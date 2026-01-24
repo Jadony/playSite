@@ -1,0 +1,279 @@
+.dashboard-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #050810 0%, #0a0e1a 50%, #1a1f2e 100%);
+    padding: 20px;
+}
+
+.dashboard-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+}
+
+.dashboard-sidebar {
+    background: rgba(26, 31, 46, 0.8);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.user-profile-section {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.user-avatar-large {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 16px;
+    border: 3px solid #a855f7;
+}
+
+.user-avatar-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    color: #a855f7;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.dashboard-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 24px;
+}
+
+.nav-item {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.nav-item:hover {
+    background: rgba(168, 85, 247, 0.1);
+    color: white;
+}
+
+.nav-item.active {
+    background: linear-gradient(135deg, #a855f7 0%, #c026d3 100%);
+    color: white;
+}
+
+.promotion-card {
+    background: linear-gradient(135deg, #a855f7 0%, #c026d3 100%);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.promo-content h4 {
+    color: white;
+    font-size: 14px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.promo-content button {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    border-radius: 6px;
+}
+
+.dashboard-main {
+    background: rgba(26, 31, 46, 0.6);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 16px;
+    padding: 32px;
+}
+
+.character-section {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.character-display {
+    flex: 1;
+}
+
+.character-avatar {
+    width: 200px;
+    height: 240px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(168, 85, 247, 0.1);
+}
+
+.character-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-showcase {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.showcase-slot {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed rgba(168, 85, 247, 0.3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.showcase-slot:hover {
+    border-color: #a855f7;
+    background: rgba(168, 85, 247, 0.05);
+}
+
+.filters-section {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.category-tabs :global(.ant-tabs-nav) {
+    margin-bottom: 0;
+}
+
+.category-tabs :global(.ant-tabs-tab) {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.category-tabs :global(.ant-tabs-tab-active .ant-tabs-tab-btn) {
+    color: #a855f7;
+}
+
+.category-tabs :global(.ant-tabs-ink-bar) {
+    background: #a855f7;
+}
+
+.filter-controls {
+    display: flex;
+    gap: 12px;
+}
+
+.filter-controls :global(.ant-select-selector) {
+    background: rgba(26, 31, 46, 0.8) !important;
+    border: 1px solid rgba(168, 85, 247, 0.3) !important;
+    color: white !important;
+}
+
+.dashboard-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.transaction-list {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 24px;
+}
+
+.transaction-list h3 {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.transaction-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.transaction-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.transaction-name {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.transaction-date {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+}
+
+.transaction-price {
+    color: #a855f7;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-sidebar {
+        position: relative;
+        top: 0;
+    }
+}

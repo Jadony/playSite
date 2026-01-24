@@ -1,0 +1,239 @@
+.image-carousel {
+    width: 100%;
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+}
+
+.carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-item {
+    position: absolute;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity, filter;
+    pointer-events: none;
+}
+
+.carousel-item.active {
+    z-index: 3;
+    transform: translateX(0) scale(1) rotateY(0deg);
+    opacity: 1;
+    filter: brightness(1) blur(0);
+    pointer-events: auto;
+}
+
+.carousel-item.side {
+    z-index: 2;
+    opacity: 0.5;
+    filter: brightness(0.7) blur(1px);
+}
+
+.carousel-item.side.prev {
+    transform: translateX(-280px) scale(0.75) rotateY(35deg);
+    transform-origin: right center;
+}
+
+.carousel-item.side.next {
+    transform: translateX(280px) scale(0.75) rotateY(-35deg);
+    transform-origin: left center;
+}
+
+.carousel-item.hidden {
+    opacity: 0;
+    transform: scale(0.5);
+    pointer-events: none;
+}
+
+.carousel-image-wrapper {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+    border: 2px solid rgba(99, 102, 241, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(168, 85, 247, 0.2);
+    transition: all 0.4s ease;
+}
+
+.carousel-item.active .carousel-image-wrapper {
+    border-color: rgba(168, 85, 247, 0.6);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(168, 85, 247, 0.4);
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-image-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 56px;
+    height: 56px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.carousel-control:hover:not(:disabled) {
+    background: rgba(168, 85, 247, 0.6);
+    border-color: rgba(168, 85, 247, 0.8);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 30px rgba(168, 85, 247, 0.5);
+}
+
+.carousel-control:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.carousel-control.prev {
+    left: 10%;
+}
+
+.carousel-control.next {
+    right: 10%;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(168, 85, 247, 0.4);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.carousel-dot:hover:not(:disabled) {
+    border-color: rgba(168, 85, 247, 0.8);
+    transform: scale(1.2);
+}
+
+.carousel-dot.active {
+    background: linear-gradient(135deg, #a855f7 0%, #c026d3 100%);
+    border-color: #a855f7;
+    width: 32px;
+    border-radius: 6px;
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+}
+
+.carousel-dot:disabled {
+    cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .carousel-container {
+        height: 400px;
+    }
+
+    .carousel-image-wrapper {
+        width: 380px;
+        height: 380px;
+    }
+
+    .carousel-item.side.prev {
+        transform: translateX(-240px) scale(0.7) rotateY(35deg);
+    }
+
+    .carousel-item.side.next {
+        transform: translateX(240px) scale(0.7) rotateY(-35deg);
+    }
+
+    .carousel-control.prev {
+        left: 5%;
+    }
+
+    .carousel-control.next {
+        right: 5%;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-container {
+        height: 350px;
+    }
+
+    .carousel-image-wrapper {
+        width: 300px;
+        height: 300px;
+    }
+
+    .carousel-item.side.prev,
+    .carousel-item.side.next {
+        opacity: 0.3;
+        transform: scale(0.5);
+    }
+
+    .carousel-control {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+
+    .carousel-control.prev {
+        left: 2%;
+    }
+
+    .carousel-control.next {
+        right: 2%;
+    }
+}

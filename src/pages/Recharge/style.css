@@ -1,0 +1,116 @@
+.recharge-page {
+  min-height: calc(100vh - 64px);
+  padding: 40px 0;
+}
+
+.recharge-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.recharge-showcase {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+}
+
+.showcase-title h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.showcase-title p {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.showcase-character {
+  margin: 32px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.character-display {
+  position: relative;
+}
+
+.character-placeholder-large {
+  width: 350px;
+  height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.glow-effect {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+.character-icon {
+  font-size: 180px;
+  animation: float 3s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.6));
+}
+
+.showcase-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+  background: rgba(99, 102, 241, 0.2);
+  transform: translateX(8px);
+}
+
+.benefit-icon {
+  font-size: 24px;
+}
+
+.benefit-text {
+  color: #cbd5e1;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+@media (max-width: 992px) {
+  .recharge-showcase {
+    margin-top: 40px;
+  }
+
+  .character-placeholder-large {
+    width: 250px;
+    height: 350px;
+  }
+
+  .character-icon {
+    font-size: 120px;
+  }
+}

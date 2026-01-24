@@ -1,0 +1,281 @@
+.invite-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 30%, #4c1d95 70%, #5b21b6 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.invite-page::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+}
+
+.invite-page::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(192, 38, 211, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(100px);
+}
+
+.invite-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.invite-hero {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.invite-rewards-visual {
+    height: 200px;
+    position: relative;
+    margin-bottom: 32px;
+}
+
+.floating-rewards {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+
+.reward-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    animation: float 3s ease-in-out infinite;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.reward-box.gold {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    animation-delay: 0s;
+}
+
+.reward-box.purple {
+    background: linear-gradient(135deg, #a855f7 0%, #c026d3 100%);
+    animation-delay: 0.5s;
+}
+
+.reward-box.blue {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    animation-delay: 1s;
+}
+
+.invite-title {
+    color: white;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    line-height: 1.4;
+}
+
+.invite-code-section {
+    max-width: 500px;
+    margin: 0 auto 48px;
+}
+
+.invite-code-input {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 12px;
+    color: white !important;
+    font-size: 18px;
+    font-weight: 600;
+    height: 56px;
+    backdrop-filter: blur(10px);
+}
+
+.copy-button {
+    background: linear-gradient(135deg, #a855f7 0%, #c026d3 100%) !important;
+    border: none !important;
+    border-radius: 8px;
+    height: 40px;
+    padding: 0 24px;
+}
+
+.invite-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 48px;
+}
+
+.invite-step {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 200px;
+    text-align: center;
+}
+
+.step-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.step-title {
+    color: white;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.step-arrow {
+    color: white;
+    font-size: 24px;
+    opacity: 0.6;
+}
+
+.milestones-section {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 48px 32px;
+    text-align: center;
+}
+
+.milestones-title {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 32px;
+}
+
+.invited-users {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    opacity: 0.3;
+}
+
+.user-avatar.active {
+    background: linear-gradient(135deg, #a855f7 0%, #c026d3 100%);
+    border-color: #a855f7;
+    opacity: 1;
+}
+
+.current-count {
+    color: white;
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 32px;
+}
+
+.invite-button {
+    background: linear-gradient(135deg, #a855f7 0%, #c026d3 100%) !important;
+    border: none !important;
+    border-radius: 12px;
+    height: 56px;
+    padding: 0 64px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 48px;
+    box-shadow: 0 8px 32px rgba(168, 85, 247, 0.4);
+}
+
+.invite-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(168, 85, 247, 0.6);
+}
+
+.reward-milestones {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.milestone {
+    width: 140px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    position: relative;
+}
+
+.milestone.completed {
+    border-color: #fbbf24;
+    background: rgba(251, 191, 36, 0.1);
+}
+
+.milestone.current {
+    border-color: #a855f7;
+    background: rgba(168, 85, 247, 0.1);
+    box-shadow: 0 0 24px rgba(168, 85, 247, 0.4);
+}
+
+.milestone-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.milestone-count {
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.milestone-reward {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+}
+
+@media (max-width: 768px) {
+    .invite-title {
+        font-size: 24px;
+    }
+
+    .invite-steps {
+        flex-direction: column;
+    }
+
+    .step-arrow {
+        transform: rotate(90deg);
+    }
+
+    .reward-milestones {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

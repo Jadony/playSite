@@ -1,0 +1,90 @@
+.games-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #050810 0%, #0a0e1a 50%, #1a1f2e 100%);
+    padding: 40px 20px;
+}
+
+.games-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.games-header {
+    margin-bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}
+
+.games-title {
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0;
+    font-style: italic;
+}
+
+.games-grid {
+    margin-bottom: 48px;
+}
+
+.games-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.pagination-info {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+}
+
+.games-pagination :global(.ant-pagination) {
+    display: flex;
+    gap: 8px;
+}
+
+.games-pagination :global(.ant-pagination-item) {
+    background: rgba(26, 31, 46, 0.6);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 8px;
+}
+
+.games-pagination :global(.ant-pagination-item a) {
+    color: white;
+}
+
+.games-pagination :global(.ant-pagination-item-active) {
+    background: linear-gradient(135deg, #a855f7 0%, #c026d3 100%);
+    border-color: #a855f7;
+}
+
+.games-pagination :global(.ant-pagination-item-active a) {
+    color: white;
+}
+
+.games-pagination :global(.ant-pagination-prev),
+.games-pagination :global(.ant-pagination-next) {
+    background: rgba(26, 31, 46, 0.6);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 8px;
+}
+
+.games-pagination :global(.ant-pagination-prev button),
+.games-pagination :global(.ant-pagination-next button) {
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .games-title {
+        font-size: 36px;
+    }
+
+    .games-pagination {
+        justify-content: center;
+    }
+}
