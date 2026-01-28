@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Carousel } from "antd";
+import Button from "../Button";
 import "./style.css";
 
 const slides = [
@@ -78,18 +79,19 @@ const HeroSection: React.FC = () => {
                   </p>
 
                   <div className="pt-4">
-                    <button
+                    <Button
                       onClick={() => navigate(slide.link)}
-                      className="banner-btn absolute px-10 py-4 rounded-full text-white font-bold text-2xl shadow-[0_0_20px_rgba(236,72,153,0.5)] hover:shadow-[0_0_30px_rgba(236,72,153,0.8)] hover:scale-105 transition-all duration-300 z-20"
-                      style={{
-                        background: `linear-gradient(276.42deg, #6600FF 9.94%, #EE22EB 47.03%, #AA00FF 92%)`,
-                        backgroundSize: "100% 100%",
-                        backgroundPosition: "center",
-                        border: "0.5px solid #FFFFFFCC",
-                      }}
+                      variant="gradient"
+                      size="large"
+                      className="banner-btn absolute px-10 py-4 rounded-full text-white font-bold text-2xl hover:scale-105 z-20"
+                      gradient="linear-gradient(276.42deg, #6600FF 9.94%, #EE22EB 47.03%, #AA00FF 92%)"
+                      borderWidth={0.5}
+                      borderColor="#FFFFFFCC"
+                      glow={true}
+                      glowColor="rgba(236,72,153,0.5)"
                     >
                       {slide.cta}
-                    </button>
+                    </Button>
                   </div>
                 </div>
 
