@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * 按钮变体
    * - primary: 主要按钮，带渐变背景
@@ -48,7 +48,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   children: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   variant = "primary",
   size = "medium",
   fullWidth = false,
@@ -136,4 +136,4 @@ const Button: React.FC<ButtonProps> = ({
   );
 };
 
-export default Button;
+export default PrimaryButton;
