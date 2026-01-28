@@ -39,6 +39,10 @@ export interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButto
    */
   glowColor?: string;
   /**
+   * 圆角大小（单位：px 或 rem，如 "8px"、"0.5rem"，默认继承）
+   */
+  borderRadius?: string;
+  /**
    * 是否禁用按钮
    */
   disabled?: boolean;
@@ -57,6 +61,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   borderColor = "#FFFFFFCC",
   glow = true,
   glowColor = "rgba(236,72,153,0.5)",
+  borderRadius,
   disabled = false,
   className = "",
   style,
@@ -90,6 +95,11 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   const customStyle: React.CSSProperties = {
     ...style,
   };
+
+  // 处理圆角
+  if (borderRadius) {
+    customStyle.borderRadius = borderRadius;
+  }
 
   // 处理渐变背景（disabled 时也保留）
   if (variant === "gradient" && gradient) {
