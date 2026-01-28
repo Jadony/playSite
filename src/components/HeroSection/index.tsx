@@ -81,14 +81,7 @@ const HeroSection: React.FC = () => {
                   <div className="pt-4">
                     <PrimaryButton
                       onClick={() => navigate(slide.link)}
-                      variant="gradient"
-                      size="large"
                       className="banner-btn absolute px-10 py-4 rounded-full text-white font-bold text-2xl hover:scale-105 z-20"
-                      gradient="linear-gradient(276.42deg, #6600FF 9.94%, #EE22EB 47.03%, #AA00FF 92%)"
-                      borderWidth={0.5}
-                      borderColor="#FFFFFFCC"
-                      glow={true}
-                      glowColor="rgba(236,72,153,0.5)"
                     >
                       {slide.cta}
                     </PrimaryButton>
