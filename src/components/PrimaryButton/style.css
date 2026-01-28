@@ -13,6 +13,43 @@
   overflow: hidden;
 }
 
+/* 星星背景效果 - 所有按钮默认都有 */
+.custom-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 92%;
+  height: 100%;
+  border-radius: 25%;
+  overflow: hidden;
+  background-image: url("../../assets/background/btnBg.png");
+  background-size: 100px 100px;
+  background-position: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 内阴影效果 - 边框内侧的白色发光 */
+.custom-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* 确保按钮内容在星星背景和内阴影之上 */
+.custom-button > * {
+  position: relative;
+  z-index: 3;
+}
+
 /* 尺寸 */
 .button-small {
   padding: 6px 16px;

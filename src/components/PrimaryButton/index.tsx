@@ -49,13 +49,13 @@ export interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButto
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
-  variant = "primary",
-  size = "medium",
+  variant = "gradient",
+  size = "large",
   fullWidth = false,
-  gradient,
-  borderWidth,
+  gradient = "linear-gradient(276.42deg, #6600FF 9.94%, #EE22EB 47.03%, #AA00FF 92%)",
+  borderWidth = 0.5,
   borderColor = "#FFFFFFCC",
-  glow = false,
+  glow = true,
   glowColor = "rgba(236,72,153,0.5)",
   disabled = false,
   className = "",
