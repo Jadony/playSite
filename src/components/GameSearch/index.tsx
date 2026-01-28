@@ -37,21 +37,21 @@ const GameSearch: React.FC<GameSearchProps> = ({ gameSelectChange }) => {
       discount: "-10%",
     },
     {
-      id: "zzz",
+      id: "juequling",
       name: "Zenless Zone Zero",
       image:
         "https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?q=80&w=600&auto=format&fit=crop",
       discount: "-10%",
     },
     {
-      id: "genshin",
+      id: "yuanshen",
       name: "Genshin Impact",
       image:
         "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=600&auto=format&fit=crop",
       discount: "-10%",
     },
     {
-      id: "hsr",
+      id: "benghuai",
       name: "Honkai: Star Rail",
       image:
         "https://images.unsplash.com/photo-1628260412297-a3377e45006f?auto=format&fit=crop&q=80&w=300",

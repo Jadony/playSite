@@ -43,6 +43,8 @@ const SpinePlayer: React.FC<SpinePlayerProps> = ({
   useEffect(() => {
     if (!containerRef.current) return;
 
+    let isMounted = true;
+
     // init pixi app
     const app = new PIXI.Application({
       width,
@@ -54,66 +56,97 @@ const SpinePlayer: React.FC<SpinePlayerProps> = ({
     appRef.current = app;
 
     // Load resources
-    PIXI.Assets.load([jsonUrl, atlasUrl, pngUrl]).then((resources) => {
-      // The loader returns a dictionary where keys are the URLs
-      // However, for Spine, we specifically need the data linked to the atlas
-      // If we loaded them properly, pixi-spine should handle the linking if assets are named consistently or if we handle the data manually.
+    const loadResources = async () => {
+      try {
+        // Check if assets are already loaded
+        const assetsToLoad = [];
+        if (!PIXI.Assets.cache.has(jsonUrl)) assetsToLoad.push(jsonUrl);
+        if (!PIXI.Assets.cache.has(atlasUrl)) assetsToLoad.push(atlasUrl);
+        if (!PIXI.Assets.cache.has(pngUrl)) assetsToLoad.push(pngUrl);
 
-      // A more robust way with standard Spine export (json + atlas + png) using PIXI.Assets is often just loading the JSON if paths are relative,
-      // OR explicitly providing the atlas.
-
-      // Let's try loading just the JSON, assuming the atlas and png are in the same location and referenced correctly in the json/atlas files.
-      // But since we provided URLs, let's look at the resource object associated with the JSON url.
-
-      const spineData = resources[jsonUrl]?.spineData;
-
-      if (spineData) {
-        const spine = new Spine(spineData);
-
-        // Centering with offsets
-        spine.x = width / 2 + offsetX;
-        spine.y = height / 2 + offsetY;
-        spine.scale.set(scale);
-
-        if (animationName) {
-          try {
-            spine.state.setAnimation(0, animationName, loop);
-          } catch (e) {
-            console.warn(
-              `Animation ${animationName} not found, playing first available if any.`,
-            );
-            // Fallback: play the first animation found
-            const animations = spineData.animations;
-            if (animations && animations.length > 0) {
-              spine.state.setAnimation(0, animations[0].name, loop);
-            }
-          }
+        if (assetsToLoad.length > 0) {
+          await PIXI.Assets.load(assetsToLoad);
         }
 
-        // Initial playing state
-        spine.state.timeScale = playing ? 1 : 0;
+        if (!isMounted) return;
 
-        app.stage.addChild(spine);
-        spineRef.current = spine;
-      } else {
-        console.error("Failed to load Spine data from:", jsonUrl);
+        // Retrieve resources from cache (pixi-spine will use them automatically)
+
+        // If we have the raw JSON object, we might need to recreate the skeleton data
+        // But usually PIXI.Assets with pixi-spine loader handles this if just the json path is loaded
+        // However, here we are manually handling potential separate loads.
+
+        // Simpler approach: Just use PIXI.Assets.load(jsonUrl) and let it resolve dependencies
+        // But since we have specific URLs for atlas/png passed, we should ensure they are linked.
+        // If the json file references the atlas relatively, strictly loading jsonUrl is enough.
+        // Assuming standard export where json references atlas.
+
+        let resource = PIXI.Assets.cache.get(jsonUrl);
+        if (!resource) {
+          // Fallback if not found in cache directly (shouldn't happen if loaded)
+          resource = await PIXI.Assets.load(jsonUrl);
+        }
+
+        if (!isMounted) return;
+
+        const spineData = resource?.spineData || resource;
+
+        if (spineData) {
+          const spine = new Spine(spineData);
+
+          // Centering with offsets
+          spine.x = width / 2 + offsetX;
+          spine.y = height / 2 + offsetY;
+          spine.scale.set(scale);
+
+          if (animationName) {
+            try {
+              spine.state.setAnimation(0, animationName, loop);
+            } catch (e) {
+              console.warn(
+                `Animation ${animationName} not found, playing first available if any.`,
+              );
+              // Fallback: play the first animation found
+              const animations = spineData.animations;
+              if (animations && animations.length > 0) {
+                spine.state.setAnimation(0, animations[0].name, loop);
+              }
+            }
+          }
+
+          // Initial playing state
+          spine.state.timeScale = playing ? 1 : 0;
+
+          app.stage.addChild(spine);
+          spineRef.current = spine;
+        } else {
+          console.error("Failed to load Spine data from:", jsonUrl);
+        }
+      } catch (error) {
+        console.error("Error loading spine assets:", error);
       }
-    });
+    };
+
+    loadResources();
 
     return () => {
+      isMounted = false;
       if (appRef.current) {
+        // Important: Do NOT destroy texture/baseTexture if they are cached by PIXI.Assets
+        // Otherwise re-mounting will fail because the cache holds destroyed textures.
         appRef.current.destroy(true, {
           children: true,
-          texture: true,
-          baseTexture: true,
+          texture: false,
+          baseTexture: false,
         });
+
         appRef.current = null;
         spineRef.current = null;
       }
     };
   }, [
     jsonUrl,
-    atlasUrl,
+    atlasUrl, // Although we might only strictly need jsonUrl if it refs others, keeping them as deps is safer for updates
     pngUrl,
     animationName,
     loop,

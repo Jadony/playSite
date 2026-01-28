@@ -12,35 +12,35 @@ const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
 
   const games = [
     {
-      id: "lol",
-      name: "League of Legend",
+      id: "juequling",
+      name: "Zenless Zone Zero",
       spine: {
-        json: "/spine/yifuna.json",
-        atlas: "/spine/yifuna.atlas",
-        png: "/spine/yifuna.png",
+        json: "./src/assets/spine/bili.json",
+        atlas: "./src/assets/spine/bili.atlas",
+        png: "./src/assets/spine/bili.png",
       },
       discount: "-30%",
       price: "$ 688.90",
     },
     {
-      id: "zzz",
-      name: "Zenless Zone Zero",
+      id: "yuanshen",
+      name: "Genshin Impact",
       spine: {
-        json: "/spine/bili.json",
-        atlas: "/spine/bili.atlas",
-        png: "/spine/bili.png",
+        json: "./src/assets/spine/yifuna.json",
+        atlas: "./src/assets/spine/yifuna.atlas",
+        png: "./src/assets/spine/yifuna.png",
       },
       discount: "-15%",
       price: "$ 688.90",
     },
     {
-      id: "pubg",
-      name: "PUBG Mobile",
+      id: "benghuai",
+      name: "Honkai: Star Rail",
       // Reusing yifuna for the third game for now as we only have 2 sets
       spine: {
-        json: "/spine/yifuna.json",
-        atlas: "/spine/yifuna.atlas",
-        png: "/spine/yifuna.png",
+        json: "./src/assets/spine/yifuna.json",
+        atlas: "./src/assets/spine/yifuna.atlas",
+        png: "./src/assets/spine/yifuna.png",
       },
       discount: "-25%",
       price: "$ 688.90",
@@ -50,7 +50,7 @@ const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
   // React to selectGame prop change
   useEffect(() => {
     if (selectGame) {
-      const index = games.findIndex((g) => g.name === selectGame.name);
+      const index = games.findIndex((g) => g.id === selectGame.id);
       if (index !== -1) {
         setActiveIndex(index);
       }
@@ -70,7 +70,7 @@ const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
     const diff = index - activeIndex;
     const absDiff = Math.abs(diff);
 
-    let zIndex = 10 - absDiff;
+    const zIndex = 10 - absDiff;
     let opacity = 1;
     let rotateY = 0;
     let translateX = 0;
@@ -83,14 +83,14 @@ const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
     } else {
       // Side items
       scale = 0.9; // Slightly larger side items
-      opacity = 0.6; // More visible side items
+      opacity = 0.4; // More visible side items
 
       // diff > 0 means to the right
       // diff < 0 means to the left
       // Increase spacing significantly to prevent overlap
       translateX = diff * 420;
       translateZ = -100;
-      rotateY = diff > 0 ? -25 : 25; // Symmetric rotation for balanced look
+      rotateY = diff > 0 ? -45 : 45; // Symmetric rotation for balanced look
     }
 
     // Specific tweaks for exact "image match" feel
@@ -144,51 +144,52 @@ const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
                 {/* Card Container */}
                 <div
                   className={`
-                              card-wrap relative w-72 h-96 bg-transparent flex items-center justify-center
+                              card-${game.id}-wrap relative w-72 h-96 bg-transparent flex items-center justify-center
                             `}
                 >
                   {/* Spine Player */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-[#fff]">
+                  <div className="absolute inset-0 flex items-center justify-center">
                     <SpinePlayer
                       jsonUrl={game.spine.json}
                       atlasUrl={game.spine.atlas}
                       pngUrl={game.spine.png}
                       animationName="loop"
-                      width={332} // Increase width to fit the character
-                      height={482} // Increase height to fit the character
-                      scale={0.5}
+                      width={690} // Increase width to fit the character
+                      height={493} // Increase height to fit the character
+                      scale={0.7}
                       playing={isActive}
-                      offsetY={150}
+                      offsetY={180}
                     />
                   </div>
 
                   {/* Text Overlay - Only if visible? Usually always visible but styled differently */}
-                  {isActive && (
-                    <div className="absolute bottom-6 left-6 z-20 pointer-events-none">
-                      <h3
-                        className="text-3xl font-bold italic text-white mb-2"
-                        style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}
+                  <div
+                    className={`${isActive ? "active-card-text" : "left-6"} absolute bottom-6 z-20 pointer-events-none`}
+                  >
+                    <h3
+                      className="text-4xl font-bold italic text-white mb-2"
+                      style={{
+                        textShadow: "0 2px 10px rgba(0,0,0,0.5)",
+                        background:
+                          "transparent url(@assets/background/gameNameBg.png) no-repeat left left/top cover",
+                        backgroundClip: "text",
+                        // WebkitBackgroundClip: "text",
+                        // WebkitTextFillColor: "transparent",
+                      }}
+                    >
+                      {game.name}
+                    </h3>
+                    <div className="flex items-center gap-4">
+                      <span
+                        className="text-pink-500 font-bold font-black italic text-3xl tracking-tighter"
+                        style={{
+                          textShadow: "0 0 10px rgba(236,72,153,0.5)",
+                        }}
                       >
-                        {game.name}
-                      </h3>
-                      <div className="flex items-center gap-4">
-                        <span
-                          className="text-pink-500 font-black italic text-2xl tracking-tighter"
-                          style={{
-                            textShadow: "0 0 10px rgba(236,72,153,0.5)",
-                          }}
-                        >
-                          {game.discount}
-                        </span>
-                        <span className="text-gray-400 text-sm line-through italic">
-                          $ 800.00
-                        </span>
-                        <span className="text-white font-bold italic text-lg">
-                          {game.price}
-                        </span>
-                      </div>
+                        {game.discount}
+                      </span>
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
             );

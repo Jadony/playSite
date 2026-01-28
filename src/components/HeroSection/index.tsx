@@ -83,7 +83,6 @@ const HeroSection: React.FC = () => {
                       className="banner-btn absolute px-10 py-4 rounded-full text-white font-bold text-2xl shadow-[0_0_20px_rgba(236,72,153,0.5)] hover:shadow-[0_0_30px_rgba(236,72,153,0.8)] hover:scale-105 transition-all duration-300 z-20"
                       style={{
                         background: `linear-gradient(276.42deg, #6600FF 9.94%, #EE22EB 47.03%, #AA00FF 92%)`,
-                        // backgroundImage: `url(${btnBg})`,
                         backgroundSize: "100% 100%",
                         backgroundPosition: "center",
                         border: "0.5px solid #FFFFFFCC",

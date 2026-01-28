@@ -1,9 +1,89 @@
-.card-wrap::before {
+.card-yuanshen-wrap,
+.card-juequling-wrap,
+.card-benghuai-wrap {
+    cursor: pointer;
+    clip-path: inset(-200px -200px 2px -200px);
+}
+.active-card-text {
+    left: -1.5rem
+}
+.card-yuanshen-wrap::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-image: url("@assets/background/yuanshenBehindBg.png");
+    background-size: 336px 443px;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 0;
+}
+.card-yuanshen-wrap::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("@assets/background/yuanshenFrontBg.png");
+    background-size: 336px 122px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    z-index: 9;
+}
+
+.card-juequling-wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("@assets/background/juequlingBehindBg.png");
+    background-size: 336px 443px;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 0;
+}
+.card-juequling-wrap::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("@assets/background/juequlingFrontBg.png");
+    background-size: 336px 122px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    z-index: 9;
+}
+
+.card-benghuai-wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("@assets/background/benghuaiBehindBg.png");
+    background-size: 336px 443px;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 0;
+}
+.card-benghuai-wrap::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("@assets/background/benghuaiFrontBg.png");
+    background-size: 336px 122px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    z-index: 9;
 }
