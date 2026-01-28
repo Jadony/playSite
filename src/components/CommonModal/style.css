@@ -89,12 +89,12 @@
   color: #999;
   font-size: 14px;
   line-height: 1.6;
-  margin-bottom: 24px;
   text-align: left;
 }
 
 /* 底部按钮区域 */
 .common-modal-footer {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
