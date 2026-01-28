@@ -1,4 +1,4 @@
-interface Game {
+type Game = {
   id: string;
   name: string;
   image?: string;
@@ -9,4 +9,5 @@ interface Game {
     png: string;
   };
   price?: string;
-}
+  isPopular: boolean;
+};

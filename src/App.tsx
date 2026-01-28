@@ -6,6 +6,7 @@ import Home from "@pages/Home";
 import Games from "@pages/Games";
 import Invite from "@pages/Invite";
 import "./App.css";
+import { AllGamesAndSelectProvider } from "./store/gameStore";
 import { hasBgPage } from "./config";
 
 const { Content } = Layout;
@@ -22,15 +23,17 @@ function App() {
     <Layout
       className={`min-h-screen bg-game-dark ${isShowBg(location.pathname)}`}
     >
-      <Header />
-      <Content className="flex-1">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/games" element={<Games />} />
-          <Route path="/invite" element={<Invite />} />
-        </Routes>
-      </Content>
-      <Footer />
+      <AllGamesAndSelectProvider>
+        <Header />
+        <Content className="flex-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/games" element={<Games />} />
+            <Route path="/invite" element={<Invite />} />
+          </Routes>
+        </Content>
+        <Footer />
+      </AllGamesAndSelectProvider>
     </Layout>
   );
 }
