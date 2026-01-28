@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Carousel } from "antd";
-import Button from "../Button";
+import PrimaryButton from "../PrimaryButton";
 import "./style.css";
 
 const slides = [
@@ -79,7 +79,7 @@ const HeroSection: React.FC = () => {
                   </p>
 
                   <div className="pt-4">
-                    <Button
+                    <PrimaryButton
                       onClick={() => navigate(slide.link)}
                       variant="gradient"
                       size="large"
@@ -89,13 +89,9 @@ const HeroSection: React.FC = () => {
                       borderColor="#FFFFFFCC"
                       glow={true}
                       glowColor="rgba(236,72,153,0.5)"
-                      innerGlow={true}
-                      innerGlowColor="rgba(255, 255, 255, 0.25)"
-                      innerGlowBlur={50}
-                      // disabled
                     >
                       {slide.cta}
-                    </Button>
+                    </PrimaryButton>
                   </div>
                 </div>
 
