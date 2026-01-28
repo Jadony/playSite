@@ -89,6 +89,10 @@ const HeroSection: React.FC = () => {
                       borderColor="#FFFFFFCC"
                       glow={true}
                       glowColor="rgba(236,72,153,0.5)"
+                      innerGlow={true}
+                      innerGlowColor="rgba(255, 255, 255, 0.25)"
+                      innerGlowBlur={50}
+                      // disabled
                     >
                       {slide.cta}
                     </Button>
