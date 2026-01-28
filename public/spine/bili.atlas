@@ -1,0 +1,118 @@
+
+bili.png
+size: 1720,457
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bg
+  rotate: false
+  xy: 2, 12
+  size: 336, 443
+  orig: 338, 445
+  offset: 1, 1
+  index: -1
+body
+  rotate: false
+  xy: 591, 145
+  size: 218, 310
+  orig: 218, 310
+  offset: 0, 0
+  index: -1
+e1
+  rotate: false
+  xy: 340, 24
+  size: 17, 21
+  orig: 17, 21
+  offset: 0, 0
+  index: -1
+e2
+  rotate: false
+  xy: 2, 2
+  size: 18, 8
+  orig: 18, 8
+  offset: 0, 0
+  index: -1
+lingzi
+  rotate: true
+  xy: 811, 122
+  size: 146, 70
+  orig: 150, 71
+  offset: 0, 1
+  index: -1
+lingzi_qian
+  rotate: false
+  xy: 1637, 89
+  size: 81, 111
+  orig: 81, 111
+  offset: 0, 0
+  index: -1
+mengban
+  rotate: true
+  xy: 467, 121
+  size: 334, 122
+  orig: 336, 124
+  offset: 1, 1
+  index: -1
+shou_l
+  rotate: true
+  xy: 467, 7
+  size: 112, 581
+  orig: 112, 581
+  offset: 0, 0
+  index: -1
+shou_r
+  rotate: false
+  xy: 340, 47
+  size: 125, 408
+  orig: 125, 408
+  offset: 0, 0
+  index: -1
+shoubi_r
+  rotate: false
+  xy: 1508, 73
+  size: 127, 127
+  orig: 127, 127
+  offset: 0, 0
+  index: -1
+tou
+  rotate: true
+  xy: 1050, 15
+  size: 185, 213
+  orig: 185, 213
+  offset: 0, 0
+  index: -1
+tui
+  rotate: true
+  xy: 1050, 202
+  size: 253, 665
+  orig: 253, 665
+  offset: 0, 0
+  index: -1
+yifu_r
+  rotate: true
+  xy: 811, 270
+  size: 185, 234
+  orig: 185, 234
+  offset: 0, 0
+  index: -1
+yifu_r1
+  rotate: true
+  xy: 1265, 69
+  size: 131, 241
+  orig: 131, 242
+  offset: 0, 1
+  index: -1
+yijiao
+  rotate: true
+  xy: 883, 205
+  size: 63, 59
+  orig: 63, 59
+  offset: 0, 0
+  index: -1
+yiling_r
+  rotate: true
+  xy: 883, 130
+  size: 70, 93
+  orig: 71, 93
+  offset: 0, 0
+  index: -1

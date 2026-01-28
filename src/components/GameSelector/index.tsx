@@ -1,73 +1,202 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import SpinePlayer from "@components/SpinePlayer";
+import "./style.css";
 
-const GameSelector: React.FC = () => {
-    const popularGames = [
-        { id: 'hsr', name: 'Honkai: Star Rail' },
-        { id: 'zzz', name: 'Zenless Zone Zero' },
-        { id: 'genshin', name: 'Genshin Impact' },
-        { id: 'wuwa', name: 'Wuthering Waves' }
-    ]
+type GameSelectorProps = {
+  selectGame: Game | null;
+};
 
-    const games = [
-        { id: 'lol', name: 'League of Legend', image: 'https://images.unsplash.com/photo-1566577739112-5180d4bf9390?q=80&w=600&auto=format&fit=crop', active: true },
-        { id: 'pubg', name: 'PUBG Mobile', image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=600&auto=format&fit=crop', active: false },
-        { id: 'apex', name: 'Apex Legends', image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=600&auto=format&fit=crop', active: false },
-    ]
+const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
+  const [activeIndex, setActiveIndex] = useState(1); // Start with the middle one (Zenless Zone Zero)
 
-    return (
-        <section className="w-full px-4 md:px-12 lg:px-24 mb-16">
-            <div className="max-w-7xl mx-auto space-y-8">
+  const games = [
+    {
+      id: "lol",
+      name: "League of Legend",
+      spine: {
+        json: "/spine/yifuna.json",
+        atlas: "/spine/yifuna.atlas",
+        png: "/spine/yifuna.png",
+      },
+      discount: "-30%",
+      price: "$ 688.90",
+    },
+    {
+      id: "zzz",
+      name: "Zenless Zone Zero",
+      spine: {
+        json: "/spine/bili.json",
+        atlas: "/spine/bili.atlas",
+        png: "/spine/bili.png",
+      },
+      discount: "-15%",
+      price: "$ 688.90",
+    },
+    {
+      id: "pubg",
+      name: "PUBG Mobile",
+      // Reusing yifuna for the third game for now as we only have 2 sets
+      spine: {
+        json: "/spine/yifuna.json",
+        atlas: "/spine/yifuna.atlas",
+        png: "/spine/yifuna.png",
+      },
+      discount: "-25%",
+      price: "$ 688.90",
+    },
+  ];
 
-                {/* Search & Tags */}
-                <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-                    <div className="relative w-full md:w-96">
-                        <input
-                            type="text"
-                            placeholder="Search for game names or keywords"
-                            className="w-full h-12 pl-12 pr-4 bg-white/5 border border-white/10 rounded-full text-white placeholder-gray-500 focus:outline-none focus:border-game-primary/50 transition-colors"
-                        />
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
-                    </div>
+  // React to selectGame prop change
+  useEffect(() => {
+    if (selectGame) {
+      const index = games.findIndex((g) => g.name === selectGame.name);
+      if (index !== -1) {
+        setActiveIndex(index);
+      }
+    }
+  }, [selectGame]);
 
-                    <div className="flex flex-wrap gap-2">
-                        <span className="text-gray-400 text-sm mr-2 py-1.5">Popular:</span>
-                        {popularGames.map(game => (
-                            <button key={game.id} className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
-                                {game.name}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev === 0 ? games.length - 1 : prev - 1));
+  };
 
-                {/* Horizontal Game Slider */}
-                <div className="flex items-center gap-6 overflow-x-auto pb-8 pt-4 scrollbar-hide snap-x">
-                    {games.map((game) => (
-                        <div
-                            key={game.id}
-                            className={`
-                        relative flex-shrink-0 cursor-pointer transition-all duration-500 ease-out group snap-center
-                        ${game.active ? 'w-64 h-80 z-10' : 'w-48 h-64 grayscale opacity-60 hover:opacity-100 hover:grayscale-0'}
-                    `}
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev === games.length - 1 ? 0 : prev + 1));
+  };
+
+  // Calculate 3D styles
+  const getCardStyle = (index: number) => {
+    const diff = index - activeIndex;
+    const absDiff = Math.abs(diff);
+
+    let zIndex = 10 - absDiff;
+    let opacity = 1;
+    let rotateY = 0;
+    let translateX = 0;
+    let scale = 1;
+    let translateZ = 0;
+
+    if (diff === 0) {
+      // Center
+      scale = 1.2;
+    } else {
+      // Side items
+      scale = 0.9; // Slightly larger side items
+      opacity = 0.6; // More visible side items
+
+      // diff > 0 means to the right
+      // diff < 0 means to the left
+      // Increase spacing significantly to prevent overlap
+      translateX = diff * 420;
+      translateZ = -100;
+      rotateY = diff > 0 ? -25 : 25; // Symmetric rotation for balanced look
+    }
+
+    // Specific tweaks for exact "image match" feel
+    // If it's effectively "hidden" or too far, just fade it out more
+    if (absDiff > 2) opacity = 0;
+
+    return {
+      zIndex,
+      opacity,
+      transform: `perspective(1000px) translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
+    };
+  };
+
+  return (
+    <section className="w-full px-4 mb-24 relative z-20 overflow-hidden py-20">
+      <div className="max-w-7xl mx-auto h-[500px] relative flex items-center justify-center">
+        {/* Navigation Buttons */}
+        <button
+          onClick={handlePrev}
+          className="absolute left-4 md:left-24 z-50 w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:scale-110 transition-all backdrop-blur-sm"
+        >
+          <LeftOutlined style={{ fontSize: "20px" }} />
+        </button>
+        <button
+          onClick={handleNext}
+          className="absolute right-4 md:right-24 z-50 w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:scale-110 transition-all backdrop-blur-sm"
+        >
+          <RightOutlined style={{ fontSize: "20px" }} />
+        </button>
+
+        {/* Carousel Container */}
+        <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
+          {games.map((game, index) => {
+            const style = getCardStyle(index);
+            const isActive = index === activeIndex;
+
+            return (
+              <div
+                key={game.id}
+                className="absolute transition-all duration-500 ease-out origin-center"
+                style={{
+                  ...style,
+                  left: "50%",
+                  top: "50%",
+                  // We use margins to center the element itself before transforms
+                  marginLeft: "-144px", // half of w-72
+                  marginTop: "-192px", // half of h-96
+                }}
+                onClick={() => setActiveIndex(index)}
+              >
+                {/* Card Container */}
+                <div
+                  className={`
+                              card-wrap relative w-72 h-96 bg-transparent flex items-center justify-center
+                            `}
+                >
+                  {/* Spine Player */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-[#fff]">
+                    <SpinePlayer
+                      jsonUrl={game.spine.json}
+                      atlasUrl={game.spine.atlas}
+                      pngUrl={game.spine.png}
+                      animationName="loop"
+                      width={332} // Increase width to fit the character
+                      height={482} // Increase height to fit the character
+                      scale={0.5}
+                      playing={isActive}
+                      offsetY={150}
+                    />
+                  </div>
+
+                  {/* Text Overlay - Only if visible? Usually always visible but styled differently */}
+                  {isActive && (
+                    <div className="absolute bottom-6 left-6 z-20 pointer-events-none">
+                      <h3
+                        className="text-3xl font-bold italic text-white mb-2"
+                        style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}
+                      >
+                        {game.name}
+                      </h3>
+                      <div className="flex items-center gap-4">
+                        <span
+                          className="text-pink-500 font-black italic text-2xl tracking-tighter"
+                          style={{
+                            textShadow: "0 0 10px rgba(236,72,153,0.5)",
+                          }}
                         >
-                            <div
-                                className={`
-                            absolute inset-0 rounded-2xl overflow-hidden border-2 
-                            ${game.active ? 'border-game-primary shadow-glow' : 'border-transparent'}
-                            transform transition-transform skew-x-[-2deg]
-                        `}
-                            >
-                                <img src={game.image} alt={game.name} className="w-full h-full object-cover" />
-                                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
-                                    <p className={`font-bold ${game.active ? 'text-white text-lg' : 'text-gray-300 text-sm'}`}>{game.name}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                          {game.discount}
+                        </span>
+                        <span className="text-gray-400 text-sm line-through italic">
+                          $ 800.00
+                        </span>
+                        <span className="text-white font-bold italic text-lg">
+                          {game.price}
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
 
-            </div>
-        </section>
-    )
-}
-
-export default GameSelector
+export default GameSelector;

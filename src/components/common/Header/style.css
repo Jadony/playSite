@@ -2,7 +2,7 @@
   background: transparent !important;
   border-bottom: none;
   padding: 16px 24px;
-  position: sticky;
+  position: absolute;
   top: 0;
   z-index: 1000;
 }
@@ -62,21 +62,23 @@
 }
 
 .header-menu-container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.6) 50%,
-      transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent
+  );
   opacity: 0.9;
 }
 
 .header-menu-container::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 2px;
   left: 2px;
@@ -193,7 +195,11 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.2) 0%,
+    rgba(168, 85, 247, 0.2) 100%
+  );
   border-radius: 20px;
   border: 1px solid rgba(99, 102, 241, 0.3);
   cursor: pointer;
@@ -201,7 +207,11 @@
 }
 
 .user-balance:hover {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(168, 85, 247, 0.3) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.3) 0%,
+    rgba(168, 85, 247, 0.3) 100%
+  );
   transform: translateY(-2px);
 }
 
@@ -241,4 +251,38 @@
   .user-balance span {
     font-size: 14px;
   }
+}
+
+/* Utility class for Glassmorphism with Gradient Border */
+.glass-gradient-border {
+  background: rgba(24, 24, 28, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 100px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  position: relative;
+  border: none !important; /* Ensure no inline border overrides */
+}
+
+/* 
+  Mask-composite trick for gradient border 
+  The padding defines the border width (1px)
+*/
+.glass-gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 100px; 
+  padding: 1px; 
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 80px, rgba(255, 255, 255, 0.1) calc(100% - 80px), rgba(255, 255, 255, 0.6) 100%);
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+  mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 10;
 }

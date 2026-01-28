@@ -1,18 +1,19 @@
-import { Routes, Route } from 'react-router-dom'
-import { Layout } from 'antd'
-import Header from '@components/common/Header'
-import Footer from '@components/common/Footer'
-import Home from '@pages/Home'
-import Recharge from '@pages/Recharge'
-import History from '@pages/History'
-import Profile from '@pages/Profile'
-import Games from '@pages/Games'
-import Trade from '@pages/Trade'
-import Checkout from '@pages/Checkout'
-import Invite from '@pages/Invite'
-import Dashboard from '@pages/Dashboard'
+import { Routes, Route } from "react-router-dom";
+import { Layout } from "antd";
+import Header from "@components/common/Header";
+import Footer from "@components/common/Footer";
+import Home from "@pages/Home";
+import Recharge from "@pages/Recharge";
+import History from "@pages/History";
+import Profile from "@pages/Profile";
+import Games from "@pages/Games";
+import Trade from "@pages/Trade";
+import Checkout from "@pages/Checkout";
+import Invite from "@pages/Invite";
+import Dashboard from "@pages/Dashboard";
+import SpinePlayer from "@components/SpinePlayer";
 
-const { Content } = Layout
+const { Content } = Layout;
 
 function App() {
   return (
@@ -32,9 +33,28 @@ function App() {
         </Routes>
       </Content>
       <Footer />
+      <div className="flex justify-center pb-4">
+        <SpinePlayer
+          jsonUrl="/spine/yifuna.json"
+          atlasUrl="/spine/yifuna.atlas"
+          pngUrl="/spine/yifuna.png"
+          animationName="loop"
+          scale={0.5}
+          width={800}
+          height={800}
+        />
+        <SpinePlayer
+          jsonUrl="/spine/bili.json"
+          atlasUrl="/spine/bili.atlas"
+          pngUrl="/spine/bili.png"
+          animationName="loop"
+          scale={0.5}
+          width={800}
+          height={800}
+        />
+      </div>
     </Layout>
-  )
+  );
 }
 
-export default App
-
+export default App;

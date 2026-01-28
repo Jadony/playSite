@@ -1,0 +1,93 @@
+.home-wrap::before {
+    content: "";
+    opacity: .5;
+    position: absolute;
+    top: -10%;
+    left: 0;
+    width: 50%;
+    height: 50%;
+    background-image: url("../../assets/bannerBg.png");
+    background-size: 700px 640px;
+    background-position: 90% -20%;
+    background-repeat: no-repeat;
+    filter: grayscale(100%);
+    transform: rotateY(180deg) rotateZ(30deg);
+}
+.home-wrap::after {
+    content: "";
+    opacity: .5;
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 40%;
+    height: 20%;
+    background-image: url("../../assets/btnBg.png");
+    background-size: 300px 400px;
+    /* background-position: 90% -20%; */
+    /* background-repeat: no-repeat; */
+    transform: rotateY(180deg) rotateZ(30deg);
+}
+.banner-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 92%;
+    height: 100%;
+    border-radius: 25%;
+    overflow: hidden;
+    background-image: url("../../assets/btnBg.png");
+    background-size: 100px 100px;
+    background-position: center;
+}
+
+.hero-carousel .slick-dots {
+    display: flex !important;
+    justify-content: flex-start;
+    bottom: 60px !important;
+    left: 0 !important;
+    width: auto !important;
+    margin-left: 0 !important;
+}
+
+.hero-carousel .slick-dots li {
+    width: 40px !important;
+    height: 3px !important;
+    margin: 0 4px !important;
+}
+
+.hero-carousel .slick-dots li button {
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 2px !important;
+    opacity: 1 !important;
+}
+
+.hero-carousel .slick-dots li.slick-active {
+    width: 40px !important;
+}
+
+.hero-carousel .slick-dots li.slick-active button {
+    background: #fff !important;
+}
+
+/* Responsive adjustment */
+@media (min-width: 1024px) {
+    .hero-carousel .slick-dots {
+        bottom: 80px !important;
+        /* Align with the container padding */
+        left: 0 !important; 
+    }
+}
+
+/* Allow overflow for hover effects */
+.hero-carousel .slick-list {
+    overflow: visible !important;
+}
+
+.hero-carousel .slick-track {
+    overflow: visible !important;
+    display: flex !important;
+    align-items: center !important;
+}

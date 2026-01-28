@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 /**
  * 环境变量类型定义
  */
