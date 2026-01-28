@@ -26,9 +26,7 @@ const Home: React.FC = () => {
   const [verificationCode, setVerificationCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [changePasswordCode, setChangePasswordCode] = useState("");
   const [name, setName] = useState("");
 
   const gameSelectChange = (game: Game) => {
@@ -379,110 +377,64 @@ const Home: React.FC = () => {
         onClose={() => setChangePasswordModalVisible(false)}
         title="修改密码"
         content={
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginBottom: "20px" }}>
-            {/* 验证码密码输入框 */}
+          <div>
+            {/* 验证码输入框 */}
             <div
               style={{
                 position: "relative",
+                marginBottom: "16px",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
               }}
             >
-              <span
-                style={{
-                  position: "absolute",
-                  left: "12px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  fontSize: "16px",
-                  zIndex: 1,
-                }}
-              >
-                图
-              </span>
-              <input
-                type="password"
-                placeholder="请输入验证码密码"
-                value={oldPassword}
-                onChange={(e) => setOldPassword(e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "12px 12px 12px 40px",
-                  background: "#2a2a2a",
-                  border: "1px solid #444",
-                  borderRadius: "9999px",
-                  color: "#fff",
-                  fontSize: "14px",
-                }}
-              />
-            </div>
-
-            {/* 新密码输入框 */}
-            <div
-              style={{
-                position: "relative",
-              }}
-            >
-              <span
-                style={{
-                  position: "absolute",
-                  left: "12px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  fontSize: "16px",
-                  zIndex: 1,
-                }}
-              >
-                图
-              </span>
-              <input
-                type="password"
-                placeholder="请输入新密码"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "12px 12px 12px 40px",
-                  background: "#2a2a2a",
-                  border: "1px solid #444",
-                  borderRadius: "9999px",
-                  color: "#fff",
-                  fontSize: "14px",
-                }}
-              />
-            </div>
-
-            {/* 确认新密码输入框 */}
-            <div
-              style={{
-                position: "relative",
-              }}
-            >
-              <span
-                style={{
-                  position: "absolute",
-                  left: "12px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  fontSize: "16px",
-                  zIndex: 1,
-                }}
-              >
-                图
-              </span>
-              <input
-                type="password"
-                placeholder="请再次输入新密码"
-                value={confirmNewPassword}
-                onChange={(e) => setConfirmNewPassword(e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "12px 12px 12px 40px",
-                  background: "#2a2a2a",
-                  border: "1px solid #444",
-                  borderRadius: "9999px",
-                  color: "#fff",
-                  fontSize: "14px",
-                }}
-              />
+              <div style={{ position: "relative", flex: 1 }}>
+                <span
+                  style={{
+                    position: "absolute",
+                    left: "12px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    fontSize: "16px",
+                    zIndex: 1,
+                  }}
+                >
+                  图
+                </span>
+                <input
+                  type="text"
+                  placeholder="请输入验证码"
+                  value={changePasswordCode}
+                  onChange={(e) => setChangePasswordCode(e.target.value)}
+                  style={{
+                    width: "100%",
+                    padding: "12px 80px 12px 40px",
+                    background: "#2a2a2a",
+                    border: "1px solid #444",
+                    borderRadius: "9999px",
+                    color: "#fff",
+                    fontSize: "14px",
+                  }}
+                />
+                <button
+                  onClick={() => console.log("发送验证码")}
+                  style={{
+                    position: "absolute",
+                    right: "8px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    padding: "6px 12px",
+                    border: "none",
+                    borderRadius: "6px",
+                    color: "#999",
+                    fontSize: "12px",
+                    cursor: "pointer",
+                    zIndex: 1,
+                  }}
+                >
+                  Send
+                </button>
+              </div>
             </div>
           </div>
         }
@@ -496,16 +448,28 @@ const Home: React.FC = () => {
             }}
           >
             <PrimaryButton
-              variant="primary"
               onClick={() => {
                 console.log("确认修改密码");
                 setChangePasswordModalVisible(false);
               }}
-              disabled={!oldPassword || !newPassword || !confirmNewPassword}
+              disabled={!changePasswordCode}
               fullWidth
             >
               确认
             </PrimaryButton>
+            <button
+              onClick={() => console.log("去绑定邮箱")}
+              style={{
+                background: "transparent",
+                border: "none",
+                color: "#DB7DFF",
+                fontSize: "12px",
+                cursor: "pointer",
+                textAlign: "center",
+              }}
+            >
+              去绑定邮箱
+            </button>
           </div>
         }
       />
