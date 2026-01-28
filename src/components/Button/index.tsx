@@ -39,6 +39,10 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    */
   glowColor?: string;
   /**
+   * 是否禁用按钮
+   */
+  disabled?: boolean;
+  /**
    * 子元素
    */
   children: React.ReactNode;
@@ -53,6 +57,7 @@ const Button: React.FC<ButtonProps> = ({
   borderColor = "#FFFFFFCC",
   glow = false,
   glowColor = "rgba(236,72,153,0.5)",
+  disabled = false,
   className = "",
   style,
   children,
@@ -86,14 +91,14 @@ const Button: React.FC<ButtonProps> = ({
     ...style,
   };
 
-  // 处理渐变背景
+  // 处理渐变背景（disabled 时也保留）
   if (variant === "gradient" && gradient) {
     customStyle.background = gradient;
     customStyle.backgroundSize = "100% 100%";
     customStyle.backgroundPosition = "center";
   }
 
-  // 处理边框和发光效果
+  // 处理边框和发光效果（disabled 时会被 CSS 覆盖）
   // 对于细边框，使用 box-shadow inset 来模拟，这是最兼容的方式
   const shadows: string[] = [];
 
@@ -102,16 +107,16 @@ const Button: React.FC<ButtonProps> = ({
     shadows.push(`inset 0 0 0 ${borderWidth}px ${borderColor}`);
   }
 
-  if (glow) {
+  if (glow && !disabled) {
     shadows.push(`0 0 20px ${glowColor}`);
   }
 
-  if (shadows.length > 0) {
+  if (shadows.length > 0 && !disabled) {
     customStyle.boxShadow = shadows.join(", ");
   }
 
-  // 如果有发光效果，设置 CSS 变量用于 hover 时的增强效果
-  if (glow) {
+  // 如果有发光效果且未禁用，设置 CSS 变量用于 hover 时的增强效果
+  if (glow && !disabled) {
     const hoverGlowColor = glowColor.replace(/0\.\d+/, (match) => {
       const num = parseFloat(match);
       return Math.min(num + 0.3, 1).toFixed(1);
@@ -125,7 +130,7 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <button className={classes} style={customStyle} {...props}>
+    <button className={classes} style={customStyle} disabled={disabled} {...props}>
       {children}
     </button>
   );

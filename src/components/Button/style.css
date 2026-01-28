@@ -10,6 +10,7 @@
   justify-content: center;
   white-space: nowrap;
   user-select: none;
+  overflow: hidden;
 }
 
 /* 尺寸 */
@@ -94,11 +95,20 @@
   box-shadow: var(--hover-shadow, 0 0 30px rgba(236, 72, 153, 0.8)) !important;
 }
 
-/* 禁用状态 */
+/* 禁用状态 - 使用灰色渐变背景，保留星星效果 */
 .custom-button:disabled {
-  opacity: 0.5;
   cursor: not-allowed;
   transform: none !important;
+  pointer-events: none;
+  color: white !important;
+  box-shadow: none !important;
+  background: linear-gradient(276.42deg, #8A8A8A 9.94%, #B0B0B0 47.03%, #929292 92%) !important;
+}
+
+.custom-button:disabled:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  background: linear-gradient(276.42deg, #8A8A8A 9.94%, #B0B0B0 47.03%, #929292 92%) !important;
 }
 
 /* 圆形按钮（用于特殊场景） */
