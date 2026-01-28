@@ -5,7 +5,20 @@
     clip-path: inset(-200px -200px 2px -200px);
 }
 .active-card-text {
-    left: -1.5rem
+    left: -2rem
+}
+.has-star::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -35%;
+    width: 80px;
+    height: 80px;
+    background-image: url("@assets/background/gameNameStar.png");
+    background-size: 80px 80px;
+    background-repeat: no-repeat;
+    background-position: left;
+    z-index: 0;
 }
 .card-yuanshen-wrap::before {
     content: "";

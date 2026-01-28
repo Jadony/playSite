@@ -59,7 +59,7 @@ const GameSearch: React.FC<GameSearchProps> = ({ gameSelectChange }) => {
     },
   ];
 
-  const popularGames = allGames.slice(1, 4); // Show 3 games for popular section
+  const popularGames = allGames.slice(2, 5); // Show 3 games for popular section
 
   // Click outside handler
   useEffect(() => {
@@ -220,6 +220,9 @@ const GameSearch: React.FC<GameSearchProps> = ({ gameSelectChange }) => {
         {popularGames.map((game) => (
           <button
             key={game.id}
+            onClick={() => {
+              gameSelectChange(game);
+            }}
             className="flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-all"
             style={{ border: "0.5px solid rgba(255, 255, 255, 0.8)" }}
           >

@@ -104,6 +104,34 @@ const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
     };
   };
 
+  const gameNameResolve = (name: string, isActive: boolean) => {
+    const nameList = name.split(" ");
+    if (nameList.length === 1) {
+      return (
+        <>
+          <span className={`${isActive ? "has-star" : ""}`}>{nameList[0]}</span>
+        </>
+      );
+    }
+    return nameList.map((item, index) => (
+      <span
+        key={index}
+        style={{
+          backgroundImage: `${isActive ? "url('/src/assets/background/gameNameBg.png')" : ""}`,
+          backgroundClip: "text",
+          WebkitBackgroundClip: "text",
+          color: `${isActive ? "transparent" : "#fff"}`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+        className={`${index === 1 && isActive ? "has-star relative" : ""}`}
+      >
+        {index < nameList.length - 1 ? item + " " : item}
+      </span>
+    ));
+  };
+
   return (
     <section className="w-full px-4 mb-24 relative z-20 overflow-hidden py-20">
       <div className="max-w-7xl mx-auto h-[500px] relative flex items-center justify-center">
@@ -164,26 +192,27 @@ const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
 
                   {/* Text Overlay - Only if visible? Usually always visible but styled differently */}
                   <div
-                    className={`${isActive ? "active-card-text" : "left-6"} absolute bottom-6 z-20 pointer-events-none`}
+                    className={`${isActive ? "active-card-text" : "left-6"} absolute bottom-4 z-20 pointer-events-none duration-500`}
                   >
-                    <h3
-                      className="text-4xl font-bold italic text-white mb-2"
-                      style={{
-                        textShadow: "0 2px 10px rgba(0,0,0,0.5)",
-                        background:
-                          "transparent url(@assets/background/gameNameBg.png) no-repeat left left/top cover",
-                        backgroundClip: "text",
-                        // WebkitBackgroundClip: "text",
-                        // WebkitTextFillColor: "transparent",
-                      }}
+                    <div
+                      className="text-4xl font-bold italic mb-2 game-name"
+                      style={{ whiteSpace: "nowrap" }}
                     >
-                      {game.name}
-                    </h3>
+                      {gameNameResolve(game.name, isActive)}
+                    </div>
                     <div className="flex items-center gap-4">
                       <span
-                        className="text-pink-500 font-bold font-black italic text-3xl tracking-tighter"
+                        className="text-pink-500 font-black italic text-3xl tracking-tighter"
                         style={{
-                          textShadow: "0 0 10px rgba(236,72,153,0.5)",
+                          background:
+                            "linear-gradient(275.92deg, #EE22EB 29.33%, #AA00FF 92.01%), linear-gradient(0deg, #FFFFFF, #FFFFFF)",
+                          backgroundClip: "text",
+                          WebkitBackgroundClip: "text",
+                          color: "transparent",
+                          backgroundPosition: "center",
+                          backgroundSize: "cover",
+                          backgroundRepeat: "no-repeat",
+                          WebkitTextStroke: "1px #fff",
                         }}
                       >
                         {game.discount}
