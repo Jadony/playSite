@@ -17,25 +17,21 @@ const Header: React.FC = () => {
   const currencyRef = React.useRef<HTMLDivElement>(null);
   const gamesRef = React.useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (langRef.current && !langRef.current.contains(event.target as Node)) {
-        setShowLang(false);
-      }
-      if (
-        currencyRef.current &&
-        !currencyRef.current.contains(event.target as Node)
-      ) {
-        setShowCurrency(false);
-      }
-      if (
-        gamesRef.current &&
-        !gamesRef.current.contains(event.target as Node)
-      ) {
-        setShowGames(false);
-      }
+  function handleClickOutside(event: MouseEvent) {
+    if (langRef.current && !langRef.current.contains(event.target as Node)) {
+      setShowLang(false);
     }
-
+    if (
+      currencyRef.current &&
+      !currencyRef.current.contains(event.target as Node)
+    ) {
+      setShowCurrency(false);
+    }
+    if (gamesRef.current && !gamesRef.current.contains(event.target as Node)) {
+      setShowGames(false);
+    }
+  }
+  useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);

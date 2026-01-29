@@ -163,7 +163,6 @@ const allGamesAndSelectReducer = (
   state: AllGamesAndSelectContextType,
   action: AllGamesAndSelectReducerActionType,
 ) => {
-  console.log("store", state, action);
   switch (action.type) {
     case "setGames":
       return {
