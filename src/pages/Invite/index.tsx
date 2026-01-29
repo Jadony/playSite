@@ -26,11 +26,12 @@ const Invite: React.FC = () => {
     { number: 3, text: 'Unlock a free coupon on their first order' },
   ];
 
+  // 根据当前邀请用户数动态计算里程碑解锁状态
   const milestones = [
-    { count: 1, reward: '5% coupon', unlocked: true },
-    { count: 3, reward: '5% coupon', unlocked: true },
-    { count: 5, reward: '5% coupon', unlocked: false },
-    { count: 10, reward: '5% coupon', unlocked: false },
+    { count: 1, reward: '5% coupon', unlocked: invitedCount >= 1 },
+    { count: 3, reward: '5% coupon', unlocked: invitedCount >= 3 },
+    { count: 5, reward: '5% coupon', unlocked: invitedCount >= 5 },
+    { count: 10, reward: '5% coupon', unlocked: invitedCount >= 10 },
   ];
 
   return (
@@ -112,6 +113,7 @@ const Invite: React.FC = () => {
           <div className="invite-button-container">
             <PrimaryButton
               className="invite-button"
+              fontSize="16px"
               onClick={() => console.log('邀请好友')}
             >
               Invitation
@@ -120,24 +122,45 @@ const Invite: React.FC = () => {
 
           {/* 里程碑奖励 */}
           <div className="reward-milestones">
-            {milestones.map((milestone, index) => (
-              <React.Fragment key={milestone.count}>
-                <div className={`milestone-item ${milestone.unlocked ? 'unlocked' : 'locked'}`}>
-                  <img
-                    src={milestone.unlocked ? '/src/assets/invite/bright.png' : '/src/assets/invite/dark.png'}
-                    alt={`${milestone.count} users`}
-                    className="milestone-image"
-                  />
-                  <div className="milestone-count">{milestone.count}</div>
-                  <div className="milestone-reward">{milestone.reward}</div>
-                </div>
-                {index < milestones.length - 1 && (
-                  <div className={`milestone-connector ${
-                    milestone.unlocked && milestones[index + 1]?.unlocked ? 'active' : ''
-                  }`}></div>
-                )}
-              </React.Fragment>
-            ))}
+            {milestones.map((milestone, index) => {
+              // 计算连接线的进度百分比
+              let progress = 0;
+              if (index < milestones.length - 1) {
+                const currentMilestone = milestone.count;
+                const nextMilestone = milestones[index + 1].count;
+
+                if (invitedCount >= nextMilestone) {
+                  // 已完成，100%
+                  progress = 100;
+                } else if (invitedCount <= currentMilestone) {
+                  // 未开始，0%
+                  progress = 0;
+                } else {
+                  // 进行中，计算百分比
+                  progress = ((invitedCount - currentMilestone) / (nextMilestone - currentMilestone)) * 100;
+                }
+              }
+
+              return (
+                <React.Fragment key={milestone.count}>
+                  <div className={`milestone-item ${milestone.unlocked ? 'unlocked' : 'locked'}`}>
+                    <img
+                      src={milestone.unlocked ? '/src/assets/invite/bright.png' : '/src/assets/invite/dark.png'}
+                      alt={`${milestone.count} users`}
+                      className="milestone-image"
+                    />
+                    <div className="milestone-count">{milestone.count}</div>
+                    <div className="milestone-reward">{milestone.reward}</div>
+                  </div>
+                  {index < milestones.length - 1 && (
+                    <div
+                      className={`milestone-connector ${progress > 0 ? 'active' : ''}`}
+                      style={{ '--progress': `${progress}%` } as React.CSSProperties}
+                    ></div>
+                  )}
+                </React.Fragment>
+              );
+            })}
           </div>
         </div>
       </div>
