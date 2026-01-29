@@ -40,21 +40,10 @@ const Coupon: React.FC<CouponProps> = ({
   minOrder = 100,
   maxSave = 20,
   expiresAt = '00:52:07',
-  showConfetti = true,
   onUse,
 }) => {
   return (
     <div className={`coupon coupon-${variant}`}>
-      {/* 纸屑装饰（仅 purple 样式） */}
-      {variant === 'purple' && showConfetti && (
-        <div className="coupon-confetti">
-          <div className="confetti-piece confetti-red"></div>
-          <div className="confetti-piece confetti-blue"></div>
-          <div className="confetti-piece confetti-yellow"></div>
-          <div className="confetti-piece confetti-orange"></div>
-        </div>
-      )}
-
       {/* 左侧穿孔 */}
       <div className="coupon-perforation coupon-perforation-left"></div>
 
