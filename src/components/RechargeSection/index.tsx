@@ -1,10 +1,6 @@
 import React from "react";
 
-type RechargeSectionProps = {
-  selectGame: Game | null;
-};
-
-const RechargeSection: React.FC<RechargeSectionProps> = ({ selectGame }) => {
+const RechargeSection: React.FC = () => {
   const products = Array.from({ length: 8 }).map((_, i) => ({
     id: i,
     title: "Zenless Zone Zero",

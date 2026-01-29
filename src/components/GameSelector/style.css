@@ -1,6 +1,4 @@
-.card-yuanshen-wrap,
-.card-juequling-wrap,
-.card-benghuai-wrap {
+.card-wrap {
     cursor: pointer;
     clip-path: inset(-200px -200px 2px -200px);
 }
@@ -20,27 +18,27 @@
     background-position: left;
     z-index: 0;
 }
-.card-yuanshen-wrap::before {
+.card-wrap::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("@assets/background/yuanshenBehindBg.png");
+    background-image: var(--bgBehindImage);
     background-size: 336px 443px;
     background-repeat: no-repeat;
     background-position: center;
     z-index: 0;
 }
-.card-yuanshen-wrap::after{
+.card-wrap::after{
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("@assets/background/yuanshenFrontBg.png");
+    background-image: var(--bgFrontImage);
     background-size: 336px 122px;
     background-position: bottom;
     background-repeat: no-repeat;

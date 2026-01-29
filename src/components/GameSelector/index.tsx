@@ -2,67 +2,67 @@ import React, { useState, useEffect } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import SpinePlayer from "@components/SpinePlayer";
 import "./style.css";
+import {
+  useAllGamesAndSelectContext,
+  useAllGamesAndSelectDispatchContext,
+} from "@/store/gameStore";
 
-type GameSelectorProps = {
-  selectGame: Game | null;
-};
-
-const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
+const GameSelector: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(1); // Start with the middle one (Zenless Zone Zero)
+  const [cardShowGameList, setCardShowGameList] = useState<Game[]>([]);
+  const { gameList = [], selectGame } = useAllGamesAndSelectContext();
+  const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
 
-  const games = [
-    {
-      id: "juequling",
-      name: "Zenless Zone Zero",
-      spine: {
-        json: "./src/assets/spine/bili.json",
-        atlas: "./src/assets/spine/bili.atlas",
-        png: "./src/assets/spine/bili.png",
-      },
-      discount: "-30%",
-      price: "$ 688.90",
-    },
-    {
-      id: "yuanshen",
-      name: "Genshin Impact",
-      spine: {
-        json: "./src/assets/spine/yifuna.json",
-        atlas: "./src/assets/spine/yifuna.atlas",
-        png: "./src/assets/spine/yifuna.png",
-      },
-      discount: "-15%",
-      price: "$ 688.90",
-    },
-    {
-      id: "benghuai",
-      name: "Honkai: Star Rail",
-      // Reusing yifuna for the third game for now as we only have 2 sets
-      spine: {
-        json: "./src/assets/spine/yifuna.json",
-        atlas: "./src/assets/spine/yifuna.atlas",
-        png: "./src/assets/spine/yifuna.png",
-      },
-      discount: "-25%",
-      price: "$ 688.90",
-    },
-  ];
+  const settleGamesRanking = (gameList: Game[]) => {
+    const result: Game[] = [];
+    let pushFlag = false;
+    while (result.length < gameList.length) {
+      for (let i = 0; i < gameList.length; i++) {
+        if (!pushFlag) {
+          result.push(gameList[i]);
+          pushFlag = true;
+        } else {
+          result.unshift(gameList[i]);
+          pushFlag = false;
+        }
+      }
+    }
+    return result;
+  };
+
+  const searchPopularGame = (gameList: Game[]) => {
+    const len = gameList.length;
+    const mid = Math.floor(len / 2);
+    if (gameList[mid].ranking === 1) {
+      setActiveIndex(mid);
+    } else {
+      setActiveIndex(mid - 1);
+    }
+  };
 
   // React to selectGame prop change
   useEffect(() => {
     if (selectGame) {
-      const index = games.findIndex((g) => g.id === selectGame.id);
+      const index = cardShowGameList.findIndex((g) => g.id === selectGame.id);
+      console.log(index);
       if (index !== -1) {
         setActiveIndex(index);
       }
     }
-  }, [selectGame]);
+  }, [selectGame, cardShowGameList]);
+
+  useEffect(() => {
+    const newGameList = settleGamesRanking(gameList);
+    searchPopularGame(newGameList);
+    setCardShowGameList(newGameList);
+  }, [gameList]);
 
   const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? games.length - 1 : prev - 1));
+    setActiveIndex((prev) => (prev === 0 ? gameList.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    setActiveIndex((prev) => (prev === games.length - 1 ? 0 : prev + 1));
+    setActiveIndex((prev) => (prev === gameList.length - 1 ? 0 : prev + 1));
   };
 
   // Calculate 3D styles
@@ -80,7 +80,7 @@ const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
     if (diff === 0) {
       // Center
       scale = 1.2;
-    } else {
+    } else if (absDiff === 1) {
       // Side items
       scale = 0.9; // Slightly larger side items
       opacity = 0.4; // More visible side items
@@ -91,6 +91,8 @@ const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
       translateX = diff * 420;
       translateZ = -100;
       rotateY = diff > 0 ? -45 : 45; // Symmetric rotation for balanced look
+    } else {
+      opacity = 0;
     }
 
     // Specific tweaks for exact "image match" feel
@@ -151,7 +153,7 @@ const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
 
         {/* Carousel Container */}
         <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
-          {games.map((game, index) => {
+          {cardShowGameList.map((game, index) => {
             const style = getCardStyle(index);
             const isActive = index === activeIndex;
 
@@ -171,9 +173,13 @@ const GameSelector: React.FC<GameSelectorProps> = ({ selectGame }) => {
               >
                 {/* Card Container */}
                 <div
-                  className={`
-                              card-${game.id}-wrap relative w-72 h-96 bg-transparent flex items-center justify-center
-                            `}
+                  className="card-wrap relative w-72 h-96 bg-transparent flex items-center justify-center"
+                  style={
+                    {
+                      "--bgFrontImage": `url(${game.frontBgImage})`,
+                      "--bgBehindImage": `url(${game.behindBgImage})`,
+                    } as React.CSSProperties
+                  }
                 >
                   {/* Spine Player */}
                   <div className="absolute inset-0 flex items-center justify-center">

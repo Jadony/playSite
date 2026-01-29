@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
-import { InboxOutlined, FireOutlined, SearchOutlined } from "@ant-design/icons";
+import { InboxOutlined, SearchOutlined } from "@ant-design/icons";
 import { useDebounce } from "ahooks";
 import { useNavigate } from "react-router-dom";
+import {
+  useAllGamesAndSelectContext,
+  useAllGamesAndSelectDispatchContext,
+} from "@/store/gameStore";
 
-type GameSearchProps = {
-  gameSelectChange: (game: Game) => void;
-};
-
-const GameSearch: React.FC<GameSearchProps> = ({ gameSelectChange }) => {
+const GameSearch: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState<Game[]>([]);
+  const { gameList = [] } = useAllGamesAndSelectContext();
+  const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
 
   const navigate = useNavigate();
 
@@ -20,46 +22,11 @@ const GameSearch: React.FC<GameSearchProps> = ({ gameSelectChange }) => {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Mock Data
-  const allGames: Game[] = [
-    {
-      id: "lol",
-      name: "League of Legend",
-      image:
-        "https://images.unsplash.com/photo-1566577739112-5180d4bf9390?q=80&w=600&auto=format&fit=crop",
-      discount: "-30%",
-    },
-    {
-      id: "pubg",
-      name: "PUBG Mobile",
-      image:
-        "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=600&auto=format&fit=crop",
-      discount: "-10%",
-    },
-    {
-      id: "juequling",
-      name: "Zenless Zone Zero",
-      image:
-        "https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?q=80&w=600&auto=format&fit=crop",
-      discount: "-10%",
-    },
-    {
-      id: "yuanshen",
-      name: "Genshin Impact",
-      image:
-        "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=600&auto=format&fit=crop",
-      discount: "-10%",
-    },
-    {
-      id: "benghuai",
-      name: "Honkai: Star Rail",
-      image:
-        "https://images.unsplash.com/photo-1628260412297-a3377e45006f?auto=format&fit=crop&q=80&w=300",
-      discount: "-15%",
-    },
-  ];
+  const searchPopularGames = (gameList: Game[]): Game => {
+    return gameList.filter((game) => game.isPopular);
+  };
 
-  const popularGames = allGames.slice(2, 5); // Show 3 games for popular section
+  const popularGames = searchPopularGames(gameList); // Show 3 games for popular section
 
   // Click outside handler
   useEffect(() => {
@@ -83,7 +50,7 @@ const GameSearch: React.FC<GameSearchProps> = ({ gameSelectChange }) => {
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 800));
 
-    const results = allGames.filter((game) =>
+    const results = gameList.filter((game) =>
       game.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()),
     );
     setSearchResults(results);
@@ -147,7 +114,12 @@ const GameSearch: React.FC<GameSearchProps> = ({ gameSelectChange }) => {
                 {searchResults.map((game) => (
                   <div
                     onClick={() => {
-                      gameSelectChange(game);
+                      allGamesAndSelectDispatch({
+                        type: "setSelectGame",
+                        payload: {
+                          selectGame: game,
+                        },
+                      });
                       setShowDropdown(false);
                     }}
                     key={game.id}
@@ -181,14 +153,19 @@ const GameSearch: React.FC<GameSearchProps> = ({ gameSelectChange }) => {
 
                 <div className="mt-6">
                   <div className="flex items-center gap-2 mb-4 text-gray-200">
-                    <FireOutlined className="text-orange-500" />
+                    🔥
                     <span className="font-medium">Popular Games</span>
                   </div>
                   <div className="space-y-2">
                     {popularGames.map((game) => (
                       <div
                         onClick={() => {
-                          gameSelectChange(game);
+                          allGamesAndSelectDispatch({
+                            type: "setSelectGame",
+                            payload: {
+                              selectGame: game,
+                            },
+                          });
                           setShowDropdown(false);
                         }}
                         key={game.id}
@@ -221,7 +198,12 @@ const GameSearch: React.FC<GameSearchProps> = ({ gameSelectChange }) => {
           <button
             key={game.id}
             onClick={() => {
-              gameSelectChange(game);
+              allGamesAndSelectDispatch({
+                type: "setSelectGame",
+                payload: {
+                  selectGame: game,
+                },
+              });
             }}
             className="flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-all"
             style={{ border: "0.5px solid rgba(255, 255, 255, 0.8)" }}

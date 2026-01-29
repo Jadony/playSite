@@ -7,8 +7,15 @@ type AllGamesAndSelectContextType = {
 
 type AllGamesAndSelectReducerActionType = {
   type: string;
-  payload: { gameList: Game[]; selectGame: Game };
+  payload: { gameList?: Game[]; selectGame?: Game };
 };
+
+import yuanshenFrontBg from "@assets/background/yuanshenFrontBg.png";
+import yuanshenBehindBg from "@assets/background/yuanshenBehindBg.png";
+import juequlingFrontBg from "@assets/background/juequlingFrontBg.png";
+import juequlingBehindBg from "@assets/background/juequlingBehindBg.png";
+import benghuaiFrontBg from "@assets/background/benghuaiFrontBg.png";
+import benghuaiBehindBg from "@assets/background/benghuaiBehindBg.png";
 
 const staticData = {
   gameList: [
@@ -23,6 +30,8 @@ const staticData = {
       discount: "-15%",
       isPopular: true,
       ranking: 1,
+      frontBgImage: yuanshenFrontBg,
+      behindBgImage: yuanshenBehindBg,
       icon: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=64&q=80",
     },
     {
@@ -36,6 +45,8 @@ const staticData = {
       discount: "-30%",
       isPopular: true,
       ranking: 2,
+      frontBgImage: juequlingFrontBg,
+      behindBgImage: juequlingBehindBg,
       icon: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=64&q=80",
     },
     {
@@ -50,6 +61,8 @@ const staticData = {
       discount: "-25%",
       isPopular: true,
       ranking: 3,
+      frontBgImage: benghuaiFrontBg,
+      behindBgImage: benghuaiBehindBg,
       icon: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=64&q=80",
     },
     {
@@ -63,6 +76,8 @@ const staticData = {
       discount: "-25%",
       isPopular: false,
       ranking: 4,
+      frontBgImage: benghuaiFrontBg,
+      behindBgImage: benghuaiBehindBg,
       icon: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=64&q=80",
     },
     {
@@ -76,11 +91,13 @@ const staticData = {
       discount: "-25%",
       isPopular: false,
       ranking: 5,
+      frontBgImage: benghuaiFrontBg,
+      behindBgImage: benghuaiBehindBg,
       icon: "https://images.unsplash.com/photo-1593305841991-05c29736f4de?auto=format&fit=crop&w=64&q=80",
     },
     {
       id: "marvelrivals",
-      name: "MarvelRivals",
+      name: "Marvel Rivals",
       spine: {
         json: "./src/assets/spine/bili.json",
         atlas: "./src/assets/spine/bili.atlas",
@@ -89,6 +106,8 @@ const staticData = {
       discount: "-25%",
       isPopular: false,
       ranking: 6,
+      frontBgImage: benghuaiFrontBg,
+      behindBgImage: benghuaiBehindBg,
       icon: "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=64&q=80",
     },
     {
@@ -102,6 +121,8 @@ const staticData = {
       discount: "-25%",
       isPopular: false,
       ranking: 7,
+      frontBgImage: "@assets/background/benghuaiFrontBg.png",
+      behindBgImage: "@assets/background/benghuaiBehindBg.png",
       icon: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=64&q=80",
     },
   ],
@@ -111,27 +132,38 @@ const staticData = {
 const allGamesAndSelectContext =
   createContext<AllGamesAndSelectContextType | null>(null);
 
-const allGamesAndSelectDispatchContext = createContext<
-  React.Dispatch<{
-    type: string;
-    payload: { gameList: Game[]; selectGame: Game };
-  }>
->(() => {});
+const allGamesAndSelectDispatchContext = createContext<React.Dispatch<{
+  type: string;
+  payload: { gameList?: Game[]; selectGame?: Game };
+}> | null>(null);
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAllGamesAndSelectContext = () => {
-  return useContext(allGamesAndSelectContext);
+  const context = useContext(allGamesAndSelectContext);
+  if (!context) {
+    throw new Error(
+      "useAllGamesAndSelectContext must be used within a AllGamesAndSelectProvider",
+    );
+  }
+  return context;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useAllGamesAndSelectDispatch = () => {
-  return useContext(allGamesAndSelectDispatchContext);
+export const useAllGamesAndSelectDispatchContext = () => {
+  const context = useContext(allGamesAndSelectDispatchContext);
+  if (!context) {
+    throw new Error(
+      "useAllGamesAndSelectDispatchContext must be used within a AllGamesAndSelectProvider",
+    );
+  }
+  return context;
 };
 
 const allGamesAndSelectReducer = (
-  state: AllGamesAndSelectContextType | null,
+  state: AllGamesAndSelectContextType,
   action: AllGamesAndSelectReducerActionType,
 ) => {
+  console.log("store", state, action);
   switch (action.type) {
     case "setGames":
       return {
@@ -148,12 +180,21 @@ const allGamesAndSelectReducer = (
   }
 };
 
+const getDefaultSelectGame = (gameList: Game[]) => {
+  const game = gameList.find((item) => item.ranking === 1);
+  return game;
+};
+
 export const AllGamesAndSelectProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [data, dispatch] = useReducer(allGamesAndSelectReducer, staticData);
+  const selectGame = getDefaultSelectGame(staticData.gameList);
+  const [data, dispatch] = useReducer(allGamesAndSelectReducer, {
+    gameList: staticData.gameList,
+    selectGame,
+  });
   return (
     <allGamesAndSelectContext.Provider value={data}>
       <allGamesAndSelectDispatchContext.Provider value={dispatch}>

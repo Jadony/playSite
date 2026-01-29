@@ -9,15 +9,14 @@ import PrimaryButton from "@components/PrimaryButton";
 import "./style.css";
 
 const Home: React.FC = () => {
-  const [selectGame, setSelectGame] = useState<Game | null>(null);
-
   // Modal 状态管理
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [failureModalVisible, setFailureModalVisible] = useState(false);
   const [genderModalVisible, setGenderModalVisible] = useState(false);
   const [emailModalVisible, setEmailModalVisible] = useState(false);
   const [newPasswordModalVisible, setNewPasswordModalVisible] = useState(false);
-  const [changePasswordModalVisible, setChangePasswordModalVisible] = useState(false);
+  const [changePasswordModalVisible, setChangePasswordModalVisible] =
+    useState(false);
   const [editProfileModalVisible, setEditProfileModalVisible] = useState(false);
 
   // 表单状态
@@ -28,10 +27,6 @@ const Home: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [changePasswordCode, setChangePasswordCode] = useState("");
   const [name, setName] = useState("");
-
-  const gameSelectChange = (game: Game) => {
-    setSelectGame(game);
-  };
 
   return (
     <div className="home-wrap relative min-h-screen text-white selection:bg-purple-500 selection:text-white pb-24">
@@ -50,10 +45,16 @@ const Home: React.FC = () => {
           borderRadius: "8px",
         }}
       >
-        <PrimaryButton size="small" onClick={() => setSuccessModalVisible(true)}>
+        <PrimaryButton
+          size="small"
+          onClick={() => setSuccessModalVisible(true)}
+        >
           1. 兑换成功
         </PrimaryButton>
-        <PrimaryButton size="small" onClick={() => setFailureModalVisible(true)}>
+        <PrimaryButton
+          size="small"
+          onClick={() => setFailureModalVisible(true)}
+        >
           2. 兑换失败
         </PrimaryButton>
         <PrimaryButton size="small" onClick={() => setGenderModalVisible(true)}>
@@ -62,13 +63,22 @@ const Home: React.FC = () => {
         <PrimaryButton size="small" onClick={() => setEmailModalVisible(true)}>
           4. 设定邮箱
         </PrimaryButton>
-        <PrimaryButton size="small" onClick={() => setNewPasswordModalVisible(true)}>
+        <PrimaryButton
+          size="small"
+          onClick={() => setNewPasswordModalVisible(true)}
+        >
           5. 设定新密码
         </PrimaryButton>
-        <PrimaryButton size="small" onClick={() => setChangePasswordModalVisible(true)}>
+        <PrimaryButton
+          size="small"
+          onClick={() => setChangePasswordModalVisible(true)}
+        >
           6. 修改密码
         </PrimaryButton>
-        <PrimaryButton size="small" onClick={() => setEditProfileModalVisible(true)}>
+        <PrimaryButton
+          size="small"
+          onClick={() => setEditProfileModalVisible(true)}
+        >
           7. 编辑资料
         </PrimaryButton>
       </div>
@@ -101,7 +111,9 @@ const Home: React.FC = () => {
         title="兑换失败"
         content={
           <div>
-            <div style={{ marginBottom: "8px" }}>兑换码无效，请再次尝试或联系</div>
+            <div style={{ marginBottom: "8px" }}>
+              兑换码无效，请再次尝试或联系
+            </div>
             <div>找媒体管理员</div>
           </div>
         }
@@ -132,7 +144,10 @@ const Home: React.FC = () => {
                   height: "62px",
                   cursor: "pointer",
                   borderRadius: "10px",
-                  backgroundColor: gender === option.value ? "rgba(255, 255, 255, 0.1)" : "transparent",
+                  backgroundColor:
+                    gender === option.value
+                      ? "rgba(255, 255, 255, 0.1)"
+                      : "transparent",
                   transition: "background-color 0.2s ease",
                 }}
               >
@@ -287,7 +302,14 @@ const Home: React.FC = () => {
         onClose={() => setNewPasswordModalVisible(false)}
         title="设定新密码"
         content={
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginBottom: "20px" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "16px",
+              marginBottom: "20px",
+            }}
+          >
             {/* 新密码输入框 */}
             <div
               style={{
@@ -507,13 +529,13 @@ const Home: React.FC = () => {
       <HeroSection />
 
       {/* 2. Game Search (Sticky) */}
-      <GameSearch gameSelectChange={gameSelectChange} />
+      <GameSearch />
 
       {/* 3. Game Selector (Slider) */}
-      <GameSelector selectGame={selectGame} />
+      <GameSelector />
 
       {/* 3. Recharge Section (Sidebar + Grid) */}
-      <RechargeSection selectGame={selectGame} />
+      <RechargeSection />
 
       {/* 4. FAQ Area */}
       <section className="container mx-auto px-4 md:px-12 lg:px-24 pt-12">
