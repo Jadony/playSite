@@ -94,6 +94,10 @@ const Invite: React.FC = () => {
 
         {/* Milestones Section */}
         <div className="milestones-section">
+          {/* 该位置放 step_bg 图（img 元素，非背景） */}
+          <div className="milestones-section-bg">
+            <img src="/src/assets/invite/step_bg.png" alt="" className="milestones-section-bg-img" />
+          </div>
           {/* 邀请人数 */}
           <div className="current-count">{invitedCount}</div>
           <h2 className="milestones-title">Cumulative number of invited users</h2>
