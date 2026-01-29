@@ -6,6 +6,7 @@ import RechargeSection from "@components/RechargeSection";
 import FAQSection from "@components/FAQSection";
 import CommonModal from "@components/CommonModal";
 import PrimaryButton from "@components/PrimaryButton";
+import Coupon from '@components/Coupon';
 import "./style.css";
 
 const Home: React.FC = () => {
@@ -539,7 +540,18 @@ const Home: React.FC = () => {
 
       {/* 4. FAQ Area */}
       <section className="container mx-auto px-4 md:px-12 lg:px-24 pt-12">
+
+        <div className="flex gap-4">
+          {/* 紫色样式（带纸屑） */}
+          <Coupon variant="purple" discount={5} minOrder={100} maxSave={20} onUse={() => console.log("使用优惠券")} />
+
+          {/* 深灰色样式 */}
+          <Coupon variant="dark" discount={5} minOrder={100} maxSave={20} onUse={() => console.log("使用优惠券")} />
+        </div>
+
         <FAQSection />
+
+
       </section>
     </div>
   );
