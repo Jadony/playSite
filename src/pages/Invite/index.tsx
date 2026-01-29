@@ -76,8 +76,10 @@ const Invite: React.FC = () => {
           <div className="invite-steps">
             {steps.map((step, index) => (
               <React.Fragment key={step.number}>
-                <div className="invite-step">
-                  <div className="step-number">{step.number}</div>
+                <div className={index === 0 ? 'invite-step first-step' : 'invite-step'}>
+                  <div className="step-number">
+                    <span className="step-number-text">{step.number}</span>
+                  </div>
                   <div className="step-text">{step.text}</div>
                 </div>
                 {index < steps.length - 1 && (
