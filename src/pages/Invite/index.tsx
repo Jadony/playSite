@@ -17,7 +17,7 @@ const Invite: React.FC = () => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(inviteCode);
-    console.log('邀请码已复制');
+    alert('Copy Success!');
   };
 
   const steps = [
