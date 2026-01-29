@@ -43,6 +43,10 @@ export interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButto
    */
   borderRadius?: string;
   /**
+   * 字体大小（单位：px 或 rem，如 "16px"、"1rem"）
+   */
+  fontSize?: string;
+  /**
    * 是否禁用按钮
    */
   disabled?: boolean;
@@ -62,6 +66,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   glow = true,
   glowColor = "rgba(236,72,153,0.5)",
   borderRadius,
+  fontSize,
   disabled = false,
   className = "",
   style,
@@ -99,6 +104,11 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   // 处理圆角
   if (borderRadius) {
     customStyle.borderRadius = borderRadius;
+  }
+
+  // 处理字体大小
+  if (fontSize) {
+    customStyle.fontSize = fontSize;
   }
 
   // 处理渐变背景（disabled 时也保留）
