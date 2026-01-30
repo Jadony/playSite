@@ -175,8 +175,14 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
             )}
           </div>
           <div className="order-detail-product-info">
-            <div className="order-detail-product-name">{product.name}</div>
-            <div className="order-detail-product-meta">数量：{product.quantity}</div>
+            <div>
+              <div className="order-detail-product-name">{product.name}</div>
+              <div className="order-detail-product-meta">数量：{product.quantity}</div>
+            </div>
+            <div className="order-detail-product-footer">
+              <span className="order-detail-product-uid">UID：{product.uid}</span>
+              <span className="order-detail-product-server">区服：{product.server}</span>
+            </div>
           </div>
           <div className="order-detail-product-right">
             <div className="order-detail-product-price-row">
@@ -215,10 +221,6 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
               </div>
             )}
           </div>
-        </div>
-        <div className="order-detail-product-footer">
-          <span className="order-detail-product-uid">UID：{product.uid}</span>
-          <span className="order-detail-product-server">区服：{product.server}</span>
         </div>
       </div>
 
