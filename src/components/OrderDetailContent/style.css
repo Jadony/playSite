@@ -264,23 +264,34 @@
 
 .order-detail-product-actions {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 12px;
   margin-top: 4px;
 }
 
-.order-detail-btn {
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: transparent;
-  color: #e5e7eb;
+/* 立即支付按钮上方的倒计时 */
+.order-detail-pay-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
 }
 
-.order-detail-btn.secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+.order-detail-pay-wrapper .order-detail-pay-btn-countdown {
+  color: #DB7DFF;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.order-detail-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: #fff;
+  color: #0C0B0F;
 }
 
 /* Order Info */

@@ -66,7 +66,7 @@ const STATUS_CONFIG: Record<
     primaryBtn: '刷新',
   },
   refund: {
-    label: '退款售后',
+    label: '退款中',
     desc: '抱歉，您的订单处理过程中遇到了一点异常，未能充值成功，我们将全额退回您的款项',
     statusColor: 'red',
     completedStep: 2,
@@ -113,10 +113,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
 
   const config = STATUS_CONFIG[status];
   const showCountdown = status === 'paying' && countdown;
-  const showActions =
-    (status === 'paying' && (onCancelOrder || onPayNow)) ||
-    (status === 'in_progress' && onRefresh) ||
-    (status === 'pending' && onGoProcess);
+  const showActions = status === 'paying' || status === 'in_progress' || status === 'pending';
 
   return (
     <div className={`order-detail-content ${className}`.trim()}>
@@ -182,9 +179,6 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
           <div className="order-detail-product-right">
             <div className="order-detail-product-price-row">
               <span className="order-detail-product-price">$ {product.totalPrice}</span>
-              {showCountdown && (
-                <span className="order-detail-product-countdown">{countdown}</span>
-              )}
             </div>
             {config.actionTag && (
               <span className={`order-detail-action-tag status-${config.statusColor}`}>
@@ -193,25 +187,44 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
             )}
             {showActions && (
               <div className="order-detail-product-actions">
-                {config.secondaryBtn && onCancelOrder && (
-                  <button className="order-detail-btn secondary" onClick={onCancelOrder}>
+                {config.secondaryBtn && (
+                  <button
+                    className="order-detail-btn secondary"
+                    onClick={onCancelOrder || (() => console.log('取消订单'))}
+                  >
                     {config.secondaryBtn}
                   </button>
                 )}
-                {config.primaryBtn && (
-                  <PrimaryButton
-                    size="small"
-                    fontSize="14px"
-                    onClick={
-                      status === 'paying'
-                        ? onPayNow
-                        : status === 'in_progress'
-                          ? onRefresh
-                          : onGoProcess
-                    }
+                {config.primaryBtn && status === 'paying' && (
+                  <div className="order-detail-pay-wrapper">
+                    {showCountdown && (
+                      <span className="order-detail-pay-btn-countdown">{countdown}</span>
+                    )}
+                    <PrimaryButton
+                      size="medium"
+                      borderRadius="10px"
+                      fontSize="14px"
+                      onClick={onPayNow || (() => console.log('立即支付'))}
+                    >
+                      {config.primaryBtn}
+                    </PrimaryButton>
+                  </div>
+                )}
+                {config.primaryBtn && status === 'in_progress' && (
+                  <button
+                    className="order-detail-btn secondary"
+                    onClick={onRefresh || (() => console.log('刷新'))}
                   >
                     {config.primaryBtn}
-                  </PrimaryButton>
+                  </button>
+                )}
+                {config.primaryBtn && status === 'pending' && (
+                  <button
+                    className="order-detail-btn secondary"
+                    onClick={onGoProcess || (() => console.log('去处理'))}
+                  >
+                    {config.primaryBtn}
+                  </button>
                 )}
               </div>
             )}
