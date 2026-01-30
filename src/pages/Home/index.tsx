@@ -30,6 +30,23 @@ const Home: React.FC = () => {
   const [changePasswordCode, setChangePasswordCode] = useState("");
   const [name, setName] = useState("");
 
+  const mcokOrderInfo = {
+    orderNo: "12121412423678",
+    paymentMethod: "银联充值",
+    orderTime: "2025.12.30 15:30:23",
+    originalPrice: "$199.9",
+    discount: "-$56",
+  }
+
+  const mockProduct = {
+    image: "/src/assets/gameItems/gameitem1.svg",
+    name: "Zenless Zone Zero",
+    quantity: 1,
+    uid: "123224215",
+    server: "132457783445345",
+    totalPrice: "260.90",
+  }
+
   return (
     <div className="home-wrap relative min-h-screen text-white selection:bg-purple-500 selection:text-white pb-24">
       {/* 7个测试按钮 */}
@@ -542,22 +559,45 @@ const Home: React.FC = () => {
         </div>
 
         <OrderDetailContent
+          status="paying"
+          product={mockProduct}
+          orderInfo={mcokOrderInfo}
+          onBack={() => console.log("返回")}
+          countdown="00:00:43"
+        />
+
+        <OrderDetailContent
+          status="completed"
+          product={mockProduct}
+          orderInfo={mcokOrderInfo}
+          onBack={() => console.log("返回")}
+        />
+
+        <OrderDetailContent
+          status="refund"
+          product={mockProduct}
+          orderInfo={mcokOrderInfo}
+          onBack={() => console.log("返回")}
+        />
+
+        <OrderDetailContent
+          status="pending"
+          product={mockProduct}
+          orderInfo={mcokOrderInfo}
+          onBack={() => console.log("返回")}
+        />
+
+        <OrderDetailContent
           status="cancelled"
-          product={{
-            image: "/src/assets/gameItems/gameitem1.svg",
-            name: "Zenless Zone Zero",
-            quantity: 1,
-            uid: "123224215",
-            server: "132457783445345",
-            totalPrice: "260.90",
-          }}
-          orderInfo={{
-            orderNo: "12121412423678",
-            paymentMethod: "银联充值",
-            orderTime: "2025.12.30 15:30:23",
-            originalPrice: "$199.9",
-            discount: "-$56",
-          }}
+          product={mockProduct}
+          orderInfo={mcokOrderInfo}
+          onBack={() => console.log("返回")}
+        />
+
+        <OrderDetailContent
+          status="in_progress"
+          product={mockProduct}
+          orderInfo={mcokOrderInfo}
           onBack={() => console.log("返回")}
         />
 
