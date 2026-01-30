@@ -63,6 +63,14 @@ const Invite: React.FC = () => {
 
   return (
     <div className="invite-page">
+      <div className="stars-space">
+        <div className="star star-a"></div>
+        <div className="star star-b"></div>
+        <div className="star star-c"></div>
+        <div className="star star-d"></div>
+        <div className="star star-e"></div>
+        <div className="star star-f"></div>
+      </div>
       <div className="invite-container">
         {/* Hero Section */}
         <div className="invite-hero">

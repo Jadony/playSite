@@ -36,6 +36,190 @@
   z-index: 1;
 }
 
+.stars-space {
+  width: 1280px;
+  height: 100%;
+  z-index: 0;
+  margin: 0 auto;
+}
+.star {
+  display: block;
+  width: 1px;
+  background: transparent;
+  position: relative;
+  opacity: 0;
+  /*过渡动画*/
+  animation: star-ani 5s linear infinite;
+  -webkit-animation: star-ani 5s linear infinite;
+  -moz-animation: star-ani 5s linear infinite;
+}
+
+/* Head */
+.star:before {
+  content: "";
+  display: block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow:
+    0 0 10px 4px rgba(255, 255, 255, 0.4),
+    0 0 20px 8px rgba(101, 143, 250, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-90%, -50%);
+  z-index: 3;
+}
+
+/* Tail */
+.star:after {
+  content: "";
+  display: block;
+  width: 150px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(101, 143, 250, 0.6) 80%,
+    #ffffff 100%
+  );
+  border-radius: 2px;
+  position: absolute;
+  top: 0;
+  left: -150px;
+  transform-origin: 100% 50%;
+  transform: rotate(45deg);
+  opacity: 0.8;
+}
+.star-a {
+  top: -30px;
+  left: 20%;
+}
+
+.star-b {
+  top: 60px;
+  left: 24%;
+  animation-delay: 4s;
+  -webkit-animation-delay: 4s;
+  -moz-animation-delay: 4s;
+}
+
+.star-c {
+  top: 40px;
+  left: 60%;
+  animation-duration: 3s;
+  -webkit-animation-duration: 3s;
+  -moz-animation-duration: 3s;
+  animation-delay: 15s;
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 5s;
+}
+
+.star-d {
+  top: -30px;
+  left: -8%;
+  animation-delay: 2s;
+  -webkit-animation-delay: 2s;
+  -moz-animation-delay: 2s;
+}
+
+.star-e {
+  top: 40px;
+  left: 14%;
+  animation-duration: 4s;
+  -webkit-animation-duration: 4s;
+  -moz-animation-duration: 4s;
+  animation-delay: 1s;
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+}
+
+.star-f {
+  top: -200px;
+  left: 60%;
+  animation-duration: 4s;
+  -webkit-animation-duration: 4s;
+  -moz-animation-duration: 4s;
+}
+
+.star-g {
+  top: -150px;
+  left: -10%;
+  animation-duration: 3s;
+  -webkit-animation-duration: 3s;
+  -moz-animation-duration: 3s;
+}
+
+.star-h {
+  top: -150px;
+  left: 15%;
+  animation-duration: 2.5s;
+  -webkit-animation-duration: 2.5s;
+  -moz-animation-duration: 2.5s;
+}
+
+@keyframes star-ani {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translate3d(0, 0, 0);
+    -webkit-transform: scale(0.5) translate3d(0, 0, 0);
+    -moz-transform: scale(0.5) translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate3d(200px, 200px, 0);
+    -webkit-transform: translate3d(200px, 200px, 0);
+    -moz-transform: translate3d(200px, 200px, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2) translate3d(300px, 300px, 0);
+    -webkit-transform: scale(1.2) translate3d(300px, 300px, 0);
+    -moz-transform: scale(1.2) translate3d(300px, 300px, 0);
+  }
+}
+@-webkit-keyframes star-ani {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translate3d(0, 0, 0);
+    -webkit-transform: scale(0.5) translate3d(0, 0, 0);
+    -moz-transform: scale(0.5) translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate3d(200px, 200px, 0);
+    -webkit-transform: translate3d(200px, 200px, 0);
+    -moz-transform: translate3d(200px, 200px, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2) translate3d(300px, 300px, 0);
+    -webkit-transform: scale(1.2) translate3d(300px, 300px, 0);
+    -moz-transform: scale(1.2) translate3d(300px, 300px, 0);
+  }
+}
+@-moz-keyframes star-ani {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translate3d(0, 0, 0);
+    -webkit-transform: scale(0.5) translate3d(0, 0, 0);
+    -moz-transform: scale(0.5) translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate3d(200px, 200px, 0);
+    -webkit-transform: translate3d(200px, 200px, 0);
+    -moz-transform: translate3d(200px, 200px, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2) translate3d(300px, 300px, 0);
+    -webkit-transform: scale(1.2) translate3d(300px, 300px, 0);
+    -moz-transform: scale(1.2) translate3d(300px, 300px, 0);
+  }
+}
+
 /* Hero Section - 1280*433 布局 */
 .invite-hero {
   width: 1280px;
