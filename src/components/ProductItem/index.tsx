@@ -1,44 +1,45 @@
 import React from 'react';
-import PrimaryButton from '@components/PrimaryButton';
 import type { OrderProduct, OrderStatus } from '@components/OrderDetailContent';
+import { STATUS_CONFIG } from '@components/OrderDetailContent';
 import './style.css';
 
-export interface ProductItemStatusConfig {
-  actionTag?: string;
-  primaryBtn?: string;
-  secondaryBtn?: string;
-  statusColor: string;
-}
+/** ProductItem 内状态对应的颜色：in_progress 绿、cancelled 灰、completed 白、refund/pending/paying 红 */
+const PRODUCT_ITEM_STATUS_COLOR: Record<OrderStatus, string> = {
+  in_progress: 'green',
+  cancelled: 'grey',
+  completed: 'white',
+  refund: 'red',
+  pending: 'red',
+  paying: 'red',
+};
 
 export interface ProductItemProps {
   product: OrderProduct;
   status: OrderStatus;
-  statusConfig: ProductItemStatusConfig;
-  showCountdown: boolean;
-  countdown?: string;
-  showActions: boolean;
-  onCancelOrder?: () => void;
-  onPayNow?: () => void;
-  onRefresh?: () => void;
-  onGoProcess?: () => void;
+  /** 是否展示顶部边框，默认 true */
+  showBorderTop?: boolean;
+  /** 点击整块商品区域时的回调 */
+  onClick?: () => void;
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({
   product,
   status,
-  statusConfig,
-  showCountdown,
-  countdown,
-  showActions,
-  onCancelOrder,
-  onPayNow,
-  onRefresh,
-  onGoProcess,
+  showBorderTop = true,
+  onClick,
 }) => {
-  const { actionTag, primaryBtn, secondaryBtn, statusColor } = statusConfig;
+  const config = STATUS_CONFIG[status];
+  const displayStatus = config.actionTag ?? config.label;
+  const statusColor = PRODUCT_ITEM_STATUS_COLOR[status];
 
   return (
-    <div className="order-detail-product">
+    <div
+      className={`order-detail-product ${showBorderTop ? '' : 'product-item-no-border'}`}
+      onClick={onClick}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick() : undefined}
+    >
       <div className="order-detail-product-main">
         <div className="order-detail-product-image">
           {product.image ? (
@@ -58,57 +59,12 @@ const ProductItem: React.FC<ProductItemProps> = ({
           </div>
         </div>
         <div className="order-detail-product-right">
+          <span className={`order-detail-action-tag status-${statusColor}`}>
+            {displayStatus || " "}
+          </span>
           <div className="order-detail-product-price-row">
             <span className="order-detail-product-price">$ {product.totalPrice}</span>
           </div>
-          {actionTag && (
-            <span className={`order-detail-action-tag status-${statusColor}`}>
-              {actionTag}
-            </span>
-          )}
-          {showActions && (
-            <div className="order-detail-product-actions">
-              {secondaryBtn && (
-                <button
-                  className="order-detail-btn secondary"
-                  onClick={onCancelOrder || (() => console.log('取消订单'))}
-                >
-                  {secondaryBtn}
-                </button>
-              )}
-              {primaryBtn && status === 'paying' && (
-                <div className="order-detail-pay-wrapper">
-                  {showCountdown && (
-                    <span className="order-detail-pay-btn-countdown">{countdown}</span>
-                  )}
-                  <PrimaryButton
-                    size="medium"
-                    borderRadius="10px"
-                    fontSize="14px"
-                    onClick={onPayNow || (() => console.log('立即支付'))}
-                  >
-                    {primaryBtn}
-                  </PrimaryButton>
-                </div>
-              )}
-              {primaryBtn && status === 'in_progress' && (
-                <button
-                  className="order-detail-btn secondary"
-                  onClick={onRefresh || (() => console.log('刷新'))}
-                >
-                  {primaryBtn}
-                </button>
-              )}
-              {primaryBtn && status === 'pending' && (
-                <button
-                  className="order-detail-btn secondary"
-                  onClick={onGoProcess || (() => console.log('去处理'))}
-                >
-                  {primaryBtn}
-                </button>
-              )}
-            </div>
-          )}
         </div>
       </div>
     </div>

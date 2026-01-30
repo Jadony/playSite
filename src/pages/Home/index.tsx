@@ -8,6 +8,7 @@ import CommonModal from "@components/CommonModal";
 import PrimaryButton from "@components/PrimaryButton";
 import Coupon from '@components/Coupon';
 import OrderDetailContent from '@components/OrderDetailContent';
+import ProductItem from '@components/ProductItem';
 import "./style.css";
 
 const Home: React.FC = () => {
@@ -557,6 +558,13 @@ const Home: React.FC = () => {
           {/* 深灰色样式 */}
           <Coupon variant="dark" discount={5} minOrder={100} maxSave={20} onUse={() => console.log("使用优惠券")} />
         </div>
+
+        <ProductItem product={mockProduct} status="in_progress" />
+        <ProductItem product={mockProduct} status="paying" />
+        <ProductItem product={mockProduct} status="completed" />
+        <ProductItem product={mockProduct} status="refund" />
+        <ProductItem product={mockProduct} status="pending" />
+        <ProductItem product={mockProduct} status="cancelled" />
 
         <OrderDetailContent
           status="paying"

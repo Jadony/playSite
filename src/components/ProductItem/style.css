@@ -3,6 +3,14 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.order-detail-product.product-item-no-border {
+  border-top: none;
+}
+
+.order-detail-product[role="button"] {
+  cursor: pointer;
+}
+
 .order-detail-product-main {
   display: flex;
   align-items: flex-start;
@@ -102,7 +110,7 @@
 }
 
 .order-detail-action-tag {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
 }
 
@@ -112,6 +120,14 @@
 
 .order-detail-action-tag.status-red {
   color: #DF393C;
+}
+
+.order-detail-action-tag.status-green {
+  color: #009844;
+}
+
+.order-detail-action-tag.status-white {
+  color: #fff;
 }
 
 .order-detail-product-actions {
