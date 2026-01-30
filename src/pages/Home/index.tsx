@@ -7,6 +7,7 @@ import FAQSection from "@components/FAQSection";
 import CommonModal from "@components/CommonModal";
 import PrimaryButton from "@components/PrimaryButton";
 import Coupon from '@components/Coupon';
+import OrderDetailContent from '@components/OrderDetailContent';
 import "./style.css";
 
 const Home: React.FC = () => {
@@ -90,16 +91,7 @@ const Home: React.FC = () => {
         onClose={() => setSuccessModalVisible(false)}
         title="兑换成功"
         content={
-          <div>
-            <div>Valid for orders over $100</div>
-            <div>Save up to $20</div>
-            <div style={{ marginTop: "8px", fontSize: "12px", color: "#666" }}>
-              It expires at 02/23/27
-            </div>
-            <div style={{ marginTop: "16px", color: "#999" }}>
-              Click buy class you want
-            </div>
-          </div>
+          <Coupon variant="purple" discount={5} minOrder={100} maxSave={20} onUse={() => console.log("使用优惠券")} />
         }
         width={480}
         footer={null}
@@ -548,6 +540,26 @@ const Home: React.FC = () => {
           {/* 深灰色样式 */}
           <Coupon variant="dark" discount={5} minOrder={100} maxSave={20} onUse={() => console.log("使用优惠券")} />
         </div>
+
+        <OrderDetailContent
+          status="cancelled"
+          product={{
+            image: "/src/assets/gameItems/gameitem1.svg",
+            name: "Zenless Zone Zero",
+            quantity: 1,
+            uid: "123224215",
+            server: "132457783445345",
+            totalPrice: "260.90",
+          }}
+          orderInfo={{
+            orderNo: "12121412423678",
+            paymentMethod: "银联充值",
+            orderTime: "2025.12.30 15:30:23",
+            originalPrice: "$199.9",
+            discount: "-$56",
+          }}
+          onBack={() => console.log("返回")}
+        />
 
         <FAQSection />
 
