@@ -47,11 +47,11 @@
 /* 状态颜色 */
 .order-detail-header-status.status-grey,
 .order-detail-action-tag.status-grey {
-  color: #9ca3af;
+  color: #949494;
 }
 
 .order-detail-status-text.status-grey {
-  color: #9ca3af;
+  color: #fff;
 }
 
 .order-detail-status-text.status-green {
@@ -59,15 +59,15 @@
 }
 
 .order-detail-status-text.status-red {
-  color: #ec4899;
+  color: #DF393C;
 }
 
 .order-detail-action-tag.status-red {
-  color: #ec4899;
+  color: #DF393C;
 }
 
 .order-detail-status-text.status-orange {
-  color: #22c55e;
+  color: #009844;
 }
 
 .order-detail-status-text.status-neutral {

@@ -66,7 +66,7 @@ const STATUS_CONFIG: Record<
     primaryBtn: '刷新',
   },
   refund: {
-    label: '退款中',
+    label: '退款售后',
     desc: '抱歉，您的订单处理过程中遇到了一点异常，未能充值成功，我们将全额退回您的款项',
     statusColor: 'red',
     completedStep: 2,
