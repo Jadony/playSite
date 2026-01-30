@@ -46,7 +46,7 @@ export interface OrderDetailContentProps {
 
 const STEPS = ['下单', '支付', '发货', '完成'] as const;
 
-const STATUS_CONFIG: Record<
+export const STATUS_CONFIG: Record<
   OrderStatus,
   { label: string; desc: string; statusColor: string; completedStep: number; actionTag?: string; primaryBtn?: string; secondaryBtn?: string; showHeaderStatus?: boolean }
 > = {
