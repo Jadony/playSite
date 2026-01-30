@@ -20,7 +20,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
       {/* Search Header */}
       <div className="flex justify-between items-center mb-8">
         <div className="text-xl font-black italic">{selectGame?.name}</div>
-        <div className="relative w-full max-w-md">
+        {/* <div className="relative w-full max-w-md">
           <div className="absolute left-1 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-white">
             <svg
               width="18"
@@ -41,7 +41,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
             placeholder="Search for game names or keywords"
             className="w-full bg-black border border-white rounded-full py-2.5 pl-12 pr-12 text-sm text-white focus:outline-none focus:border-white transition-colors"
           />
-        </div>
+        </div> */}
       </div>
 
       {/* Grid */}

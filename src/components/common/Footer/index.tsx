@@ -1,61 +1,37 @@
 import React from "react";
 import { Layout } from "antd";
-import {
-  GithubOutlined,
-  WechatOutlined,
-  CustomerServiceOutlined,
-} from "@ant-design/icons";
+import faceBook from "@assets/footerIcon/facebook-02.svg";
+import linkedIn from "@assets/footerIcon/linkedin-02.svg";
+import telegram from "@assets/footerIcon/telegram.svg";
+import threads from "@assets/footerIcon/threads.svg";
+import { useTranslation } from "react-i18next";
 import "./style.css";
 
 const { Footer: AntFooter } = Layout;
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <AntFooter className="game-footer">
       <div className="footer-container">
         {/* Left Section: Logo & Socials */}
         <div className="footer-brand">
           <div className="footer-logo">
-            {/* Simple Logo Placeholder based on image */}
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="logo-icon"
-            >
-              <path
-                d="M4 12L20 12"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <path
-                d="M4 6L20 6"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <path
-                d="M4 18L20 18"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
             <span className="logo-text">LOGO</span>
           </div>
 
           <div className="footer-social">
             <a href="#" className="social-icon">
-              <GithubOutlined />
+              <img src={faceBook} alt="" />
             </a>
             <a href="#" className="social-icon">
-              <WechatOutlined />
+              <img src={linkedIn} alt="" />
             </a>
             <a href="#" className="social-icon">
-              <CustomerServiceOutlined />
+              <img src={telegram} alt="" />
+            </a>
+            <a href="#" className="social-icon">
+              <img src={threads} alt="" />
             </a>
           </div>
         </div>
@@ -63,43 +39,43 @@ const Footer: React.FC = () => {
         {/* Right Section: Link Columns */}
         <div className="footer-links">
           <div className="footer-column">
-            <h3>Product</h3>
+            <h3>{t("footer.product")}</h3>
             <ul>
               <li>
-                <a href="#">Features</a>
+                <a href="#">{t("footer.features")}</a>
               </li>
               <li>
-                <a href="#">Pricing</a>
+                <a href="#">{t("footer.pricing")}</a>
               </li>
               <li>
-                <a href="#">Integrations</a>
+                <a href="#">{t("footer.integrations")}</a>
               </li>
             </ul>
           </div>
 
           <div className="footer-column">
-            <h3>Company</h3>
+            <h3>{t("footer.company")}</h3>
             <ul>
               <li>
-                <a href="#">About Us</a>
+                <a href="#">{t("footer.aboutUs")}</a>
               </li>
               <li>
-                <a href="#">Blog</a>
+                <a href="#">{t("footer.blog")}</a>
               </li>
               <li>
-                <a href="#">Contact</a>
+                <a href="#">{t("footer.contact")}</a>
               </li>
             </ul>
           </div>
 
           <div className="footer-column">
-            <h3>Resources</h3>
+            <h3>{t("footer.resources")}</h3>
             <ul>
               <li>
-                <a href="#">Privacy Policy</a>
+                <a href="#">{t("footer.privacyPolicy")}</a>
               </li>
               <li>
-                <a href="#">Terms of Service</a>
+                <a href="#">{t("footer.termsOfService")}</a>
               </li>
             </ul>
           </div>

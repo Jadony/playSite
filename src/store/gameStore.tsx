@@ -184,7 +184,7 @@ const getDefaultSelectGame = (gameList: Game[]) => {
   return game;
 };
 
-export const AllGamesAndSelectProvider = ({
+const AllGamesAndSelectProvider = ({
   children,
 }: {
   children: React.ReactNode;
@@ -202,3 +202,5 @@ export const AllGamesAndSelectProvider = ({
     </allGamesAndSelectContext.Provider>
   );
 };
+
+export default AllGamesAndSelectProvider;

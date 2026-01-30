@@ -1,37 +1,64 @@
-import React, { useState } from 'react';
-import { Input } from 'antd';
-import PrimaryButton from '@components/PrimaryButton';
-import './style.css';
+import React, { useState } from "react";
+import { Input } from "antd";
+import { useTranslation } from "react-i18next";
+import PrimaryButton from "@components/PrimaryButton";
+import "./style.css";
 
 // 用户头像图片（这里用颜色模拟，实际可替换为真实头像）
 const userAvatars = [
-  { color: '#4CAF50', emoji: '👤' },
-  { color: '#2196F3', emoji: '👤' },
-  { color: '#9C27B0', emoji: '👤' },
-  { color: '#FF9800', emoji: '👤' },
+  { color: "#4CAF50", emoji: "👤" },
+  { color: "#2196F3", emoji: "👤" },
+  { color: "#9C27B0", emoji: "👤" },
+  { color: "#FF9800", emoji: "👤" },
 ];
 
 const Invite: React.FC = () => {
-  const [inviteCode] = useState('245KNFSHJNJK');
+  const { t } = useTranslation();
+  const [inviteCode] = useState("245KNFSHJNJK");
   const [invitedCount] = useState(4);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(inviteCode);
-    alert('Copy Success!');
+    alert(t("playWithFriends.copySuccess"));
   };
 
   const steps = [
-    { number: 1, text: 'Share your invite code with friends' },
-    { number: 2, text: 'Friends enter it on signup → Both get discount coupons' },
-    { number: 3, text: 'Unlock a free coupon on their first order' },
+    {
+      number: 1,
+      text: t("playWithFriends.shareYourInviteCodeWithFriends"),
+    },
+    {
+      number: 2,
+      text: t("playWithFriends.friendsEnterItOnSignupBothGetDiscountCoupons"),
+    },
+    {
+      number: 3,
+      text: t("playWithFriends.unlockAFreeCouponOnTheirFirstOrder"),
+    },
   ];
 
   // 根据当前邀请用户数动态计算里程碑解锁状态
   const milestones = [
-    { count: 1, reward: '5% coupon', unlocked: invitedCount >= 1 },
-    { count: 3, reward: '5% coupon', unlocked: invitedCount >= 3 },
-    { count: 5, reward: '5% coupon', unlocked: invitedCount >= 5 },
-    { count: 10, reward: '5% coupon', unlocked: invitedCount >= 10 },
+    {
+      count: 1,
+      reward: `5% ${t("playWithFriends.coupon")}`,
+      unlocked: invitedCount >= 1,
+    },
+    {
+      count: 3,
+      reward: `5% ${t("playWithFriends.coupon")}`,
+      unlocked: invitedCount >= 3,
+    },
+    {
+      count: 5,
+      reward: `5% ${t("playWithFriends.coupon")}`,
+      unlocked: invitedCount >= 5,
+    },
+    {
+      count: 10,
+      reward: `5% ${t("playWithFriends.coupon")}`,
+      unlocked: invitedCount >= 10,
+    },
   ];
 
   return (
@@ -49,13 +76,7 @@ const Invite: React.FC = () => {
           </div>
 
           {/* 主标题 */}
-          <img
-            src="/src/assets/invite/invite_text.png"
-            alt="Invite friends to unlock discounted gift packages and cash rewards"
-            className="invite-title"
-            width="900"
-            height="136"
-          />
+          <div className="invite-title">{t("playWithFriends.subTitle")}</div>
 
           {/* 邀请码输入框 */}
           <div className="invite-code-section">
@@ -67,7 +88,7 @@ const Invite: React.FC = () => {
                 className="invite-code-input"
               />
               <button className="copy-button" onClick={handleCopy}>
-                Copy
+                {t("playWithFriends.copy")}
               </button>
             </div>
           </div>
@@ -76,7 +97,11 @@ const Invite: React.FC = () => {
           <div className="invite-steps">
             {steps.map((step, index) => (
               <React.Fragment key={step.number}>
-                <div className={index === 0 ? 'invite-step first-step' : 'invite-step'}>
+                <div
+                  className={
+                    index === 0 ? "invite-step first-step" : "invite-step"
+                  }
+                >
                   <div className="step-number">
                     <span className="step-number-text">{step.number}</span>
                   </div>
@@ -84,7 +109,11 @@ const Invite: React.FC = () => {
                 </div>
                 {index < steps.length - 1 && (
                   <div className="step-arrow">
-                    <img src="/src/assets/invite/arrow.png" alt="arrow" className="arrow-icon" />
+                    <img
+                      src="/src/assets/invite/arrow.png"
+                      alt="arrow"
+                      className="arrow-icon"
+                    />
                   </div>
                 )}
               </React.Fragment>
@@ -96,11 +125,17 @@ const Invite: React.FC = () => {
         <div className="milestones-section">
           {/* 该位置放 step_bg 图（img 元素，非背景） */}
           <div className="milestones-section-bg">
-            <img src="/src/assets/invite/milestones_section_bg.png" alt="" className="milestones-section-bg-img" />
+            <img
+              src="/src/assets/invite/milestones_section_bg.png"
+              alt=""
+              className="milestones-section-bg-img"
+            />
           </div>
           {/* 邀请人数 */}
           <div className="current-count">{invitedCount}</div>
-          <h2 className="milestones-title">Cumulative number of invited users</h2>
+          <h2 className="milestones-title">
+            {t("playWithFriends.cumulativeNumberOfInvitedUsers")}
+          </h2>
 
           {/* 用户头像 - 只显示已邀请的 */}
           <div className="invited-users">
@@ -120,9 +155,9 @@ const Invite: React.FC = () => {
             <PrimaryButton
               className="invite-button"
               fontSize="16px"
-              onClick={() => console.log('邀请好友')}
+              onClick={handleCopy}
             >
-              Invitation
+              {t("playWithFriends.invitation")}
             </PrimaryButton>
           </div>
 
@@ -143,15 +178,24 @@ const Invite: React.FC = () => {
                   progress = 0;
                 } else {
                   // 进行中，计算百分比
-                  progress = ((invitedCount - currentMilestone) / (nextMilestone - currentMilestone)) * 100;
+                  progress =
+                    ((invitedCount - currentMilestone) /
+                      (nextMilestone - currentMilestone)) *
+                    100;
                 }
               }
 
               return (
                 <React.Fragment key={milestone.count}>
-                  <div className={`milestone-item ${milestone.unlocked ? 'unlocked' : 'locked'}`}>
+                  <div
+                    className={`milestone-item ${milestone.unlocked ? "unlocked" : "locked"}`}
+                  >
                     <img
-                      src={milestone.unlocked ? '/src/assets/invite/bright.png' : '/src/assets/invite/dark.png'}
+                      src={
+                        milestone.unlocked
+                          ? "/src/assets/invite/bright.png"
+                          : "/src/assets/invite/dark.png"
+                      }
                       alt={`${milestone.count} users`}
                       className="milestone-image"
                     />
@@ -160,8 +204,10 @@ const Invite: React.FC = () => {
                   </div>
                   {index < milestones.length - 1 && (
                     <div
-                      className={`milestone-connector ${progress > 0 ? 'active' : ''}`}
-                      style={{ '--progress': `${progress}%` } as React.CSSProperties}
+                      className={`milestone-connector ${progress > 0 ? "active" : ""}`}
+                      style={
+                        { "--progress": `${progress}%` } as React.CSSProperties
+                      }
                     ></div>
                   )}
                 </React.Fragment>

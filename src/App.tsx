@@ -1,12 +1,15 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Layout } from "antd";
+import i18n from "./i18n";
+import { I18nextProvider } from "react-i18next";
 import Header from "@components/common/Header";
 import Footer from "@components/common/Footer";
 import Home from "@pages/Home";
 import Games from "@pages/Games";
 import Invite from "@pages/Invite";
 import "./App.css";
-import { AllGamesAndSelectProvider } from "./store/gameStore";
+import AllGamesAndSelectProvider from "./store/gameStore";
+import LanguageProvider from "./store/languageStore";
 import { hasBgPage } from "./config";
 
 const { Content } = Layout;
@@ -20,21 +23,25 @@ function App() {
     return "";
   };
   return (
-    <Layout
-      className={`min-h-screen bg-game-dark ${isShowBg(location.pathname)}`}
-    >
-      <AllGamesAndSelectProvider>
-        <Header />
-        <Content className="flex-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/games" element={<Games />} />
-            <Route path="/invite" element={<Invite />} />
-          </Routes>
-        </Content>
-        <Footer />
-      </AllGamesAndSelectProvider>
-    </Layout>
+    <I18nextProvider i18n={i18n}>
+      <Layout
+        className={`min-h-screen bg-game-dark ${isShowBg(location.pathname)}`}
+      >
+        <LanguageProvider>
+          <AllGamesAndSelectProvider>
+            <Header />
+            <Content className="flex-1">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/games" element={<Games />} />
+                <Route path="/invite" element={<Invite />} />
+              </Routes>
+            </Content>
+            <Footer />
+          </AllGamesAndSelectProvider>
+        </LanguageProvider>
+      </Layout>
+    </I18nextProvider>
   );
 }
 

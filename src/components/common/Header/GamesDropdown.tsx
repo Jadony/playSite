@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   useAllGamesAndSelectContext,
   useAllGamesAndSelectDispatchContext,
@@ -13,6 +14,7 @@ const GamesDropdown: React.FC<GamesDropdownProps> = ({ onClose }) => {
   const { gameList = [] } = useAllGamesAndSelectContext();
   const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="absolute top-full left-0 mt-4 w-[800px] h-[550px] bg-[#1a1a1a] rounded-3xl border border-white/10 shadow-2xl overflow-hidden flex animate-fade-in z-50">
@@ -69,7 +71,7 @@ const GamesDropdown: React.FC<GamesDropdownProps> = ({ onClose }) => {
               strokeLinecap="round"
             />
           </svg>
-          <span className="text-white font-medium">All games</span>
+          <span className="text-white font-medium">{t("header.allGames")}</span>
         </div>
 
         <div className="flex-1 overflow-y-auto custom-scrollbar pr-2 space-y-1">

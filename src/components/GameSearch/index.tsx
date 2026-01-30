@@ -6,8 +6,10 @@ import {
   useAllGamesAndSelectContext,
   useAllGamesAndSelectDispatchContext,
 } from "@/store/gameStore";
+import { useTranslation } from "react-i18next";
 
 const GameSearch: React.FC = () => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +24,7 @@ const GameSearch: React.FC = () => {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const searchPopularGames = (gameList: Game[]): Game => {
+  const searchPopularGames = (gameList: Game[]): Game[] => {
     return gameList.filter((game) => game.isPopular);
   };
 
@@ -86,7 +88,7 @@ const GameSearch: React.FC = () => {
             onFocus={() => {
               if (searchTerm) setShowDropdown(true);
             }}
-            placeholder="Search for game names or keywords"
+            placeholder={t("home.search.searchForGameNamesOrKeywords")}
             className="flex-1 bg-transparent text-white placeholder-gray-500 focus:outline-none text-lg"
           />
         </div>
@@ -99,7 +101,7 @@ const GameSearch: React.FC = () => {
           }}
           className="w-[60px] h-[60px] rounded-full border border-white flex items-center justify-center text-white hover:bg-white/10 transition-all bg-[#121212] z-50 cursor-pointer"
         >
-          <span className="text-base">All</span>
+          <span className="text-base">{t("home.search.allBtn")}</span>
         </button>
 
         {/* Dropdown Results */}

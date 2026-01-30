@@ -3,58 +3,58 @@ import { useNavigate } from "react-router-dom";
 import { Carousel } from "antd";
 import PrimaryButton from "../PrimaryButton";
 import "./style.css";
-
-const slides = [
-  {
-    id: 1,
-    title: "Starting benefits",
-    subtitle: (
-      <>
-        The lowest price, hi play, unlimited
-        <br />
-        Register now to enjoy the newbie gift
-      </>
-    ),
-    image:
-      "https://images.unsplash.com/photo-1612152605347-f93296cb657d?auto=format&fit=crop&q=80&w=1000",
-    cta: "Sign Up",
-    link: "/invite",
-  },
-  {
-    id: 2,
-    title: "Genshin Impact",
-    subtitle: (
-      <>
-        Explore a vast world of adventure
-        <br />
-        New character summons available now
-      </>
-    ),
-    image:
-      "https://images.unsplash.com/photo-1560942485-b2a11cc13456?auto=format&fit=crop&w=1000&q=80",
-    cta: "Top Up",
-    link: "/games",
-  },
-  {
-    id: 3,
-    title: "PUBG Mobile",
-    subtitle: (
-      <>
-        Battle Royale excitement
-        <br />
-        Get your Unknown Cash instantly
-      </>
-    ),
-    image:
-      "https://images.unsplash.com/photo-1593305841991-05c29736f4de?auto=format&fit=crop&w=1000&q=80",
-    cta: "Buy UC",
-    link: "/games",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const HeroSection: React.FC = () => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
+  const slides = [
+    {
+      id: 1,
+      title: t("home.section.startingBenefits"),
+      subtitle: (
+        <>
+          {t("home.section.startingBenefitsSubFirst")}
+          <br />
+          {t("home.section.startingBenefitsSubSecond")}
+        </>
+      ),
+      image:
+        "https://images.unsplash.com/photo-1612152605347-f93296cb657d?auto=format&fit=crop&q=80&w=1000",
+      cta: t("singUp"),
+      link: "/invite",
+    },
+    {
+      id: 2,
+      title: "Genshin Impact",
+      subtitle: (
+        <>
+          Explore a vast world of adventure
+          <br />
+          New character summons available now
+        </>
+      ),
+      image:
+        "https://images.unsplash.com/photo-1560942485-b2a11cc13456?auto=format&fit=crop&w=1000&q=80",
+      cta: "Top Up",
+      link: "/games",
+    },
+    {
+      id: 3,
+      title: "PUBG Mobile",
+      subtitle: (
+        <>
+          Battle Royale excitement
+          <br />
+          Get your Unknown Cash instantly
+        </>
+      ),
+      image:
+        "https://images.unsplash.com/photo-1593305841991-05c29736f4de?auto=format&fit=crop&w=1000&q=80",
+      cta: "Buy UC",
+      link: "/games",
+    },
+  ];
   return (
     <section className="relative w-full h-[950px] overflow-hidden flex items-center">
       {/* Background Image - Starry Light Effect */}

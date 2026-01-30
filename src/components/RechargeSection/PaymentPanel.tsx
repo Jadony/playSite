@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import PrimaryButton from "@/components/PrimaryButton";
 import GameSelectDropDown from "./GameSelectDropDown";
 import avatar1 from "@/assets/avatars/Ellipse 1.png";
@@ -10,19 +11,19 @@ const staticData = [
     id: 1,
     image: avatar1,
     name: "sa******df",
-    time: "5 minutes ago",
+    time: "5",
   },
   {
     id: 2,
     image: avatar2,
     name: "sa******df",
-    time: "6 minutes ago",
+    time: "6",
   },
   {
     id: 3,
     image: avatar3,
     name: "sa******df",
-    time: "7 minutes ago",
+    time: "7",
   },
 ];
 const serverOptions = [
@@ -57,7 +58,8 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
   const [selectedServerType, setSelectedServerType] = useState<{
     type: string;
     name: string;
-  }>(serverOptions[0]);
+  } | null>(null);
+  const { t } = useTranslation();
 
   return (
     <div
@@ -99,8 +101,13 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
             left: staticData.length * 24,
           }}
         >
-          <p className="text-sm">User {staticData[0].name}</p>
-          <p className="text-xs">placed an order {staticData[0].time}</p>
+          <p className="text-sm">
+            {t("home.selectorAndPayment.user")} {staticData[0].name}
+          </p>
+          <p className="text-xs">
+            {t("home.selectorAndPayment.placedAnOrder")} {staticData[0].time}{" "}
+            {t("home.selectorAndPayment.minutesAgo")}
+          </p>
         </div>
       </div>
       <div>
@@ -112,7 +119,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
           }}
         >
           <label className="text-sm text-white mb-2 block font-medium">
-            Community
+            {t("home.selectorAndPayment.commodity")}
           </label>
           <div className="transition-colors">
             <span className="text-sm text-white">
@@ -129,10 +136,12 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
           }}
         >
           <label className="text-sm text-white mb-2 block font-medium">
-            Recharge method
+            {t("home.selectorAndPayment.rechargeMethod")}
           </label>
           <div className="transition-colors">
-            <span className="text-sm text-white">Self-service recharge</span>
+            <span className="text-sm text-white">
+              {t("home.selectorAndPayment.selfServiceRecharge")}
+            </span>
           </div>
         </div>
 
@@ -147,9 +156,9 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
             onChange={(value) => {
               setSelectedServerType(value);
             }}
-            label="Area / Server"
+            label={t("home.selectorAndPayment.areaService")}
             options={serverOptions}
-            name={selectedServerType.name}
+            name={selectedServerType?.name ?? ""}
             keyName="type"
           />
         </div>
@@ -162,11 +171,11 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
           }}
         >
           <label className="text-sm text-white mb-2 block font-medium ml-1">
-            UID
+            {t("home.selectorAndPayment.uid")}
           </label>
           <input
             type="text"
-            placeholder="Game ID"
+            placeholder={t("home.selectorAndPayment.gameId")}
             className="w-full bg-[#2e2e36] rounded-lg p-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500/50"
           />
         </div>
@@ -179,7 +188,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
           }}
         >
           <label className="text-sm text-white mb-2 block font-medium ml-1">
-            Quantity
+            {t("home.selectorAndPayment.quantity")}
           </label>
           <div className="flex items-center justify-between bg-[#2e2e36] rounded-lg p-1">
             <button
@@ -201,7 +210,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
         {/* Price & Action */}
         <div className="pt-4">
           <label className="text-sm text-white mb-1 block font-medium ml-1">
-            Price
+            {t("home.selectorAndPayment.price")}
           </label>
           <div className="flex justify-between items-baseline mb-4">
             <span
@@ -217,7 +226,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
               $ 260.90
             </span>
             <span className="text-sm text-gray-500 cursor-pointer">
-              $200 OFF Weekly &gt;
+              $200 {t("home.selectorAndPayment.offAlready")} &gt;
             </span>
           </div>
           <PrimaryButton
@@ -228,7 +237,9 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
               console.log("Trade Now");
             }}
           >
-            <span className="text-base">Trade Now</span>
+            <span className="text-base">
+              {t("home.selectorAndPayment.tradeNow")}
+            </span>
           </PrimaryButton>
         </div>
       </div>

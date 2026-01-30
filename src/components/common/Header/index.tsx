@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { languages } from "@/i18n";
+import {
+  useLanguageContext,
+  useLanguageDispatchContext,
+} from "@/store/languageStore";
 import LoginModal from "@components/LoginModal";
 import GamesDropdown from "./GamesDropdown";
 import "./style.css";
@@ -10,12 +16,29 @@ const Header: React.FC = () => {
   const [showLang, setShowLang] = useState(false);
   const [showCurrency, setShowCurrency] = useState(false);
   const [showGames, setShowGames] = useState(false);
-  const [currentLang, setCurrentLang] = useState("English");
   const [currentCurrency, setCurrentCurrency] = useState("USD");
 
   const langRef = React.useRef<HTMLDivElement>(null);
   const currencyRef = React.useRef<HTMLDivElement>(null);
   const gamesRef = React.useRef<HTMLDivElement>(null);
+  const { selectLanguage } = useLanguageContext();
+  const dispatch = useLanguageDispatchContext();
+
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lang: { label: string; value: string }) => {
+    i18n.changeLanguage(lang.value);
+    dispatch({
+      type: "setSelectLanguage",
+      payload: {
+        selectLanguage: {
+          label: lang.label,
+          value: lang.value,
+        },
+      },
+    });
+    setShowLang(false);
+  };
 
   function handleClickOutside(event: MouseEvent) {
     if (langRef.current && !langRef.current.contains(event.target as Node)) {
@@ -37,8 +60,6 @@ const Header: React.FC = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const languages = ["English", "Español", "Français", "Deutsch", "中文"];
   const currencies = ["USD", "EUR", "GBP", "JPY", "CNY"];
 
   const isActive = (path: string) => location.pathname === path;
@@ -49,16 +70,16 @@ const Header: React.FC = () => {
     path: string;
     icon?: React.ReactNode;
   }[] = [
-    { key: "/", label: "Home", path: "/" },
-    { key: "/games", label: "Games", path: "/games" },
+    { key: "/", label: t("header.home"), path: "/" },
+    { key: "/games", label: t("header.games"), path: "/games" },
     {
       key: "/invite",
-      label: "Play with friends",
+      label: t("header.playWithFriends"),
       path: "/invite",
       icon: <span className="mr-1">🔥</span>,
     },
-    { key: "/suggested", label: "Suggestion", path: "/suggested" },
-    { key: "/help", label: "Help Center", path: "/help" },
+    { key: "/suggested", label: t("header.suggestion"), path: "/suggested" },
+    { key: "/help", label: t("header.helpCenter"), path: "/help" },
   ];
 
   return (
@@ -174,7 +195,9 @@ const Header: React.FC = () => {
                   strokeWidth="1.5"
                 />
               </svg>
-              <span className="text-sm font-medium">{currentLang}</span>
+              <span className="text-sm font-medium">
+                {selectLanguage.label}
+              </span>
               <svg
                 width="10"
                 height="6"
@@ -197,14 +220,13 @@ const Header: React.FC = () => {
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-32 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-xl py-2 animate-fade-in z-50 backdrop-blur-md">
                 {languages.map((lang) => (
                   <div
-                    key={lang}
+                    key={lang.value}
                     onClick={() => {
-                      setCurrentLang(lang);
-                      setShowLang(false);
+                      changeLanguage(lang);
                     }}
-                    className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${currentLang === lang ? "text-white font-bold" : "text-gray-400"}`}
+                    className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${selectLanguage.label === lang.label ? "text-white font-bold" : "text-gray-400"}`}
                   >
-                    {lang}
+                    {lang.label}
                   </div>
                 ))}
               </div>
@@ -286,7 +308,7 @@ const Header: React.FC = () => {
               strokeLinejoin="round"
             />
           </svg>
-          Sign Up
+          {t("singUp")}
         </button>
       </div>
 
