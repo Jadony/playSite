@@ -126,11 +126,6 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
           <span className="order-detail-back">←</span>
           <span className="order-detail-title">订单详情</span>
         </div>
-        {config.showHeaderStatus && (
-          <span className={`order-detail-header-status status-${config.statusColor}`}>
-            {config.label}
-          </span>
-        )}
       </div>
 
       {/* Status Area */}
