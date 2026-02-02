@@ -74,7 +74,7 @@ const Header: React.FC = () => {
     { key: "/games", label: t("header.games"), path: "/games" },
     {
       key: "/invite",
-      label: t("header.playWithFriends"),
+      label: t("header.inviteFriends"),
       path: "/invite",
       icon: <span className="mr-1">🔥</span>,
     },
@@ -308,7 +308,7 @@ const Header: React.FC = () => {
               strokeLinejoin="round"
             />
           </svg>
-          {t("singUp")}
+          {t("loginSignUp")}
         </button>
       </div>
 

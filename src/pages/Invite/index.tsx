@@ -25,15 +25,19 @@ const Invite: React.FC = () => {
   const steps = [
     {
       number: 1,
-      text: t("playWithFriends.shareYourInviteCodeWithFriends"),
+      text: t("inviteFriends.sendInvitationCodeToFriends"),
     },
     {
       number: 2,
-      text: t("playWithFriends.friendsEnterItOnSignupBothGetDiscountCoupons"),
+      text: t(
+        "inviteFriends.friendsEnterTheInvitationCodeWhenSigningUpAndCompleteRegistration",
+      ),
     },
     {
       number: 3,
-      text: t("playWithFriends.unlockAFreeCouponOnTheirFirstOrder"),
+      text: t(
+        "inviteFriends.uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons",
+      ),
     },
   ];
 
@@ -41,22 +45,22 @@ const Invite: React.FC = () => {
   const milestones = [
     {
       count: 1,
-      reward: `5% ${t("playWithFriends.coupon")}`,
+      reward: `5% ${t("inviteFriends.coupon")}`,
       unlocked: invitedCount >= 1,
     },
     {
       count: 3,
-      reward: `5% ${t("playWithFriends.coupon")}`,
+      reward: `5% ${t("inviteFriends.coupon")}`,
       unlocked: invitedCount >= 3,
     },
     {
       count: 5,
-      reward: `5% ${t("playWithFriends.coupon")}`,
+      reward: `5% ${t("inviteFriends.coupon")}`,
       unlocked: invitedCount >= 5,
     },
     {
       count: 10,
-      reward: `5% ${t("playWithFriends.coupon")}`,
+      reward: `5% ${t("inviteFriends.coupon")}`,
       unlocked: invitedCount >= 10,
     },
   ];
@@ -84,7 +88,7 @@ const Invite: React.FC = () => {
           </div>
 
           {/* 主标题 */}
-          <div className="invite-title">{t("playWithFriends.subTitle")}</div>
+          <div className="invite-title">{t("inviteFriends.subTitle")}</div>
 
           {/* 邀请码输入框 */}
           <div className="invite-code-section">
@@ -96,7 +100,7 @@ const Invite: React.FC = () => {
                 className="invite-code-input"
               />
               <button className="copy-button" onClick={handleCopy}>
-                {t("playWithFriends.copy")}
+                {t("inviteFriends.copy")}
               </button>
             </div>
           </div>
@@ -142,7 +146,7 @@ const Invite: React.FC = () => {
           {/* 邀请人数 */}
           <div className="current-count">{invitedCount}</div>
           <h2 className="milestones-title">
-            {t("playWithFriends.cumulativeNumberOfInvitedUsers")}
+            {t("inviteFriends.friendsInvited")}
           </h2>
 
           {/* 用户头像 - 只显示已邀请的 */}
@@ -165,7 +169,7 @@ const Invite: React.FC = () => {
               fontSize="16px"
               onClick={handleCopy}
             >
-              {t("playWithFriends.invitation")}
+              {t("inviteFriends.invitation")}
             </PrimaryButton>
           </div>
 

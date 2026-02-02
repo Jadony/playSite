@@ -1,55 +1,46 @@
-import React from 'react'
-import { Card } from 'antd'
-import './style.css'
+import React from "react";
+import { useTranslation } from "react-i18next";
+import DiscountTag from "../DiscountTag";
+import "./style.css";
 
 interface GameCardProps {
-    id: string
-    title: string
-    image: string
-    price: string
-    discount?: number
-    popular?: boolean
-    onClick?: () => void
+  item: Game;
 }
 
-const GameCard: React.FC<GameCardProps> = ({
-    title,
-    image,
-    price,
-    discount,
-    popular,
-    onClick,
-}) => {
-    return (
-        <Card
-            hoverable
-            className="game-card"
-            onClick={onClick}
-            cover={
-                <div className="game-card-image-wrapper">
-                    <img alt={title} src={image} className="game-card-image" />
-                    {discount && (
-                        <div className="discount-badge">
-                            {discount}%
-                        </div>
-                    )}
-                    {popular && (
-                        <div className="popular-badge">
-                            🔥 Popular
-                        </div>
-                    )}
-                </div>
-            }
-        >
-            <div className="game-card-content">
-                <h3 className="game-card-title">{title}</h3>
-                <div className="game-card-footer">
-                    <span className="game-card-price">{price}</span>
-                    <button className="game-card-button">Buy Now</button>
-                </div>
-            </div>
-        </Card>
-    )
-}
+const GameCard: React.FC<GameCardProps> = ({ item }) => {
+  const { t } = useTranslation();
+  const gameItemClick = (item: Game) => {
+    console.log(item);
+  };
+  return (
+    <div
+      onClick={() => gameItemClick(item)}
+      key={item.id}
+      className="mb-12 relative flex flex-col items-center cursor-pointer backdrop-blur transition-transform duration-300 hover:translate-y-[-15px]"
+    >
+      {/* Discount Badge */}
+      {item.discount && (
+        <div className="absolute top-2 right-2 z-10">
+          <DiscountTag discount={item.discount} />
+        </div>
+      )}
 
-export default GameCard
+      {/* Image Container - simplified, transparent bg as per image */}
+      <div className="w-full aspect-square flex items-center justify-center mb-2">
+        <img
+          src={item.image}
+          alt="Product"
+          className={`w-[240px] h-[290px] object-contain drop-shadow-lg rounded-2xl rounded-[14px] border-[1px] border-gray-500 hover:border-2 hover:border-white`}
+        />
+      </div>
+      <div className="w-full">
+        <div className="text-lg text-white font-simibold mb-2">{item.name}</div>
+        <div className="text-sm text-[#EE22EB]">
+          {t("games.theHighestProvince")} $ {item.discount}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default GameCard;

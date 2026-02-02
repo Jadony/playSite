@@ -1,5 +1,6 @@
 import React from "react";
 import { useAllGamesAndSelectContext } from "@/store/gameStore";
+import DiscountTag from "@/components/DiscountTag";
 // import Pagination from "@/components/Pagination";
 
 type ProductGridProps = {
@@ -64,18 +65,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
             {/* Discount Badge */}
             {item.discount && (
               <div className="absolute top-2 right-2 z-10">
-                <span
-                  className={`
-                  ${
-                    item.discount.includes("today")
-                      ? "bg-gradient-to-r from-[#CA1619] to-[#C131DE]" // Special tag
-                      : "bg-[#a855f7]" // Default purple tag
-                  } 
-                   text-white text-xs font-bold px-1 py-1 rounded-md shadow-sm
-                `}
-                >
-                  {item.discount}
-                </span>
+                <DiscountTag discount={item.discount} />
               </div>
             )}
 

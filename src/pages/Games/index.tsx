@@ -1,62 +1,41 @@
 import React from "react";
 import { useInfiniteScroll } from "ahooks";
-import { Row, Col } from "antd";
 import { useTranslation } from "react-i18next";
 import SearchBar from "@components/SearchBar";
 import GameCard from "@components/GameCard";
+import yuanshenFrontBg from "@assets/background/yuanshenFrontBg.png";
+import yuanshenBehindBg from "@assets/background/yuanshenBehindBg.png";
+import gameImage from "@assets/games/gameImage.png";
 import "./style.css";
 
 const Games: React.FC = () => {
   const { t } = useTranslation();
-  // Define Game Interface
-  interface Game {
-    id: string;
-    title: string;
-    image: string;
-    price: string;
-    discount?: number;
-    popular: boolean;
-  }
-
-  interface Result {
-    list: Game[];
-    nextId: string | undefined;
-  }
 
   // Mock API function
   const fetchGameList = (
     nextId: string | undefined,
     limit: number,
-  ): Promise<Result> => {
+  ): Promise<{ list: Game[]; nextId: string | undefined }> => {
     return new Promise((resolve) => {
       setTimeout(() => {
         const page = nextId ? parseInt(nextId) : 1;
         const list = Array.from({ length: limit }, (_, i) => {
           const seed = page * limit + i + Math.floor(Math.random() * 1000);
           return {
-            id: `game-${seed}`,
-            title: [
-              "Genshin Impact",
-              "Zenless Zone Zero",
-              "League of Legend",
-              "Honkai Star Rail",
-              "PUBG Mobile",
-              "Mobile Legends:Bang Bang",
-              "Valorant",
-              "Honor of Kings",
-              "Legends of Runeterra",
-              "Tom and Jerry: Chase",
-              "Wuthering Waves",
-              "Arema Breakout",
-              "MarvelRivals",
-              "Delta Force",
-            ][seed % 14],
-            image: `https://picsum.photos/seed/${seed}/300/400`,
-            price: `Top-up game available 0.1$`,
-            discount:
-              [0, 20, 15, 0, 25, 20, 0, 15, 30, 0, 20, 25, 15, 0][seed % 14] ||
-              undefined,
-            popular: seed % 5 === 0,
+            id: `yuanshen_${seed}`,
+            name: "Genshin Impact",
+            spine: {
+              json: "./src/assets/spine/yifuna.json",
+              atlas: "./src/assets/spine/yifuna.atlas",
+              png: "./src/assets/spine/yifuna.png",
+            },
+            discount: "-15%",
+            isPopular: true,
+            ranking: 1,
+            image: gameImage,
+            frontBgImage: yuanshenFrontBg,
+            behindBgImage: yuanshenBehindBg,
+            icon: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=64&q=80",
           };
         });
 
@@ -88,20 +67,12 @@ const Games: React.FC = () => {
         </div>
 
         {/* Games Grid */}
-        <Row gutter={[24, 24]} className="games-grid">
+
+        <div className="flex flex-wrap justify-between">
           {data?.list.map((game) => (
-            <Col key={game.id} xs={24} sm={12} md={8} lg={6} xl={6}>
-              <GameCard
-                id={game.id}
-                title={game.title}
-                image={game.image}
-                price={game.price}
-                discount={game.discount}
-                popular={game.popular}
-              />
-            </Col>
+            <GameCard item={game} />
           ))}
-        </Row>
+        </div>
 
         {/* Loading / No More Data Indicator */}
         <div

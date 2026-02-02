@@ -14,4 +14,5 @@ type Game = {
   isPopular: boolean;
   ranking: number;
   icon: string;
+  province?: string;
 };

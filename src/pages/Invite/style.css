@@ -388,6 +388,14 @@
   margin: 0 auto;
   box-sizing: border-box;
   position: relative;
+  background-image:
+    url("../../assets/background/invitationBgLeft.png"),
+    url("../../assets/background/invitationBgRight.png");
+  background-size: 460px 530px;
+  background-repeat: no-repeat;
+  background-position:
+    left bottom,
+    right bottom;
 }
 
 /* 该位置放 step_bg 图（img 元素，非背景）：789×480，水平居中，垂直略偏上 */

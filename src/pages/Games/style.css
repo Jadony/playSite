@@ -7,6 +7,22 @@
 .games-container {
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+}
+
+.games-container::before {
+  content: "";
+  position: absolute;
+  width: 40%;
+  height: 20%;
+  top: 0;
+  left: 30%;
+  right: 0;
+  bottom: 0;
+  background-color: #003dcc;
+  opacity: 0.1;
+  filter: blur(170px);
+  z-index: 0;
 }
 
 .games-header {

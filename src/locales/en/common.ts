@@ -2,12 +2,12 @@ export default {
   header: {
     home: "Home",
     games: "Games",
-    playWithFriends: "Play with friends",
+    inviteFriends: "Invite friends",
     suggestion: "Suggestion",
-    helpCenter: "Help Center",
+    helpCenter: "Help center",
     allGames: "All Games",
   },
-  singUp: "Sign Up",
+  loginSignUp: "login/ sign up",
   home: {
     section: {
       startingBenefits: "Starting benefits",
@@ -60,16 +60,17 @@ You can deposit money into your Cash balance at many participating retailers aro
   games: {
     allGames: "All Games",
     searchForGameNamesOrKeywords: "Search for game names or keywords",
+    theHighestProvince: "The highest province",
   },
-  playWithFriends: {
-    subTitle: `Invite friends to unlock discounted gift\npackages and cash rewards`,
+  inviteFriends: {
+    subTitle: `Invite friends to unlock a discount bundle`,
     copy: "Copy",
-    shareYourInviteCodeWithFriends: "Share your invite code with friends",
-    friendsEnterItOnSignupBothGetDiscountCoupons:
-      "Friends enter it on signup → Both get discount coupons",
-    unlockAFreeCouponOnTheirFirstOrder:
-      "Unlock a free coupon on their first order",
-    cumulativeNumberOfInvitedUsers: "Cumulative number of invited users",
+    sendInvitationCodeToFriends: "Send invitation code to friends",
+    friendsEnterTheInvitationCodeWhenSigningUpAndCompleteRegistration:
+      "Friends enter the invitation code when signing up and complete registration",
+    uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons:
+      "Upon successful registration, both parties will receive discount coupons",
+    friendsInvited: "friends invited",
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
