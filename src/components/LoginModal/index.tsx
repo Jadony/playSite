@@ -148,31 +148,36 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
             <PrimaryButton onClick={handleLogin} fontSize="14px">
               {t("loginOrSignUpModal.login")}
             </PrimaryButton>
-
-            {/* Social Login Icons */}
-            <div className="social-login">
-              <div
-                className="social-icon google"
-                onClick={() => handleLoginWithGoogle()}
-              >
-                <GoogleOutlined />
-              </div>
-              <div className="social-icon apple">
-                <AppleOutlined />
-              </div>
-              <div className="social-icon">
-                <span>💬</span>
-              </div>
-            </div>
-
-            {/* Terms Checkbox */}
-            <div className="terms text-center text-xs">
-              <span className="terms-text text-white">
-                {t(
-                  "loginOrSignUpModal.byRegisteringAnAccountOrLoggingInYouAgreeToThePrivacyPolicyTermsOfServiceCookiePlicy",
-                )}
+            <div className="text-white text-center text-sm">
+              {t("loginOrSignUpModal.alreadyHaveAnAccount")}
+              <span className="text-[#B706FA] cursor-pointer underline">
+                {t("loginOrSignUpModal.login")}
               </span>
             </div>
+          </div>
+          {/* Social Login Icons */}
+          <div className="social-login mt-10">
+            <div
+              className="social-icon google"
+              onClick={() => handleLoginWithGoogle()}
+            >
+              <GoogleOutlined />
+            </div>
+            <div className="social-icon apple">
+              <AppleOutlined />
+            </div>
+            <div className="social-icon">
+              <span>💬</span>
+            </div>
+          </div>
+
+          {/* Terms */}
+          <div className="terms text-center text-xs mt-4">
+            <span className="terms-text text-white">
+              {t(
+                "loginOrSignUpModal.byRegisteringAnAccountOrLoggingInYouAgreeToThePrivacyPolicyTermsOfServiceCookiePlicy",
+              )}
+            </span>
           </div>
         </div>
       </div>
