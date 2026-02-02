@@ -44,7 +44,6 @@ const GameSelector: React.FC = () => {
   useEffect(() => {
     if (selectGame) {
       const index = cardShowGameList.findIndex((g) => g.id === selectGame.id);
-      console.log(index);
       if (index !== -1) {
         setActiveIndex(index);
       }
@@ -134,6 +133,14 @@ const GameSelector: React.FC = () => {
     ));
   };
 
+  const changeSelectGame = (game: Game, index: number) => {
+    setActiveIndex(index);
+    allGamesAndSelectDispatch({
+      type: "SELECT_GAME",
+      payload: { selectGame: game },
+    });
+  };
+
   return (
     <section className="w-full px-4 mb-24 relative z-20 overflow-hidden py-20">
       <div className="max-w-7xl mx-auto h-[500px] relative flex items-center justify-center">
@@ -169,7 +176,7 @@ const GameSelector: React.FC = () => {
                   marginLeft: "-144px", // half of w-72
                   marginTop: "-192px", // half of h-96
                 }}
-                onClick={() => setActiveIndex(index)}
+                onClick={() => changeSelectGame(game, index)}
               >
                 {/* Card Container */}
                 <div

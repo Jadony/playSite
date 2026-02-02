@@ -7,7 +7,7 @@ export default {
     helpCenter: "Help center",
     allGames: "All Games",
   },
-  loginSignUp: "login/ sign up",
+  loginSignUp: "login / sign up",
   home: {
     section: {
       startingBenefits: "Starting benefits",
