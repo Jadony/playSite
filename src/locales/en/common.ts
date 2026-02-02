@@ -75,6 +75,14 @@ You can deposit money into your Cash balance at many participating retailers aro
     coupon: "coupon",
     copySuccess: "Copy success",
   },
+  loginOrSignUpModal: {
+    pleaseEnterEmailAddress: "Please enter email address",
+    invitationCode: "Invitation code",
+    login: "Login",
+    alreadyHaveAnAccount: "Already have an account，",
+    byRegisteringAnAccountOrLoggingInYouAgreeToThePrivacyPolicyTermsOfServiceCookiePlicy:
+      "By registering  an account or logging in,you agree to the Privacy Policy / Terms of Service / cookie Plicy",
+  },
   footer: {
     product: "Product",
     features: "Features",

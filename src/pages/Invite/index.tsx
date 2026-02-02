@@ -19,7 +19,7 @@ const Invite: React.FC = () => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(inviteCode);
-    alert(t("playWithFriends.copySuccess"));
+    alert(t("inviteFriends.copySuccess"));
   };
 
   const steps = [
