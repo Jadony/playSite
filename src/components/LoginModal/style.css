@@ -82,6 +82,9 @@
   flex-direction: column;
   gap: 20px;
 }
+.login-form .disabled {
+  cursor: not-allowed;
+}
 
 .login-input::placeholder {
   font-size: 14px;
@@ -113,4 +116,25 @@
 .social-login .social-icon:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: scale(1.1);
+}
+
+.leave-modal {
+  overflow: visible;
+}
+.leave-modal-content img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: -120px;
+}
+.leave-modal-text {
+  width: 100%;
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
 }

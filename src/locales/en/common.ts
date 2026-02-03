@@ -79,9 +79,30 @@ You can deposit money into your Cash balance at many participating retailers aro
     pleaseEnterEmailAddress: "Please enter email address",
     invitationCode: "Invitation code",
     login: "Login",
-    alreadyHaveAnAccount: "Already have an account，",
+    alreadyHaveAnAccount: "Already have an account, ",
     byRegisteringAnAccountOrLoggingInYouAgreeToThePrivacyPolicyTermsOfServiceCookiePlicy:
       "By registering  an account or logging in,you agree to the Privacy Policy / Terms of Service / cookie Plicy",
+    verificationCodeHasBeenSentTo: "Verification code has been sent to :",
+    verificationCode: "Verification Code",
+    verificationCodeError: "The code is incorrect, please try again",
+    verifyEmail: "Verify Email",
+    reSend: "Resend",
+    mail: "mail: ",
+    pleaseEnterPassword: "Please enter password",
+    pleaseReEnterPassword: "Please re-enter password",
+    passwordPatternError:
+      "A combination of numbers, uppercase, and lowercase letters, with a minimum length of 6 characters",
+    completeRegistration: "Complete Registration",
+    pleaseEnterEmailAddressOrNickname: "Please enter email address or nickname",
+    pleaseEnterAccountPassword: "Please enter account password",
+    emailAlreadyLinked:
+      "This email is already linked to a registered account. Please confirm to proceed.",
+    continueWithGoogleAccount: "Continue with Google account",
+    youreOnlyOneStepAway: "You're only one step away!",
+    completeRegistrationToReceiveANewUserGiftPack:
+      "Complete registration to receive a New User Gift Pack.",
+    continue: "continue",
+    leaveNow: "leave now",
   },
   footer: {
     product: "Product",

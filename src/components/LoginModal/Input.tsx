@@ -1,8 +1,15 @@
+import { useTranslation } from "react-i18next";
 type InputProps = {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
-  placeholder: string;
-  svgEl: React.ReactNode;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  placeholder?: string;
+  svgEl?: React.ReactNode;
+  hasSendBtn?: boolean;
+  isSend?: boolean;
+  handleSendBtn?: () => void;
+  time?: number;
+  type?: string;
+  disabled?: boolean;
 };
 
 const Input: React.FC<InputProps> = ({
@@ -10,19 +17,35 @@ const Input: React.FC<InputProps> = ({
   value,
   placeholder,
   svgEl,
+  hasSendBtn = false,
+  isSend,
+  handleSendBtn,
+  time,
+  type = "text",
+  disabled = false,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="relative">
       <div className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-white">
         {svgEl}
       </div>
       <input
+        disabled={disabled}
         onChange={onChange}
         value={value}
-        type="text"
+        type={type}
         placeholder={placeholder}
-        className="login-input w-full bg-black border border-white rounded-full py-3.5 pl-12 pr-12 text-base text-white focus:outline-none focus:border-white transition-colors"
+        className="login-input w-full bg-white/5 border border-white rounded-full py-3.5 pl-12 pr-12 text-base text-white focus:outline-none focus:border-white transition-colors"
       />
+      {hasSendBtn && (
+        <div
+          onClick={handleSendBtn}
+          className={`absolute right-4 top-1/2 -translate-y-1/2 text-right w-20 h-8 flex items-center justify-end text-white opacity-50 cursor-pointer ${isSend ? "disabled" : ""}`}
+        >
+          {isSend ? `${time}s` : t("reSend")}
+        </div>
+      )}
     </div>
   );
 };
