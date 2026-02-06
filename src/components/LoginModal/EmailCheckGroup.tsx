@@ -3,8 +3,11 @@ import Input from "./Input";
 import PrimaryButton from "../PrimaryButton";
 import { useEffect, useState } from "react";
 import { isValidEmail } from "@/utils/helpers";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 interface EmailCheckGroupProps {
+  loading: boolean;
   email: string;
   invitationCode: string;
   setEmail: (email: string) => void;
@@ -13,6 +16,7 @@ interface EmailCheckGroupProps {
 }
 
 const EmailCheckGroup: React.FC<EmailCheckGroupProps> = ({
+  loading,
   email,
   invitationCode,
   setEmail,
@@ -92,11 +96,17 @@ const EmailCheckGroup: React.FC<EmailCheckGroupProps> = ({
         </div>
       </div>
       <PrimaryButton
-        disabled={!!emailError}
+        disabled={!!emailError || loading}
         onClick={handleSearchEmail}
         fontSize="14px"
       >
-        {t("loginOrSignUpModal.login")}
+        <Spin
+          indicator={<LoadingOutlined spin />}
+          spinning={loading}
+          size="large"
+        >
+          {t("loginOrSignUpModal.login")}
+        </Spin>
       </PrimaryButton>
     </div>
   );

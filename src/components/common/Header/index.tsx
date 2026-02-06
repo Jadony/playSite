@@ -9,6 +9,11 @@ import {
 import LoginModal from "@components/LoginModal";
 import GamesDropdown from "./GamesDropdown";
 import "./style.css";
+import { useAuthContext } from "@/store/authStore";
+import userImg from "@/assets/avatars/user.jpg";
+import { allGames, hotGames } from "@/api/game";
+import { message } from "antd";
+import { useAllGamesAndSelectDispatchContext } from "@/store/gameStore";
 
 const Header: React.FC = () => {
   const location = useLocation();
@@ -22,13 +27,16 @@ const Header: React.FC = () => {
   const currencyRef = React.useRef<HTMLDivElement>(null);
   const gamesRef = React.useRef<HTMLDivElement>(null);
   const { selectLanguage } = useLanguageContext();
-  const dispatch = useLanguageDispatchContext();
+  const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
+
+  const languageDispatch = useLanguageDispatchContext();
+  const { isAuthenticated, user } = useAuthContext();
 
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (lang: { label: string; value: string }) => {
     i18n.changeLanguage(lang.value);
-    dispatch({
+    languageDispatch({
       type: "setSelectLanguage",
       payload: {
         selectLanguage: {
@@ -54,7 +62,46 @@ const Header: React.FC = () => {
       setShowGames(false);
     }
   }
+
+  const getHotGames = async () => {
+    try {
+      const { data } = await hotGames({
+        limit: 14,
+      });
+      allGamesAndSelectDispatch({
+        type: "setHotGames",
+        payload: {
+          hotGameList: data.data,
+        },
+      });
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
+  const getAllGames = async () => {
+    try {
+      const { data } = await allGames();
+      allGamesAndSelectDispatch({
+        type: "setAllGames",
+        payload: {
+          gameList: data.data.records,
+        },
+      });
+      allGamesAndSelectDispatch({
+        type: "setSelectGame",
+        payload: {
+          selectGame: data.data.records[0],
+        },
+      });
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
   useEffect(() => {
+    getAllGames();
+    getHotGames();
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -282,34 +329,44 @@ const Header: React.FC = () => {
           </div>
         </div>
 
-        <button
-          onClick={() => setLoginModalVisible(true)}
-          className="flex items-center gap-2 px-6 py-2.5 rounded-full text-white/90 hover:text-white font-medium text-sm hover:bg-[#2a2a2a] transition-all glass-gradient-border"
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        {isAuthenticated ? (
+          <div className="flex items-center gap-2">
+            <img
+              src={user?.avatar || userImg}
+              alt="user"
+              className="w-10 h-10 rounded-full border-2 border-white cursor-pointer"
+            />
+          </div>
+        ) : (
+          <button
+            onClick={() => setLoginModalVisible(true)}
+            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-white/90 hover:text-white font-medium text-sm hover:bg-[#2a2a2a] transition-all glass-gradient-border"
           >
-            <path
-              d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          {t("loginSignUp")}
-        </button>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {t("loginSignUp")}
+          </button>
+        )}
       </div>
 
       <LoginModal

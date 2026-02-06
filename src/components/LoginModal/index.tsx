@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal } from "antd";
+import { message, Modal } from "antd";
 import {
   CloseOutlined,
   GoogleOutlined,
@@ -18,6 +18,8 @@ import LoginGroup from "./LoginGroup";
 import GoogleLoginGroup from "./GoogleLoginGroup";
 import LeaveModal from "./LeaveModal";
 import "./style.css";
+import { useAuthContext } from "@/store/authStore";
+import { emailCodeCheck, existEmail, getGoogleUserInfo } from "@/api/user";
 
 interface LoginModalProps {
   visible: boolean;
@@ -54,21 +56,6 @@ const bgType: BgType = {
   },
 };
 
-const staticEmail = [
-  {
-    name: "jadony",
-    email: "456@qq.com",
-    verificationCode: "123456",
-    isGoogle: true,
-  },
-  {
-    name: "jadony",
-    email: "123@qq.com",
-    verificationCode: "123456",
-    isGoogle: false,
-  },
-];
-
 const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
   const [email, setEmail] = useState("");
   const [invitationCode, setInvitationCode] = useState("");
@@ -79,6 +66,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
   const [account, setAccount] = useState("");
   const [accountPwd, setAccountPwd] = useState("");
   const [leaveModalVisible, setLeaveModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { registerEmailLogin, login, loginWithGoogle } = useAuthContext();
   const { t } = useTranslation();
 
   const initState = () => {
@@ -94,47 +83,114 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
     setCurrentType("login");
   };
 
-  const handleSearchEmail = () => {
-    if (staticEmail.find((item) => item.isGoogle && item.email === email)) {
-      setCurrentType("googleLogin");
-    } else if (staticEmail.find((item) => item.email === email)) {
-      setCurrentType("login");
-    } else {
-      setCurrentType("emailUnSearch");
+  const handleSearchEmail = async () => {
+    try {
+      setLoading(true);
+      const { data } = await existEmail({ email });
+      if (data.data.data) {
+        if (data.data.fetchGoogle) {
+          setCurrentType("googleLogin");
+        } else {
+          setCurrentType("login");
+        }
+      } else {
+        setCurrentType("emailUnSearch");
+      }
+    } catch (error) {
+      message.error("error");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleCheckVerificationCode = (
+  const handleCheckVerificationCode = async (
     setVerificationCodeError: (error: string) => void,
   ) => {
-    if (
-      staticEmail.find((item) => item.verificationCode === verificationCode)
-    ) {
-      setCurrentType("setNewPwd");
-    } else {
-      setVerificationCodeError(t("loginOrSignUpModal.verificationCodeError"));
+    try {
+      setLoading(true);
+      const { data } = await emailCodeCheck({
+        email,
+        code: verificationCode,
+      });
+      if (data.data) {
+        setCurrentType("setNewPwd");
+      } else {
+        setVerificationCodeError(t("loginOrSignUpModal.verificationCodeError"));
+      }
+    } catch (error) {
+      message.error("error");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleCheckPWD = () => {
-    setCurrentType("login");
+  const handleCheckPWD = async () => {
+    try {
+      setLoading(true);
+      await registerEmailLogin(
+        {
+          email,
+          password: pwd,
+          invitationCode,
+        },
+        () => {
+          initState();
+          onClose?.();
+        },
+      );
+    } catch (error) {
+      message.error("error");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleLogin = () => {};
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      await login(
+        {
+          account: account,
+          password: accountPwd,
+        },
+        () => {
+          initState();
+          onClose?.();
+        },
+      );
+    } catch (error) {
+      message.error("error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLoginWithGoogle = useGoogleLogin({
-    onSuccess: (credentialResponse) => {
-      console.log("登录成功，未解码的用户信息:", credentialResponse);
+    onSuccess: async (credentialResponse) => {
+      const { access_token } = credentialResponse;
+      try {
+        const { data } = await getGoogleUserInfo({ accessToken: access_token });
+        await loginWithGoogle({
+          accessToken: access_token,
+          googleId: data.sub,
+          email: data.email,
+          avatar: data.picture,
+          inviteCode: invitationCode,
+        });
+        console.log("登录成功，未解码的用户信息:", data);
+      } catch (error) {
+        message.error("error");
+      }
     },
     onError: () => {
-      console.error("登录失败");
+      message.error("error");
     },
   });
 
   const leaveModalOnClose = (isContinue: boolean) => {
     if (!isContinue) {
       initState();
-      onClose();
+      onClose?.();
     }
     setLeaveModalVisible(false);
   };
@@ -147,7 +203,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
           setLeaveModalVisible(true);
         } else {
           initState();
-          onClose();
+          onClose?.();
         }
       }}
       footer={null}
@@ -213,6 +269,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
           {/* Form Inputs */}
           {currentType === "emailSearch" && (
             <EmailCheckGroup
+              loading={loading}
               email={email}
               invitationCode={invitationCode}
               setEmail={setEmail}
@@ -222,6 +279,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
           )}
           {currentType === "emailUnSearch" && (
             <SignEmailGroup
+              loading={loading}
               email={email}
               verificationCode={verificationCode}
               setVerificationCode={setVerificationCode}
@@ -230,6 +288,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
           )}
           {currentType === "setNewPwd" && (
             <SetPWDGroup
+              loading={loading}
               email={email}
               pwd={pwd}
               setPwd={setPwd}
@@ -240,6 +299,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
           )}
           {currentType === "login" && (
             <LoginGroup
+              loading={loading}
               account={account}
               accountPwd={accountPwd}
               setAccount={setAccount}
@@ -249,6 +309,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
           )}
           {currentType === "googleLogin" && (
             <GoogleLoginGroup
+              loading={loading}
               email={email}
               handleLoginWithGoogle={handleLoginWithGoogle}
             />

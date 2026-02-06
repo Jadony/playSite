@@ -3,8 +3,11 @@ import { useTranslation } from "react-i18next";
 import PrimaryButton from "../PrimaryButton";
 import Input from "./Input";
 import { isPasswordValid } from "@/utils/helpers";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 type SetPWDGroupProps = {
+  loading: boolean;
   email: string;
   pwd: string;
   confirmPwd: string;
@@ -13,6 +16,7 @@ type SetPWDGroupProps = {
   handleCheckPWD: () => void;
 };
 const SetPWDGroup: React.FC<SetPWDGroupProps> = ({
+  loading,
   email,
   pwd,
   confirmPwd,
@@ -121,11 +125,17 @@ const SetPWDGroup: React.FC<SetPWDGroupProps> = ({
         )}
       </div>
       <PrimaryButton
-        disabled={!!pwdError}
+        disabled={!!pwdError || loading}
         onClick={handleCheckPWD}
         fontSize="14px"
       >
-        {t("loginOrSignUpModal.completeRegistration")}
+        <Spin
+          indicator={<LoadingOutlined spin />}
+          spinning={loading}
+          size="large"
+        >
+          {t("loginOrSignUpModal.completeRegistration")}
+        </Spin>
       </PrimaryButton>
     </div>
   );

@@ -1,9 +1,13 @@
 type GameItem = {
-  id: string;
-  image: string;
-  discount: string | null;
-  itemName: string;
-  oldPrice: string;
-  nowPrice: string;
-  tag: string | null;
+  id: number;
+  goodsId: number;
+  goodsName: string;
+  skuNames: string;
+  skuImg: string;
+  originalPrice: number;
+  bubblePrice: number;
+  discount: number;
+  currency: string;
+  zoneInfo: string;
+  hasSpecialOffer: boolean;
 };

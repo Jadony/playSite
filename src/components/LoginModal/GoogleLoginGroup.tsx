@@ -1,13 +1,17 @@
 import { useTranslation } from "react-i18next";
 import Input from "./Input";
 import PrimaryButton from "../PrimaryButton";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 interface GoogleLoginGroupProps {
+  loading: boolean;
   email: string;
   handleLoginWithGoogle: () => void;
 }
 
 const GoogleLoginGroup: React.FC<GoogleLoginGroupProps> = ({
+  loading,
   email,
   handleLoginWithGoogle,
 }) => {
@@ -44,8 +48,18 @@ const GoogleLoginGroup: React.FC<GoogleLoginGroupProps> = ({
           />
         </div>
       </div>
-      <PrimaryButton onClick={() => handleLoginWithGoogle()} fontSize="14px">
-        {t("loginOrSignUpModal.continueWithGoogleAccount")}
+      <PrimaryButton
+        disabled={loading}
+        onClick={() => handleLoginWithGoogle()}
+        fontSize="14px"
+      >
+        <Spin
+          indicator={<LoadingOutlined spin />}
+          spinning={loading}
+          size="large"
+        >
+          {t("loginOrSignUpModal.continueWithGoogleAccount")}
+        </Spin>
       </PrimaryButton>
     </div>
   );

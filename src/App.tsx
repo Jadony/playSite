@@ -12,6 +12,8 @@ import "./App.css";
 import AllGamesAndSelectProvider from "./store/gameStore";
 import LanguageProvider from "./store/languageStore";
 import { hasBgPage } from "./config";
+import AuthProvider from "./store/authStore";
+import GameItemDetail from "@pages/GameItemDetail";
 
 const { Content } = Layout;
 
@@ -24,27 +26,30 @@ function App() {
     return "";
   };
   return (
-    <GoogleOAuthProvider clientId="1006552427972-d6sah06kgcscm233lp3oqfvo1kt9b13r.apps.googleusercontent.com">
-      <I18nextProvider i18n={i18n}>
-        <Layout
-          className={`min-h-screen bg-game-dark ${isShowBg(location.pathname)}`}
-        >
-          <LanguageProvider>
-            <AllGamesAndSelectProvider>
-              <Header />
-              <Content className="flex-1">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/games" element={<Games />} />
-                  <Route path="/invite" element={<Invite />} />
-                </Routes>
-              </Content>
-              <Footer />
-            </AllGamesAndSelectProvider>
-          </LanguageProvider>
-        </Layout>
-      </I18nextProvider>
-    </GoogleOAuthProvider>
+    <AuthProvider>
+      <GoogleOAuthProvider clientId="1006552427972-d6sah06kgcscm233lp3oqfvo1kt9b13r.apps.googleusercontent.com">
+        <I18nextProvider i18n={i18n}>
+          <Layout
+            className={`min-h-screen bg-game-dark ${isShowBg(location.pathname)}`}
+          >
+            <LanguageProvider>
+              <AllGamesAndSelectProvider>
+                <Header />
+                <Content className="flex-1">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/games" element={<Games />}></Route>
+                    <Route path="/games/:id" element={<GameItemDetail />} />
+                    <Route path="/invite" element={<Invite />} />
+                  </Routes>
+                </Content>
+                <Footer />
+              </AllGamesAndSelectProvider>
+            </LanguageProvider>
+          </Layout>
+        </I18nextProvider>
+      </GoogleOAuthProvider>
+    </AuthProvider>
   );
 }
 

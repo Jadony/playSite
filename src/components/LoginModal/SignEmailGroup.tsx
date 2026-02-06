@@ -2,8 +2,12 @@ import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Input from "./Input";
 import PrimaryButton from "../PrimaryButton";
+import { sendEmailCode } from "@/api/user";
+import { message, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 interface SignEmailGroupProps {
+  loading: boolean;
   email: string;
   verificationCode: string;
   setVerificationCode: (verificationCode: string) => void;
@@ -13,27 +17,40 @@ interface SignEmailGroupProps {
 }
 
 const SignEmailGroup: React.FC<SignEmailGroupProps> = ({
+  loading,
   email,
   verificationCode,
   setVerificationCode,
   handleCheckVerificationCode,
 }) => {
-  const [isSend, setIsSend] = useState(true);
+  const [isSend, setIsSend] = useState(false);
   const [time, setTime] = useState(60);
   const [verificationCodeError, setVerificationCodeError] = useState("");
 
   const { t } = useTranslation();
   const timerRef = useRef<number | null>(null);
-  const handleSendBtn = () => {
-    if (isSend) return;
-    setIsSend(true);
-    setTime(60);
-  };
 
   const clearTimer = () => {
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
+    }
+  };
+
+  const handleSendEmailCode = async () => {
+    try {
+      const { data } = await sendEmailCode({
+        email,
+      });
+      if (data.data) {
+        message.success("success");
+        setIsSend(true);
+        setTime(60);
+      } else {
+        message.error("error");
+      }
+    } catch (error) {
+      message.error("error");
     }
   };
 
@@ -52,6 +69,8 @@ const SignEmailGroup: React.FC<SignEmailGroupProps> = ({
           });
         }, 1000); // 每秒更新一次
       }
+    } else {
+      handleSendEmailCode();
     }
     return () => clearTimer();
   }, [isSend, time]);
@@ -89,7 +108,7 @@ const SignEmailGroup: React.FC<SignEmailGroupProps> = ({
             }
             time={time}
             isSend={isSend}
-            handleSendBtn={handleSendBtn}
+            handleSendBtn={handleSendEmailCode}
             hasSendBtn={true}
           />
         </div>
@@ -98,11 +117,17 @@ const SignEmailGroup: React.FC<SignEmailGroupProps> = ({
         </div>
       </div>
       <PrimaryButton
-        disabled={!verificationCode}
+        disabled={!verificationCode || loading}
         onClick={() => handleCheckVerificationCode(setVerificationCodeError)}
         fontSize="14px"
       >
-        {t("loginOrSignUpModal.verifyEmail")}
+        <Spin
+          indicator={<LoadingOutlined spin />}
+          spinning={loading}
+          size="large"
+        >
+          {t("loginOrSignUpModal.verifyEmail")}
+        </Spin>
       </PrimaryButton>
     </div>
   );

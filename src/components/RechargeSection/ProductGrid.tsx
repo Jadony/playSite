@@ -4,12 +4,14 @@ import DiscountTag from "@/components/DiscountTag";
 // import Pagination from "@/components/Pagination";
 
 type ProductGridProps = {
+  isShowTitle: boolean;
   gameItemClick: (item: GameItem) => void;
   products: GameItem[];
   selectGameItem: GameItem | null;
 };
 
 const ProductGrid: React.FC<ProductGridProps> = ({
+  isShowTitle,
   gameItemClick,
   products,
   selectGameItem,
@@ -19,9 +21,12 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   return (
     <div className="space-y-6 backdrop-blur">
       {/* Search Header */}
-      <div className="flex justify-between items-center mb-8">
-        <div className="text-xl font-black italic">{selectGame?.name}</div>
-        {/* <div className="relative w-full max-w-md">
+      {isShowTitle ? (
+        <div className="flex justify-between items-center mb-8">
+          <div className="text-xl font-black italic">
+            {selectGame?.gameName}
+          </div>
+          {/* <div className="relative w-full max-w-md">
           <div className="absolute left-1 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-white">
             <svg
               width="18"
@@ -43,7 +48,10 @@ const ProductGrid: React.FC<ProductGridProps> = ({
             className="w-full bg-black border border-white rounded-full py-2.5 pl-12 pr-12 text-sm text-white focus:outline-none focus:border-white transition-colors"
           />
         </div> */}
-      </div>
+        </div>
+      ) : (
+        ""
+      )}
 
       {/* Grid */}
       <div
@@ -65,26 +73,33 @@ const ProductGrid: React.FC<ProductGridProps> = ({
             {/* Discount Badge */}
             {item.discount && (
               <div className="absolute top-2 right-2 z-10">
-                <DiscountTag discount={item.discount} />
+                <DiscountTag
+                  hasSpecialOffer={item.hasSpecialOffer}
+                  discount={item.discount}
+                />
               </div>
             )}
 
             {/* Image Container - simplified, transparent bg as per image */}
             <div className="w-full aspect-square flex items-center justify-center mb-2">
               <img
-                src={item.image}
+                src={item.skuImg}
                 alt="Product"
                 className={`w-full h-full object-contain drop-shadow-lg rounded-2xl ${selectGameItem?.id === item.id ? "border-2 border-white" : ""}`}
               />
             </div>
             <div className="w-full">
               <div className="text-base font-simibold mb-2">
-                {item.itemName}
+                {item.goodsName}
               </div>
               <div className="flex justify-between">
-                <div className="text-base">{item.nowPrice}</div>
+                <div className="text-base">
+                  {item.currency}&nbsp;
+                  {item.bubblePrice}
+                </div>
                 <div className="text-sm line-through text-gray-500">
-                  {item.oldPrice}
+                  {item.currency}
+                  {item.originalPrice}
                 </div>
               </div>
             </div>

@@ -1,16 +1,14 @@
 import React from "react";
-import { Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
 import "./style.css";
 
 interface SearchBarProps {
   placeholder?: string;
-  onSearch?: (value: string) => void;
-  size?: "large" | "middle" | "small";
+  onChange?: (value: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = "Search for game names or keywords",
+  onChange,
 }) => {
   return (
     <div className="relative w-full max-w-md">
@@ -30,6 +28,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </svg>
       </div>
       <input
+        onChange={(e) => onChange?.(e.target.value)}
         type="text"
         placeholder={placeholder}
         className="w-full bg-black border border-white rounded-full py-2.5 pl-12 pr-12 text-sm text-white focus:outline-none focus:border-white transition-colors"

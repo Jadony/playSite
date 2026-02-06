@@ -1,18 +1,16 @@
 type Game = {
-  id: string;
-  name: string;
-  image?: string;
-  discount: string;
-  spine: {
+  spine?: {
     json: string;
     atlas: string;
     png: string;
   };
-  frontBgImage: string;
-  behindBgImage: string;
-  price?: string;
-  isPopular: boolean;
-  ranking: number;
-  icon: string;
-  province?: string;
+  gameId: number;
+  gameName: string;
+  code?: string;
+  iconUrl?: string;
+  maxDiscount?: number;
+  purchased?: boolean;
+  orderCount?: number;
+  frontBgImage?: string;
+  behindBgImage?: string;
 };

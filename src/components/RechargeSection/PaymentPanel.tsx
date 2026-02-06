@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PrimaryButton from "@/components/PrimaryButton";
 import GameSelectDropDown from "./GameSelectDropDown";
+import LoginModal from "@/components/LoginModal";
 import avatar1 from "@/assets/avatars/Ellipse 1.png";
 import avatar2 from "@/assets/avatars/Ellipse 2.png";
 import avatar3 from "@/assets/avatars/Ellipse 36.png";
+import { useAuthContext } from "@/store/authStore";
 
 const staticData = [
   {
@@ -59,7 +61,15 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
     type: string;
     name: string;
   } | null>(null);
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const { isAuthenticated } = useAuthContext();
   const { t } = useTranslation();
+
+  const handleTradeBtn = () => {
+    if (!isAuthenticated) {
+      setLoginModalVisible(true);
+    }
+  };
 
   return (
     <div
@@ -123,7 +133,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
           </label>
           <div className="transition-colors">
             <span className="text-sm text-white">
-              {selectGameItem?.itemName}
+              {selectGameItem?.goodsName}
             </span>
           </div>
         </div>
@@ -233,9 +243,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
             variant="primary"
             size="large"
             fullWidth
-            onClick={() => {
-              console.log("Trade Now");
-            }}
+            onClick={handleTradeBtn}
           >
             <span className="text-base">
               {t("home.selectorAndPayment.tradeNow")}
@@ -243,6 +251,10 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
           </PrimaryButton>
         </div>
       </div>
+      <LoginModal
+        visible={loginModalVisible}
+        onClose={() => setLoginModalVisible(false)}
+      />
     </div>
   );
 };

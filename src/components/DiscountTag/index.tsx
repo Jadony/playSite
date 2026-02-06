@@ -1,5 +1,6 @@
 type discountTagProps = {
-  discount: string;
+  discount: number;
+  hasSpecialOffer?: boolean;
   fromColor?: string;
   toColor?: string;
   normalColor?: string;
@@ -7,22 +8,20 @@ type discountTagProps = {
 
 const DiscountTag = ({
   discount,
+  hasSpecialOffer = false,
   fromColor = "#CA1619",
   toColor = "#C131DE",
   normalColor = "#a855f7",
 }: discountTagProps) => {
+  const dynamicStyle = hasSpecialOffer
+    ? { backgroundImage: `linear-gradient(to right, ${fromColor}, ${toColor})` }
+    : { backgroundColor: normalColor };
   return (
     <span
-      className={`
-                  ${
-                    discount.includes("today")
-                      ? `bg-gradient-to-r from-[${fromColor}] to-[${toColor}]` // Special tag
-                      : `bg-[${normalColor}]` // Default purple tag
-                  } 
-                   text-white text-xs font-bold px-1 py-1 rounded-md shadow-sm
-                `}
+      className={`text-white text-xs font-bold px-1 py-1 rounded-md shadow-sm`}
+      style={dynamicStyle}
     >
-      {discount}
+      {hasSpecialOffer ? `${discount}% off today` : `-${discount}%`}
     </span>
   );
 };

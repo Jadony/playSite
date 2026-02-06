@@ -43,7 +43,7 @@ const Input: React.FC<InputProps> = ({
           onClick={handleSendBtn}
           className={`absolute right-4 top-1/2 -translate-y-1/2 text-right w-20 h-8 flex items-center justify-end text-white opacity-50 cursor-pointer ${isSend ? "disabled" : ""}`}
         >
-          {isSend ? `${time}s` : t("reSend")}
+          {isSend ? `${time}s` : t("loginOrSignUpModal.reSend")}
         </div>
       )}
     </div>

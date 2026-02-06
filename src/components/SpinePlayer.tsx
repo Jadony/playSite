@@ -3,9 +3,9 @@ import * as PIXI from "pixi.js";
 import { Spine } from "pixi-spine";
 
 interface SpinePlayerProps {
-  jsonUrl: string;
-  atlasUrl: string;
-  pngUrl: string;
+  jsonUrl?: string;
+  atlasUrl?: string;
+  pngUrl?: string;
   animationName?: string;
   loop?: boolean;
   width?: number;
@@ -17,9 +17,9 @@ interface SpinePlayerProps {
 }
 
 const SpinePlayer: React.FC<SpinePlayerProps> = ({
-  jsonUrl,
-  atlasUrl,
-  pngUrl,
+  jsonUrl = "",
+  atlasUrl = "",
+  pngUrl = "",
   animationName = "loop", // Default animation name
   loop = true,
   width = 300,

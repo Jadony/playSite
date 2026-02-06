@@ -2,8 +2,11 @@ import Input from "./Input";
 import { useTranslation } from "react-i18next";
 import PrimaryButton from "../PrimaryButton";
 import { useEffect, useState } from "react";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 interface LoginGroupProps {
+  loading: boolean;
   account: string;
   accountPwd: string;
   setAccount: (account: string) => void;
@@ -12,6 +15,7 @@ interface LoginGroupProps {
 }
 
 const LoginGroup: React.FC<LoginGroupProps> = ({
+  loading,
   account,
   accountPwd,
   setAccount,
@@ -109,11 +113,17 @@ const LoginGroup: React.FC<LoginGroupProps> = ({
         )}
       </div>
       <PrimaryButton
-        disabled={!!loginError}
+        disabled={!!loginError || loading}
         onClick={handleLogin}
         fontSize="14px"
       >
-        {t("loginOrSignUpModal.login")}
+        <Spin
+          indicator={<LoadingOutlined spin />}
+          spinning={loading}
+          size="large"
+        >
+          {t("loginOrSignUpModal.login")}
+        </Spin>
       </PrimaryButton>
     </div>
   );

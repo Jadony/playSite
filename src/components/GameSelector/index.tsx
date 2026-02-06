@@ -30,10 +30,10 @@ const GameSelector: React.FC = () => {
     return result;
   };
 
-  const searchPopularGame = (gameList: Game[]) => {
-    const len = gameList.length;
+  const searchPopularGame = (newGameList: Game[]) => {
+    const len = newGameList.length;
     const mid = Math.floor(len / 2);
-    if (gameList[mid].ranking === 1) {
+    if (newGameList[mid].gameId === gameList[0].gameId) {
       setActiveIndex(mid);
     } else {
       setActiveIndex(mid - 1);
@@ -43,7 +43,9 @@ const GameSelector: React.FC = () => {
   // React to selectGame prop change
   useEffect(() => {
     if (selectGame) {
-      const index = cardShowGameList.findIndex((g) => g.id === selectGame.id);
+      const index = cardShowGameList.findIndex(
+        (g) => g.gameId === selectGame.gameId,
+      );
       if (index !== -1) {
         setActiveIndex(index);
       }
@@ -51,9 +53,11 @@ const GameSelector: React.FC = () => {
   }, [selectGame, cardShowGameList]);
 
   useEffect(() => {
-    const newGameList = settleGamesRanking(gameList);
-    searchPopularGame(newGameList);
-    setCardShowGameList(newGameList);
+    if (gameList.length) {
+      const newGameList = settleGamesRanking(gameList);
+      searchPopularGame(newGameList);
+      setCardShowGameList(newGameList);
+    }
   }, [gameList]);
 
   const handlePrev = () => {
@@ -142,7 +146,10 @@ const GameSelector: React.FC = () => {
   };
 
   return (
-    <section className="w-full px-4 mb-24 relative z-20 overflow-hidden py-20">
+    <section
+      className="w-full px-4 mb-24 relative z-20 overflow-hidden py-20"
+      id="gameSelector"
+    >
       <div className="max-w-7xl mx-auto h-[500px] relative flex items-center justify-center">
         {/* Navigation Buttons */}
         <button
@@ -166,7 +173,7 @@ const GameSelector: React.FC = () => {
 
             return (
               <div
-                key={game.id}
+                key={game.gameId}
                 className="absolute transition-all duration-500 ease-out origin-center"
                 style={{
                   ...style,
@@ -191,9 +198,9 @@ const GameSelector: React.FC = () => {
                   {/* Spine Player */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <SpinePlayer
-                      jsonUrl={game.spine.json}
-                      atlasUrl={game.spine.atlas}
-                      pngUrl={game.spine.png}
+                      jsonUrl={game.spine?.json}
+                      atlasUrl={game.spine?.atlas}
+                      pngUrl={game.spine?.png}
                       animationName="loop"
                       width={690} // Increase width to fit the character
                       height={493} // Increase height to fit the character
@@ -211,7 +218,7 @@ const GameSelector: React.FC = () => {
                       className="text-4xl font-bold italic mb-2 game-name"
                       style={{ whiteSpace: "nowrap" }}
                     >
-                      {gameNameResolve(game.name, isActive)}
+                      {gameNameResolve(game.gameName, isActive)}
                     </div>
                     <div className="flex items-center gap-4">
                       <span
@@ -228,7 +235,7 @@ const GameSelector: React.FC = () => {
                           WebkitTextStroke: "1px #fff",
                         }}
                       >
-                        {game.discount}
+                        -{game.maxDiscount}%
                       </span>
                     </div>
                   </div>

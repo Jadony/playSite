@@ -14,7 +14,7 @@ const GameSearch: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState<Game[]>([]);
-  const { gameList = [] } = useAllGamesAndSelectContext();
+  const { gameList = [], hotGameList = [] } = useAllGamesAndSelectContext();
   const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
 
   const navigate = useNavigate();
@@ -24,11 +24,11 @@ const GameSearch: React.FC = () => {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const searchPopularGames = (gameList: Game[]): Game[] => {
-    return gameList.filter((game) => game.isPopular);
+  const searchPopularGames = (hotGameList: Game[]): Game[] => {
+    return hotGameList.slice(0, 3);
   };
 
-  const popularGames = searchPopularGames(gameList); // Show 3 games for popular section
+  const popularGames = searchPopularGames(hotGameList); // Show 3 games for popular section
 
   // Click outside handler
   useEffect(() => {
@@ -50,10 +50,10 @@ const GameSearch: React.FC = () => {
     setShowDropdown(true);
 
     // Simulate network delay
-    await new Promise((resolve) => setTimeout(resolve, 800));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     const results = gameList.filter((game) =>
-      game.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()),
+      game.gameName.toLowerCase().includes(debouncedSearchTerm.toLowerCase()),
     );
     setSearchResults(results);
     setIsLoading(false);
@@ -124,21 +124,21 @@ const GameSearch: React.FC = () => {
                       });
                       setShowDropdown(false);
                     }}
-                    key={game.id}
+                    key={game.gameId}
                     className="flex items-center gap-4 p-3 hover:bg-white/5 rounded-xl cursor-pointer group transition-colors"
                   >
                     <img
-                      src={game.image}
-                      alt={game.name}
+                      src={game.iconUrl}
+                      alt={game.gameName}
                       className="w-12 h-12 rounded-lg object-cover"
                     />
                     <div className="flex-1">
                       <div className="text-white font-medium group-hover:text-purple-400 transition-colors">
-                        {game.name}
+                        {game.gameName}
                       </div>
                     </div>
                     <span className="bg-purple-600 px-2 py-0.5 rounded text-xs font-bold text-white">
-                      {game.discount}
+                      -{game.maxDiscount}%
                     </span>
                   </div>
                 ))}
@@ -170,19 +170,19 @@ const GameSearch: React.FC = () => {
                           });
                           setShowDropdown(false);
                         }}
-                        key={game.id}
+                        key={game.gameId}
                         className="flex items-center gap-4 p-3 hover:bg-white/5 rounded-xl cursor-pointer group transition-colors"
                       >
                         <img
-                          src={game.image}
-                          alt={game.name}
+                          src={game.iconUrl}
+                          alt={game.gameName}
                           className="w-10 h-10 rounded-lg object-cover"
                         />
                         <div className="flex-1 text-white font-medium group-hover:text-purple-400 transition-colors">
-                          {game.name}
+                          {game.gameName}
                         </div>
                         <span className="bg-purple-600 px-2 py-0.5 rounded text-xs font-bold text-white">
-                          {game.discount}
+                          -{game.maxDiscount}%
                         </span>
                       </div>
                     ))}
@@ -198,7 +198,7 @@ const GameSearch: React.FC = () => {
       <div className="flex gap-4 mt-2">
         {popularGames.map((game) => (
           <button
-            key={game.id}
+            key={game.gameId}
             onClick={() => {
               allGamesAndSelectDispatch({
                 type: "setSelectGame",
@@ -211,7 +211,7 @@ const GameSearch: React.FC = () => {
             style={{ border: "0.5px solid rgba(255, 255, 255, 0.8)" }}
           >
             <span>✓</span>
-            {game.name}
+            {game.gameName}
           </button>
         ))}
       </div>
