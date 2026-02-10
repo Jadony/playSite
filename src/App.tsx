@@ -14,6 +14,9 @@ import LanguageProvider from "./store/languageStore";
 import { hasBgPage } from "./config";
 import AuthProvider from "./store/authStore";
 import GameItemDetail from "@pages/GameItemDetail";
+import About from "@pages/About";
+import UserCenter from "@pages/UserCenter";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const { Content } = Layout;
 
@@ -41,6 +44,15 @@ function App() {
                     <Route path="/games" element={<Games />}></Route>
                     <Route path="/games/:id" element={<GameItemDetail />} />
                     <Route path="/invite" element={<Invite />} />
+                    <Route path="/about" element={<About />} />
+                    <Route
+                      path="/user-center"
+                      element={
+                        // <ProtectedRoute>
+                        <UserCenter />
+                        // </ProtectedRoute>
+                      }
+                    />
                   </Routes>
                 </Content>
                 <Footer />

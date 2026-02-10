@@ -1,16 +1,17 @@
-import React from 'react';
-import type { OrderProduct, OrderStatus } from '@components/OrderDetailContent';
-import { STATUS_CONFIG } from '@components/OrderDetailContent';
-import './style.css';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import type { OrderProduct, OrderStatus } from "@components/OrderDetailContent";
+import { usePurchaseHistoryStatusConfig } from "@/config/userPurchaseHistoryTypes";
+import "./style.css";
 
 /** ProductItem 内状态对应的颜色：in_progress 绿、cancelled 灰、completed 白、refund/pending/paying 红 */
 const PRODUCT_ITEM_STATUS_COLOR: Record<OrderStatus, string> = {
-  in_progress: 'green',
-  cancelled: 'grey',
-  completed: 'white',
-  refund: 'red',
-  pending: 'red',
-  paying: 'red',
+  in_progress: "green",
+  cancelled: "grey",
+  completed: "white",
+  refund: "red",
+  // pending: "red",
+  paying: "red",
 };
 
 export interface ProductItemProps {
@@ -28,17 +29,18 @@ const ProductItem: React.FC<ProductItemProps> = ({
   showBorderTop = true,
   onClick,
 }) => {
-  const config = STATUS_CONFIG[status];
-  const displayStatus = config.actionTag ?? config.label;
+  const config = usePurchaseHistoryStatusConfig()[status];
+  const displayStatus = config?.actionTag ?? config?.label;
   const statusColor = PRODUCT_ITEM_STATUS_COLOR[status];
+  const { t } = useTranslation();
 
   return (
     <div
-      className={`order-detail-product ${showBorderTop ? '' : 'product-item-no-border'}`}
+      className={`order-detail-product ${showBorderTop ? "" : "product-item-no-border"} cursor-pointer`}
       onClick={onClick}
-      role={onClick ? 'button' : undefined}
+      role={onClick ? "button" : undefined}
       tabIndex={onClick ? 0 : undefined}
-      onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick() : undefined}
+      onKeyDown={onClick ? (e) => e.key === "Enter" && onClick() : undefined}
     >
       <div className="order-detail-product-main">
         <div className="order-detail-product-image">
@@ -51,11 +53,15 @@ const ProductItem: React.FC<ProductItemProps> = ({
         <div className="order-detail-product-info">
           <div>
             <div className="order-detail-product-name">{product.name}</div>
-            <div className="order-detail-product-meta">数量：{product.quantity}</div>
+            <div className="order-detail-product-meta">{product.date}</div>
           </div>
           <div className="order-detail-product-footer">
-            <span className="order-detail-product-uid">UID：{product.uid}</span>
-            <span className="order-detail-product-server">区服：{product.server}</span>
+            <span className="order-detail-product-uid">
+              {t("userCenter.quantity")}：{product.quantity}
+            </span>
+            <span className="order-detail-product-server">
+              {t("userCenter.orderForm")}：{product.server}
+            </span>
           </div>
         </div>
         <div className="order-detail-product-right">
@@ -63,7 +69,9 @@ const ProductItem: React.FC<ProductItemProps> = ({
             {displayStatus || " "}
           </span>
           <div className="order-detail-product-price-row">
-            <span className="order-detail-product-price">$ {product.totalPrice}</span>
+            <span className="order-detail-product-price">
+              $ {product.totalPrice}
+            </span>
           </div>
         </div>
       </div>

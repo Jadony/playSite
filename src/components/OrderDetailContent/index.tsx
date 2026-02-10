@@ -1,14 +1,16 @@
-import React from 'react';
-import PrimaryButton from '@components/PrimaryButton';
-import './style.css';
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import PrimaryButton from "@components/PrimaryButton";
+import { usePurchaseHistoryStatusConfig } from "@/config/userPurchaseHistoryTypes";
+import "./style.css";
 
 export type OrderStatus =
-  | 'cancelled'   // 已取消
-  | 'in_progress' // 进行中
-  | 'refund'      // 退款售后
-  | 'pending'     // 待处理
-  | 'paying'      // 支付中
-  | 'completed';  // 完成
+  | "cancelled" // 已取消
+  | "in_progress" // 进行中
+  | "refund" // 退款售后
+  // | "pending" // 待处理
+  | "paying" // 支付中
+  | "completed"; // 完成
 
 export interface OrderProduct {
   image?: string;
@@ -17,6 +19,7 @@ export interface OrderProduct {
   uid: string;
   server: string;
   totalPrice: string;
+  date: string;
 }
 
 export interface OrderInfo {
@@ -28,15 +31,13 @@ export interface OrderInfo {
 }
 
 export interface OrderDetailContentProps {
-  /** 是否显示，不传则始终显示 */
-  visible?: boolean;
   onClose?: () => void;
   onBack?: () => void;
   status: OrderStatus;
   product: OrderProduct;
   orderInfo: OrderInfo;
   /** 支付中时的倒计时，如 "00:54:43" */
-  countdown?: string;
+  countdown?: number;
   onCancelOrder?: () => void;
   onPayNow?: () => void;
   onRefresh?: () => void;
@@ -44,59 +45,9 @@ export interface OrderDetailContentProps {
   className?: string;
 }
 
-const STEPS = ['下单', '支付', '发货', '完成'] as const;
-
-export const STATUS_CONFIG: Record<
-  OrderStatus,
-  { label: string; desc: string; statusColor: string; completedStep: number; actionTag?: string; primaryBtn?: string; secondaryBtn?: string; showHeaderStatus?: boolean }
-> = {
-  cancelled: {
-    label: '已取消',
-    desc: '订单已取消，请重新下单',
-    statusColor: 'grey',
-    completedStep: 1,
-    actionTag: '已取消',
-    showHeaderStatus: true,
-  },
-  in_progress: {
-    label: '进行中',
-    desc: '我们正在处理您的订单，请耐心等待...',
-    statusColor: 'green',
-    completedStep: 3,
-    primaryBtn: '刷新',
-  },
-  refund: {
-    label: '退款售后',
-    desc: '抱歉，您的订单处理过程中遇到了一点异常，未能充值成功，我们将全额退回您的款项',
-    statusColor: 'red',
-    completedStep: 2,
-    actionTag: '售后中',
-  },
-  pending: {
-    label: '待处理',
-    desc: '您提供的账号密码有错，请及时确认并重新提交，方便我们尽快为您完成充值',
-    statusColor: 'orange',
-    completedStep: 2,
-    primaryBtn: '去处理',
-  },
-  paying: {
-    label: '支付中',
-    desc: '支付确认中，支付成功后我们将尽快发货',
-    statusColor: 'neutral',
-    completedStep: 1,
-    secondaryBtn: '取消订单',
-    primaryBtn: '立即支付',
-  },
-  completed: {
-    label: '完成',
-    desc: '订单已完成',
-    statusColor: 'green',
-    completedStep: 4,
-  },
-};
+const STEPS = ["下单", "支付", "发货", "完成"] as const;
 
 const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
-  visible = true,
   onClose,
   onBack,
   status,
@@ -107,27 +58,53 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
   onPayNow,
   onRefresh,
   onGoProcess,
-  className = '',
+  className = "",
 }) => {
-  if (visible === false) return null;
+  const config = usePurchaseHistoryStatusConfig()[status];
+  const showCountdown = status === "paying" && countdown;
+  const showActions = status === "paying" || status === "in_progress";
+  const [curTime, setCurTime] = useState(countdown || 0);
+  // || status === "pending";
+  const { t } = useTranslation();
 
-  const config = STATUS_CONFIG[status];
-  const showCountdown = status === 'paying' && countdown;
-  const showActions = status === 'paying' || status === 'in_progress' || status === 'pending';
+  useEffect(() => {
+    if (showCountdown && curTime > 0) {
+      const timer = setInterval(() => {
+        setCurTime((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [showCountdown, curTime]);
+
+  const showTime = () => {
+    const h = Math.floor(curTime / 3600);
+    const m = Math.floor((curTime % 3600) / 60);
+    const s = curTime % 60;
+
+    return [h, m, s].map((v) => v.toString().padStart(2, "0")).join(":");
+  };
 
   return (
     <div className={`order-detail-content ${className}`.trim()}>
       {/* Header */}
       <div className="order-detail-header">
-        <div className="order-detail-header-left" onClick={onBack || onClose} role="button">
+        <div
+          className="order-detail-header-left"
+          onClick={onBack || onClose}
+          role="button"
+        >
           <span className="order-detail-back">←</span>
-          <span className="order-detail-title">订单详情</span>
+          <span className="order-detail-title">
+            {t("userCenter.orderDetails")}
+          </span>
         </div>
       </div>
 
       {/* Status Area */}
       <div className="order-detail-status-area">
-        <div className={`order-detail-status-text status-${config.statusColor}`}>
+        <div
+          className={`order-detail-status-text status-${config.statusColor}`}
+        >
           {config.label}
         </div>
         <div className="order-detail-status-desc">{config.desc}</div>
@@ -140,14 +117,20 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
             return (
               <React.Fragment key={step}>
                 <div className="order-detail-step">
-                  <div className={`order-detail-step-circle ${completed ? 'completed' : ''}`}>
-                    {completed ? '✓' : ''}
+                  <div
+                    className={`order-detail-step-circle ${completed ? "completed" : ""}`}
+                  >
+                    {completed ? "✓" : ""}
                   </div>
-                  <div className={`order-detail-step-label ${completed ? 'completed' : ''}`}>{step}</div>
+                  <div
+                    className={`order-detail-step-label ${completed ? "completed" : ""}`}
+                  >
+                    {step}
+                  </div>
                 </div>
                 {!isLast && (
                   <div
-                    className={`order-detail-step-line ${index + 1 < config.completedStep ? 'completed' : ''}`}
+                    className={`order-detail-step-line ${index + 1 < config.completedStep ? "completed" : ""}`}
                   />
                 )}
               </React.Fragment>
@@ -169,19 +152,29 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
           <div className="order-detail-product-info">
             <div>
               <div className="order-detail-product-name">{product.name}</div>
-              <div className="order-detail-product-meta">数量：{product.quantity}</div>
+              <div className="order-detail-product-meta">
+                {t("userCenter.quantity")}：{product.quantity}
+              </div>
             </div>
             <div className="order-detail-product-footer">
-              <span className="order-detail-product-uid">UID：{product.uid}</span>
-              <span className="order-detail-product-server">区服：{product.server}</span>
+              <span className="order-detail-product-uid">
+                UID：{product.uid}
+              </span>
+              <span className="order-detail-product-server">
+                {t("userCenter.server")}：{product.server}
+              </span>
             </div>
           </div>
           <div className="order-detail-product-right">
             <div className="order-detail-product-price-row">
-              <span className="order-detail-product-price">$ {product.totalPrice}</span>
+              <span className="order-detail-product-price">
+                $ {product.totalPrice}
+              </span>
             </div>
             {config.actionTag && (
-              <span className={`order-detail-action-tag status-${config.statusColor}`}>
+              <span
+                className={`order-detail-action-tag status-${config.statusColor}`}
+              >
                 {config.actionTag}
               </span>
             )}
@@ -190,38 +183,41 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
                 {config.secondaryBtn && (
                   <button
                     className="order-detail-btn secondary"
-                    onClick={onCancelOrder || (() => console.log('取消订单'))}
+                    onClick={onCancelOrder || (() => console.log("取消订单"))}
                   >
                     {config.secondaryBtn}
                   </button>
                 )}
-                {config.primaryBtn && status === 'paying' && (
+                {config.primaryBtn && status === "paying" && (
                   <div className="order-detail-pay-wrapper">
                     {showCountdown && (
-                      <span className="order-detail-pay-btn-countdown">{countdown}</span>
+                      <span className="order-detail-pay-btn-countdown">
+                        {showTime()}
+                      </span>
                     )}
                     <PrimaryButton
                       size="medium"
                       borderRadius="10px"
                       fontSize="14px"
-                      onClick={onPayNow || (() => console.log('立即支付'))}
+                      onClick={onPayNow || (() => console.log("立即支付"))}
                     >
                       {config.primaryBtn}
                     </PrimaryButton>
                   </div>
                 )}
-                {config.primaryBtn && status === 'in_progress' && (
+                {config.primaryBtn && status === "in_progress" && (
                   <button
                     className="order-detail-btn secondary"
-                    onClick={onRefresh || (() => console.log('刷新'))}
+                    onClick={onRefresh || (() => console.log("刷新"))}
                   >
                     {config.primaryBtn}
                   </button>
                 )}
-                {config.primaryBtn && status === 'pending' && (
+                {config.primaryBtn && (
+                  // && status === "pending"
                   <button
                     className="order-detail-btn secondary"
-                    onClick={onGoProcess || (() => console.log('去处理'))}
+                    onClick={onGoProcess || (() => console.log("去处理"))}
                   >
                     {config.primaryBtn}
                   </button>
@@ -234,26 +230,28 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
 
       {/* Order Info */}
       <div className="order-detail-info">
-        <div className="order-detail-info-title">订单信息</div>
+        <div className="order-detail-info-title">
+          {t("userCenter.orderDetails")}
+        </div>
         <div className="order-detail-info-grid">
           <div className="order-detail-info-item">
-            <span className="key">订单编号：</span>
+            <span className="key">{t("userCenter.orderId")}：</span>
             <span className="value">{orderInfo.orderNo}</span>
           </div>
           <div className="order-detail-info-item">
-            <span className="key">充值方式：</span>
+            <span className="key">{t("userCenter.paymentMethod")}：</span>
             <span className="value">{orderInfo.paymentMethod}</span>
           </div>
           <div className="order-detail-info-item">
-            <span className="key">优惠总价：</span>
+            <span className="key">{t("userCenter.totalDiscount")}：</span>
             <span className="value">{orderInfo.discount}</span>
           </div>
           <div className="order-detail-info-item">
-            <span className="key">订单时间：</span>
+            <span className="key">{t("userCenter.orderTime")}：</span>
             <span className="value">{orderInfo.orderTime}</span>
           </div>
           <div className="order-detail-info-item">
-            <span className="key">商品原价：</span>
+            <span className="key">{t("userCenter.officialPrice")}：</span>
             <span className="value">{orderInfo.originalPrice}</span>
           </div>
         </div>

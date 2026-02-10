@@ -7,51 +7,79 @@ import FAQSection from "@components/FAQSection";
 import CommonModal from "@components/CommonModal";
 import PrimaryButton from "@components/PrimaryButton";
 import Coupon from "@components/Coupon";
-import OrderDetailContent from "@components/OrderDetailContent";
-import ProductItem from "@components/ProductItem";
 import "./style.css";
 
 const Home: React.FC = () => {
   // Modal 状态管理
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [failureModalVisible, setFailureModalVisible] = useState(false);
-  const [genderModalVisible, setGenderModalVisible] = useState(false);
-  const [emailModalVisible, setEmailModalVisible] = useState(false);
-  const [newPasswordModalVisible, setNewPasswordModalVisible] = useState(false);
-  const [changePasswordModalVisible, setChangePasswordModalVisible] =
-    useState(false);
-  const [editProfileModalVisible, setEditProfileModalVisible] = useState(false);
-
-  // 表单状态
-  const [gender, setGender] = useState("male");
-  const [email, setEmail] = useState("");
-  const [verificationCode, setVerificationCode] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [changePasswordCode, setChangePasswordCode] = useState("");
-  const [name, setName] = useState("");
-
-  const mcokOrderInfo = {
-    orderNo: "12121412423678",
-    paymentMethod: "银联充值",
-    orderTime: "2025.12.30 15:30:23",
-    originalPrice: "$199.9",
-    discount: "-$56",
-  };
-
-  const mockProduct = {
-    image: "/src/assets/gameItems/gameitem1.svg",
-    name: "Zenless Zone Zero",
-    quantity: 1,
-    uid: "123224215",
-    server: "132457783445345",
-    totalPrice: "260.90",
-  };
 
   return (
     <div className="home-wrap relative min-h-screen text-white selection:bg-purple-500 selection:text-white pb-24">
       {/* 7个测试按钮 */}
+      <div
+        style={{
+          position: "fixed",
+          top: "100px",
+          right: "20px",
+          zIndex: 999,
+          display: "flex",
+          flexDirection: "column",
+          gap: "8px",
+          background: "rgba(0, 0, 0, 0.7)",
+          padding: "16px",
+          borderRadius: "8px",
+        }}
+      >
+        <PrimaryButton
+          size="small"
+          onClick={() => setSuccessModalVisible(true)}
+        >
+          1. 兑换成功
+        </PrimaryButton>
+        <PrimaryButton
+          size="small"
+          onClick={() => setFailureModalVisible(true)}
+        >
+          2. 兑换失败
+        </PrimaryButton>
+      </div>
+      <div>
+        {/* 1. 兑换成功 Modal */}
+        <CommonModal
+          visible={successModalVisible}
+          onClose={() => setSuccessModalVisible(false)}
+          title="兑换成功"
+          content={
+            <Coupon
+              variant="purple"
+              discount={5}
+              minOrder={100}
+              maxSave={20}
+              onUse={() => console.log("使用优惠券")}
+            />
+          }
+          width={480}
+          footer={null}
+        />
 
+        {/* 2. 兑换失败 Modal */}
+        <CommonModal
+          visible={failureModalVisible}
+          onClose={() => setFailureModalVisible(false)}
+          title="兑换失败"
+          content={
+            <div>
+              <div style={{ marginBottom: "8px" }}>
+                兑换码无效，请再次尝试或联系
+              </div>
+              <div>找媒体管理员</div>
+            </div>
+          }
+          width={480}
+          footer={null}
+        />
+      </div>
       {/* 1. Hero Section */}
       <HeroSection />
 

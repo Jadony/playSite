@@ -17,8 +17,8 @@ export default [
     method: "get",
     response: () => {
       return resolveResult({
-        fetchGoogle: true,
-        data: true,
+        fetchGoogle: false,
+        data: false,
       });
     },
   },

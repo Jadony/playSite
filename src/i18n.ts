@@ -1,17 +1,12 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import enTranslation from "./locales/en/common";
-import zhCNTranslation from "./locales/zhCN/common";
 import zhTWTranslation from "./locales/zhTW/common";
 
 export const languages = [
   {
     label: "English",
     value: "en",
-  },
-  {
-    label: "中文",
-    value: "zh-CN",
   },
   {
     label: "繁體中文",
@@ -23,9 +18,6 @@ export const languages = [
 const resources = {
   en: {
     translation: enTranslation,
-  },
-  "zh-CN": {
-    translation: zhCNTranslation,
   },
   "zh-TW": {
     translation: zhTWTranslation,

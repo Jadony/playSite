@@ -1,5 +1,6 @@
-import React from 'react';
-import './style.css';
+import React, { useEffect, useState } from "react";
+import expirationBg from "@/assets/userPanel/expirationBg.png";
+import "./style.css";
 
 export interface CouponProps {
   /**
@@ -7,7 +8,7 @@ export interface CouponProps {
    * - dark: 深灰色背景样式
    * - purple: 紫色背景样式（带纸屑装饰）
    */
-  variant?: 'dark' | 'purple';
+  variant?: "dark" | "purple";
   /**
    * 折扣百分比
    */
@@ -23,7 +24,7 @@ export interface CouponProps {
   /**
    * 过期时间（倒计时显示）
    */
-  expiresAt?: string;
+  remainingSeconds?: number;
   /**
    * 是否显示纸屑装饰（仅 purple 样式）
    */
@@ -32,16 +33,41 @@ export interface CouponProps {
    * 点击 "To Use" 按钮的回调
    */
   onUse?: () => void;
+
+  /**
+   * 是否可用
+   */
+  available?: boolean;
 }
 
 const Coupon: React.FC<CouponProps> = ({
-  variant = 'dark',
+  variant = "dark",
   discount = 5,
   minOrder = 100,
   maxSave = 20,
-  expiresAt = '00:52:07',
+  remainingSeconds = 20,
   onUse,
+  available = true,
 }) => {
+  const [curTime, setCurTime] = useState(remainingSeconds || 0);
+
+  useEffect(() => {
+    if (available && curTime > 0) {
+      const timer = setInterval(() => {
+        setCurTime((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [remainingSeconds, available, curTime]);
+
+  const showTime = () => {
+    const h = Math.floor(curTime / 3600);
+    const m = Math.floor((curTime % 3600) / 60);
+    const s = curTime % 60;
+
+    return [h, m, s].map((v) => v.toString().padStart(2, "0")).join(":");
+  };
+
   return (
     <div className={`coupon coupon-${variant}`}>
       {/* 左侧穿孔 */}
@@ -52,22 +78,60 @@ const Coupon: React.FC<CouponProps> = ({
         {/* 顶部区域 */}
         <div className="coupon-top">
           <div className="coupon-discount-info">
-            <div className="coupon-discount">{discount}% OFF</div>
-            <div className="coupon-validity">Valid for orders over ${minOrder}</div>
-            <div className="coupon-save">Save up to ${maxSave}</div>
+            <div
+              className={`coupon-discount ${!available ? "expiration-opacity" : ""}`}
+            >
+              {discount}% OFF
+            </div>
+            <div
+              className={`coupon-validity ${!available ? "expiration-opacity" : ""}`}
+            >
+              Valid for orders over ${minOrder}
+            </div>
+            <div
+              className={`coupon-save ${!available ? "expiration-opacity" : ""}`}
+            >
+              Save up to ${maxSave}
+            </div>
           </div>
-          <button className="coupon-use-btn" onClick={onUse}>
-            To Use
-          </button>
+          {available ? (
+            <button className="coupon-use-btn" onClick={onUse}>
+              To Use
+            </button>
+          ) : (
+            <div
+              className="relative expiration-bg text-[#3a393d]"
+              style={
+                {
+                  "--expirationBg": `url(${expirationBg})`,
+                  transform: "rotate(25deg)",
+                } as React.CSSProperties
+              }
+            >
+              <span className="absolute top-[25px] left-[-60px] text-base font-semibold">
+                Expiration
+              </span>
+            </div>
+          )}
         </div>
 
         {/* 虚线分隔线 */}
-        <div className="coupon-divider"></div>
+        <div
+          className={`coupon-divider ${!available ? "expiration-opacity" : ""}`}
+        ></div>
 
         {/* 底部区域 */}
         <div className="coupon-bottom">
-          <div className="coupon-expires">It expires at {expiresAt}</div>
-          <div className="coupon-disclaimer">Click Buy does not stack</div>
+          <div
+            className={`coupon-expires ${!available ? "expiration-opacity" : ""}`}
+          >
+            It expires at {showTime()}
+          </div>
+          <div
+            className={`coupon-disclaimer ${!available ? "expiration-opacity" : ""}`}
+          >
+            Click Buy does not stack
+          </div>
         </div>
       </div>
 

@@ -10,7 +10,7 @@
 
 /* 深灰色样式 */
 .coupon-dark {
-  background: #2A2A30;
+  background: #2a2a30;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
@@ -37,14 +37,14 @@
 /* 穿孔效果 - 与虚线分隔线同一水平线 */
 .coupon::before,
 .coupon::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 44px;
   transform: translateY(50%);
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--page-bg, #0a0a0f);
+  background: var(--page-bg, #1d1c20);
   z-index: 10;
   pointer-events: none;
 }
@@ -103,7 +103,7 @@
   margin-bottom: 4px;
   line-height: 1.2;
   /* 粉紫色渐变文字带白色描边效果 */
-  background: linear-gradient(180deg, #FF00FF 0%, #D000FF 100%);
+  background: linear-gradient(180deg, #ff00ff 0%, #d000ff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -113,7 +113,7 @@
 
 .coupon-validity {
   font-size: 14px;
-  color: #9CA3AF;
+  color: #9ca3af;
   margin-bottom: 4px;
   line-height: 1.4;
 }
@@ -125,14 +125,14 @@
 .coupon-save {
   font-size: 20px;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #ffffff;
   line-height: 1.4;
 }
 
 /* To Use 按钮 */
 .coupon-use-btn {
-  background: #FFFFFF;
-  color: #2A2A30;
+  background: #ffffff;
+  color: #2a2a30;
   border: none;
   border-radius: 10px;
   margin-top: 20px;
@@ -171,7 +171,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 12px;
-  color: #9CA3AF;
+  color: #9ca3af;
 }
 
 .coupon-purple .coupon-bottom {
@@ -187,9 +187,28 @@
 }
 
 /* 响应式 */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .coupon {
     width: 100%;
     max-width: 440px;
   }
+} */
+
+.expiration-bg::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: -51px;
+  background-image: var(--expirationBg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: rotate(-25deg);
+  z-index: 100;
+  width: 160px;
+  height: 160px;
+}
+
+.expiration-opacity {
+  opacity: 0.2;
 }
