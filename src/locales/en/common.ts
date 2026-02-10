@@ -6,6 +6,7 @@ export default {
     suggestion: "Suggestion",
     helpCenter: "Help center",
     allGames: "All Games",
+    about: "About Us",
   },
   loginSignUp: "login / sign up",
   home: {
@@ -17,6 +18,7 @@ export default {
     search: {
       searchForGameNamesOrKeywords: "Search for game names or keywords",
       allBtn: "All",
+      noResultsFound: "No results found",
     },
     selectorAndPayment: {
       user: "User",
@@ -39,22 +41,18 @@ export default {
     },
     faq: {
       faq: "FAQ",
-      whatIs: "What is [xxx]?",
-      whatIsText:
-        "No, if you don't have money in your Cash balance, money will be drawn from a linked debit card or bank account. There are a few different ways you can add money to your balance. Link a debit card...   more+",
+      whatIsGearpoints: "What is Gearpoints?",
+      whatIsGearpointsText:
+        "We are a global game top-up platform dedicated to providing affordable, secure, and enjoyable recharge services for gamers worldwide.",
       whyChooseUs: "Why Choose Us?",
-      whyChooseUsText: `No, if you don't have money in your Cash balance, money will be drawn from a linked debit card or bank account. There are a few different ways you can add money to your balance.
-Link a debit card:
-After you link a debit card, you can add money to your Cash balance. Adding money is quick and easy, and then you can send or spend it how you want.
-Deposit paper money in stores:
-You can deposit money into your Cash balance at many participating retailers around the country.  `,
+      whyChooseUsText: `We offer competitive discounts on a wide range of games and strive for lightning-fast delivery. All transaction data is strictly encrypted to ensure your account privacy and fund security. Our professional support team is available 24/7 to resolve any issues.`,
       howToUseCoupons: "How to Use Coupons?",
-      howToUseCouponsText: `No, if you don't have money in your Cash balance, money will be drawn from a linked debit card or bank account. There are a few different ways you can add money to your balance. Link a debit card...   more+`,
-      howLongAfterPurchase: "How long after purchase?",
-      howLongAfterPurchaseText: `No, if you don't have money in your Cash balance, money will be drawn from a linked debit card or bank account. There are a few different ways you can add money to your balance. Link a debit card...   more+`,
+      howToUseCouponsText: `During checkout, the system will automatically apply the best available coupons from your account to ensure the lowest price. You can also manually select other coupons or redeem codesby clicking on "Discount Details."`,
+      howLongAfterPurchase: "How long does delivery take?",
+      howLongAfterPurchaseText: `Most top-up items are delivered to your account within 5 minutes after a successful payment.`,
       whatIfTheGoodsAreNotSuccessfullyRechargedAfterPayment:
-        "What if the goods are not successfully recharged after payment?",
-      whatIfTheGoodsAreNotSuccessfullyRechargedAfterPaymentText: `No, if you don't have money in your Cash balance, money will be drawn from a linked debit card or bank account. There are a few different ways you can add money to your balance. Link a debit card...   more+`,
+        "What if the transaction fails after payment?",
+      whatIfTheGoodsAreNotSuccessfullyRechargedAfterPaymentText: `Please contact our customer service. Provide your proof of payment and order details, and our team will process a manual refund for you.`,
     },
   },
   games: {
@@ -84,14 +82,15 @@ You can deposit money into your Cash balance at many participating retailers aro
       "By registering  an account or logging in,you agree to the Privacy Policy / Terms of Service / cookie Plicy",
     verificationCodeHasBeenSentTo: "Verification code has been sent to :",
     verificationCode: "Verification Code",
-    verificationCodeError: "The code is incorrect, please try again",
+    verificationCodeError: "Invalid code",
     verifyEmail: "Verify Email",
     reSend: "Resend",
     mail: "mail: ",
     pleaseEnterPassword: "Please enter password",
     pleaseReEnterPassword: "Please re-enter password",
+    pwdConfirmError: "Passwords do not match.",
     passwordPatternError:
-      "A combination of numbers, uppercase, and lowercase letters, with a minimum length of 6 characters",
+      "Password must contain both letters and numbers, with a minimum length of 6 characters.",
     completeRegistration: "Complete Registration",
     pleaseEnterEmailAddressOrNickname: "Please enter email address or nickname",
     pleaseEnterAccountPassword: "Please enter account password",
@@ -100,9 +99,35 @@ You can deposit money into your Cash balance at many participating retailers aro
     continueWithGoogleAccount: "Continue with Google account",
     youreOnlyOneStepAway: "You're only one step away!",
     completeRegistrationToReceiveANewUserGiftPack:
-      "Complete registration to receive a New User Gift Pack.",
+      "Complete registration to claim your New User Gift Pack",
     continue: "continue",
     leaveNow: "leave now",
+    incorrectEmailOrPassword: "Incorrect email address or password.",
+  },
+  userCenter: {
+    myAchievements: "My achievements",
+    accountSettings: "Account settings",
+    purchaseHistory: "Purchase history",
+    coupons: "Coupons",
+    inviteFriends: "Invite Friends",
+    feedbackAndSuggestions: "Feedback & Suggestions",
+    helpCenter: "Help Center",
+    unlockedBadges: "Unlocked Badges",
+    nickname: "Nickname",
+    gender: "Gender",
+    male: "Male",
+    female: "Female",
+    other: "Other",
+    birthday: "Birthday",
+    email: "Email",
+    password: "Password",
+    settings: "Settings",
+    languageAndCurrencySettings: "Language and Currency Settings",
+    setEmail: "Set Email",
+    pleaseEnterEmailAddress: "Please enter email address",
+    pleaseEnterVerificationCode: "Please enter verification code",
+    changePassword: "Change Password",
+    linkEmail: "Link Email",
   },
   footer: {
     product: "Product",

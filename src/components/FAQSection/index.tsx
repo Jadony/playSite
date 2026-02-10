@@ -15,8 +15,8 @@ const FAQSection: React.FC<FAQSectionProps> = () => {
   const { t } = useTranslation();
   const defaultFAQItems: FAQItem[] = [
     {
-      question: t("home.faq.whatIs"),
-      answer: t("home.faq.whatIsText"),
+      question: t("home.faq.whatIsGearpoints"),
+      answer: t("home.faq.whatIsGearpointsText"),
     },
     {
       question: t("home.faq.whyChooseUs"),

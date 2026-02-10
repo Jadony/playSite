@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Carousel } from "antd";
+import sectionImg from "../../assets/background/sectionImg.png";
 import PrimaryButton from "../PrimaryButton";
 import "./style.css";
 import { useTranslation } from "react-i18next";
@@ -19,8 +20,7 @@ const HeroSection: React.FC = () => {
           {t("home.section.startingBenefitsSubSecond")}
         </>
       ),
-      image:
-        "https://images.unsplash.com/photo-1612152605347-f93296cb657d?auto=format&fit=crop&q=80&w=1000",
+      image: sectionImg,
       cta: t("singUp"),
       link: "/invite",
     },
@@ -59,7 +59,7 @@ const HeroSection: React.FC = () => {
     <section className="relative w-full h-[950px] overflow-hidden flex items-center">
       {/* Background Image - Starry Light Effect */}
 
-      <div className="container mx-auto px-4 md:px-12 lg:px-24 relative z-10 h-full">
+      <div className="hero-section-container container mx-auto px-4 md:px-12 lg:px-24 relative z-10 h-full">
         <Carousel
           autoplay
           effect="fade"
@@ -89,7 +89,7 @@ const HeroSection: React.FC = () => {
                 </div>
 
                 {/* RIGHT: Character Image */}
-                <div className="relative h-[750px] flex items-center justify-center lg:justify-end">
+                <div className="relative h-[750px] w-[780px] flex items-center justify-start lg:justify-end">
                   <img
                     src={slide.image}
                     alt={slide.title}

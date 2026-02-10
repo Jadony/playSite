@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import SpinePlayer from "@components/SpinePlayer";
+import SpinePlayer from "@/components/SpinePlayer";
 import "./style.css";
 import {
   useAllGamesAndSelectContext,

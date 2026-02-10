@@ -11,7 +11,7 @@ type ProductGridProps = {
 };
 
 const ProductGrid: React.FC<ProductGridProps> = ({
-  isShowTitle,
+  isShowTitle = true,
   gameItemClick,
   products,
   selectGameItem,

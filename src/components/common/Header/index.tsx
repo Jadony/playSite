@@ -21,7 +21,7 @@ const Header: React.FC = () => {
   const [showLang, setShowLang] = useState(false);
   const [showCurrency, setShowCurrency] = useState(false);
   const [showGames, setShowGames] = useState(false);
-  const [currentCurrency, setCurrentCurrency] = useState("USD");
+  const [currentCurrency, setCurrentCurrency] = useState("$ USD");
 
   const langRef = React.useRef<HTMLDivElement>(null);
   const currencyRef = React.useRef<HTMLDivElement>(null);
@@ -107,7 +107,7 @@ const Header: React.FC = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  const currencies = ["USD", "EUR", "GBP", "JPY", "CNY"];
+  const currencies = ["$ USD", "¥ CNY"];
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -127,6 +127,7 @@ const Header: React.FC = () => {
     },
     { key: "/suggested", label: t("header.suggestion"), path: "/suggested" },
     { key: "/help", label: t("header.helpCenter"), path: "/help" },
+    { key: "/about", label: t("header.about"), path: "/about" },
   ];
 
   return (
@@ -290,7 +291,6 @@ const Header: React.FC = () => {
               }}
               className="flex items-center gap-2 text-white cursor-pointer transition-colors select-none"
             >
-              <span className="text-lg">$</span>
               <span className="text-sm font-medium">{currentCurrency}</span>
               <svg
                 width="10"

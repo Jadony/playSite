@@ -2,6 +2,7 @@
 // contexts/AuthContext.js
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { message } from "antd";
+import { useTranslation } from "react-i18next";
 import { loginEmail, loginGoogle, registerEmail } from "@/api/user";
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -23,6 +24,7 @@ type AuthContextType = {
 };
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const { t } = useTranslation();
   // 状态：用户信息和加载状态
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -81,12 +83,13 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   ) => {
     try {
       const { data } = await loginEmail(params);
-      if (data.code === 200) {
+      if (data.data.userId) {
         setUser(data.data);
         localStorage.setItem("token", data.data.token);
         localStorage.setItem("user", JSON.stringify(data.data));
         callback?.();
-        message.success("success");
+      } else {
+        message.error(t("common.incorrectEmailOrPassword"));
       }
     } catch (error: any) {
       message.error(error.message);

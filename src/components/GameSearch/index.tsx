@@ -149,7 +149,7 @@ const GameSearch: React.FC = () => {
                 <div className="flex-1 flex flex-col items-center justify-center py-12 border-b border-white/5">
                   <InboxOutlined className="text-6xl text-gray-600 mb-4" />
                   <h3 className="text-white text-lg font-bold mb-1">
-                    什么都没有喔
+                    {t("home.search.noResultsFound")}
                   </h3>
                 </div>
 
