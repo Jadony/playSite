@@ -1,7 +1,11 @@
 import userAchievementImg from "@/assets/userPanel/achievementImg.png";
 import userAchievementUnderImg from "@/assets/userPanel/achievementUnderImg.png";
+import achievementImg from "@/assets/userPanel/achievement.png";
+import CommonModal from "../CommonModal";
+import { useState } from "react";
 
 const UserAchievement = () => {
+  const [visible, setVisible] = useState(false);
   // 模拟数据，你可以替换成真实的数据
   const achievements = [
     { id: 1, img: userAchievementImg, underImg: userAchievementUnderImg },
@@ -20,6 +24,7 @@ const UserAchievement = () => {
         <div className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory">
           {achievements.map((item) => (
             <div
+              onClick={() => setVisible(true)}
               key={item.id}
               className="relative flex-shrink-0 snap-center min-h-[300px]" // 关键：防止卡片被压缩
             >
@@ -40,6 +45,14 @@ const UserAchievement = () => {
             </div>
           ))}
         </div>
+        <CommonModal
+          className="p-0 rounded-[14px]"
+          visible={visible}
+          width={500}
+          onClose={() => setVisible(false)}
+          content={<img width={500} src={achievementImg} alt="" />}
+          footer={null}
+        />
       </div>
     </div>
   );
