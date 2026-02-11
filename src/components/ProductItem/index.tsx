@@ -1,21 +1,21 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import type { OrderProduct, OrderStatus } from "@components/OrderDetailContent";
+import type { OrderStatus } from "@components/OrderDetailContent";
 import { usePurchaseHistoryStatusConfig } from "@/config/userPurchaseHistoryTypes";
 import "./style.css";
 
 /** ProductItem 内状态对应的颜色：in_progress 绿、cancelled 灰、completed 白、refund/pending/paying 红 */
 const PRODUCT_ITEM_STATUS_COLOR: Record<OrderStatus, string> = {
-  in_progress: "green",
-  cancelled: "grey",
-  completed: "white",
-  refund: "red",
+  PROCESSING: "green",
+  CANCELLED: "grey",
+  COMPLETED: "white",
+  REFUNDING: "red",
   // pending: "red",
-  paying: "red",
+  PENDING: "red",
 };
 
 export interface ProductItemProps {
-  product: OrderProduct;
+  product: OrderListResponseData;
   status: OrderStatus;
   /** 是否展示顶部边框，默认 true */
   showBorderTop?: boolean;
@@ -44,23 +44,23 @@ const ProductItem: React.FC<ProductItemProps> = ({
     >
       <div className="order-detail-product-main">
         <div className="order-detail-product-image">
-          {product.image ? (
-            <img src={product.image} alt={product.name} />
+          {product.skuImage ? (
+            <img src={product.skuImage} alt={product.gameName} />
           ) : (
             <div className="order-detail-product-placeholder">图</div>
           )}
         </div>
         <div className="order-detail-product-info">
           <div>
-            <div className="order-detail-product-name">{product.name}</div>
-            <div className="order-detail-product-meta">{product.date}</div>
+            <div className="order-detail-product-name">{product.skuName}</div>
+            <div className="order-detail-product-meta">{product.gameName}</div>
           </div>
           <div className="order-detail-product-footer">
             <span className="order-detail-product-uid">
               {t("userCenter.quantity")}：{product.quantity}
             </span>
             <span className="order-detail-product-server">
-              {t("userCenter.orderForm")}：{product.server}
+              {t("userCenter.orderForm")}：{product.orderNo}
             </span>
           </div>
         </div>
@@ -70,7 +70,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
           </span>
           <div className="order-detail-product-price-row">
             <span className="order-detail-product-price">
-              $ {product.totalPrice}
+              $ {product.orderAmount}
             </span>
           </div>
         </div>

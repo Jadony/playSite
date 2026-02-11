@@ -2,6 +2,7 @@ import React from "react";
 import user from "@/assets/avatars/user.jpg";
 // import userMenuBg from "@/assets/userPanel/userMenuBg.png";
 import "./style.css";
+import { Link } from "react-scroll";
 
 type UserMenuProps = {
   activeMenu: string;
@@ -10,6 +11,7 @@ type UserMenuProps = {
     id: string;
     icon: React.ReactNode;
     label: string;
+    to: string;
   }[];
   avatars: string;
   userName: string;
@@ -95,18 +97,19 @@ const UserMenu: React.FC<UserMenuProps> = ({
         <div>
           <div className="pt-3.5">
             {useMenu.map((item) => (
-              <div
-                key={item.id}
-                className="flex px-5 py-2 items-center cursor-pointer hover:bg-white/10 rounded-lg mb-3.5 h-12"
-                style={{
-                  backgroundColor:
-                    activeMenu === item.id ? "rgba(255, 255, 255, 0.10)" : "",
-                }}
-                onClick={() => changeMenu(item.id)}
-              >
-                {item.icon}
-                <div className="pl-2.5 text-base">{item.label}</div>
-              </div>
+              <Link key={item.id} to={item.to} smooth={true} duration={200}>
+                <div
+                  className="flex px-5 py-2 items-center cursor-pointer hover:bg-white/10 rounded-lg mb-3.5 h-12"
+                  style={{
+                    backgroundColor:
+                      activeMenu === item.id ? "rgba(255, 255, 255, 0.10)" : "",
+                  }}
+                  onClick={() => changeMenu(item.id)}
+                >
+                  {item.icon}
+                  <div className="pl-2.5 text-base">{item.label}</div>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

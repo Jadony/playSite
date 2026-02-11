@@ -44,6 +44,7 @@ export default function useMenuData(
           />
         </svg>
       ),
+      to: "myAchievements",
       label: t("userCenter.myAchievements"),
       comp: <UserAchievement />,
     },
@@ -136,6 +137,7 @@ export default function useMenuData(
           />
         </svg>
       ),
+      to: "accountSettings",
       label: t("userCenter.accountSettings"),
       comp: <AccountSetting />,
     },
@@ -167,6 +169,7 @@ export default function useMenuData(
       ),
       label: t("userCenter.purchaseHistory"),
       comp: <PurchaseHistory />,
+      to: "purchaseHistory",
     },
     {
       id: "coupons",
@@ -213,6 +216,7 @@ export default function useMenuData(
         <div className="flex bg-white/10 w-[334px] ml-auto rounded-[10px] py-[11px] px-3.5">
           <input
             value={exchangeCode}
+            placeholder={t("userCenter.enterTheRedemptionCode")}
             onChange={(e) => setExchangeCode(e.target.value)}
             className="w-[220px] bg-transparent outline-none"
             type="text"
@@ -221,11 +225,12 @@ export default function useMenuData(
             onClick={() => leftElOnClick?.(exchangeCode)}
             className="ml-auto cursor-pointer"
           >
-            ｜ exchange
+            ｜ {t("userCenter.exchange")}
           </div>
         </div>
       ),
       comp: <Coupons />,
+      to: "coupons",
     },
     // {
     //   id: "inviteFriends",

@@ -1,3 +1,5 @@
+// import { OrderStatus } from "@/components/OrderDetailContent";
+
 type ExistEmailRequestParams = {
   email: string;
 };
@@ -106,4 +108,108 @@ type GameDetailResponseData = {
   iconUrl: string;
   maxDiscount: number;
   skuList: GameItem[];
+};
+
+type UserAchievementsResponseData = {
+  id: number;
+  achievementCode: string;
+  achievementName: string;
+  achievementDesc: string;
+  achievementIcon: string;
+  unlockTime: string;
+};
+
+type UserInfoResponseData = {
+  userId: number;
+  nickname: string;
+  email: string;
+  avatar: string;
+  gender: string;
+  birthday: string;
+  inviteCode: string;
+  channelName: string;
+  thirdPartyType: string;
+};
+
+type UpdateUserInfoRequestParams = {
+  nickname?: string;
+  gender?: string;
+  birthday?: string;
+  avatar?: string;
+};
+
+type SetPasswordRequestParams = {
+  newPassword: string;
+  confirmPassword: string;
+  code?: string;
+};
+
+type BindEmailRequestParams = {
+  email: string;
+  code: string;
+};
+
+type OrderListRequestParams = {
+  status: string;
+};
+
+type OrderListResponseData = {
+  orderId: number;
+  orderNo: string;
+  gameName: string;
+  skuName: string;
+  skuImage: string;
+  quantity: number;
+  orderAmount: number;
+  status: OrderStatus;
+  statusDesc: string;
+  createTime: string;
+};
+
+type OrderDetailResponseData = {
+  orderId: number;
+  orderNo: string;
+  gameName: string;
+  skuName: string;
+  skuImage: string;
+  quantity: number;
+  gameUid: string;
+  gameServer: string;
+  paymentMethod: string;
+  originalPrice: number;
+  platformPrice: number;
+  discountAmount: number;
+  orderAmount: number;
+  status: OrderStatus;
+  statusDesc: string;
+  createTime: string;
+  payTime: string;
+  completeTime: string;
+  remainingPaySeconds: number;
+};
+
+type OrderStatus =
+  | "CANCELLED" // 已取消
+  | "PROCESSING" // 进行中
+  | "REFUNDING" // 退款售后
+  // | "pending" // 待处理
+  | "PENDING" // 支付中
+  | "COMPLETED"; // 完成
+
+type UserCouponsResponseData = {
+  id: number;
+  couponCode: string;
+  couponName: string;
+  couponType: string;
+  discountValue: number;
+  minOrderAmount: number;
+  maxDiscountAmount: number;
+  validFrom: string;
+  validTo: string;
+  status: number;
+  statusDesc: string;
+  rules: string;
+  source: string;
+  remainingSeconds: number;
+  available: boolean;
 };

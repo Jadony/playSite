@@ -1,4 +1,3 @@
-import { OrderStatus } from "@/components/OrderDetailContent";
 import { useTranslation } from "react-i18next";
 
 const usePurchaseHistoryTypes = () => {
@@ -44,7 +43,7 @@ export const usePurchaseHistoryStatusConfig = (): Record<
 > => {
   const { t } = useTranslation();
   return {
-    cancelled: {
+    CANCELLED: {
       label: "已取消",
       desc: "订单已取消，请重新下单",
       statusColor: "grey",
@@ -52,14 +51,14 @@ export const usePurchaseHistoryStatusConfig = (): Record<
       actionTag: "已取消",
       showHeaderStatus: true,
     },
-    in_progress: {
+    PROCESSING: {
       label: t("userCenter.processing"),
       desc: t("userCenter.orderProcessingText"),
       statusColor: "green",
       completedStep: 3,
       primaryBtn: t("userCenter.refresh"),
     },
-    refund: {
+    REFUNDING: {
       label: t("userCenter.refundAndAfterSales"),
       desc: t("userCenter.refundAndAfterSalesText"),
       statusColor: "red",
@@ -73,7 +72,7 @@ export const usePurchaseHistoryStatusConfig = (): Record<
     //   completedStep: 2,
     //   primaryBtn: "去处理",
     // },
-    paying: {
+    PENDING: {
       label: t("userCenter.paymentPending"),
       desc: t("userCenter.paymentConfirming"),
       statusColor: "neutral",
@@ -81,7 +80,7 @@ export const usePurchaseHistoryStatusConfig = (): Record<
       secondaryBtn: t("userCenter.cancelOrder"),
       primaryBtn: t("userCenter.payNow"),
     },
-    completed: {
+    COMPLETED: {
       label: t("userCenter.success"),
       desc: t("userCenter.orderCompleted"),
       statusColor: "green",

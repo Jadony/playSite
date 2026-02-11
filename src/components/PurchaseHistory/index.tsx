@@ -1,30 +1,41 @@
 import usePurchaseHistoryTypes from "@/config/userPurchaseHistoryTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductItem from "../ProductItem";
 import OrderDetailContent from "../OrderDetailContent";
 import CommonModal from "../CommonModal";
-
-const mockProduct = {
-  image: "/src/assets/gameItems/gameitem1.svg",
-  name: "Zenless Zone Zero",
-  quantity: 1,
-  uid: "123224215",
-  server: "132457783445345",
-  totalPrice: "260.90",
-  date: "2025.12.30 15:30",
-};
-
-const mcokOrderInfo = {
-  orderNo: "12121412423678",
-  paymentMethod: "银联充值",
-  orderTime: "2025.12.30 15:30:23",
-  originalPrice: "$199.9",
-  discount: "-$56",
-};
+import { getOrderDetail, getOrderList } from "@/api/user";
+import { message } from "antd";
 
 const PurchaseHistory = () => {
   const [curType, setCurType] = useState("ALL");
   const [visible, setVisible] = useState(false);
+  const [orderList, setOrderList] = useState<OrderListResponseData[]>([]);
+  const [curOrder, setCurOrder] = useState<OrderDetailResponseData | null>(
+    null,
+  );
+
+  const getUserOrderList = async () => {
+    try {
+      const { data } = await getOrderList({ status: curType });
+      setOrderList(data.data);
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
+  const getUserOrderDetail = async (orderId: number) => {
+    try {
+      const { data } = await getOrderDetail(orderId);
+      setCurOrder(data.data);
+      setVisible(true);
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
+  useEffect(() => {
+    getUserOrderList();
+  }, [curType]);
 
   const changePurchaseType = (type: string) => {
     setCurType(type);
@@ -48,19 +59,18 @@ const PurchaseHistory = () => {
         })}
       </div>
       <div>
-        <ProductItem
-          onClick={() => {
-            setVisible(true);
-          }}
-          showBorderTop={false}
-          product={mockProduct}
-          status="in_progress"
-        />
-        <ProductItem product={mockProduct} status="paying" />
-        <ProductItem product={mockProduct} status="completed" />
-        <ProductItem product={mockProduct} status="refund" />
-        {/* <ProductItem product={mockProduct} status="pending" /> */}
-        <ProductItem product={mockProduct} status="cancelled" />
+        {orderList.map((item) => {
+          return (
+            <ProductItem
+              onClick={() => {
+                getUserOrderDetail(item.orderId);
+              }}
+              showBorderTop={false}
+              product={item}
+              status={item.status}
+            />
+          );
+        })}
         {/* <OrderDetailContent
           status="in_progress"
           product={mockProduct}
@@ -102,11 +112,11 @@ const PurchaseHistory = () => {
         showClose={false}
         content={
           <OrderDetailContent
-            status="paying"
-            product={mockProduct}
-            orderInfo={mcokOrderInfo}
+            status={curOrder?.status}
+            product={curOrder}
+            orderInfo={curOrder}
             onBack={() => setVisible(false)}
-            countdown={5}
+            countdown={curOrder?.remainingPaySeconds}
           />
         }
         footer={null}

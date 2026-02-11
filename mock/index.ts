@@ -368,4 +368,153 @@ export default [
       });
     },
   },
+  {
+    url: "/front/profile/achievements",
+    method: "get",
+    response: () => {
+      return resolveResult([
+        {
+          id: 1,
+          achievementName: "Achievement 1",
+          achievementIcon: "./src/assets/userPanel/achievementImg.png",
+          achievementDescription: "Description 1",
+        },
+        {
+          id: 2,
+          achievementName: "Achievement 2",
+          achievementIcon: "./src/assets/userPanel/achievementImg.png",
+          achievementDescription: "Description 2",
+        },
+        {
+          id: 3,
+          achievementName: "Achievement 3",
+          achievementIcon: "./src/assets/userPanel/achievementImg.png",
+          achievementDescription: "Description 3",
+        },
+      ]);
+    },
+  },
+  {
+    url: "/front/profile/me",
+    method: "get",
+    response: () => {
+      return resolveResult({
+        userId: 1,
+        nickname: "User 1",
+        email: "user1@example.com",
+        avatar: "./src/assets/avatars/user.jpg",
+        gender: "Male",
+        birthday: "2023-01-01",
+        inviteCode: "INVITE123",
+        channelName: "Channel 1",
+        thirdPartyType: "Google",
+      });
+    },
+  },
+  {
+    url: "/front/orders/list",
+    method: "get",
+    response: () => {
+      return resolveResult([
+        {
+          orderId: 1,
+          orderNo: "1234567890",
+          gameName: "Game 1",
+          skuName: "SKU 1",
+          skuImage: "./src/assets/gameItems/gameitem1.svg",
+          quantity: 1,
+          orderAmount: 123,
+          status: "COMPLETED",
+          statusDesc: "Success",
+          createTime: "2022-01-01 12:00:00",
+        },
+      ]);
+    },
+  },
+  {
+    url: "/front/orders/detail",
+    method: "get",
+    response: () => {
+      return resolveResult({
+        orderId: 1,
+        orderNo: "1234567890",
+        gameName: "Game 1",
+        skuName: "SKU 1",
+        skuImage: "./src/assets/gameItems/gameitem1.svg",
+        quantity: 1,
+        gameUid: "1234567890",
+        gameServer: "1234567890",
+        paymentMethod: "银联充值",
+        originalPrice: 123,
+        platformPrice: 123,
+        discountAmount: 123,
+        orderAmount: 123,
+        status: "COMPLETED",
+        statusDesc: "Success",
+        createTime: "2022-01-01 12:00:00",
+        payTime: "2022-01-01 12:00:00",
+        completeTime: "2022-01-01 12:00:00",
+        remainingPaySeconds: 123,
+      });
+    },
+  },
+  {
+    url: "/front/profile/coupons",
+    method: "get",
+    response: () => {
+      return resolveResult([
+        {
+          id: 1,
+          couponCode: "111",
+          couponName: "111",
+          couponType: "111",
+          discountValue: 111,
+          minOrderAmount: 111,
+          maxDiscountAmount: 111,
+          validFrom: "2022-01-01 12:00:00",
+          validTo: "2022-01-01 12:00:00",
+          status: 0,
+          statusDesc: "",
+          rules: "",
+          source: "",
+          remainingSeconds: 3000,
+          available: true,
+        },
+        {
+          id: 2,
+          couponCode: "111",
+          couponName: "111",
+          couponType: "111",
+          discountValue: 111,
+          minOrderAmount: 111,
+          maxDiscountAmount: 111,
+          validFrom: "2022-01-01 12:00:00",
+          validTo: "2022-01-01 12:00:00",
+          status: 0,
+          statusDesc: "",
+          rules: "",
+          source: "",
+          remainingSeconds: 30,
+          available: true,
+        },
+        {
+          id: 3,
+          couponCode: "111",
+          couponName: "111",
+          couponType: "111",
+          discountValue: 111,
+          minOrderAmount: 111,
+          maxDiscountAmount: 111,
+          validFrom: "2022-01-01 12:00:00",
+          validTo: "2022-01-01 12:00:00",
+          status: 0,
+          statusDesc: "",
+          rules: "",
+          source: "",
+          remainingSeconds: 30,
+          available: false,
+        },
+      ]);
+    },
+  },
 ] as MockMethod[];

@@ -4,9 +4,4 @@ type User = {
   avatar?: string | null;
   email: string;
   token: string;
-  gender?: string;
-  birthday?: string;
-  inviteCode?: string;
-  channelName?: string;
-  thirdPartyType?: string;
 };

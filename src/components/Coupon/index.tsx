@@ -45,11 +45,11 @@ const Coupon: React.FC<CouponProps> = ({
   discount = 5,
   minOrder = 100,
   maxSave = 20,
-  remainingSeconds = 20,
+  remainingSeconds = 0,
   onUse,
   available = true,
 }) => {
-  const [curTime, setCurTime] = useState(remainingSeconds || 0);
+  const [curTime, setCurTime] = useState(remainingSeconds);
 
   useEffect(() => {
     if (available && curTime > 0) {

@@ -10,10 +10,19 @@ import {
 } from "@/store/languageStore";
 import PrimaryButton from "../PrimaryButton";
 import { message } from "antd";
-import { isPasswordValid } from "@/utils/helpers";
+import { isPasswordValid, isValidEmail } from "@/utils/helpers";
+import {
+  bindEmail,
+  emailCodeCheck,
+  getUserInfo,
+  sendEmailCode,
+  setNewPassword,
+  updateUserInfo,
+} from "@/api/user";
 
 const AccountSetting = () => {
   const [editProfileModalVisible, setEditProfileModalVisible] = useState(false);
+  const [userInfo, setUserInfo] = useState<UserInfoResponseData>();
   const [name, setName] = useState("");
   const [genderModalVisible, setGenderModalVisible] = useState(false);
   const [gender, setGender] = useState("male");
@@ -30,6 +39,7 @@ const AccountSetting = () => {
   const [showLang, setShowLang] = useState(false);
   const [showCurrency, setShowCurrency] = useState(false);
   const [currentCurrency, setCurrentCurrency] = useState("$ USD");
+  const [countDown, setCountDown] = useState(0);
 
   const langRef = useRef<HTMLDivElement>(null);
   const currencyRef = useRef<HTMLDivElement>(null);
@@ -55,9 +65,139 @@ const AccountSetting = () => {
     setNewPasswordModalVisible(true);
   };
 
-  // const changePasswordClick = () => {
-  //   setChangePasswordModalVisible(true);
-  // };
+  const changePasswordClick = () => {
+    setChangePasswordModalVisible(true);
+  };
+
+  const sendEmailCodeClick = async () => {
+    if (!isValidEmail(email)) {
+      message.error("Please enter your email");
+      return;
+    }
+    try {
+      const { data } = await sendEmailCode({ email });
+      if (data.data) {
+        message.success("success");
+      }
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
+  const getUserAllInfo = async () => {
+    try {
+      const { data } = await getUserInfo();
+      setUserInfo(data.data);
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
+  useEffect(() => {
+    if (countDown > 0) {
+      const timer = setInterval(() => {
+        setCountDown((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [countDown]);
+
+  useEffect(() => {
+    getUserAllInfo();
+  }, []);
+
+  const updateNormalInfo = async (
+    params: UpdateUserInfoRequestParams,
+    callback?: () => void,
+  ) => {
+    try {
+      const { data } = await updateUserInfo(params);
+      if (data.data) {
+        message.success("success");
+        getUserAllInfo();
+        callback?.();
+      } else {
+        message.error("error");
+      }
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
+  const updatePassword = async () => {
+    try {
+      const { data } = await setNewPassword({
+        newPassword: password,
+        confirmPassword: confirmPassword,
+        code: changePasswordCode,
+      });
+      if (data.data) {
+        message.success("success");
+        getUserAllInfo();
+        setChangePasswordModalVisible(false);
+      } else {
+        message.error("error");
+      }
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
+  const changeEmail = async () => {
+    try {
+      const { data } = await bindEmail({
+        email,
+        code: verificationCode,
+      });
+      if (data.data) {
+        message.success("success");
+        getUserAllInfo();
+        setEmailModalVisible(false);
+      } else {
+        message.error("error");
+      }
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
+  const checkCode = async () => {
+    try {
+      const { data } = await emailCodeCheck({
+        email,
+        code: verificationCode,
+        scene: "RESET_PASSWORD",
+      });
+      if (data.data) {
+        message.success("success");
+        setChangePasswordModalVisible(false);
+        setNewPasswordModalVisible(true);
+      } else {
+        message.error("error");
+      }
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
+  const updateUserInfoData = async (type: string, param?: string) => {
+    switch (type) {
+      case "nickname":
+        updateNormalInfo({ nickname: param }, () => {
+          setEditProfileModalVisible(false);
+        });
+        break;
+      case "gender":
+        updateNormalInfo({ gender: param });
+        break;
+      case "email":
+        changeEmail();
+        break;
+      case "setPassword":
+        updatePassword();
+        break;
+    }
+  };
 
   const changeLanguage = (lang: { label: string; value: string }) => {
     i18n.changeLanguage(lang.value);
@@ -176,12 +316,12 @@ const AccountSetting = () => {
           <div className="flex justify-between mb-5">
             <InfoBox
               label={t("userCenter.nickname")}
-              value="Saul"
+              value={userInfo?.nickname}
               rightBtnClick={editProfile}
             />
             <InfoBox
               label={t("userCenter.gender")}
-              value="Saul"
+              value={userInfo?.gender}
               rightBtnClick={selectGenderClick}
             />
           </div>
@@ -200,7 +340,7 @@ const AccountSetting = () => {
           <div className="flex justify-between">
             <InfoBox
               label={t("userCenter.email")}
-              value="Saul"
+              value={userInfo?.email}
               rightBtnClick={changeEmailClick}
             />
             <InfoBox
@@ -351,8 +491,7 @@ const AccountSetting = () => {
           }
           primaryButtonText={t("userCenter.confirm")}
           onPrimaryClick={() => {
-            console.log("编辑的姓名:", name);
-            setEditProfileModalVisible(false);
+            updateUserInfoData("nickname", name);
           }}
           primaryButtonDisabled={!name}
         />
@@ -360,7 +499,7 @@ const AccountSetting = () => {
         {/* 修改性别 Modal */}
         <CommonModal
           visible={genderModalVisible}
-          onClose={() => setGenderModalVisible(false)}
+          onClose={() => updateUserInfoData("gender", gender)}
           title={t("userCenter.gender")}
           width={460}
           content={
@@ -394,7 +533,6 @@ const AccountSetting = () => {
                     checked={gender === option.value}
                     onChange={(e) => {
                       setGender(e.target.value);
-                      console.log("选择的性别:", e.target.value);
                     }}
                     className="gender-radio"
                     style={{ marginRight: "12px", cursor: "pointer" }}
@@ -538,7 +676,7 @@ const AccountSetting = () => {
                     }}
                   />
                   <button
-                    onClick={() => console.log("发送验证码")}
+                    onClick={() => sendEmailCodeClick()}
                     style={{
                       position: "absolute",
                       right: "8px",
@@ -549,11 +687,11 @@ const AccountSetting = () => {
                       borderRadius: "6px",
                       color: "#999",
                       fontSize: "12px",
-                      cursor: "pointer",
+                      cursor: countDown > 0 ? "not-allowed" : "pointer",
                       zIndex: 1,
                     }}
                   >
-                    {t("userCenter.send")}
+                    {countDown > 0 ? `${countDown}s` : t("userCenter.send")}
                   </button>
                 </div>
               </div>
@@ -574,9 +712,7 @@ const AccountSetting = () => {
           }
           primaryButtonText="确认"
           onPrimaryClick={() => {
-            console.log("设定的邮箱:", email);
-            console.log("验证码:", verificationCode);
-            setEmailModalVisible(false);
+            updateUserInfoData("email");
           }}
           primaryButtonDisabled={!email || !verificationCode}
         />
@@ -732,8 +868,7 @@ const AccountSetting = () => {
               message.error(t("userCenter.passwordPatternError"));
               return;
             }
-            console.log("设定的新密码");
-            setNewPasswordModalVisible(false);
+            updateUserInfoData("setPassword");
           }}
           primaryButtonDisabled={!password || !confirmPassword}
         />
@@ -812,7 +947,7 @@ const AccountSetting = () => {
                     }}
                   />
                   <button
-                    onClick={() => console.log("发送验证码")}
+                    onClick={() => sendEmailCodeClick()}
                     style={{
                       position: "absolute",
                       right: "8px",
@@ -823,11 +958,11 @@ const AccountSetting = () => {
                       borderRadius: "6px",
                       color: "#999",
                       fontSize: "12px",
-                      cursor: "pointer",
+                      cursor: countDown > 0 ? "not-allowed" : "pointer",
                       zIndex: 1,
                     }}
                   >
-                    {t("userCenter.send")}
+                    {countDown > 0 ? `${countDown}s` : t("userCenter.send")}
                   </button>
                 </div>
               </div>
@@ -844,8 +979,7 @@ const AccountSetting = () => {
             >
               <PrimaryButton
                 onClick={() => {
-                  console.log("确认修改密码");
-                  setChangePasswordModalVisible(false);
+                  checkCode();
                 }}
                 disabled={!changePasswordCode}
                 fullWidth
@@ -853,7 +987,10 @@ const AccountSetting = () => {
                 {t("userCenter.confirm")}
               </PrimaryButton>
               <button
-                onClick={() => console.log("去绑定邮箱")}
+                onClick={() => {
+                  setChangePasswordModalVisible(false);
+                  setEmailModalVisible(true);
+                }}
                 style={{
                   background: "transparent",
                   border: "none",

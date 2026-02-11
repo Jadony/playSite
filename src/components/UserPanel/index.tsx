@@ -4,6 +4,7 @@ type UserPanelProps = {
   icon: React.ReactNode;
   className?: string;
   leftEl?: React.ReactNode;
+  id: string;
 };
 
 const UserPanel = ({
@@ -12,10 +13,12 @@ const UserPanel = ({
   icon,
   className,
   leftEl,
+  id,
 }: UserPanelProps) => {
   return (
     <div
       className={`p-5 bg-white/5 border border-white/20 rounded-xl ${className}`}
+      id={id}
     >
       <div className="flex pb-5 border-b border-white/10 items-center">
         {icon}

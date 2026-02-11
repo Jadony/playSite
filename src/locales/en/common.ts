@@ -169,6 +169,8 @@ export default {
     quantity: "Quantity",
     orderForm: "Order form",
     server: "Server",
+    enterTheRedemptionCode: "Enter the redemption code",
+    exchange: "Exchange",
   },
   footer: {
     product: "Product",

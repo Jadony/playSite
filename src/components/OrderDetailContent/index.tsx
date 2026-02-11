@@ -4,14 +4,6 @@ import PrimaryButton from "@components/PrimaryButton";
 import { usePurchaseHistoryStatusConfig } from "@/config/userPurchaseHistoryTypes";
 import "./style.css";
 
-export type OrderStatus =
-  | "cancelled" // 已取消
-  | "in_progress" // 进行中
-  | "refund" // 退款售后
-  // | "pending" // 待处理
-  | "paying" // 支付中
-  | "completed"; // 完成
-
 export interface OrderProduct {
   image?: string;
   name: string;
@@ -33,9 +25,9 @@ export interface OrderInfo {
 export interface OrderDetailContentProps {
   onClose?: () => void;
   onBack?: () => void;
-  status: OrderStatus;
-  product: OrderProduct;
-  orderInfo: OrderInfo;
+  status?: OrderStatus;
+  product: OrderDetailResponseData | null;
+  orderInfo: OrderDetailResponseData | null;
   /** 支付中时的倒计时，如 "00:54:43" */
   countdown?: number;
   onCancelOrder?: () => void;
@@ -60,9 +52,9 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
   onGoProcess,
   className = "",
 }) => {
-  const config = usePurchaseHistoryStatusConfig()[status];
-  const showCountdown = status === "paying" && countdown;
-  const showActions = status === "paying" || status === "in_progress";
+  const config = usePurchaseHistoryStatusConfig()[status || "PENDING"];
+  const showCountdown = status === "PENDING" && countdown;
+  const showActions = status === "PENDING" || status === "PROCESSING";
   const [curTime, setCurTime] = useState(countdown || 0);
   // || status === "pending";
   const { t } = useTranslation();
@@ -143,32 +135,34 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
       <div className="order-detail-product">
         <div className="order-detail-product-main">
           <div className="order-detail-product-image">
-            {product.image ? (
-              <img src={product.image} alt={product.name} />
+            {product?.skuImage ? (
+              <img src={product.skuImage} alt={product.gameName} />
             ) : (
               <div className="order-detail-product-placeholder">图</div>
             )}
           </div>
           <div className="order-detail-product-info">
             <div>
-              <div className="order-detail-product-name">{product.name}</div>
+              <div className="order-detail-product-name">
+                {product?.skuName}
+              </div>
               <div className="order-detail-product-meta">
-                {t("userCenter.quantity")}：{product.quantity}
+                {t("userCenter.quantity")}：{product?.quantity}
               </div>
             </div>
             <div className="order-detail-product-footer">
               <span className="order-detail-product-uid">
-                UID：{product.uid}
+                UID：{product?.gameUid}
               </span>
               <span className="order-detail-product-server">
-                {t("userCenter.server")}：{product.server}
+                {t("userCenter.server")}：{product?.gameServer}
               </span>
             </div>
           </div>
           <div className="order-detail-product-right">
             <div className="order-detail-product-price-row">
               <span className="order-detail-product-price">
-                $ {product.totalPrice}
+                $ {product?.orderAmount}
               </span>
             </div>
             {config.actionTag && (
@@ -188,7 +182,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
                     {config.secondaryBtn}
                   </button>
                 )}
-                {config.primaryBtn && status === "paying" && (
+                {config.primaryBtn && status === "PENDING" && (
                   <div className="order-detail-pay-wrapper">
                     {showCountdown && (
                       <span className="order-detail-pay-btn-countdown">
@@ -205,7 +199,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
                     </PrimaryButton>
                   </div>
                 )}
-                {config.primaryBtn && status === "in_progress" && (
+                {config.primaryBtn && status === "PROCESSING" && (
                   <button
                     className="order-detail-btn secondary"
                     onClick={onRefresh || (() => console.log("刷新"))}
@@ -236,23 +230,23 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
         <div className="order-detail-info-grid">
           <div className="order-detail-info-item">
             <span className="key">{t("userCenter.orderId")}：</span>
-            <span className="value">{orderInfo.orderNo}</span>
+            <span className="value">{orderInfo?.orderNo}</span>
           </div>
           <div className="order-detail-info-item">
             <span className="key">{t("userCenter.paymentMethod")}：</span>
-            <span className="value">{orderInfo.paymentMethod}</span>
+            <span className="value">{orderInfo?.paymentMethod}</span>
           </div>
           <div className="order-detail-info-item">
             <span className="key">{t("userCenter.totalDiscount")}：</span>
-            <span className="value">{orderInfo.discount}</span>
+            <span className="value">{orderInfo?.discountAmount}</span>
           </div>
           <div className="order-detail-info-item">
             <span className="key">{t("userCenter.orderTime")}：</span>
-            <span className="value">{orderInfo.orderTime}</span>
+            <span className="value">{orderInfo?.createTime}</span>
           </div>
           <div className="order-detail-info-item">
             <span className="key">{t("userCenter.officialPrice")}：</span>
-            <span className="value">{orderInfo.originalPrice}</span>
+            <span className="value">{orderInfo?.originalPrice}</span>
           </div>
         </div>
       </div>
