@@ -49,6 +49,15 @@ const AccountSetting = () => {
 
   const currencies = ["$ USD", "¥ CNY"];
 
+  const initState = () => {
+    setName("");
+    setEmail("");
+    setVerificationCode("");
+    setPassword("");
+    setConfirmPassword("");
+    setChangePasswordCode("");
+  };
+
   const editProfile = () => {
     setEditProfileModalVisible(true);
   };
@@ -88,6 +97,7 @@ const AccountSetting = () => {
     try {
       const { data } = await getUserInfo();
       setUserInfo(data.data);
+      setGender(data.data.gender);
     } catch (error) {
       message.error("error");
     }
@@ -115,6 +125,7 @@ const AccountSetting = () => {
       if (data.data) {
         message.success("success");
         getUserAllInfo();
+        initState();
         callback?.();
       } else {
         message.error("error");
@@ -134,6 +145,7 @@ const AccountSetting = () => {
       if (data.data) {
         message.success("success");
         getUserAllInfo();
+        initState();
         setChangePasswordModalVisible(false);
       } else {
         message.error("error");
@@ -152,6 +164,7 @@ const AccountSetting = () => {
       if (data.data) {
         message.success("success");
         getUserAllInfo();
+        initState();
         setEmailModalVisible(false);
       } else {
         message.error("error");
@@ -170,6 +183,7 @@ const AccountSetting = () => {
       });
       if (data.data) {
         message.success("success");
+        initState();
         setChangePasswordModalVisible(false);
         setNewPasswordModalVisible(true);
       } else {
