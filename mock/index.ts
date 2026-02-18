@@ -403,7 +403,7 @@ export default [
         nickname: "User 1",
         email: "user1@example.com",
         avatar: "./src/assets/avatars/user.jpg",
-        gender: "Male",
+        gender: "male",
         birthday: "2023-01-01",
         inviteCode: "INVITE123",
         channelName: "Channel 1",

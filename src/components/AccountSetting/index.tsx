@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import user from "@/assets/avatars/user.jpg";
 import InfoBox from "./InfoBox";
 import CommonModal from "../CommonModal";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { languages } from "@/i18n";
 import {
   useLanguageContext,
@@ -53,6 +53,14 @@ const AccountSetting = () => {
 
   const currencies = ["$ USD", "¥ CNY"];
 
+  const genderMap = useMemo(() => {
+    return [
+      { value: "male", label: t("userCenter.male") },
+      { value: "female", label: t("userCenter.female") },
+      { value: "other", label: t("userCenter.other") },
+    ];
+  }, []);
+
   const initState = () => {
     setName("");
     setEmail("");
@@ -87,6 +95,9 @@ const AccountSetting = () => {
   };
 
   const sendEmailCodeClick = async () => {
+    if (countDown > 0) {
+      return;
+    }
     if (!isValidEmail(email)) {
       message.error("Please enter your email");
       return;
@@ -95,6 +106,7 @@ const AccountSetting = () => {
       const { data } = await sendEmailCode({ email });
       if (data.data) {
         message.success("success");
+        setCountDown(60);
       }
     } catch (error) {
       message.error("error");
@@ -348,7 +360,9 @@ const AccountSetting = () => {
             />
             <InfoBox
               label={t("userCenter.gender")}
-              value={userInfo?.gender}
+              value={
+                genderMap.find((item) => item.value === userInfo?.gender)?.label
+              }
               rightBtnClick={selectGenderClick}
             />
           </div>
@@ -539,11 +553,7 @@ const AccountSetting = () => {
           width={460}
           content={
             <div style={{ textAlign: "left" }}>
-              {[
-                { value: "male", label: t("userCenter.male") },
-                { value: "female", label: t("userCenter.female") },
-                { value: "other", label: t("userCenter.other") },
-              ].map((option, index) => (
+              {genderMap.map((option, index) => (
                 <label
                   key={option.value}
                   style={{
@@ -565,7 +575,7 @@ const AccountSetting = () => {
                     type="radio"
                     name="gender"
                     value={option.value}
-                    checked={gender === option.value}
+                    checked={userInfo?.gender === option.value}
                     onChange={(e) => {
                       setGender(e.target.value);
                     }}
