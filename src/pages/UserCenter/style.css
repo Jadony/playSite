@@ -1,0 +1,15 @@
+.coupons-success-modal {
+  position: relative;
+  overflow: visible;
+}
+.coupons-success-modal::after {
+  content: "";
+  position: absolute;
+  top: -70px;
+  left: -70px;
+  width: 640px;
+  height: 390px;
+  background-image: url("../../assets/background/couponsBg.png");
+  background-size: 640px 390px;
+  background-position: left top;
+}

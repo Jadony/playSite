@@ -5,14 +5,32 @@ import Coupon from "@/components/Coupon";
 import UserMenu from "@/components/UserMenu";
 import UserPanel from "@/components/UserPanel";
 import userMenuData from "@/config/userMenuData";
+import { getUserCoupons, redeemInOrder } from "@/api/user";
+import "./style.css";
 
 const UserCenter = () => {
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [failureModalVisible, setFailureModalVisible] = useState(false);
-  const exchangeOnClick = (code: string) => {
-    console.log(code);
+  const [coupon, setCoupon] = useState<UserCouponsResponseData | null>(null);
+  const [coupons, setCoupons] = useState<UserCouponsResponseData[]>([]);
+  const exchangeOnClick = async (code: string) => {
+    try {
+      const { data } = await redeemInOrder({ redeemCode: code });
+      setSuccessModalVisible(true);
+      if (data) {
+        setCoupon(data.data);
+        getUserCoupons().then((res) => {
+          setCoupons(res.data.data);
+        });
+      } else {
+        setFailureModalVisible(true);
+      }
+    } catch (error) {
+      setSuccessModalVisible(true);
+      // setFailureModalVisible(true);
+    }
   };
-  const userMenu = userMenuData(exchangeOnClick);
+  const userMenu = userMenuData(exchangeOnClick, { coupons });
   const [activeMenu, setActiveMenu] = useState("myAchievements");
 
   const changeMenu = (id: string) => {
@@ -48,15 +66,16 @@ const UserCenter = () => {
       </div>
       {/* 1. 兑换成功 Modal */}
       <CommonModal
+        className="coupons-success-modal"
         visible={successModalVisible}
         onClose={() => setSuccessModalVisible(false)}
         title="兑换成功"
         content={
           <Coupon
             variant="purple"
-            discount={5}
-            minOrder={100}
-            maxSave={20}
+            discount={coupon?.discountValue}
+            minOrder={coupon?.minOrderAmount}
+            maxSave={coupon?.maxDiscountAmount}
             onUse={() => console.log("使用优惠券")}
           />
         }

@@ -170,6 +170,7 @@ export default {
     orderForm: "Order form",
     server: "Server",
     enterTheRedemptionCode: "Enter the redemption code",
+    pleaseInputYourBirthday: "Please select your birthday",
     exchange: "Exchange",
   },
   footer: {

@@ -16,6 +16,7 @@ const api = {
   orderList: "/front/orders/list",
   orderDetail: "/front/orders/detail",
   userCoupons: "/front/profile/coupons",
+  redeemInOrder: "/front/coupons/redeem-in-order",
 };
 
 export const existEmail = (params: ExistEmailRequestParams) => {
@@ -130,5 +131,13 @@ export const getUserCoupons = () => {
   return request<UserCouponsResponseData[]>({
     url: api.userCoupons,
     method: "get",
+  });
+};
+
+export const redeemInOrder = (params: { redeemCode: string }) => {
+  return request<UserCouponsResponseData>({
+    url: api.redeemInOrder,
+    method: "post",
+    params,
   });
 };

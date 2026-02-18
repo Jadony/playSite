@@ -6,6 +6,9 @@ import { useState } from "react";
 import Coupons from "@/components/Coupons";
 export default function useMenuData(
   leftElOnClick?: (exchangeCode: string) => void,
+  data?: {
+    coupons?: UserCouponsResponseData[];
+  },
 ) {
   const [exchangeCode, setExchangeCode] = useState("");
   const { t } = useTranslation();
@@ -229,7 +232,7 @@ export default function useMenuData(
           </div>
         </div>
       ),
-      comp: <Coupons />,
+      comp: <Coupons data={data?.coupons || []} />,
       to: "coupons",
     },
     // {

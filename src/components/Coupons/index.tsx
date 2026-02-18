@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Coupon from "../Coupon";
 import { getUserCoupons } from "@/api/user";
 
-const Coupons = () => {
+const Coupons = ({ data }: { data: UserCouponsResponseData[] }) => {
   const [coupons, setCoupons] = useState<UserCouponsResponseData[]>([]);
 
   useEffect(() => {
@@ -10,6 +10,10 @@ const Coupons = () => {
       setCoupons(res.data.data);
     });
   }, []);
+
+  useEffect(() => {
+    setCoupons(data);
+  }, [data]);
 
   return (
     <div>

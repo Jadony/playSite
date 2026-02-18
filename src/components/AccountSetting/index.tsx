@@ -9,7 +9,7 @@ import {
   useLanguageDispatchContext,
 } from "@/store/languageStore";
 import PrimaryButton from "../PrimaryButton";
-import { message } from "antd";
+import { DatePicker, DatePickerProps, message } from "antd";
 import { isPasswordValid, isValidEmail } from "@/utils/helpers";
 import {
   bindEmail,
@@ -19,9 +19,13 @@ import {
   setNewPassword,
   updateUserInfo,
 } from "@/api/user";
+import dayjs, { Dayjs } from "dayjs";
 
 const AccountSetting = () => {
   const [editProfileModalVisible, setEditProfileModalVisible] = useState(false);
+  const [editBirthdayModalVisible, setEditBirthdayModalVisible] =
+    useState(false);
+  const [birthday, setBirthday] = useState<Dayjs>();
   const [userInfo, setUserInfo] = useState<UserInfoResponseData>();
   const [name, setName] = useState("");
   const [genderModalVisible, setGenderModalVisible] = useState(false);
@@ -64,6 +68,10 @@ const AccountSetting = () => {
 
   const selectGenderClick = () => {
     setGenderModalVisible(true);
+  };
+
+  const changeBirthdayClick = () => {
+    setEditBirthdayModalVisible(true);
   };
 
   const changeEmailClick = () => {
@@ -194,18 +202,23 @@ const AccountSetting = () => {
     }
   };
 
-  const updateUserInfoData = async (type: string, param?: string) => {
+  const updateUserInfoData = async (type: string, param?: string | Dayjs) => {
     switch (type) {
       case "nickname":
-        updateNormalInfo({ nickname: param }, () => {
+        updateNormalInfo({ nickname: param as string }, () => {
           setEditProfileModalVisible(false);
         });
         break;
       case "gender":
-        updateNormalInfo({ gender: param });
+        updateNormalInfo({ gender: param as string });
         break;
       case "email":
         changeEmail();
+        break;
+      case "birthday":
+        updateNormalInfo({
+          birthday: dayjs(param as Dayjs).format("YYYY-MM-DD"),
+        });
         break;
       case "setPassword":
         updatePassword();
@@ -343,14 +356,19 @@ const AccountSetting = () => {
             <InfoBox
               label={t("userCenter.birthday")}
               value={
-                <div className="font-semibold text-white/50">
-                  {t("userCenter.perfectInformation")}
-                </div>
+                userInfo?.birthday ? (
+                  userInfo?.birthday
+                ) : (
+                  <div className="font-semibold text-white/50">
+                    {t("userCenter.perfectInformation")}
+                  </div>
+                )
               }
+              rightBtnClick={changeBirthdayClick}
             />
           </div>
         </div>
-        <div className="relative border-b border-white/10 py-5">
+        <div className="relative py-5">
           <div className="flex justify-between">
             <InfoBox
               label={t("userCenter.email")}
@@ -373,6 +391,9 @@ const AccountSetting = () => {
           </div>
         </div>
         <div className="relative py-5">
+          <div className="text-base font-medium mb-5">
+            Language and currency setting
+          </div>
           <div className="flex justify-between">
             <InfoBox
               label={t("userCenter.language")}
@@ -557,6 +578,31 @@ const AccountSetting = () => {
             </div>
           }
           footer={null}
+        />
+
+        {/* 修改生日 Modal */}
+        <CommonModal
+          visible={editBirthdayModalVisible}
+          onClose={() => setEditBirthdayModalVisible(false)}
+          title={t("userCenter.birthday")}
+          content={
+            <DatePicker
+              size="large"
+              placeholder={t("userCenter.pleaseInputYourBirthday")}
+              value={birthday}
+              style={{ width: "100%" }}
+              onChange={(data): DatePickerProps["onChange"] => {
+                setBirthday(data);
+                return;
+              }}
+              format={"YYYY-MM-DD"}
+            />
+          }
+          primaryButtonText={t("userCenter.confirm")}
+          onPrimaryClick={() => {
+            updateUserInfoData("birthday", birthday);
+          }}
+          primaryButtonDisabled={!birthday}
         />
 
         {/* 修改邮箱 Modal */}
