@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import expirationBg from "@/assets/userPanel/expirationBg.png";
+import { useTranslation } from "react-i18next";
 import "./style.css";
 
 export interface CouponProps {
@@ -38,6 +39,26 @@ export interface CouponProps {
    * 是否可用
    */
   available?: boolean;
+
+  /**
+   * 是否显示ToUse按钮
+   */
+  isShowToUse?: boolean;
+
+  /**
+   * 优惠券名称
+   */
+  couponName?: string;
+
+  /**
+   * 是否选中
+   */
+  isSelect?: boolean;
+
+  /**
+   * 是否显示右侧按钮
+   */
+  isShowRightBtn?: boolean;
 }
 
 const Coupon: React.FC<CouponProps> = ({
@@ -48,8 +69,13 @@ const Coupon: React.FC<CouponProps> = ({
   remainingSeconds = 0,
   onUse,
   available = true,
+  isShowToUse = true,
+  couponName,
+  isSelect = false,
+  isShowRightBtn = true,
 }) => {
   const [curTime, setCurTime] = useState(remainingSeconds);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (available && curTime > 0) {
@@ -68,6 +94,58 @@ const Coupon: React.FC<CouponProps> = ({
     return [h, m, s].map((v) => v.toString().padStart(2, "0")).join(":");
   };
 
+  const selectBtn = (isSelect: boolean) => {
+    if (isSelect) {
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="42"
+          height="42"
+          viewBox="0 0 42 42"
+          fill="none"
+          className="cursor-pointer mt-4"
+        >
+          <circle cx="21.0013" cy="21.0013" r="21.0013" fill="white" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="27"
+            height="27"
+            x="7.5"
+            y="7.5"
+            viewBox="0 0 27 27"
+            fill="none"
+          >
+            <path
+              d="M22.0078 6.60229L9.90354 18.7065L4.40161 13.2046"
+              stroke="#0C0B0F"
+              strokeWidth="3.77275"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </svg>
+      );
+    }
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="42"
+        height="42"
+        viewBox="0 0 42 42"
+        fill="none"
+        className="cursor-pointer mt-4"
+      >
+        <circle
+          opacity="0.2"
+          cx="21.0013"
+          cy="21.0013"
+          r="21.0013"
+          fill="white"
+        />
+      </svg>
+    );
+  };
+
   return (
     <div className={`coupon coupon-${variant}`}>
       {/* 左侧穿孔 */}
@@ -79,7 +157,12 @@ const Coupon: React.FC<CouponProps> = ({
         <div className="coupon-top">
           <div className="coupon-discount-info">
             <div
-              className={`coupon-discount ${!available ? "expiration-opacity" : ""}`}
+              className={`text-sm text-white font-bold ${!available ? "expiration-opacity" : ""}`}
+            >
+              {couponName}
+            </div>
+            <div
+              className={`coupon-discount italic ${!available ? "expiration-opacity" : ""}`}
             >
               {discount}% OFF
             </div>
@@ -95,9 +178,17 @@ const Coupon: React.FC<CouponProps> = ({
             </div>
           </div>
           {available ? (
-            <button className="coupon-use-btn" onClick={onUse}>
-              To Use
-            </button>
+            isShowRightBtn ? (
+              isShowToUse ? (
+                <button className="coupon-use-btn" onClick={onUse}>
+                  To Use
+                </button>
+              ) : (
+                selectBtn(isSelect)
+              )
+            ) : (
+              ""
+            )
           ) : (
             <div
               className="relative expiration-bg text-[#3a393d]"
@@ -109,7 +200,7 @@ const Coupon: React.FC<CouponProps> = ({
               }
             >
               <span className="absolute top-[25px] left-[-60px] text-base font-semibold">
-                Expiration
+                {t("userCenter.expiration")}
               </span>
             </div>
           )}

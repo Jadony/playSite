@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PrimaryButton from "@/components/PrimaryButton";
 import GameSelectDropDown from "./GameSelectDropDown";
@@ -7,6 +7,12 @@ import avatar1 from "@/assets/avatars/Ellipse 1.png";
 import avatar2 from "@/assets/avatars/Ellipse 2.png";
 import avatar3 from "@/assets/avatars/Ellipse 36.png";
 import { useAuthContext } from "@/store/authStore";
+import CouponModal from "../CouponModal";
+import { redeemInOrder } from "@/api/user";
+import CouponExchangeSuccess from "../CouponExchangeSuccess";
+import CouponExchangeErr from "../CouponExchangeErr";
+import { message } from "antd";
+import { availableForOrder, calculate } from "@/api/payment";
 
 const staticData = [
   {
@@ -28,40 +34,28 @@ const staticData = [
     time: "7",
   },
 ];
-const serverOptions = [
-  {
-    type: "International-Clothing",
-    name: "International-Clothing",
-  },
-  {
-    type: "Asia",
-    name: "Asia",
-  },
-  {
-    type: "America",
-    name: "America",
-  },
-  {
-    type: "Europe",
-    name: "Europe",
-  },
-  {
-    type: "TW, HK, MO",
-    name: "TW, HK, MO",
-  },
-];
 
 type PaymentPanelProps = {
   selectGameItem: GameItem | null;
 };
 
 const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
   const [selectedServerType, setSelectedServerType] = useState<{
     type: string;
     name: string;
   } | null>(null);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const [couponModalVisible, setCouponModalVisible] = useState(false);
+  const [uid, setUid] = useState("");
+  const [successModalVisible, setSuccessModalVisible] = useState(false);
+  const [failureModalVisible, setFailureModalVisible] = useState(false);
+  const [coupon, setCoupon] = useState<UserCouponsResponseData | null>(null);
+  const [coupons, setCoupons] = useState<UserCouponsResponseData[]>([]);
+  const [selectedCoupon, setSelectedCoupon] =
+    useState<UserCouponsResponseData | null>(null);
+  const [calculateData, setCalculateData] =
+    useState<CalculateResponseData | null>(null);
   const { isAuthenticated } = useAuthContext();
   const { t } = useTranslation();
 
@@ -70,6 +64,52 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
       setLoginModalVisible(true);
     }
   };
+
+  const exchangeOnClick = async (code: string) => {
+    try {
+      const { data } = await redeemInOrder({ redeemCode: code });
+      if (data.code === 200) {
+        setSuccessModalVisible(true);
+        setCoupon(data.data);
+        const { data: couponsData } = await availableForOrder({
+          orderAmount: calculateData?.finalPrice.toString() || "0",
+        });
+        setCoupons(couponsData.data);
+      } else {
+        setFailureModalVisible(true);
+      }
+    } catch (error) {
+      // setSuccessModalVisible(true);
+      setFailureModalVisible(true);
+    }
+  };
+
+  const selectCurCoupon = (coupon: UserCouponsResponseData) => {
+    setSelectedCoupon(coupon);
+    getCalculateData(coupon);
+  };
+
+  const getCalculateData = async (
+    selectedCoupon?: UserCouponsResponseData | null,
+  ) => {
+    try {
+      const { data } = await calculate({
+        skuId: selectGameItem?.id || 0,
+        couponId: selectedCoupon?.id,
+        quantity: 1,
+      });
+      setSelectedCoupon(data.data.selectedCoupon);
+      setCalculateData(data.data);
+      setCoupons(data.data.availableCoupons);
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
+  useEffect(() => {
+    getCalculateData();
+    setSelectedServerType(null);
+  }, [selectGameItem]);
 
   return (
     <div
@@ -166,8 +206,16 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
             onChange={(value) => {
               setSelectedServerType(value);
             }}
+            placeholder={t("home.selectorAndPayment.plaseSelectServer")}
             label={t("home.selectorAndPayment.areaService")}
-            options={serverOptions}
+            options={
+              selectGameItem?.zoneInfo.map((item) => {
+                return {
+                  type: item,
+                  name: item,
+                };
+              }) ?? []
+            }
             name={selectedServerType?.name ?? ""}
             keyName="type"
           />
@@ -184,6 +232,10 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
             {t("home.selectorAndPayment.uid")}
           </label>
           <input
+            value={uid}
+            onChange={(e) => {
+              setUid(e.target.value);
+            }}
             type="text"
             placeholder={t("home.selectorAndPayment.gameId")}
             className="w-full bg-[#2e2e36] rounded-lg p-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500/50"
@@ -200,8 +252,9 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
           <label className="text-sm text-white mb-2 block font-medium ml-1">
             {t("home.selectorAndPayment.quantity")}
           </label>
-          <div className="flex items-center justify-between bg-[#2e2e36] rounded-lg p-1">
-            <button
+          <div className="flex items-center justify-between rounded-lg p-1">
+            <span>1</span>
+            {/* <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
               className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white"
             >
@@ -213,7 +266,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
               className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white"
             >
               +
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -233,10 +286,14 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
                 color: "transparent",
               }}
             >
-              $ 260.90
+              $ {calculateData?.finalPrice}
             </span>
-            <span className="text-sm text-gray-500 cursor-pointer">
-              $200 {t("home.selectorAndPayment.offAlready")} &gt;
+            <span
+              className="text-sm text-gray-500 cursor-pointer"
+              onClick={() => setCouponModalVisible(true)}
+            >
+              $ {calculateData?.couponDiscount}
+              {t("home.selectorAndPayment.savings")} &gt;
             </span>
           </div>
           <PrimaryButton
@@ -246,7 +303,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
             onClick={handleTradeBtn}
           >
             <span className="text-base">
-              {t("home.selectorAndPayment.tradeNow")}
+              {t("home.selectorAndPayment.topUpNow")}
             </span>
           </PrimaryButton>
         </div>
@@ -254,6 +311,23 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
       <LoginModal
         visible={loginModalVisible}
         onClose={() => setLoginModalVisible(false)}
+      />
+      <CouponModal
+        selectedCoupon={selectedCoupon}
+        visible={couponModalVisible}
+        onClose={() => setCouponModalVisible(false)}
+        exchangeOnClick={exchangeOnClick}
+        coupons={coupons}
+        selectCurCoupon={selectCurCoupon}
+      />
+      <CouponExchangeSuccess
+        visible={successModalVisible}
+        onClose={() => setSuccessModalVisible(false)}
+        coupon={coupon}
+      />
+      <CouponExchangeErr
+        visible={failureModalVisible}
+        onClose={() => setFailureModalVisible(false)}
       />
     </div>
   );

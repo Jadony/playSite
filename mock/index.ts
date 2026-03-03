@@ -242,7 +242,7 @@ export default [
             bubblePrice: 260.9,
             discount: 22,
             currency: "$",
-            zoneInfo: "US",
+            zoneInfo: ["Asia", "America", "Europe", "TW,HK,MO"],
             hasSpecialOffer: false,
           },
           {
@@ -255,7 +255,7 @@ export default [
             bubblePrice: 260.9,
             discount: 22,
             currency: "$",
-            zoneInfo: "US",
+            zoneInfo: ["Asia", "America", "TW,HK,MO"],
             hasSpecialOffer: false,
           },
           {
@@ -268,7 +268,7 @@ export default [
             bubblePrice: 260.9,
             discount: 22,
             currency: "$",
-            zoneInfo: "US",
+            zoneInfo: ["Asia", "Europe", "TW,HK,MO"],
             hasSpecialOffer: false,
           },
           {
@@ -281,7 +281,7 @@ export default [
             bubblePrice: 260.9,
             discount: 22,
             currency: "$",
-            zoneInfo: "US",
+            zoneInfo: ["Asia", "America", "Europe", "TW,HK,MO"],
             hasSpecialOffer: false,
           },
           // Row 2
@@ -295,7 +295,7 @@ export default [
             bubblePrice: 260.9,
             discount: 22,
             currency: "$",
-            zoneInfo: "US",
+            zoneInfo: ["Asia", "America", "Europe", "TW,HK,MO"],
             hasSpecialOffer: false,
           },
           {
@@ -308,7 +308,7 @@ export default [
             bubblePrice: 260.9,
             discount: 22,
             currency: "$",
-            zoneInfo: "US",
+            zoneInfo: ["Asia", "America", "Europe", "TW,HK,MO"],
             hasSpecialOffer: false,
           },
           {
@@ -321,7 +321,7 @@ export default [
             bubblePrice: 260.9,
             discount: 22,
             currency: "$",
-            zoneInfo: "US",
+            zoneInfo: ["Asia", "America", "Europe", "TW,HK,MO"],
             hasSpecialOffer: false,
           },
           {
@@ -334,7 +334,7 @@ export default [
             bubblePrice: 260.9,
             discount: 22,
             currency: "$",
-            zoneInfo: "US",
+            zoneInfo: ["Asia", "America", "Europe", "TW,HK,MO"],
             hasSpecialOffer: false,
           },
           // Row 3 (partial to match image approximately or just fill grid)
@@ -348,7 +348,7 @@ export default [
             bubblePrice: 260.9,
             discount: 22,
             currency: "$",
-            zoneInfo: "US",
+            zoneInfo: ["Asia", "America", "Europe", "TW,HK,MO"],
             hasSpecialOffer: false,
           },
           {
@@ -361,7 +361,7 @@ export default [
             bubblePrice: 260.9,
             discount: 22,
             currency: "$",
-            zoneInfo: "US",
+            zoneInfo: ["Asia", "America", "Europe", "TW,HK,MO"],
             hasSpecialOffer: true,
           },
         ],

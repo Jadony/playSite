@@ -28,6 +28,7 @@ const Coupons = ({ data }: { data: UserCouponsResponseData[] }) => {
               maxSave={coupon.maxDiscountAmount}
               remainingSeconds={coupon.remainingSeconds}
               available={coupon.available}
+              couponName={coupon.couponName}
               onUse={() => console.log("使用优惠券")}
             />
           </div>

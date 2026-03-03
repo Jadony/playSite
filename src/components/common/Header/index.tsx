@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { languages } from "@/i18n";
 import {
@@ -33,6 +33,8 @@ const Header: React.FC = () => {
   const { isAuthenticated, user } = useAuthContext();
 
   const { t, i18n } = useTranslation();
+
+  const navigate = useNavigate();
 
   const changeLanguage = (lang: { label: string; value: string }) => {
     i18n.changeLanguage(lang.value);
@@ -335,6 +337,7 @@ const Header: React.FC = () => {
               src={user?.avatar || userImg}
               alt="user"
               className="w-10 h-10 rounded-full border-2 border-white cursor-pointer"
+              onClick={() => navigate("/user-center")}
             />
           </div>
         ) : (

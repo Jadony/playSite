@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import PrimaryButton from "../PrimaryButton";
 import "./style.css";
 
@@ -14,7 +15,7 @@ export interface CommonModalProps {
   /**
    * Modal 标题
    */
-  title?: string;
+  title?: string | React.ReactNode;
   /**
    * Modal 内容（可以是文本或 JSX）
    */
@@ -122,7 +123,7 @@ const CommonModal: React.FC<CommonModalProps> = ({
     </div>
   );
 
-  return (
+  return ReactDOM.createPortal(
     <div className="common-modal-mask" onClick={handleMaskClick}>
       <div
         className={`common-modal ${className}`}
@@ -145,7 +146,8 @@ const CommonModal: React.FC<CommonModalProps> = ({
         {/* 底部 */}
         {footer !== undefined ? footer : defaultFooter}
       </div>
-    </div>
+    </div>,
+    document.getElementsByTagName("body")[0],
   );
 };
 

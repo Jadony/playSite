@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
 
 type SelectDropDownProps = {
-  onChange: (value: any) => void;
+  onChange: (value: { type: string; name: string }) => void;
   label: string;
   name: string;
-  options: any[];
-  keyName: string;
+  options: { type: string; name: string }[];
+  keyName: keyof { type: string; name: string };
+  placeholder?: string;
 };
 
 const GameSelectDropDown: React.FC<SelectDropDownProps> = ({
@@ -15,6 +16,7 @@ const GameSelectDropDown: React.FC<SelectDropDownProps> = ({
   options,
   name,
   keyName,
+  placeholder,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
@@ -44,7 +46,11 @@ const GameSelectDropDown: React.FC<SelectDropDownProps> = ({
           className="bg-[#2e2e36] rounded-lg p-3 flex justify-between items-center cursor-pointer hover:border-white/20 transition-colors"
           onClick={() => setShowDropdown(!showDropdown)}
         >
-          <span className="text-sm text-white">{name}</span>
+          {name ? (
+            <span className="text-sm text-white">{name}</span>
+          ) : (
+            <span className="opacity-20">{placeholder}</span>
+          )}
           <span className="text-white text-xs">
             <DownOutlined />
           </span>

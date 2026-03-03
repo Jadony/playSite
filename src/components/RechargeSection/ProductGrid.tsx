@@ -4,7 +4,7 @@ import DiscountTag from "@/components/DiscountTag";
 // import Pagination from "@/components/Pagination";
 
 type ProductGridProps = {
-  isShowTitle: boolean;
+  isShowTitle?: boolean;
   gameItemClick: (item: GameItem) => void;
   products: GameItem[];
   selectGameItem: GameItem | null;

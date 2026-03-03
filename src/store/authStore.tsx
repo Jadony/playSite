@@ -112,7 +112,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     login,
     loginWithGoogle,
     logout,
-    isAuthenticated: !!user, // 便捷的认证状态
+    isAuthenticated: !user, // 便捷的认证状态
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

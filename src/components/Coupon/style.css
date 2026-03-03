@@ -97,7 +97,7 @@
 }
 
 .coupon-discount {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 900;
   font-style: italic;
   margin-bottom: 4px;
@@ -112,7 +112,7 @@
 }
 
 .coupon-validity {
-  font-size: 14px;
+  font-size: 12px;
   color: #9ca3af;
   margin-bottom: 4px;
   line-height: 1.4;
@@ -123,7 +123,7 @@
 }
 
 .coupon-save {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 700;
   color: #ffffff;
   line-height: 1.4;

@@ -4,6 +4,13 @@
   background-repeat: no-repeat;
   background-position: top;
 }
+
+.hero-section-container
+  :where(.css-dev-only-do-not-override-1tjuv2x).ant-carousel
+  .slick-dots
+  li.slick-active::after {
+  background-color: transparent;
+}
 .banner-btn::before {
   content: "";
   position: absolute;

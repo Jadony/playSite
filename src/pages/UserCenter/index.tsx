@@ -1,12 +1,11 @@
 import { useState } from "react";
-import exchangeErr from "@/assets/userPanel/exchangeErr.png";
-import CommonModal from "@/components/CommonModal";
-import Coupon from "@/components/Coupon";
 import UserMenu from "@/components/UserMenu";
 import UserPanel from "@/components/UserPanel";
 import userMenuData from "@/config/userMenuData";
 import { getUserCoupons, redeemInOrder } from "@/api/user";
 import "./style.css";
+import CouponExchangeSuccess from "@/components/CouponExchangeSuccess";
+import CouponExchangeErr from "@/components/CouponExchangeErr";
 
 const UserCenter = () => {
   const [successModalVisible, setSuccessModalVisible] = useState(false);
@@ -65,41 +64,16 @@ const UserCenter = () => {
         })}
       </div>
       {/* 1. 兑换成功 Modal */}
-      <CommonModal
-        className="coupons-success-modal"
+      <CouponExchangeSuccess
         visible={successModalVisible}
         onClose={() => setSuccessModalVisible(false)}
-        title="兑换成功"
-        content={
-          <Coupon
-            variant="purple"
-            discount={coupon?.discountValue}
-            minOrder={coupon?.minOrderAmount}
-            maxSave={coupon?.maxDiscountAmount}
-            onUse={() => console.log("使用优惠券")}
-          />
-        }
-        width={480}
-        footer={null}
+        coupon={coupon}
       />
 
       {/* 2. 兑换失败 Modal */}
-      <CommonModal
+      <CouponExchangeErr
         visible={failureModalVisible}
         onClose={() => setFailureModalVisible(false)}
-        title="兑换失败"
-        content={
-          <div>
-            <div className="w-[155px] mx-auto" style={{ marginBottom: "8px" }}>
-              <img width={155} src={exchangeErr} alt="" />
-            </div>
-            <div className="text-center text-sm text-white">
-              兑换码无效，请检查后重试
-            </div>
-          </div>
-        }
-        width={480}
-        footer={null}
       />
     </div>
   );
