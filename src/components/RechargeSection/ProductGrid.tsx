@@ -94,11 +94,11 @@ const ProductGrid: React.FC<ProductGridProps> = ({
               </div>
               <div className="flex justify-between">
                 <div className="text-base">
-                  {item.currency}&nbsp;
+                  {item.unit}&nbsp;
                   {item.bubblePrice}
                 </div>
                 <div className="text-sm line-through text-gray-500">
-                  {item.currency}
+                  {item.unit}
                   {item.originalPrice}
                 </div>
               </div>

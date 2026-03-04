@@ -21,12 +21,12 @@ const Header: React.FC = () => {
   const [showLang, setShowLang] = useState(false);
   const [showCurrency, setShowCurrency] = useState(false);
   const [showGames, setShowGames] = useState(false);
-  const [currentCurrency, setCurrentCurrency] = useState("$ USD");
 
   const langRef = React.useRef<HTMLDivElement>(null);
   const currencyRef = React.useRef<HTMLDivElement>(null);
   const gamesRef = React.useRef<HTMLDivElement>(null);
-  const { selectLanguage } = useLanguageContext();
+  const { selectLanguage, unitAndLanguageList, selectUnit } =
+    useLanguageContext();
   const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
 
   const languageDispatch = useLanguageDispatchContext();
@@ -36,15 +36,12 @@ const Header: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const changeLanguage = (lang: { label: string; value: string }) => {
-    i18n.changeLanguage(lang.value);
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
     languageDispatch({
       type: "setSelectLanguage",
       payload: {
-        selectLanguage: {
-          label: lang.label,
-          value: lang.value,
-        },
+        selectLanguage: lang,
       },
     });
     setShowLang(false);
@@ -109,7 +106,6 @@ const Header: React.FC = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  const currencies = ["$ USD", "¥ CNY"];
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -245,9 +241,7 @@ const Header: React.FC = () => {
                   strokeWidth="1.5"
                 />
               </svg>
-              <span className="text-sm font-medium">
-                {selectLanguage.label}
-              </span>
+              <span className="text-sm font-medium">{selectLanguage}</span>
               <svg
                 width="10"
                 height="6"
@@ -270,13 +264,13 @@ const Header: React.FC = () => {
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-32 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-xl py-2 animate-fade-in z-50 backdrop-blur-md">
                 {languages.map((lang) => (
                   <div
-                    key={lang.value}
+                    key={lang}
                     onClick={() => {
                       changeLanguage(lang);
                     }}
-                    className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${selectLanguage.label === lang.label ? "text-white font-bold" : "text-gray-400"}`}
+                    className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${selectLanguage === lang ? "text-white font-bold" : "text-gray-400"}`}
                   >
-                    {lang.label}
+                    {lang}
                   </div>
                 ))}
               </div>
@@ -293,7 +287,9 @@ const Header: React.FC = () => {
               }}
               className="flex items-center gap-2 text-white cursor-pointer transition-colors select-none"
             >
-              <span className="text-sm font-medium">{currentCurrency}</span>
+              <span className="text-sm font-medium">
+                {selectUnit?.unit} {selectUnit?.currency}
+              </span>
               <svg
                 width="10"
                 height="6"
@@ -314,16 +310,24 @@ const Header: React.FC = () => {
             {/* Currency Dropdown */}
             {showCurrency && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-24 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-xl py-2 animate-fade-in z-50 backdrop-blur-md">
-                {currencies.map((curr) => (
+                {unitAndLanguageList?.map((curr) => (
                   <div
-                    key={curr}
+                    key={curr.currency}
                     onClick={() => {
-                      setCurrentCurrency(curr);
+                      languageDispatch({
+                        type: "setSelectUnit",
+                        payload: {
+                          selectUnit: {
+                            currency: curr.currency,
+                            unit: curr.unit,
+                          },
+                        },
+                      });
                       setShowCurrency(false);
                     }}
-                    className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${currentCurrency === curr ? "text-white font-bold" : "text-gray-400"}`}
+                    className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${selectUnit?.currency === curr.currency ? "text-white font-bold" : "text-gray-400"}`}
                   >
-                    {curr}
+                    {curr.unit} {curr.currency}
                   </div>
                 ))}
               </div>

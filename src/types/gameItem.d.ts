@@ -10,4 +10,5 @@ type GameItem = {
   currency: string;
   zoneInfo: string[];
   hasSpecialOffer: boolean;
+  unit: string;
 };

@@ -5,9 +5,10 @@ import "./style.css";
 import { useNavigate } from "react-router-dom";
 interface GameCardProps {
   item: Game;
+  unit?: string;
 }
 
-const GameCard: React.FC<GameCardProps> = ({ item }) => {
+const GameCard: React.FC<GameCardProps> = ({ item, unit }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const gameItemClick = (item: Game) => {
@@ -39,7 +40,7 @@ const GameCard: React.FC<GameCardProps> = ({ item }) => {
           {item.gameName}
         </div>
         <div className="text-sm text-[#EE22EB]">
-          {t("games.theHighestProvince")} $ {item.maxDiscount}
+          {t("games.theHighestProvince")} {unit} {item.maxDiscount}
         </div>
       </div>
     </div>

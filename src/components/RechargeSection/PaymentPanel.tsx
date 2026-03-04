@@ -13,6 +13,7 @@ import CouponExchangeSuccess from "../CouponExchangeSuccess";
 import CouponExchangeErr from "../CouponExchangeErr";
 import { message } from "antd";
 import { availableForOrder, calculate } from "@/api/payment";
+import { useLanguageContext } from "@/store/languageStore";
 
 const staticData = [
   {
@@ -57,6 +58,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
   const [calculateData, setCalculateData] =
     useState<CalculateResponseData | null>(null);
   const { isAuthenticated } = useAuthContext();
+  const { selectUnit } = useLanguageContext();
   const { t } = useTranslation();
 
   const handleTradeBtn = () => {
@@ -67,12 +69,16 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
 
   const exchangeOnClick = async (code: string) => {
     try {
-      const { data } = await redeemInOrder({ redeemCode: code });
+      const { data } = await redeemInOrder({
+        redeemCode: code,
+        currency: selectUnit?.currency,
+      });
       if (data.code === 200) {
         setSuccessModalVisible(true);
         setCoupon(data.data);
         const { data: couponsData } = await availableForOrder({
           orderAmount: calculateData?.finalPrice.toString() || "0",
+          currency: selectUnit?.currency,
         });
         setCoupons(couponsData.data);
       } else {
@@ -97,6 +103,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
         skuId: selectGameItem?.id || 0,
         couponId: selectedCoupon?.id,
         quantity: 1,
+        currency: selectUnit?.currency,
       });
       setSelectedCoupon(data.data.selectedCoupon);
       setCalculateData(data.data);
@@ -286,13 +293,13 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
                 color: "transparent",
               }}
             >
-              $ {calculateData?.finalPrice}
+              {selectUnit?.unit} {calculateData?.finalPrice}
             </span>
             <span
               className="text-sm text-gray-500 cursor-pointer"
               onClick={() => setCouponModalVisible(true)}
             >
-              $ {calculateData?.couponDiscount}
+              {selectUnit?.unit} {calculateData?.couponDiscount}
               {t("home.selectorAndPayment.savings")} &gt;
             </span>
           </div>

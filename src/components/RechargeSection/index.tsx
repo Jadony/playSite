@@ -4,11 +4,13 @@ import ProductGrid from "./ProductGrid";
 import { gameDetail } from "@/api/game";
 import { useAllGamesAndSelectContext } from "@/store/gameStore";
 import { message } from "antd";
+import { useLanguageContext } from "@/store/languageStore";
 
 const RechargeSection: React.FC = () => {
   const [selectGameItem, setSelectGameItem] = useState<GameItem | null>(null);
   const [itemList, setItemList] = useState<GameItem[]>([]);
   const { selectGame } = useAllGamesAndSelectContext();
+  const { selectUnit } = useLanguageContext();
   const gameItemClick = (item: GameItem) => {
     setSelectGameItem(item);
   };
@@ -17,6 +19,7 @@ const RechargeSection: React.FC = () => {
     try {
       const { data } = await gameDetail({
         gameId: selectGame.gameId,
+        currency: selectUnit?.currency || "",
       });
       setItemList(data.data.skuList);
     } catch (error) {
@@ -26,7 +29,7 @@ const RechargeSection: React.FC = () => {
 
   useEffect(() => {
     getGameItemList();
-  }, [selectGame]);
+  }, [selectGame, selectUnit]);
 
   return (
     <section className="w-full max-w-[1280px] mx-auto">

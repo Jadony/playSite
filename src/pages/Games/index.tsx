@@ -6,11 +6,13 @@ import GameCard from "@components/GameCard";
 import "./style.css";
 import { allGames } from "@/api/game";
 import { message } from "antd";
+import { useLanguageContext } from "@/store/languageStore";
 
 const Games: React.FC = () => {
   const [gameList, setGameList] = useState<Game[]>([]);
   const [searchList, setSearchList] = useState<Game[]>([]);
   const [isSearch, setIsSearch] = useState(false);
+  const { selectUnit } = useLanguageContext();
   const { t } = useTranslation();
 
   const searchGame = async (keyword: string) => {
@@ -70,6 +72,7 @@ const Games: React.FC = () => {
       isNoMore: (d) => {
         return (d?.list.length || 0) >= (d?.total || 0);
       },
+      reloadDeps: [selectUnit?.currency],
     },
   );
 
@@ -172,13 +175,13 @@ const Games: React.FC = () => {
           {isSearch ? (
             <div className="flex flex-wrap justify-start">
               {searchList.map((game) => (
-                <GameCard item={game} />
+                <GameCard item={game} unit={selectUnit?.unit} />
               ))}
             </div>
           ) : (
             <div className="flex flex-wrap justify-start">
               {gameList.map((game) => (
-                <GameCard item={game} />
+                <GameCard item={game} unit={selectUnit?.unit} />
               ))}
             </div>
           )}

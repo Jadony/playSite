@@ -99,6 +99,7 @@ type AllGamesResponseData = {
 
 type GameDetailRequestParams = {
   gameId: number;
+  currency: string;
 };
 
 type GameDetailResponseData = {
@@ -212,4 +213,99 @@ type UserCouponsResponseData = {
   source: string;
   remainingSeconds: number;
   available: boolean;
+};
+
+type CalculateRequestParams = {
+  skuId: number;
+  quantity: number;
+  couponId?: number;
+  orderAmount?: number;
+  currency?: string;
+};
+
+type CalculateResponseData = {
+  originalPrice: number;
+  platformPrice: number;
+  platformDiscount: number;
+  couponDiscount: number;
+  totalDiscount: number;
+  finalPrice: number;
+  selectedCoupon: {
+    id: number;
+    couponCode: string;
+    couponName: string;
+    couponType: string;
+    discountValue: number;
+    minOrderAmount: number;
+    maxDiscountAmount: number;
+    validFrom: string;
+    validTo: string;
+    status: number;
+    statusDesc: string;
+    rules: string;
+    source: string;
+    remainingSeconds: number;
+    available: boolean;
+  };
+  availableCoupons: {
+    id: number;
+    couponCode: string;
+    couponName: string;
+    couponType: string;
+    discountValue: number;
+    minOrderAmount: number;
+    maxDiscountAmount: number;
+    validFrom: string;
+    validTo: string;
+    status: number;
+    statusDesc: string;
+    rules: string;
+    source: string;
+    remainingSeconds: number;
+    available: boolean;
+  }[];
+};
+
+type AvailableForOrderParams = {
+  orderAmount: string;
+  currency?: string;
+};
+
+type AvailableForOrderResponseData = {
+  id: number;
+  couponCode: string;
+  couponName: string;
+  couponType: string;
+  discountValue: number;
+  minOrderAmount: number;
+  maxDiscountAmount: number;
+  validFrom: string;
+  validTo: string;
+  status: number;
+  statusDesc: string;
+  rules: string;
+  source: string;
+  remainingSeconds: number;
+  available: boolean;
+};
+
+type CountryConfigs = {
+  id: number;
+  countryName: string;
+  languageName: string;
+  displayLanguage: string;
+  currency: string;
+  unit: string;
+  status: number;
+  exchange: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type CountryAllResponseData = {
+  countryConfigs: CountryConfigs[];
+  currentCountry: string;
+  currentLanguage: string;
+  currentCurrency: string;
+  currentUnit: string;
 };

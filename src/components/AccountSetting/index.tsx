@@ -238,15 +238,12 @@ const AccountSetting = () => {
     }
   };
 
-  const changeLanguage = (lang: { label: string; value: string }) => {
-    i18n.changeLanguage(lang.value);
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
     languageDispatch({
       type: "setSelectLanguage",
       payload: {
-        selectLanguage: {
-          label: lang.label,
-          value: lang.value,
-        },
+        selectLanguage: lang,
       },
     });
     setShowLang(false);
@@ -411,7 +408,7 @@ const AccountSetting = () => {
           <div className="flex justify-between">
             <InfoBox
               label={t("userCenter.language")}
-              value={selectLanguage.label}
+              value={selectLanguage}
               rightEl={
                 <div className="relative" ref={langRef}>
                   <div
@@ -443,15 +440,15 @@ const AccountSetting = () => {
                     <div className="absolute top-full right-0 mt-2 w-32 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-xl py-2 z-50 backdrop-blur-md">
                       {languages.map((lang) => (
                         <div
-                          key={lang.value}
+                          key={lang}
                           onClick={() => changeLanguage(lang)}
                           className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${
-                            selectLanguage.label === lang.label
+                            selectLanguage === lang
                               ? "text-white font-bold"
                               : "text-gray-400"
                           }`}
                         >
-                          {lang.label}
+                          {lang}
                         </div>
                       ))}
                     </div>

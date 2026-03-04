@@ -1,10 +1,13 @@
+import { getCountryAll } from "@/api/user";
 import { createContext, useContext, useReducer } from "react";
 
 type LanguageContextType = {
-  selectLanguage: {
-    label: string;
-    value: string;
+  selectUnit?: {
+    unit: string;
+    currency: string;
   };
+  selectLanguage?: string;
+  unitAndLanguageList?: CountryConfigs[];
 };
 const languageContext = createContext<LanguageContextType | null>(null);
 const languageDispatchContext = createContext<React.Dispatch<{
@@ -49,12 +52,40 @@ const languageReducer = (
   }
 };
 
+const getCountryAllData = async () => {
+  const { data } = await getCountryAll();
+  const { data: countryData } = data;
+  const { countryConfigs, currentCurrency, currentLanguage, currentUnit } =
+    countryData;
+  return {
+    countryConfigs,
+    currentCurrency,
+    currentLanguage,
+    currentUnit,
+  };
+};
+
 const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
+  const countryAllData = getCountryAllData();
+
+  let countryConfigs: CountryConfigs[] = [];
+  let currentCurrency = "";
+  let currentLanguage = "";
+  let currentUnit = "";
+  countryAllData.then((res) => {
+    countryConfigs = res.countryConfigs;
+    currentCurrency = res.currentCurrency;
+    currentLanguage = res.currentLanguage;
+    currentUnit = res.currentUnit;
+  });
+
   const [state, dispatch] = useReducer(languageReducer, {
-    selectLanguage: {
-      label: "English",
-      value: "en",
+    selectUnit: {
+      currency: currentCurrency,
+      unit: currentUnit,
     },
+    selectLanguage: currentLanguage,
+    unitAndLanguageList: countryConfigs,
   });
   return (
     <languageContext.Provider value={state}>
