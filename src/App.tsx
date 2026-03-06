@@ -17,17 +17,21 @@ import AuthProvider from "./store/authStore";
 import GameItemDetail from "@pages/GameItemDetail";
 import About from "@pages/About";
 import UserCenter from "@pages/UserCenter";
-import ProtectedRoute from "./components/ProtectedRoute";
+import Payment from "@pages/Payment";
+// import ProtectedRoute from "./components/ProtectedRoute";
 
 const { Content } = Layout;
 
 function App() {
   const location = useLocation();
   const isShowBg = (pathname: string) => {
-    if (hasBgPage.includes(pathname)) {
-      return "light-star-bg";
-    }
-    return "";
+    let showBg = "";
+    hasBgPage.forEach((item) => {
+      if (pathname.includes(item)) {
+        showBg = "light-star-bg";
+      }
+    });
+    return showBg;
   };
   return (
     <AuthProvider>
@@ -45,6 +49,7 @@ function App() {
                       <Route path="/" element={<Home />} />
                       <Route path="/games" element={<Games />}></Route>
                       <Route path="/games/:id" element={<GameItemDetail />} />
+                      <Route path="/payment/:skuId" element={<Payment />} />
                       <Route path="/invite" element={<Invite />} />
                       <Route path="/about" element={<About />} />
                       <Route

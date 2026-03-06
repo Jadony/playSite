@@ -37,7 +37,7 @@ const HeroSection: React.FC = () => {
       image:
         "https://images.unsplash.com/photo-1560942485-b2a11cc13456?auto=format&fit=crop&w=1000&q=80",
       cta: "Top Up",
-      link: "/games",
+      link: "/payment",
     },
     {
       id: 3,

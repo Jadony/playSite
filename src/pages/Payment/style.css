@@ -1,0 +1,14 @@
+.payment-container::before {
+  content: "";
+  position: absolute;
+  width: 40%;
+  height: 20%;
+  top: 55%;
+  left: 30%;
+  right: 0;
+  bottom: 0;
+  background-color: #003dcc;
+  opacity: 0.5;
+  filter: blur(170px);
+  z-index: -1;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PrimaryButton from "@/components/PrimaryButton";
+import { useNavigate } from "react-router-dom";
 import GameSelectDropDown from "./GameSelectDropDown";
 import LoginModal from "@/components/LoginModal";
 import avatar1 from "@/assets/avatars/Ellipse 1.png";
@@ -60,11 +61,14 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
   const { isAuthenticated } = useAuthContext();
   const { selectUnit } = useLanguageContext();
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const handleTradeBtn = () => {
     if (!isAuthenticated) {
       setLoginModalVisible(true);
+      return;
     }
+    navigate(`/payment/${selectGameItem?.id}`);
   };
 
   const exchangeOnClick = async (code: string) => {
