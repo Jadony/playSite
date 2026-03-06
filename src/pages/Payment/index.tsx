@@ -10,6 +10,7 @@ import CouponExchangeSuccess from "@/components/CouponExchangeSuccess";
 import CouponExchangeErr from "@/components/CouponExchangeErr";
 import { availableForOrder, calculate } from "@/api/payment";
 import { message } from "antd";
+import PaymentModal from "@/components/PaymentModal";
 
 const staticPaymentMethods = [
   { id: "visa-usd", name: "VISA", currency: "USD", price: "$234", icon: "🌐" },
@@ -44,6 +45,7 @@ const Payment: React.FC = () => {
     useState<CalculateResponseData | null>(null);
   const [coupon, setCoupon] = useState<UserCouponsResponseData | null>(null);
   const [coupons, setCoupons] = useState<UserCouponsResponseData[]>([]);
+  const [paymentModalVisible, setPaymentModalVisible] = useState(false);
   const params = useParams();
   const { selectUnit } = useLanguageContext();
 
@@ -334,7 +336,10 @@ const Payment: React.FC = () => {
             </div>
 
             {/* Radiant Payment Button */}
-            <PrimaryButton className="w-full py-4 rounded-[73px] text-white font-bold text-lg relative overflow-hidden">
+            <PrimaryButton
+              onClick={() => setPaymentModalVisible(true)}
+              className="w-full py-4 rounded-[73px] text-white font-bold text-lg relative overflow-hidden"
+            >
               Payment
             </PrimaryButton>
           </div>
@@ -356,6 +361,10 @@ const Payment: React.FC = () => {
       <CouponExchangeErr
         visible={failureModalVisible}
         onClose={() => setFailureModalVisible(false)}
+      />
+      <PaymentModal
+        visible={paymentModalVisible}
+        onClose={() => setPaymentModalVisible(false)}
       />
     </div>
   );
