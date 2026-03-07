@@ -517,4 +517,29 @@ export default [
       ]);
     },
   },
+  {
+    url: "/front/country/all",
+    method: "get",
+    response: () => {
+      return resolveResult({
+        countryConfigs: [
+          {
+            id: 0,
+            countryName: "string",
+            languageName: "string",
+            displayLanguage: "string",
+            currency: "string",
+            unit: "string",
+            status: 0,
+            exchange: 0,
+            createdAt: "string",
+            updatedAt: "string",
+          },
+        ],
+        currentCountry: "string",
+        currentLanguage: "string",
+        currentCurrency: "string",
+      });
+    },
+  },
 ] as MockMethod[];

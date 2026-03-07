@@ -5,8 +5,10 @@ import {
   KeyRound,
   PackageSearch,
   CheckCircle2,
+  XCircle,
 } from "lucide-react";
 import CommonModal from "../CommonModal";
+import PrimaryButton from "../PrimaryButton";
 import "./style.css";
 
 type PaymentProgressProps = {
@@ -14,7 +16,7 @@ type PaymentProgressProps = {
   onClose: () => void;
 };
 
-type PaymentState = "verifying" | "shipping" | "success";
+type PaymentState = "verifying" | "shipping" | "success" | "failed";
 
 const PaymentProgress: React.FC<PaymentProgressProps> = ({
   visible,
@@ -155,6 +157,55 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
                 您现在可在游戏账号内查看购买商品
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Step 3 (Failed): 发货超时 */}
+        {status === "failed" && (
+          <div
+            className="progress-step active"
+            style={{
+              marginTop: "16px",
+              flexDirection: "row",
+              alignItems: "flex-start",
+            }}
+          >
+            <XCircle
+              className="step-icon"
+              strokeWidth={1.5}
+              color="#F53F3F"
+              style={{ flexShrink: 0, marginTop: "4px" }}
+            />
+            <div>
+              <div
+                className="step-title"
+                style={{ margin: 0, color: "#F53F3F", marginBottom: "8px" }}
+              >
+                发货超时
+              </div>
+              <div
+                className="step-subtitle"
+                style={{ margin: 0, lineHeight: "1.5" }}
+              >
+                客服团队会帮助解决发货问题或帮助返回钱款至您的支付账户
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 联系客服按钮 */}
+        {status === "failed" && (
+          <div style={{ marginTop: "32px", width: "100%" }}>
+            <PrimaryButton
+              fullWidth
+              variant="gradient"
+              glow
+              glowColor="rgba(170, 0, 255, 0.5)"
+              fontSize="18px"
+              style={{ padding: "16px 0", fontWeight: "bold" }}
+            >
+              联系客服人员
+            </PrimaryButton>
           </div>
         )}
       </div>

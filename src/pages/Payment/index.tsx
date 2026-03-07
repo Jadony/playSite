@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Info } from "lucide-react";
 import "./style.css";
 import PrimaryButton from "@/components/PrimaryButton";
@@ -33,6 +33,7 @@ const staticPaymentMethods = [
 
 const Payment: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   // const [quantity, setQuantity] = useState(1);
   const [selectedMethod, setSelectedMethod] = useState("usdt-trc20");
   const [promoCode, setPromoCode] = useState("");
@@ -99,7 +100,10 @@ const Payment: React.FC = () => {
     <div className="container payment-container mx-auto px-4 md:px-12 lg:px-24 pt-48 pb-20">
       {/* Back Button Area */}
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => {
+          const from = location.state?.from || "";
+          navigate(from);
+        }}
         className="flex items-center text-white hover:text-gray-300 transition-colors mb-8 group"
       >
         <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-3 group-hover:bg-white/20 transition-colors border border-white/30">

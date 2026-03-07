@@ -177,7 +177,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
           avatar: data.picture,
           inviteCode: invitationCode,
         });
-        console.log("登录成功，未解码的用户信息:", data);
       } catch (error) {
         message.error("error");
       }
