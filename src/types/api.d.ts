@@ -309,3 +309,23 @@ type CountryAllResponseData = {
   currentCurrency: string;
   currentUnit: string;
 };
+
+type GetInviteActivity = {
+  inviteCode: string;
+  inviteUrl: string;
+  totalInviteCount: number;
+  invitedUsers: {
+    userId: number;
+    nickname: string;
+    avatar: string;
+    registerTime: string;
+  }[];
+  rewardProgress: {
+    targetCount: number;
+    rewardDesc: string;
+    rewardType: string;
+    rewardValue: string;
+    achieved: boolean;
+    claimed: boolean;
+  }[];
+};

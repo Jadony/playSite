@@ -74,6 +74,7 @@ export default {
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
+    logIn: "Log in",
   },
   loginOrSignUpModal: {
     pleaseEnterEmailAddress: "Please enter email address",

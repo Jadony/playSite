@@ -574,4 +574,55 @@ export default [
       });
     },
   },
+  {
+    url: "/front/invite/activity",
+    method: "get",
+    response: () => {
+      return resolveResult({
+        inviteCode: "10",
+        inviteUrl: "https://dutiful-cook.biz/",
+        totalInviteCount: 49,
+        invitedUsers: [
+          {
+            userId: 34,
+            nickname: "资建军",
+            avatar: "https://avatars.githubusercontent.com/u/90435458",
+            registerTime: "2027-01-20 09:04:48",
+          },
+          {
+            userId: 92,
+            nickname: "琦志国",
+            avatar: "https://avatars.githubusercontent.com/u/57442600",
+            registerTime: "2025-06-13 16:45:58",
+          },
+        ],
+        rewardProgress: [
+          {
+            targetCount: 33,
+            rewardDesc: "nulla aliqua Ut pariatur",
+            rewardType: "exercitation do aliqua",
+            rewardValue: "dolor sint ipsum consectetur",
+            achieved: true,
+            claimed: true,
+          },
+          {
+            targetCount: 21,
+            rewardDesc: "id tempor est proident",
+            rewardType: "fugiat in",
+            rewardValue: "officia velit proident ipsum minim",
+            achieved: true,
+            claimed: false,
+          },
+          {
+            targetCount: 20,
+            rewardDesc: "in ex proident",
+            rewardType: "sit dolore eu occaecat dolor",
+            rewardValue: "mollit velit do",
+            achieved: false,
+            claimed: true,
+          },
+        ],
+      });
+    },
+  },
 ] as MockMethod[];

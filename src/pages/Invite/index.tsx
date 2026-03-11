@@ -1,24 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "antd";
 import { useTranslation } from "react-i18next";
 import PrimaryButton from "@components/PrimaryButton";
 import "./style.css";
-
-// 用户头像图片（这里用颜色模拟，实际可替换为真实头像）
-const userAvatars = [
-  { color: "#4CAF50", emoji: "👤" },
-  { color: "#2196F3", emoji: "👤" },
-  { color: "#9C27B0", emoji: "👤" },
-  { color: "#FF9800", emoji: "👤" },
-];
+import { useAuthContext } from "@/store/authStore";
+import { getInviteActivity } from "@/api/user";
+import LoginModal from "@/components/LoginModal";
 
 const Invite: React.FC = () => {
   const { t } = useTranslation();
-  const [inviteCode] = useState("245KNFSHJNJK");
-  const [invitedCount] = useState(4);
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const [inviteActivityData, setInviteActivityData] =
+    useState<GetInviteActivity>();
+  const { isAuthenticated } = useAuthContext();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getInviteActivity().then((res) => {
+        const { data } = res;
+        const { data: inviteActivity } = data;
+        setInviteActivityData(inviteActivity);
+      });
+    }
+  }, [isAuthenticated]);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(inviteCode);
+    navigator.clipboard.writeText(inviteActivityData?.inviteCode || "");
     alert(t("inviteFriends.copySuccess"));
   };
 
@@ -38,30 +45,6 @@ const Invite: React.FC = () => {
       text: t(
         "inviteFriends.uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons",
       ),
-    },
-  ];
-
-  // 根据当前邀请用户数动态计算里程碑解锁状态
-  const milestones = [
-    {
-      count: 1,
-      reward: `5% ${t("inviteFriends.coupon")}`,
-      unlocked: invitedCount >= 1,
-    },
-    {
-      count: 3,
-      reward: `5% ${t("inviteFriends.coupon")}`,
-      unlocked: invitedCount >= 3,
-    },
-    {
-      count: 5,
-      reward: `5% ${t("inviteFriends.coupon")}`,
-      unlocked: invitedCount >= 5,
-    },
-    {
-      count: 10,
-      reward: `5% ${t("inviteFriends.coupon")}`,
-      unlocked: invitedCount >= 10,
     },
   ];
 
@@ -92,17 +75,23 @@ const Invite: React.FC = () => {
 
           {/* 邀请码输入框 */}
           <div className="invite-code-section">
-            <div className="invite-code-wrapper">
-              <Input
-                value={inviteCode}
-                readOnly
-                size="large"
-                className="invite-code-input"
-              />
-              <button className="copy-button" onClick={handleCopy}>
-                {t("inviteFriends.copy")}
-              </button>
-            </div>
+            {isAuthenticated ? (
+              <div className="invite-code-wrapper">
+                <Input
+                  value={inviteActivityData?.inviteCode}
+                  readOnly
+                  size="large"
+                  className="invite-code-input"
+                />
+                <button className="copy-button" onClick={handleCopy}>
+                  {t("inviteFriends.copy")}
+                </button>
+              </div>
+            ) : (
+              <PrimaryButton fontSize="16px" onClick={handleCopy}>
+                {t("inviteFriends.logIn")}
+              </PrimaryButton>
+            )}
           </div>
 
           {/* 三个步骤 */}
@@ -144,20 +133,18 @@ const Invite: React.FC = () => {
             />
           </div>
           {/* 邀请人数 */}
-          <div className="current-count">{invitedCount}</div>
+          <div className="current-count">
+            {isAuthenticated ? inviteActivityData?.totalInviteCount : 0}
+          </div>
           <h2 className="milestones-title">
             {t("inviteFriends.friendsInvited")}
           </h2>
 
           {/* 用户头像 - 只显示已邀请的 */}
           <div className="invited-users">
-            {userAvatars.slice(0, invitedCount).map((avatar, i) => (
-              <div
-                key={i}
-                className="user-avatar"
-                style={{ backgroundColor: avatar.color }}
-              >
-                {avatar.emoji}
+            {inviteActivityData?.invitedUsers.map((user) => (
+              <div key={user.userId} className="user-avatar">
+                <img src={user.avatar} alt="" />
               </div>
             ))}
           </div>
@@ -168,6 +155,7 @@ const Invite: React.FC = () => {
               className="invite-button"
               fontSize="16px"
               onClick={handleCopy}
+              disabled={!isAuthenticated}
             >
               {t("inviteFriends.invitation")}
             </PrimaryButton>
@@ -175,46 +163,53 @@ const Invite: React.FC = () => {
 
           {/* 里程碑奖励 */}
           <div className="reward-milestones">
-            {milestones.map((milestone, index) => {
+            {inviteActivityData?.rewardProgress.map((milestone, index) => {
               // 计算连接线的进度百分比
               let progress = 0;
-              if (index < milestones.length - 1) {
-                const currentMilestone = milestone.count;
-                const nextMilestone = milestones[index + 1].count;
+              if (index < inviteActivityData?.rewardProgress.length - 1) {
+                const currentMilestone = milestone.targetCount;
+                const nextMilestone =
+                  inviteActivityData?.rewardProgress[index + 1].targetCount;
 
-                if (invitedCount >= nextMilestone) {
+                if (inviteActivityData?.totalInviteCount >= nextMilestone) {
                   // 已完成，100%
                   progress = 100;
-                } else if (invitedCount <= currentMilestone) {
+                } else if (
+                  inviteActivityData?.totalInviteCount <= currentMilestone
+                ) {
                   // 未开始，0%
                   progress = 0;
                 } else {
                   // 进行中，计算百分比
                   progress =
-                    ((invitedCount - currentMilestone) /
+                    ((inviteActivityData?.totalInviteCount - currentMilestone) /
                       (nextMilestone - currentMilestone)) *
                     100;
                 }
               }
 
               return (
-                <React.Fragment key={milestone.count}>
+                <React.Fragment key={milestone.targetCount}>
                   <div
-                    className={`milestone-item ${milestone.unlocked ? "unlocked" : "locked"}`}
+                    className={`milestone-item ${milestone.achieved ? "unlocked" : "locked"}`}
                   >
                     <img
                       src={
-                        milestone.unlocked
+                        milestone.achieved
                           ? "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-invite/bright.png"
                           : "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-invite/dark.png"
                       }
-                      alt={`${milestone.count} users`}
+                      alt={`${milestone.targetCount} users`}
                       className="milestone-image"
                     />
-                    <div className="milestone-count">{milestone.count}</div>
-                    <div className="milestone-reward">{milestone.reward}</div>
+                    <div className="milestone-count">
+                      {milestone.targetCount}
+                    </div>
+                    <div className="milestone-reward">
+                      {milestone.rewardDesc}
+                    </div>
                   </div>
-                  {index < milestones.length - 1 && (
+                  {index < inviteActivityData?.rewardProgress.length - 1 && (
                     <div
                       className={`milestone-connector ${progress > 0 ? "active" : ""}`}
                       style={
@@ -228,6 +223,10 @@ const Invite: React.FC = () => {
           </div>
         </div>
       </div>
+      <LoginModal
+        visible={loginModalVisible}
+        onClose={() => setLoginModalVisible(false)}
+      />
     </div>
   );
 };
