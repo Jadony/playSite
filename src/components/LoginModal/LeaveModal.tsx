@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import CommonModal from "../CommonModal";
-import leaveModalBg from "@/assets/background/leaveModalBg.png";
 import PrimaryButton from "../PrimaryButton";
 import React from "react";
 
@@ -27,7 +26,10 @@ const LeaveModal: React.FC<LeaveModalType> = ({ visible, onClose }) => {
       showClose={false}
       content={
         <div className="leave-modal-content">
-          <img src={leaveModalBg} alt="leaveModalBg" />
+          <img
+            src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/leaveModalBg.png"
+            alt="leaveModalBg"
+          />
           <div className="leave-modal-text">
             <p className="px-4">
               {t("loginOrSignUpModal.youreOnlyOneStepAway")}

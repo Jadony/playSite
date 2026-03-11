@@ -122,7 +122,7 @@ const Invite: React.FC = () => {
                 {index < steps.length - 1 && (
                   <div className="step-arrow">
                     <img
-                      src="/src/assets/invite/arrow.png"
+                      src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-invite/arrow.png"
                       alt="arrow"
                       className="arrow-icon"
                     />
@@ -138,7 +138,7 @@ const Invite: React.FC = () => {
           {/* 该位置放 step_bg 图（img 元素，非背景） */}
           <div className="milestones-section-bg">
             <img
-              src="/src/assets/invite/milestones_section_bg.png"
+              src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-invite/milestones_section_bg.png"
               alt=""
               className="milestones-section-bg-img"
             />
@@ -205,8 +205,8 @@ const Invite: React.FC = () => {
                     <img
                       src={
                         milestone.unlocked
-                          ? "/src/assets/invite/bright.png"
-                          : "/src/assets/invite/dark.png"
+                          ? "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-invite/bright.png"
+                          : "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-invite/dark.png"
                       }
                       alt={`${milestone.count} users`}
                       className="milestone-image"

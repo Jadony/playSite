@@ -122,7 +122,7 @@ const GameSelector: React.FC = () => {
       <span
         key={index}
         style={{
-          backgroundImage: `${isActive ? "url('/src/assets/background/gameNameBg.png')" : ""}`,
+          backgroundImage: `${isActive ? "url('https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/gameNameBg.png')" : ""}`,
           backgroundClip: "text",
           WebkitBackgroundClip: "text",
           color: `${isActive ? "transparent" : "#fff"}`,

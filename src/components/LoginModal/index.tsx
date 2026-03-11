@@ -7,10 +7,6 @@ import {
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { useGoogleLogin } from "@react-oauth/google";
-import emailSearchBehindBg from "@/assets/background/emailSearchBehindBg.png";
-import emailSearchFrontBg from "@/assets/background/emailSearchFrontBg.png";
-import emailUnSearchFrontBg from "@/assets/background/emailUnSearchFrontBg.png";
-import loginFrontBg from "@/assets/background/loginFrontBg.png";
 import EmailCheckGroup from "./EmailCheckGroup";
 import SignEmailGroup from "./SignEmailGroup";
 import SetPWDGroup from "./SetPWDGroup";
@@ -35,24 +31,34 @@ type BgType = {
 
 const bgType: BgType = {
   emailSearch: {
-    frontBg: emailSearchFrontBg,
-    behindBg: emailSearchBehindBg,
+    frontBg:
+      "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/emailSearchFrontBg.png",
+    behindBg:
+      "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/emailSearchBehindBg.png",
   },
   emailUnSearch: {
-    frontBg: emailUnSearchFrontBg,
-    behindBg: emailSearchBehindBg,
+    frontBg:
+      "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/emailUnSearchFrontBg.png",
+    behindBg:
+      "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/emailSearchBehindBg.png",
   },
   setNewPwd: {
-    frontBg: emailUnSearchFrontBg,
-    behindBg: emailSearchBehindBg,
+    frontBg:
+      "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/emailUnSearchFrontBg.png",
+    behindBg:
+      "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/emailSearchBehindBg.png",
   },
   login: {
-    frontBg: loginFrontBg,
-    behindBg: emailSearchBehindBg,
+    frontBg:
+      "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/loginFrontBg.png",
+    behindBg:
+      "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/emailSearchBehindBg.png",
   },
   googleLogin: {
-    frontBg: loginFrontBg,
-    behindBg: emailSearchBehindBg,
+    frontBg:
+      "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/loginFrontBg.png",
+    behindBg:
+      "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/emailSearchBehindBg.png",
   },
 };
 

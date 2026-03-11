@@ -1,0 +1,83 @@
+
+英雄联盟.png
+size: 698,568
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+s_Sketch_03
+  rotate: true
+  xy: 417, 163
+  size: 104, 279
+  orig: 104, 279
+  offset: 0, 0
+  index: -1
+s_Sketch_04
+  rotate: true
+  xy: 2, 2
+  size: 219, 162
+  orig: 221, 162
+  offset: 2, 0
+  index: -1
+s_Sketch_05
+  rotate: false
+  xy: 301, 87
+  size: 114, 134
+  orig: 132, 134
+  offset: 0, 0
+  index: -1
+s_Sketch_06
+  rotate: true
+  xy: 301, 2
+  size: 83, 76
+  orig: 84, 78
+  offset: 0, 2
+  index: -1
+s_Sketch_07
+  rotate: true
+  xy: 470, 5
+  size: 84, 94
+  orig: 84, 95
+  offset: 0, 0
+  index: -1
+s_Sketch_08
+  rotate: true
+  xy: 417, 91
+  size: 70, 132
+  orig: 82, 136
+  offset: 12, 0
+  index: -1
+s_Sketch_09
+  rotate: false
+  xy: 2, 223
+  size: 333, 343
+  orig: 363, 655
+  offset: 30, 97
+  index: -1
+s_Sketch_10
+  rotate: true
+  xy: 379, 4
+  size: 81, 89
+  orig: 81, 90
+  offset: 0, 0
+  index: -1
+s_Sketch_11
+  rotate: true
+  xy: 337, 269
+  size: 297, 342
+  orig: 297, 342
+  offset: 0, 0
+  index: -1
+s_Sketch_14
+  rotate: false
+  xy: 166, 42
+  size: 133, 179
+  orig: 133, 180
+  offset: 0, 1
+  index: -1
+s_Sketch_15
+  rotate: false
+  xy: 566, 39
+  size: 129, 122
+  orig: 130, 126
+  offset: 1, 4
+  index: -1

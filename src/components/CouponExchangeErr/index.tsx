@@ -1,5 +1,4 @@
 import CommonModal from "../CommonModal";
-import exchangeErr from "../../assets/userPanel/exchangeErr.png";
 
 type CouponExchangeErrProps = {
   visible: boolean;
@@ -18,7 +17,11 @@ const CouponExchangeErr: React.FC<CouponExchangeErrProps> = ({
       content={
         <div>
           <div className="w-[155px] mx-auto" style={{ marginBottom: "8px" }}>
-            <img width={155} src={exchangeErr} alt="" />
+            <img
+              width={155}
+              src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/exchangeErr.png"
+              alt=""
+            />
           </div>
           <div className="text-center text-sm text-white">
             兑换码无效，请检查后重试

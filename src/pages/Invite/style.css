@@ -1,7 +1,7 @@
 .invite-page {
   min-height: 100vh;
   background: linear-gradient(180deg, #1a1040 0%, #0d0d1a 50%, #0a0a0f 100%);
-  background-image: url("../../assets/invite/bg.png");
+  background-image: url("https://play-test.oss-cn-hangzhou.aliyuncs.com/front-invite/inviteBg.png");
   background-size: 100%;
   background-position: top;
   background-repeat: no-repeat;
@@ -389,8 +389,8 @@
   box-sizing: border-box;
   position: relative;
   background-image:
-    url("../../assets/background/invitationBgLeft.png"),
-    url("../../assets/background/invitationBgRight.png");
+    url("https://play-test.oss-cn-hangzhou.aliyuncs.com/front-invite/invitationBgLeft.png"),
+    url("https://play-test.oss-cn-hangzhou.aliyuncs.com/front-invite/invitationBgRight.png");
   background-size: 460px 530px;
   background-repeat: no-repeat;
   background-position:

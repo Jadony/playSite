@@ -1,100 +1,100 @@
 .card-wrap {
-    cursor: pointer;
-    clip-path: inset(-200px -200px 2px -200px);
+  cursor: pointer;
+  clip-path: inset(-200px -200px 2px -200px);
 }
 .active-card-text {
-    left: -2rem
+  left: -2rem;
 }
 .has-star::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -35%;
-    width: 80px;
-    height: 80px;
-    background-image: url("@assets/background/gameNameStar.png");
-    background-size: 80px 80px;
-    background-repeat: no-repeat;
-    background-position: left;
-    z-index: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -35%;
+  width: 80px;
+  height: 80px;
+  background-image: url("https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/gameNameStar.png");
+  background-size: 80px 80px;
+  background-repeat: no-repeat;
+  background-position: left;
+  z-index: 0;
 }
 .card-wrap::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: var(--bgBehindImage);
-    background-size: 336px 443px;
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--bgBehindImage);
+  background-size: 336px 443px;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 0;
 }
-.card-wrap::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: var(--bgFrontImage);
-    background-size: 336px 122px;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    z-index: 9;
+.card-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--bgFrontImage);
+  background-size: 336px 122px;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: 9;
 }
 
 .card-juequling-wrap::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("@assets/background/juequlingBehindBg.png");
-    background-size: 336px 443px;
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("@assets/background/juequlingBehindBg.png");
+  background-size: 336px 443px;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 0;
 }
-.card-juequling-wrap::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("@assets/background/juequlingFrontBg.png");
-    background-size: 336px 122px;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    z-index: 9;
+.card-juequling-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("@assets/background/juequlingFrontBg.png");
+  background-size: 336px 122px;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: 9;
 }
 
 .card-benghuai-wrap::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("@assets/background/benghuaiBehindBg.png");
-    background-size: 336px 443px;
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("@assets/background/benghuaiBehindBg.png");
+  background-size: 336px 443px;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 0;
 }
-.card-benghuai-wrap::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("@assets/background/benghuaiFrontBg.png");
-    background-size: 336px 122px;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    z-index: 9;
+.card-benghuai-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("@assets/background/benghuaiFrontBg.png");
+  background-size: 336px 122px;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: 9;
 }

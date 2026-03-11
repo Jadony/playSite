@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import expirationBg from "@/assets/userPanel/expirationBg.png";
 import { useTranslation } from "react-i18next";
 import "./style.css";
 
@@ -194,7 +193,7 @@ const Coupon: React.FC<CouponProps> = ({
               className="relative expiration-bg text-[#3a393d]"
               style={
                 {
-                  "--expirationBg": `url(${expirationBg})`,
+                  "--expirationBg": `url(https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/expirationBg.png)`,
                   transform: "rotate(25deg)",
                 } as React.CSSProperties
               }

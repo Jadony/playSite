@@ -1,6 +1,3 @@
-import userAchievementUnderImg from "@/assets/userPanel/achievementUnderImg.png";
-import achievementImg from "@/assets/userPanel/achievement.png";
-import achievementNone from "@assets/userPanel/none.png";
 import CommonModal from "../CommonModal";
 import { useEffect, useState } from "react";
 import { getUserAchievements } from "@/api/user";
@@ -51,13 +48,13 @@ const UserAchievement = () => {
                 >
                   <img
                     width={135}
-                    src={achievementNone}
+                    src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-userCenter/none.png"
                     alt={`none`}
                     className="rounded-lg relative left-0 top-[78px]"
                   />
                   <img
                     className="absolute left-[50%] translate-x-[-50%] bottom-[25px] w-[200px] max-w-[200px]"
-                    src={userAchievementUnderImg}
+                    src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-userCenter/achievementUnderImg.png"
                     alt=""
                   />
                   <div className="min-w-[70px] text-white absolute left-[50%] translate-x-[-50%] bottom-0 text-sm opacity-50">
@@ -80,7 +77,7 @@ const UserAchievement = () => {
                 />
                 <img
                   className="absolute left-[50%] translate-x-[-50%] bottom-[25px] w-[200px] max-w-[200px]"
-                  src={userAchievementUnderImg}
+                  src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-userCenter/achievementUnderImg.png"
                   alt=""
                 />
                 <div className="absolute left-[50%] translate-x-[-50%] bottom-0 text-sm font-semibold">
@@ -95,7 +92,13 @@ const UserAchievement = () => {
           visible={visible}
           width={500}
           onClose={() => setVisible(false)}
-          content={<img width={500} src={achievementImg} alt="" />}
+          content={
+            <img
+              width={500}
+              src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-userCenter/achievement.png"
+              alt=""
+            />
+          }
           footer={null}
         />
       </div>
