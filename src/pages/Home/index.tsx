@@ -16,7 +16,7 @@ const Home: React.FC = () => {
     const time = localStorage.getItem("achievementModalCloseTime") ?? "";
     const nowTime = Date.now();
     if (
-      !time ||
+      (!time && !isAuthenticated) ||
       (!isAuthenticated && nowTime - Number(time) > 24 * 60 * 60 * 1000)
     ) {
       setIsModalOpen(true);
