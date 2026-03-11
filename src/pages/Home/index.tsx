@@ -13,6 +13,8 @@ const Home: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isAuthenticated } = useAuthContext();
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) return;
     const time = localStorage.getItem("achievementModalCloseTime") ?? "";
     const nowTime = Date.now();
     if (
