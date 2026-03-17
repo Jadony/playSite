@@ -7,11 +7,13 @@ import FAQSection from "@components/FAQSection";
 import "./style.css";
 import AchievementModal from "@/components/AchievementModal";
 import { useAuthContext } from "@/store/authStore";
+import LoginModal from "@/components/LoginModal";
 
 const Home: React.FC = () => {
   // Modal 状态管理
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isAuthenticated } = useAuthContext();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) return;
@@ -28,6 +30,7 @@ const Home: React.FC = () => {
   const closeRegisterModal = () => {
     localStorage.setItem("achievementModalCloseTime", Date.now().toString());
     setIsModalOpen(false);
+    setIsLoginModalOpen(true);
   };
 
   return (
@@ -51,6 +54,10 @@ const Home: React.FC = () => {
       {isModalOpen ? (
         <AchievementModal closeRegisterModal={closeRegisterModal} />
       ) : null}
+      <LoginModal
+        visible={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
     </div>
   );
 };

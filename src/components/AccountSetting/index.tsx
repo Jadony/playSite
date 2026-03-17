@@ -9,7 +9,7 @@ import {
   useLanguageDispatchContext,
 } from "@/store/languageStore";
 import PrimaryButton from "../PrimaryButton";
-import { DatePicker, DatePickerProps, message } from "antd";
+import { DatePicker, DatePickerProps, message, Upload } from "antd";
 import { isPasswordValid, isValidEmail } from "@/utils/helpers";
 import {
   bindEmail,
@@ -20,6 +20,7 @@ import {
   updateUserInfo,
 } from "@/api/user";
 import dayjs, { Dayjs } from "dayjs";
+import { UploadChangeParam } from "antd/es/upload";
 
 const AccountSetting = () => {
   const [editProfileModalVisible, setEditProfileModalVisible] = useState(false);
@@ -261,6 +262,15 @@ const AccountSetting = () => {
     }
   };
 
+  const uplodOnChange = (info: UploadChangeParam) => {
+    if (info.file.status === "done") {
+      message.success("success");
+      getUserAllInfo();
+    } else if (info.file.status === "error") {
+      message.error("error");
+    }
+  };
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -273,78 +283,84 @@ const AccountSetting = () => {
       <div className="mb-5">
         <div className="relative flex justify-center items-center">
           <img className="rounded-full" width={120} src={user} alt="" />
-          <svg
-            className="absolute left-[50%] translate-x-[30%] bottom-[-10px] cursor-pointer"
-            xmlns="http://www.w3.org/2000/svg"
-            width="47"
-            height="47"
-            viewBox="0 0 47 47"
-            fill="none"
+          <Upload
+            action="/front/oss/upload"
+            showUploadList={false}
+            onChange={uplodOnChange}
           >
-            <foreignObject
-              x="-47.5909"
-              y="-47.5909"
-              width="141.545"
-              height="141.546"
+            <svg
+              className="absolute left-[50%] translate-x-[30%] bottom-[-10px] cursor-pointer"
+              xmlns="http://www.w3.org/2000/svg"
+              width="47"
+              height="47"
+              viewBox="0 0 47 47"
+              fill="none"
             >
-              <div
-                style={{
-                  backdropFilter: "blur(23.8px)",
-                  clipPath: "url(#bgblur_0_129_592_clip_path)",
-                  height: "100%",
-                  width: "100%",
-                }}
-              ></div>
-            </foreignObject>
-            <g data-figma-bg-blur-radius="47.5909">
-              <rect
-                x="2.72727"
-                y="2.72727"
-                width="40.9091"
-                height="40.9091"
-                rx="20.4545"
-                fill="white"
-                fill-opacity="0.1"
-              />
-              <rect
-                x="2.72727"
-                y="2.72727"
-                width="40.9091"
-                height="40.9091"
-                rx="20.4545"
-                stroke="#18171B"
-                stroke-width="5.45455"
-              />
-              <path
-                d="M29.7244 19.4805C30.1015 19.1034 30.3134 18.592 30.3135 18.0588C30.3136 17.5255 30.1018 17.0141 29.7248 16.6369C29.3477 16.2598 28.8364 16.0479 28.3031 16.0479C27.7698 16.0478 27.2584 16.2596 26.8812 16.6366L17.3617 26.1583C17.1961 26.3234 17.0736 26.5267 17.005 26.7503L16.0628 29.8546C16.0443 29.9162 16.043 29.9818 16.0588 30.0442C16.0746 30.1066 16.107 30.1636 16.1525 30.2091C16.1981 30.2546 16.2551 30.2869 16.3175 30.3026C16.38 30.3183 16.4455 30.3168 16.5072 30.2982L19.6121 29.3567C19.8355 29.2887 20.0388 29.167 20.2041 29.0022L29.7244 19.4805Z"
-                stroke="white"
-                stroke-width="1.63636"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M25.3213 18.187L28.1744 21.0402"
-                stroke="white"
-                stroke-width="1.63636"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </g>
-            <defs>
-              <clipPath
-                id="bgblur_0_129_592_clip_path"
-                transform="translate(47.5909 47.5909)"
+              <foreignObject
+                x="-47.5909"
+                y="-47.5909"
+                width="141.545"
+                height="141.546"
               >
+                <div
+                  style={{
+                    backdropFilter: "blur(23.8px)",
+                    clipPath: "url(#bgblur_0_129_592_clip_path)",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                ></div>
+              </foreignObject>
+              <g data-figma-bg-blur-radius="47.5909">
                 <rect
                   x="2.72727"
                   y="2.72727"
                   width="40.9091"
                   height="40.9091"
                   rx="20.4545"
+                  fill="white"
+                  fill-opacity="0.1"
                 />
-              </clipPath>
-            </defs>
-          </svg>
+                <rect
+                  x="2.72727"
+                  y="2.72727"
+                  width="40.9091"
+                  height="40.9091"
+                  rx="20.4545"
+                  stroke="#18171B"
+                  stroke-width="5.45455"
+                />
+                <path
+                  d="M29.7244 19.4805C30.1015 19.1034 30.3134 18.592 30.3135 18.0588C30.3136 17.5255 30.1018 17.0141 29.7248 16.6369C29.3477 16.2598 28.8364 16.0479 28.3031 16.0479C27.7698 16.0478 27.2584 16.2596 26.8812 16.6366L17.3617 26.1583C17.1961 26.3234 17.0736 26.5267 17.005 26.7503L16.0628 29.8546C16.0443 29.9162 16.043 29.9818 16.0588 30.0442C16.0746 30.1066 16.107 30.1636 16.1525 30.2091C16.1981 30.2546 16.2551 30.2869 16.3175 30.3026C16.38 30.3183 16.4455 30.3168 16.5072 30.2982L19.6121 29.3567C19.8355 29.2887 20.0388 29.167 20.2041 29.0022L29.7244 19.4805Z"
+                  stroke="white"
+                  stroke-width="1.63636"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M25.3213 18.187L28.1744 21.0402"
+                  stroke="white"
+                  stroke-width="1.63636"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath
+                  id="bgblur_0_129_592_clip_path"
+                  transform="translate(47.5909 47.5909)"
+                >
+                  <rect
+                    x="2.72727"
+                    y="2.72727"
+                    width="40.9091"
+                    height="40.9091"
+                    rx="20.4545"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </Upload>
         </div>
       </div>
       <div>

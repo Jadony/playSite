@@ -8,10 +8,10 @@ import { viteMockServe } from "vite-plugin-mock";
 export default defineConfig({
   plugins: [
     react(),
-    viteMockServe({
-      mockPath: "mock",
-      enable: true,
-    }),
+    // viteMockServe({
+    //   mockPath: "mock",
+    //   enable: true,
+    // }),
   ],
   resolve: {
     alias: {
@@ -28,6 +28,13 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    proxy: {
+      "/front": {
+        target: "http://124.220.2.226:8088",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/front/, ""),
+      },
+    },
     open: true,
   },
   build: {
