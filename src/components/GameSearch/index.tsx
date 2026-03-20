@@ -7,6 +7,8 @@ import {
   useAllGamesAndSelectDispatchContext,
 } from "@/store/gameStore";
 import { useTranslation } from "react-i18next";
+import { getPurchasedGames } from "@/api/user";
+import { useAuthContext } from "@/store/authStore";
 
 const GameSearch: React.FC = () => {
   const { t } = useTranslation();
@@ -14,7 +16,13 @@ const GameSearch: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState<Game[]>([]);
-  const { gameList = [], hotGameList = [] } = useAllGamesAndSelectContext();
+  const [purchasedGames, setPurchasedGames] = useState<Game[]>([]);
+  const { isAuthenticated } = useAuthContext();
+  const {
+    gameList = [],
+    hotGameList = [],
+    selectGame,
+  } = useAllGamesAndSelectContext();
   const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
 
   const navigate = useNavigate();
@@ -30,6 +38,16 @@ const GameSearch: React.FC = () => {
 
   const popularGames = searchPopularGames(hotGameList); // Show 3 games for popular section
 
+  const getGamePurchase = async () => {
+    const { data } = await getPurchasedGames({ limit: 3 });
+    setPurchasedGames(data.data);
+  };
+
+  const resolveGame = () => {
+    const gameSet = new Set([...purchasedGames, ...hotGameList]);
+    return Array.from(gameSet).slice(0, 3);
+  };
+
   // Click outside handler
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -40,6 +58,9 @@ const GameSearch: React.FC = () => {
         setShowDropdown(false);
       }
     };
+    if (isAuthenticated) {
+      getGamePurchase();
+    }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -196,7 +217,7 @@ const GameSearch: React.FC = () => {
 
       {/* Pills below search - Keep them but maybe hide when dropdown is huge? Or keep as is. */}
       <div className="flex gap-4 mt-2">
-        {popularGames.map((game) => (
+        {resolveGame().map((game) => (
           <button
             key={game.gameId}
             onClick={() => {
@@ -208,9 +229,15 @@ const GameSearch: React.FC = () => {
               });
             }}
             className="flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-all"
-            style={{ border: "0.5px solid rgba(255, 255, 255, 0.8)" }}
+            style={{
+              border: "0.5px solid rgba(255, 255, 255, 0.8)",
+              backgroundColor:
+                game.gameId === selectGame?.gameId
+                  ? "rgba(255, 255, 255, 0.1)"
+                  : "rgba(255, 255, 255, 0.05)",
+            }}
           >
-            <span>✓</span>
+            {!game.purchased ? <span>🔥</span> : <span>✓</span>}
             {game.gameName}
           </button>
         ))}

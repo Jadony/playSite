@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import Coupon from "../Coupon";
 import { getUserCoupons } from "@/api/user";
+import { useLanguageContext } from "@/store/languageStore";
 
 const Coupons = ({ data }: { data: UserCouponsResponseData[] }) => {
   const [coupons, setCoupons] = useState<UserCouponsResponseData[]>([]);
+  const { selectUnit } = useLanguageContext();
 
   useEffect(() => {
-    getUserCoupons().then((res) => {
+    getUserCoupons({ currency: selectUnit?.currency }).then((res) => {
       setCoupons(res.data.data);
     });
   }, []);

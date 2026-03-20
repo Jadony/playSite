@@ -11,6 +11,8 @@ type CouponModalProps = {
   coupons: UserCouponsResponseData[];
   selectCurCoupon: (coupon: UserCouponsResponseData) => void;
   selectedCoupon: UserCouponsResponseData | null;
+  totalDiscount?: number;
+  unit?: string;
 };
 
 const CouponModal: React.FC<CouponModalProps> = ({
@@ -20,6 +22,8 @@ const CouponModal: React.FC<CouponModalProps> = ({
   coupons,
   selectCurCoupon,
   selectedCoupon,
+  totalDiscount,
+  unit,
 }) => {
   const [exchangeCode, setExchangeCode] = useState("");
   const { t } = useTranslation();
@@ -127,7 +131,7 @@ const CouponModal: React.FC<CouponModalProps> = ({
                 paintOrder: "stroke fill",
               }}
             >
-              $ 123
+              {unit} {totalDiscount}
             </div>
           </div>
           <PrimaryButton className="text-base" onClick={onClose}>

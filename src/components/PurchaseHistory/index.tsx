@@ -9,7 +9,7 @@ import { message } from "antd";
 const PurchaseHistory = () => {
   const [curType, setCurType] = useState("ALL");
   const [visible, setVisible] = useState(false);
-  const [orderList, setOrderList] = useState<OrderListResponseData[]>([]);
+  const [orderData, setOrderData] = useState<OrderListResponseData>();
   const [curOrder, setCurOrder] = useState<OrderDetailResponseData | null>(
     null,
   );
@@ -17,7 +17,7 @@ const PurchaseHistory = () => {
   const getUserOrderList = async () => {
     try {
       const { data } = await getOrderList({ status: curType });
-      setOrderList(data.data);
+      setOrderData(data.data);
     } catch (error) {
       message.error("error");
     }
@@ -59,7 +59,7 @@ const PurchaseHistory = () => {
         })}
       </div>
       <div>
-        {orderList.map((item) => {
+        {orderData?.records.map((item) => {
           return (
             <ProductItem
               onClick={() => {

@@ -2,23 +2,28 @@ import { useState } from "react";
 import UserMenu from "@/components/UserMenu";
 import UserPanel from "@/components/UserPanel";
 import userMenuData from "@/config/userMenuData";
-import { getUserCoupons, redeemInOrder } from "@/api/user";
+import { getUserCoupons, getUserInfo, redeemInOrder } from "@/api/user";
 import "./style.css";
 import CouponExchangeSuccess from "@/components/CouponExchangeSuccess";
 import CouponExchangeErr from "@/components/CouponExchangeErr";
+import { useLanguageContext } from "@/store/languageStore";
+import { message } from "antd";
 
 const UserCenter = () => {
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [failureModalVisible, setFailureModalVisible] = useState(false);
   const [coupon, setCoupon] = useState<UserCouponsResponseData | null>(null);
   const [coupons, setCoupons] = useState<UserCouponsResponseData[]>([]);
+  const [userInfo, setUserInfo] = useState<UserInfoResponseData>();
+  const [gender, setGender] = useState("male");
+  const { selectUnit } = useLanguageContext();
   const exchangeOnClick = async (code: string) => {
     try {
       const { data } = await redeemInOrder({ redeemCode: code });
       setSuccessModalVisible(true);
       if (data) {
         setCoupon(data.data);
-        getUserCoupons().then((res) => {
+        getUserCoupons({ currency: selectUnit?.currency }).then((res) => {
           setCoupons(res.data.data);
         });
       } else {
@@ -29,7 +34,21 @@ const UserCenter = () => {
       // setFailureModalVisible(true);
     }
   };
-  const userMenu = userMenuData(exchangeOnClick, { coupons });
+  const getUserAllInfo = async () => {
+    try {
+      const { data } = await getUserInfo();
+      setUserInfo(data.data);
+      setGender(data.data.gender);
+    } catch (error) {
+      message.error("error");
+    }
+  };
+  const userMenu = userMenuData(
+    getUserAllInfo,
+    { userInfo, gender: gender || "" },
+    exchangeOnClick,
+    { coupons },
+  );
   const [activeMenu, setActiveMenu] = useState("myAchievements");
 
   const changeMenu = (id: string) => {
@@ -41,8 +60,8 @@ const UserCenter = () => {
         <UserMenu
           activeMenu={activeMenu}
           useMenu={userMenu}
-          avatars=""
-          userName="Saul"
+          avatars={userInfo?.avatar || ""}
+          userName={userInfo?.nickname || ""}
           // integral="123123"
           changeMenu={changeMenu}
         />

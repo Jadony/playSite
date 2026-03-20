@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-scroll";
 import {
@@ -15,6 +15,7 @@ const GamesDropdown: React.FC<GamesDropdownProps> = ({ onClose }) => {
   const { gameList = [], hotGameList = [] } = useAllGamesAndSelectContext();
   const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
 
   return (
@@ -39,6 +40,9 @@ const GamesDropdown: React.FC<GamesDropdownProps> = ({ onClose }) => {
                       selectGame: game,
                     },
                   });
+                  if (location.pathname !== "/") {
+                    navigate(`/games/${game.gameId}`);
+                  }
                   onClose();
                 }}
               >
@@ -117,6 +121,9 @@ const GamesDropdown: React.FC<GamesDropdownProps> = ({ onClose }) => {
                       selectGame: game,
                     },
                   });
+                  if (location.pathname !== "/") {
+                    navigate(`/games/${game.gameId}`);
+                  }
                   onClose();
                 }} // Or navigate to specific game
               >

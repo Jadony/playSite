@@ -15,7 +15,7 @@ const PRODUCT_ITEM_STATUS_COLOR: Record<OrderStatus, string> = {
 };
 
 export interface ProductItemProps {
-  product: OrderListResponseData;
+  product: OrderListResponseData["records"][0];
   status: OrderStatus;
   /** 是否展示顶部边框，默认 true */
   showBorderTop?: boolean;

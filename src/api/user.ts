@@ -19,6 +19,7 @@ const api = {
   redeemInOrder: "/front/coupons/redeem-in-order",
   countryAll: "/front/country/all",
   inviteActivity: "/front/invite/activity",
+  purchasedGames: "/front/games/purchased",
 };
 
 export const existEmail = (params: ExistEmailRequestParams) => {
@@ -114,9 +115,9 @@ export const bindEmail = (params: BindEmailRequestParams) => {
 };
 
 export const getOrderList = (params: OrderListRequestParams) => {
-  return request<OrderListResponseData[]>({
+  return request<OrderListResponseData>({
     url: api.orderList,
-    method: "get",
+    method: "post",
     params,
   });
 };
@@ -129,10 +130,11 @@ export const getOrderDetail = (orderId: number) => {
   });
 };
 
-export const getUserCoupons = () => {
+export const getUserCoupons = (params: { currency?: string }) => {
   return request<UserCouponsResponseData[]>({
     url: api.userCoupons,
     method: "get",
+    params,
   });
 };
 
@@ -158,5 +160,13 @@ export const getInviteActivity = () => {
   return request<GetInviteActivity>({
     url: api.inviteActivity,
     method: "get",
+  });
+};
+
+export const getPurchasedGames = (params: { limit: number } = { limit: 3 }) => {
+  return request<Game[]>({
+    url: api.purchasedGames,
+    method: "get",
+    params,
   });
 };

@@ -1,4 +1,3 @@
-import { getCountryAll } from "@/api/user";
 import { createContext, useContext, useReducer } from "react";
 
 type LanguageContextType = {
@@ -8,6 +7,7 @@ type LanguageContextType = {
   };
   selectLanguage?: string;
   unitAndLanguageList?: CountryConfigs[];
+  countryConfigs?: CountryConfigs[];
 };
 const languageContext = createContext<LanguageContextType | null>(null);
 const languageDispatchContext = createContext<React.Dispatch<{
@@ -47,45 +47,36 @@ const languageReducer = (
         ...state,
         selectLanguage: action.payload.selectLanguage,
       };
+    case "setSelectUnit":
+      return {
+        ...state,
+        selectUnit: action.payload.selectUnit,
+      };
+    case "setSelectUnitAndLanguage":
+      return {
+        ...state,
+        unitAndLanguageList: action.payload.countryConfigs,
+      };
+    case "allData":
+      return {
+        ...state,
+        unitAndLanguageList: action.payload.countryConfigs,
+        selectUnit: action.payload.selectUnit,
+        selectLanguage: action.payload.selectLanguage,
+      };
     default:
       return state;
   }
 };
 
-const getCountryAllData = async () => {
-  const { data } = await getCountryAll();
-  const { data: countryData } = data;
-  const { countryConfigs, currentCurrency, currentLanguage, currentUnit } =
-    countryData;
-  return {
-    countryConfigs,
-    currentCurrency,
-    currentLanguage,
-    currentUnit,
-  };
-};
-
 const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
-  const countryAllData = getCountryAllData();
-
-  let countryConfigs: CountryConfigs[] = [];
-  let currentCurrency = "";
-  let currentLanguage = "";
-  let currentUnit = "";
-  countryAllData.then((res) => {
-    countryConfigs = res.countryConfigs;
-    currentCurrency = res.currentCurrency;
-    currentLanguage = res.currentLanguage;
-    currentUnit = res.currentUnit;
-  });
-
   const [state, dispatch] = useReducer(languageReducer, {
     selectUnit: {
-      currency: currentCurrency,
-      unit: currentUnit,
+      currency: "",
+      unit: "",
     },
-    selectLanguage: currentLanguage,
-    unitAndLanguageList: countryConfigs,
+    selectLanguage: "",
+    unitAndLanguageList: [],
   });
   return (
     <languageContext.Provider value={state}>

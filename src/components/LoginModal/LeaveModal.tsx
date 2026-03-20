@@ -22,7 +22,8 @@ const LeaveModal: React.FC<LeaveModalType> = ({ visible, onClose }) => {
     <CommonModal
       className="leave-modal"
       visible={visible}
-      onClose={() => onClose(true)}
+      zIndex="9999"
+      onClose={() => onClose(false)}
       showClose={false}
       content={
         <div className="leave-modal-content">

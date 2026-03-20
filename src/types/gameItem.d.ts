@@ -8,7 +8,7 @@ type GameItem = {
   bubblePrice: number;
   discount: number;
   currency: string;
-  zoneInfo: string[];
+  zoneInfos: string[];
   hasSpecialOffer: boolean;
   unit: string;
 };

@@ -39,7 +39,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: `url(${user})`,
+          backgroundImage: `url('${avatars}')`,
           backgroundSize: "100%",
           backgroundPosition: "top",
           backgroundRepeat: "no-repeat",

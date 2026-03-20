@@ -61,11 +61,15 @@ const GameSelector: React.FC = () => {
   }, [gameList]);
 
   const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? gameList.length - 1 : prev - 1));
+    const newIndex = activeIndex === 0 ? gameList.length - 1 : activeIndex - 1;
+    setActiveIndex(newIndex);
+    changeSelectGame(cardShowGameList[newIndex]);
   };
 
   const handleNext = () => {
-    setActiveIndex((prev) => (prev === gameList.length - 1 ? 0 : prev + 1));
+    const newIndex = activeIndex === gameList.length - 1 ? 0 : activeIndex + 1;
+    setActiveIndex(newIndex);
+    changeSelectGame(cardShowGameList[newIndex]);
   };
 
   // Calculate 3D styles
@@ -110,44 +114,45 @@ const GameSelector: React.FC = () => {
   };
 
   const gameNameResolve = (name: string, isActive: boolean) => {
-    const nameList = name.split(" ");
-    if (nameList.length === 1) {
-      return (
-        <>
-          <span className={`${isActive ? "has-star" : ""}`}>{nameList[0]}</span>
-        </>
-      );
-    }
-    return nameList.map((item, index) => (
-      <span
-        key={index}
-        style={{
-          backgroundImage: `${isActive ? "url('https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/gameNameBg.png')" : ""}`,
-          backgroundClip: "text",
-          WebkitBackgroundClip: "text",
-          color: `${isActive ? "transparent" : "#fff"}`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-        className={`${index === 1 && isActive ? "has-star relative" : ""}`}
-      >
-        {index < nameList.length - 1 ? item + " " : item}
-      </span>
-    ));
+    // const nameList = name.split(" ");
+    // if (nameList.length === 1) {
+    return (
+      <>
+        <span className={`${isActive ? "has-star" : ""}`}>{name}</span>
+      </>
+    );
+    // }
+    // return nameList.map((item, index) => (
+    //   <span
+    //     key={index}
+    //     style={{
+    //       backgroundImage: `${isActive ? "url('https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/gameNameBg.png')" : ""}`,
+    //       backgroundClip: "text",
+    //       WebkitBackgroundClip: "text",
+    //       color: `${isActive ? "transparent" : "#fff"}`,
+    //       backgroundSize: "cover",
+    //       backgroundPosition: "center",
+    //       backgroundRepeat: "no-repeat",
+    //       "--left": "-35%",
+    //     }}
+    //     className={`${index === 1 && isActive ? "has-star relative" : ""}`}
+    //   >
+    //     {index < nameList.length - 1 ? item + " " : item}
+    //   </span>
+    // ));
   };
 
-  const changeSelectGame = (game: Game, index: number) => {
-    setActiveIndex(index);
+  const changeSelectGame = (game: Game, index?: number) => {
+    if (index !== undefined) setActiveIndex(index);
     allGamesAndSelectDispatch({
-      type: "SELECT_GAME",
+      type: "setSelectGame",
       payload: { selectGame: game },
     });
   };
 
   return (
     <section
-      className="w-full px-4 mb-24 relative z-20 overflow-hidden py-20"
+      className="w-full px-4 relative z-20 overflow-hidden pt-20 pb-60"
       id="gameSelector"
     >
       <div className="max-w-7xl mx-auto h-[500px] relative flex items-center justify-center">
@@ -174,15 +179,18 @@ const GameSelector: React.FC = () => {
             return (
               <div
                 key={game.gameId}
-                className="absolute transition-all duration-500 ease-out origin-center"
-                style={{
-                  ...style,
-                  left: "50%",
-                  top: "50%",
-                  // We use margins to center the element itself before transforms
-                  marginLeft: "-144px", // half of w-72
-                  marginTop: "-192px", // half of h-96
-                }}
+                className="spine-player-wrap absolute transition-all duration-500 ease-out origin-center"
+                style={
+                  {
+                    ...style,
+                    left: "50%",
+                    top: "50%",
+                    // We use margins to center the element itself before transforms
+                    marginLeft: "-144px", // half of w-72
+                    marginTop: "-192px", // half of h-96
+                    "--footerImage": `url('${game.spine?.footerImage}')`,
+                  } as React.CSSProperties
+                }
                 onClick={() => changeSelectGame(game, index)}
               >
                 {/* Card Container */}
@@ -190,8 +198,8 @@ const GameSelector: React.FC = () => {
                   className="card-wrap relative w-72 h-96 bg-transparent flex items-center justify-center"
                   style={
                     {
-                      "--bgFrontImage": `url(${game.frontBgImage})`,
-                      "--bgBehindImage": `url(${game.behindBgImage})`,
+                      "--bgFrontImage": `url('${game.spine?.frontBgImage}')`,
+                      "--bgBehindImage": `url('${game.spine?.behindBgImage}')`,
                     } as React.CSSProperties
                   }
                 >

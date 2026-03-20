@@ -21,7 +21,7 @@ const GameCard: React.FC<GameCardProps> = ({ item, unit }) => {
       className="mb-12 mr-10 relative flex flex-wrap flex-col items-center cursor-pointer backdrop-blur transition-transform duration-300 hover:translate-y-[-15px]"
     >
       {/* Discount Badge */}
-      {item.maxDiscount && (
+      {item.maxDiscount !== undefined && (
         <div className="absolute top-2 right-2 z-10">
           <DiscountTag discount={item.maxDiscount} />
         </div>

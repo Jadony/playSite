@@ -5,8 +5,8 @@ type ExistEmailRequestParams = {
 };
 
 type ExistEmailResponseData = {
+  exist: boolean;
   fetchGoogle: boolean;
-  data: boolean;
 };
 
 type RegisterEmailRequestParams = {
@@ -71,12 +71,14 @@ type LoginGoogleResponseData = {
 
 type HotGamesRequestParams = {
   limit: number;
+  currency: string;
 };
 
 type AllGamesRequestParams = {
   pageSize?: number;
   pageNum?: number;
   keyword?: string;
+  currency?: string;
 };
 
 type AllGamesResponseData = {
@@ -108,6 +110,8 @@ type GameDetailResponseData = {
   code: string;
   iconUrl: string;
   maxDiscount: number;
+  frontBgImage: string;
+  behindBgImage: string;
   skuList: GameItem[];
 };
 
@@ -155,16 +159,22 @@ type OrderListRequestParams = {
 };
 
 type OrderListResponseData = {
-  orderId: number;
-  orderNo: string;
-  gameName: string;
-  skuName: string;
-  skuImage: string;
-  quantity: number;
-  orderAmount: number;
-  status: OrderStatus;
-  statusDesc: string;
-  createTime: string;
+  current: number;
+  pages: number;
+  records: {
+    orderId: number;
+    orderNo: string;
+    gameName: string;
+    skuName: string;
+    skuImage: string;
+    quantity: number;
+    orderAmount: number;
+    status: OrderStatus;
+    statusDesc: string;
+    createTime: string;
+  }[];
+  size: number;
+  total: number;
 };
 
 type OrderDetailResponseData = {
@@ -328,4 +338,14 @@ type GetInviteActivity = {
     achieved: boolean;
     claimed: boolean;
   }[];
+};
+
+type RecentOrdersParams = {
+  skuId: number;
+};
+
+type RecentOrdersResponseData = {
+  avatar: string;
+  nickname: string;
+  finishedTime: string;
 };

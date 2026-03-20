@@ -24,8 +24,7 @@ export const allGames = (params?: AllGamesRequestParams) => {
 
 export const gameDetail = (params: GameDetailRequestParams) => {
   return request<GameDetailResponseData>({
-    url: api.gameDetail,
+    url: `${api.gameDetail}/${params.gameId}/${params.currency}`,
     method: "get",
-    params,
   });
 };

@@ -21,9 +21,8 @@ export default {
       noResultsFound: "No results found",
     },
     selectorAndPayment: {
-      user: "User",
       placedAnOrder: "placed an order",
-      minutesAgo: "minutes ago",
+      placedAnOrderForLimitedGloves: "Placed an order for limited gloves",
       commodity: "Commodity",
       rechargeMethod: "Recharge method",
       selfServiceRecharge: "Self-service recharge",

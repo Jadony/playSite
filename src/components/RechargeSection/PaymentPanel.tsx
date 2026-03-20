@@ -4,44 +4,27 @@ import PrimaryButton from "@/components/PrimaryButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import GameSelectDropDown from "./GameSelectDropDown";
 import LoginModal from "@/components/LoginModal";
-import avatar1 from "@/assets/avatars/Ellipse 1.png";
-import avatar2 from "@/assets/avatars/Ellipse 2.png";
-import avatar3 from "@/assets/avatars/Ellipse 36.png";
 import { useAuthContext } from "@/store/authStore";
 import CouponModal from "../CouponModal";
 import { redeemInOrder } from "@/api/user";
 import CouponExchangeSuccess from "../CouponExchangeSuccess";
 import CouponExchangeErr from "../CouponExchangeErr";
 import { message } from "antd";
-import { availableForOrder, calculate } from "@/api/payment";
+import { availableForOrder, calculate, recentOrders } from "@/api/payment";
 import { useLanguageContext } from "@/store/languageStore";
-
-const staticData = [
-  {
-    id: 1,
-    image: avatar1,
-    name: "sa******df",
-    time: "5",
-  },
-  {
-    id: 2,
-    image: avatar2,
-    name: "sa******df",
-    time: "6",
-  },
-  {
-    id: 3,
-    image: avatar3,
-    name: "sa******df",
-    time: "7",
-  },
-];
+import CommonModal from "../CommonModal";
 
 type PaymentPanelProps = {
   selectGameItem: GameItem | null;
+  isShowRecentOrders?: boolean;
+  setRecentOrders?: (data: RecentOrdersResponseData[]) => void;
 };
 
-const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
+const PaymentPanel: React.FC<PaymentPanelProps> = ({
+  selectGameItem,
+  isShowRecentOrders = true,
+  setRecentOrders,
+}) => {
   // const [quantity, setQuantity] = useState(1);
   const [selectedServerType, setSelectedServerType] = useState<{
     type: string;
@@ -52,12 +35,16 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
   const [uid, setUid] = useState("");
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [failureModalVisible, setFailureModalVisible] = useState(false);
+  const [recentOrdersData, setRecentOrdersData] = useState<
+    RecentOrdersResponseData[]
+  >([]);
   const [coupon, setCoupon] = useState<UserCouponsResponseData | null>(null);
   const [coupons, setCoupons] = useState<UserCouponsResponseData[]>([]);
   const [selectedCoupon, setSelectedCoupon] =
     useState<UserCouponsResponseData | null>(null);
   const [calculateData, setCalculateData] =
     useState<CalculateResponseData | null>(null);
+  const [showHelpModal, setShowHelpModal] = useState(false);
   const { isAuthenticated } = useAuthContext();
   const { selectUnit } = useLanguageContext();
   const { t } = useTranslation();
@@ -105,6 +92,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
   const getCalculateData = async (
     selectedCoupon?: UserCouponsResponseData | null,
   ) => {
+    if (!isAuthenticated) return;
     try {
       const { data } = await calculate({
         skuId: selectGameItem?.id || 0,
@@ -120,9 +108,23 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
     }
   };
 
+  const getRecentOrders = async () => {
+    try {
+      const { data } = await recentOrders({
+        skuId: selectGameItem?.id || 0,
+      });
+      setRecentOrdersData(data.data);
+      setRecentOrders?.(data.data);
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
   useEffect(() => {
+    if (!selectGameItem) return;
     getCalculateData();
     setSelectedServerType(null);
+    getRecentOrders();
   }, [selectGameItem]);
 
   return (
@@ -134,50 +136,52 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
       }}
     >
       {/* User Info / Ticker */}
-      <div
-        className="gap-3 rounded-lg pb-3 relative"
-        style={{
-          borderBottom: "1px solid #282836",
-          borderRadius: "0",
-        }}
-      >
-        {staticData.map((item, index) => {
-          if (index > 3) return;
-          return (
+      {isShowRecentOrders &&
+        recentOrdersData &&
+        recentOrdersData.length > 0 && (
+          <div
+            className="gap-3 rounded-lg pb-3 mb-3 relative"
+            style={{
+              borderBottom: "1px solid #282836",
+              borderRadius: "0",
+            }}
+          >
+            {recentOrdersData.map((item, index) => {
+              if (index > 3) return;
+              return (
+                <div
+                  className="absolute"
+                  key={item.nickname}
+                  style={{
+                    left: `${index * 15}px`,
+                  }}
+                >
+                  <div className="w-8 h-8 rounded-full bg-white/10">
+                    <div className="text-xs">
+                      <img src={item.avatar} alt={item.nickname} />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
             <div
-              className="absolute"
-              key={item.id}
+              className="text-white relative left-[50px]"
               style={{
-                left: `${index * 15}px`,
+                left: 72,
               }}
             >
-              <div className="w-8 h-8 rounded-full bg-white/10">
-                <div className="text-xs">
-                  <img src={item.image} alt={item.name} />
-                </div>
-              </div>
+              <p className="text-sm">{recentOrdersData[0]?.nickname}</p>
+              <p className="text-xs">
+                {t("home.selectorAndPayment.placedAnOrder")}{" "}
+                {recentOrdersData[0]?.finishedTime}
+              </p>
             </div>
-          );
-        })}
-        <div
-          className="text-white relative left-[50px]"
-          style={{
-            left: staticData.length * 24,
-          }}
-        >
-          <p className="text-sm">
-            {t("home.selectorAndPayment.user")} {staticData[0].name}
-          </p>
-          <p className="text-xs">
-            {t("home.selectorAndPayment.placedAnOrder")} {staticData[0].time}{" "}
-            {t("home.selectorAndPayment.minutesAgo")}
-          </p>
-        </div>
-      </div>
+          </div>
+        )}
       <div>
         {/* Community Select */}
         <div
-          className="mt-3 pb-3"
+          className="pb-3"
           style={{
             borderBottom: "1px solid #282836",
           }}
@@ -223,7 +227,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
             placeholder={t("home.selectorAndPayment.plaseSelectServer")}
             label={t("home.selectorAndPayment.areaService")}
             options={
-              selectGameItem?.zoneInfo.map((item) => {
+              selectGameItem?.zoneInfos.map((item) => {
                 return {
                   type: item,
                   name: item,
@@ -242,8 +246,46 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
             borderBottom: "1px solid #282836",
           }}
         >
-          <label className="text-sm text-white mb-2 block font-medium ml-1">
+          <label className="text-sm text-white mb-2 block font-medium ml-1 flex items-center">
             {t("home.selectorAndPayment.uid")}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              className="ml-2 cursor-pointer"
+              onClick={() => setShowHelpModal(true)}
+            >
+              <g opacity="0.5" clip-path="url(#clip0_92_852)">
+                <path
+                  d="M7 9.3335H7.00583"
+                  stroke="white"
+                  stroke-width="0.875"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M7 4.6665V6.99984"
+                  stroke="white"
+                  stroke-width="0.875"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M8.93202 1.1665C9.24141 1.16657 9.53811 1.28953 9.75685 1.50834L12.4915 4.243C12.7103 4.46175 12.8333 4.75844 12.8334 5.06784V8.93184C12.8333 9.24123 12.7103 9.53793 12.4915 9.75667L9.75685 12.4913C9.53811 12.7101 9.24141 12.8331 8.93202 12.8332H5.06802C4.75863 12.8331 4.46193 12.7101 4.24319 12.4913L1.50852 9.75667C1.28971 9.53793 1.16675 9.24123 1.16669 8.93184V5.06784C1.16675 4.75844 1.28971 4.46175 1.50852 4.243L4.24319 1.50834C4.46193 1.28953 4.75863 1.16657 5.06802 1.1665H8.93202Z"
+                  stroke="white"
+                  stroke-width="0.875"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_92_852">
+                  <rect width="14" height="14" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
           </label>
           <input
             value={uid}
@@ -300,15 +342,26 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
                 color: "transparent",
               }}
             >
-              {selectUnit?.unit} {calculateData?.finalPrice}
+              {selectUnit?.unit}{" "}
+              {isAuthenticated
+                ? calculateData?.finalPrice
+                : selectGameItem?.bubblePrice}
             </span>
-            <span
-              className="text-sm text-gray-500 cursor-pointer"
-              onClick={() => setCouponModalVisible(true)}
-            >
-              {selectUnit?.unit} {calculateData?.couponDiscount}
-              {t("home.selectorAndPayment.savings")} &gt;
-            </span>
+            {isAuthenticated && (
+              <span
+                className="text-sm text-gray-500 cursor-pointer"
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    setLoginModalVisible(true);
+                    return;
+                  }
+                  setCouponModalVisible(true);
+                }}
+              >
+                {selectUnit?.unit} {calculateData?.totalDiscount}
+                {t("home.selectorAndPayment.savings")} &gt;
+              </span>
+            )}
           </div>
           <PrimaryButton
             variant="primary"
@@ -333,6 +386,8 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
         exchangeOnClick={exchangeOnClick}
         coupons={coupons}
         selectCurCoupon={selectCurCoupon}
+        unit={selectUnit?.unit}
+        totalDiscount={calculateData?.totalDiscount}
       />
       <CouponExchangeSuccess
         visible={successModalVisible}
@@ -342,6 +397,12 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({ selectGameItem }) => {
       <CouponExchangeErr
         visible={failureModalVisible}
         onClose={() => setFailureModalVisible(false)}
+      />
+      <CommonModal
+        content="如何获取游戏UID如何获取游戏UID如何获取游戏UID如何获取游戏UID"
+        title="如何获取游戏UID"
+        visible={showHelpModal}
+        onClose={() => setShowHelpModal(false)}
       />
     </div>
   );

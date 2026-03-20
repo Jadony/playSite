@@ -85,7 +85,11 @@ const ProductGrid: React.FC<ProductGridProps> = ({
               <img
                 src={item.skuImg}
                 alt="Product"
-                className={`w-full h-full object-contain drop-shadow-lg rounded-2xl ${selectGameItem?.id === item.id ? "border-2 border-white" : ""}`}
+                className={`w-full h-full object-contain drop-shadow-lg hover:border-2 hover:border-white bg-[#18181c] border-[#484448] border-[1px] rounded-2xl`}
+                style={{
+                  border:
+                    selectGameItem?.id === item.id ? "2px solid white" : "",
+                }}
               />
             </div>
             <div className="w-full">

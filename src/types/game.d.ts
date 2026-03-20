@@ -3,6 +3,9 @@ type Game = {
     json: string;
     atlas: string;
     png: string;
+    frontBgImage?: string;
+    behindBgImage?: string;
+    footerImage?: string;
   };
   gameId: number;
   gameName: string;
@@ -11,6 +14,4 @@ type Game = {
   maxDiscount?: number;
   purchased?: boolean;
   orderCount?: number;
-  frontBgImage?: string;
-  behindBgImage?: string;
 };

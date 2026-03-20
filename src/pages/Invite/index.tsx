@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Input } from "antd";
+import { Input, message } from "antd";
 import { useTranslation } from "react-i18next";
 import PrimaryButton from "@components/PrimaryButton";
 import "./style.css";
@@ -26,7 +26,7 @@ const Invite: React.FC = () => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(inviteActivityData?.inviteCode || "");
-    alert(t("inviteFriends.copySuccess"));
+    message.success(t("inviteFriends.copySuccess"));
   };
 
   const steps = [
@@ -88,7 +88,10 @@ const Invite: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <PrimaryButton fontSize="16px" onClick={handleCopy}>
+              <PrimaryButton
+                fontSize="16px"
+                onClick={() => setLoginModalVisible(true)}
+              >
                 {t("inviteFriends.logIn")}
               </PrimaryButton>
             )}

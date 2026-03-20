@@ -35,7 +35,7 @@ function App() {
   };
   return (
     <AuthProvider>
-      <GoogleOAuthProvider clientId="103542172806-v9fh6gl64d995kv8hsilnj5llq8eiidu.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="1006552427972-d6sah06kgcscm233lp3oqfvo1kt9b13r.apps.googleusercontent.com">
         <I18nextProvider i18n={i18n}>
           <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
             <Layout

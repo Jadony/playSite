@@ -45,7 +45,9 @@ const Home: React.FC = () => {
       <GameSelector />
 
       {/* 3. Recharge Section (Sidebar + Grid) */}
-      <RechargeSection />
+      <div className="mt-[-120px]">
+        <RechargeSection />
+      </div>
 
       {/* 4. FAQ Area */}
       <section className="container mx-auto px-4 md:px-12 lg:px-24 pt-12">

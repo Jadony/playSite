@@ -64,6 +64,11 @@ export interface CommonModalProps {
    * 主按钮是否加载中
    */
   primaryButtonLoading?: boolean;
+
+  /**
+   * 自定义 z-index
+   */
+  zIndex?: string;
 }
 
 const CommonModal: React.FC<CommonModalProps> = ({
@@ -82,6 +87,7 @@ const CommonModal: React.FC<CommonModalProps> = ({
   onSecondaryClick,
   primaryButtonDisabled = false,
   primaryButtonLoading = false,
+  zIndex,
 }) => {
   if (!visible) return null;
 
@@ -124,7 +130,11 @@ const CommonModal: React.FC<CommonModalProps> = ({
   );
 
   return ReactDOM.createPortal(
-    <div className="common-modal-mask" onClick={handleMaskClick}>
+    <div
+      className="common-modal-mask"
+      style={{ zIndex }}
+      onClick={handleMaskClick}
+    >
       <div
         className={`common-modal ${className}`}
         style={{ width: modalWidth }}

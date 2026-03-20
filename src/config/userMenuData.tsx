@@ -5,6 +5,11 @@ import PurchaseHistory from "@/components/PurchaseHistory";
 import { useState } from "react";
 import Coupons from "@/components/Coupons";
 export default function useMenuData(
+  getUserAllInfo: () => void,
+  userData: {
+    userInfo?: UserInfoResponseData;
+    gender: string;
+  },
   leftElOnClick?: (exchangeCode: string) => void,
   data?: {
     coupons?: UserCouponsResponseData[];
@@ -142,7 +147,9 @@ export default function useMenuData(
       ),
       to: "accountSettings",
       label: t("userCenter.accountSettings"),
-      comp: <AccountSetting />,
+      comp: (
+        <AccountSetting userData={userData} getUserAllInfo={getUserAllInfo} />
+      ),
     },
     {
       id: "purchaseHistory",

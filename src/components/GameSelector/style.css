@@ -5,11 +5,24 @@
 .active-card-text {
   left: -2rem;
 }
+.spine-player-wrap::after {
+  content: "";
+  position: absolute;
+  bottom: -67%;
+  left: -30%;
+  width: 160%;
+  height: 100%;
+  background-image: var(--footerImage);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 999;
+}
 .has-star::after {
   content: "";
   position: absolute;
   top: 0;
-  left: -35%;
+  left: 10%;
   width: 80px;
   height: 80px;
   background-image: url("https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/gameNameStar.png");
@@ -39,7 +52,7 @@
   width: 100%;
   height: 100%;
   background-image: var(--bgFrontImage);
-  background-size: 336px 122px;
+  background-size: 336px 123px;
   background-position: bottom;
   background-repeat: no-repeat;
   z-index: 9;

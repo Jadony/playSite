@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { languages } from "@/i18n";
 import {
   useLanguageContext,
   useLanguageDispatchContext,
@@ -10,10 +9,10 @@ import LoginModal from "@components/LoginModal";
 import GamesDropdown from "./GamesDropdown";
 import "./style.css";
 import { useAuthContext } from "@/store/authStore";
-import userImg from "@/assets/avatars/user.jpg";
 import { allGames, hotGames } from "@/api/game";
 import { message } from "antd";
 import { useAllGamesAndSelectDispatchContext } from "@/store/gameStore";
+import { getCountryAll } from "@/api/user";
 
 const Header: React.FC = () => {
   const location = useLocation();
@@ -35,6 +34,24 @@ const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
 
   const navigate = useNavigate();
+
+  const getCountryAllData = async () => {
+    const { data } = await getCountryAll();
+    const { data: countryData } = data;
+    const { countryConfigs, currentCurrency, currentLanguage, currentUnit } =
+      countryData;
+    languageDispatch({
+      type: "allData",
+      payload: {
+        countryConfigs,
+        selectUnit: {
+          currency: currentCurrency,
+          unit: currentUnit,
+        },
+        selectLanguage: currentLanguage,
+      },
+    });
+  };
 
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
@@ -66,6 +83,7 @@ const Header: React.FC = () => {
     try {
       const { data } = await hotGames({
         limit: 14,
+        currency: selectUnit?.currency || "",
       });
       allGamesAndSelectDispatch({
         type: "setHotGames",
@@ -80,7 +98,9 @@ const Header: React.FC = () => {
 
   const getAllGames = async () => {
     try {
-      const { data } = await allGames();
+      const { data } = await allGames({
+        currency: selectUnit?.currency,
+      });
       allGamesAndSelectDispatch({
         type: "setAllGames",
         payload: {
@@ -99,13 +119,18 @@ const Header: React.FC = () => {
   };
 
   useEffect(() => {
-    getAllGames();
-    getHotGames();
+    getCountryAllData();
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if (!selectUnit?.currency) return;
+    getHotGames();
+    getAllGames();
+  }, [selectUnit?.currency]);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -262,15 +287,15 @@ const Header: React.FC = () => {
             {/* Language Dropdown */}
             {showLang && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-32 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-xl py-2 animate-fade-in z-50 backdrop-blur-md">
-                {languages.map((lang) => (
+                {unitAndLanguageList?.map((item) => (
                   <div
-                    key={lang}
+                    key={item.id}
                     onClick={() => {
-                      changeLanguage(lang);
+                      changeLanguage(item.displayLanguage);
                     }}
-                    className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${selectLanguage === lang ? "text-white font-bold" : "text-gray-400"}`}
+                    className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${selectLanguage === item.displayLanguage ? "text-white font-bold" : "text-gray-400"}`}
                   >
-                    {lang}
+                    {item.displayLanguage}
                   </div>
                 ))}
               </div>
@@ -338,7 +363,7 @@ const Header: React.FC = () => {
         {isAuthenticated ? (
           <div className="flex items-center gap-2">
             <img
-              src={user?.avatar || userImg}
+              src={user?.avatar || ""}
               alt="user"
               className="w-10 h-10 rounded-full border-2 border-white cursor-pointer"
               onClick={() => navigate("/user-center")}

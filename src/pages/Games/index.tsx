@@ -18,9 +18,7 @@ const Games: React.FC = () => {
   const searchGame = async (keyword: string) => {
     try {
       if (keyword.length) {
-        const { data } = await allGames({
-          keyword,
-        });
+        const { data } = await allGames({ keyword });
         setIsSearch(true);
         setSearchList(data.data.records);
       } else {
@@ -29,11 +27,6 @@ const Games: React.FC = () => {
     } catch (error) {
       message.error("error");
     }
-    return {
-      list: [],
-      total: 0,
-      nextId: undefined,
-    };
   };
 
   const { run } = useRequest(searchGame, {
@@ -48,8 +41,6 @@ const Games: React.FC = () => {
         pageSize: 20,
         pageNum: nextId || 1,
       });
-      setGameList((prev) => [...prev, ...data.data.records]);
-
       return {
         list: data.data.records,
         total: data.data.total,
@@ -57,21 +48,18 @@ const Games: React.FC = () => {
       };
     } catch (error) {
       message.error("error");
+      return { list: [], total: 0, nextId: undefined };
     }
-    return {
-      list: [],
-      total: 0,
-      nextId: undefined,
-    };
   };
 
-  const { loading, loadingMore, noMore } = useInfiniteScroll(
-    (d) => fetchGameList(d?.nextId),
+  const { data, loading, loadingMore, noMore } = useInfiniteScroll(
+    async (d) => {
+      const res = await fetchGameList(d?.nextId);
+      return res; // 确保返回 { list, total, nextId }
+    },
     {
       target: document,
-      isNoMore: (d) => {
-        return (d?.list.length || 0) >= (d?.total || 0);
-      },
+      isNoMore: (d) => (d?.list.length || 0) >= (d?.total || 0),
       reloadDeps: [selectUnit?.currency],
     },
   );
@@ -91,7 +79,7 @@ const Games: React.FC = () => {
         {/* Games Grid */}
 
         <div className="flex">
-          <div className="min-w-60 h-[713px] mr-6 rounded-[14px] bg-white/[.05] border border-white/[.2] p-[20px]">
+          <div className="min-w-60 mr-6 rounded-[14px] bg-white/[.05] border border-white/[.2] p-[20px]">
             <div
               onClick={() => {}}
               className="flex items-center gap-2 p-3 bg-white/10 hover:bg-white/20 rounded-xl cursor-pointer transition-colors mb-2"
@@ -180,7 +168,7 @@ const Games: React.FC = () => {
             </div>
           ) : (
             <div className="flex flex-wrap justify-start">
-              {gameList.map((game) => (
+              {data?.list.map((game) => (
                 <GameCard item={game} unit={selectUnit?.unit} />
               ))}
             </div>

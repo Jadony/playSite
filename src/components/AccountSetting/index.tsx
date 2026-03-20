@@ -14,7 +14,6 @@ import { isPasswordValid, isValidEmail } from "@/utils/helpers";
 import {
   bindEmail,
   emailCodeCheck,
-  getUserInfo,
   sendEmailCode,
   setNewPassword,
   updateUserInfo,
@@ -22,15 +21,21 @@ import {
 import dayjs, { Dayjs } from "dayjs";
 import { UploadChangeParam } from "antd/es/upload";
 
-const AccountSetting = () => {
+type AccountSettingProps = {
+  getUserAllInfo: () => void;
+  userData: {
+    userInfo?: UserInfoResponseData;
+    gender: string;
+  };
+};
+
+const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
   const [editProfileModalVisible, setEditProfileModalVisible] = useState(false);
   const [editBirthdayModalVisible, setEditBirthdayModalVisible] =
     useState(false);
   const [birthday, setBirthday] = useState<Dayjs>();
-  const [userInfo, setUserInfo] = useState<UserInfoResponseData>();
   const [name, setName] = useState("");
   const [genderModalVisible, setGenderModalVisible] = useState(false);
-  const [gender, setGender] = useState("male");
   const [emailModalVisible, setEmailModalVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
@@ -43,16 +48,15 @@ const AccountSetting = () => {
   const { t, i18n } = useTranslation();
   const [showLang, setShowLang] = useState(false);
   const [showCurrency, setShowCurrency] = useState(false);
-  const [currentCurrency, setCurrentCurrency] = useState("$ USD");
   const [countDown, setCountDown] = useState(0);
+  const { userInfo, gender } = userData;
 
   const langRef = useRef<HTMLDivElement>(null);
   const currencyRef = useRef<HTMLDivElement>(null);
 
-  const { selectLanguage } = useLanguageContext();
+  const { selectLanguage, unitAndLanguageList, selectUnit } =
+    useLanguageContext();
   const languageDispatch = useLanguageDispatchContext();
-
-  const currencies = ["$ USD", "¥ CNY"];
 
   const genderMap = useMemo(() => {
     return [
@@ -109,16 +113,6 @@ const AccountSetting = () => {
         message.success("success");
         setCountDown(60);
       }
-    } catch (error) {
-      message.error("error");
-    }
-  };
-
-  const getUserAllInfo = async () => {
-    try {
-      const { data } = await getUserInfo();
-      setUserInfo(data.data);
-      setGender(data.data.gender);
     } catch (error) {
       message.error("error");
     }
@@ -454,17 +448,17 @@ const AccountSetting = () => {
                   </div>
                   {showLang && (
                     <div className="absolute top-full right-0 mt-2 w-32 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-xl py-2 z-50 backdrop-blur-md">
-                      {languages.map((lang) => (
+                      {unitAndLanguageList?.map((item) => (
                         <div
-                          key={lang}
-                          onClick={() => changeLanguage(lang)}
+                          key={item.displayLanguage}
+                          onClick={() => changeLanguage(item.displayLanguage)}
                           className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${
-                            selectLanguage === lang
+                            selectLanguage === item.displayLanguage
                               ? "text-white font-bold"
                               : "text-gray-400"
                           }`}
                         >
-                          {lang}
+                          {item.displayLanguage}
                         </div>
                       ))}
                     </div>
@@ -474,7 +468,7 @@ const AccountSetting = () => {
             />
             <InfoBox
               label={t("userCenter.currency")}
-              value={currentCurrency}
+              value={selectUnit?.currency}
               rightEl={
                 <div className="relative" ref={currencyRef}>
                   <div
@@ -504,20 +498,28 @@ const AccountSetting = () => {
                   </div>
                   {showCurrency && (
                     <div className="absolute top-full right-0 mt-2 w-24 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-xl py-2 z-50 backdrop-blur-md">
-                      {currencies.map((curr) => (
+                      {unitAndLanguageList?.map((item) => (
                         <div
-                          key={curr}
+                          key={item.currency}
                           onClick={() => {
-                            setCurrentCurrency(curr);
+                            languageDispatch({
+                              type: "setSelectUnit",
+                              payload: {
+                                selectUnit: {
+                                  unit: item.unit,
+                                  currency: item.currency,
+                                },
+                              },
+                            });
                             setShowCurrency(false);
                           }}
                           className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${
-                            currentCurrency === curr
+                            selectUnit?.currency === item.currency
                               ? "text-white font-bold"
                               : "text-gray-400"
                           }`}
                         >
-                          {curr}
+                          {item.currency}
                         </div>
                       ))}
                     </div>
@@ -561,7 +563,7 @@ const AccountSetting = () => {
         {/* 修改性别 Modal */}
         <CommonModal
           visible={genderModalVisible}
-          onClose={() => updateUserInfoData("gender", gender)}
+          onClose={() => setGenderModalVisible(false)}
           title={t("userCenter.gender")}
           width={460}
           content={
@@ -590,7 +592,7 @@ const AccountSetting = () => {
                     value={option.value}
                     checked={userInfo?.gender === option.value}
                     onChange={(e) => {
-                      setGender(e.target.value);
+                      updateUserInfoData("gender", e.target.value);
                     }}
                     className="gender-radio"
                     style={{ marginRight: "12px", cursor: "pointer" }}
@@ -624,6 +626,7 @@ const AccountSetting = () => {
           primaryButtonText={t("userCenter.confirm")}
           onPrimaryClick={() => {
             updateUserInfoData("birthday", birthday);
+            setEditBirthdayModalVisible(false);
           }}
           primaryButtonDisabled={!birthday}
         />
