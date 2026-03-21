@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import ProductItem from "../ProductItem";
 import OrderDetailContent from "../OrderDetailContent";
 import CommonModal from "../CommonModal";
-import { getOrderDetail, getOrderList } from "@/api/user";
+import {
+  getOrderDetail,
+  getOrderList,
+  orderCancel,
+  orderRefresh,
+} from "@/api/user";
 import { message } from "antd";
 
 const PurchaseHistory = () => {
@@ -13,6 +18,7 @@ const PurchaseHistory = () => {
   const [curOrder, setCurOrder] = useState<OrderDetailResponseData | null>(
     null,
   );
+  const [loading, setLoading] = useState(false);
 
   const getUserOrderList = async () => {
     try {
@@ -30,6 +36,32 @@ const PurchaseHistory = () => {
       setVisible(true);
     } catch (error) {
       message.error("error");
+    }
+  };
+
+  const getOrderRefresh = async (orderId: number) => {
+    setLoading(true);
+    try {
+      const { data } = await orderRefresh(orderId);
+      setCurOrder(data.data);
+    } catch (error) {
+      message.error("error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getOrderCancel = async (orderId: number) => {
+    setLoading(true);
+    try {
+      const { data } = await orderCancel(orderId);
+      if (data.data) {
+        message.success("success");
+      }
+    } catch (error) {
+      message.error("error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -112,9 +144,12 @@ const PurchaseHistory = () => {
         showClose={false}
         content={
           <OrderDetailContent
+            loading={loading}
             status={curOrder?.status}
             product={curOrder}
             orderInfo={curOrder}
+            onCancelOrder={() => getOrderCancel(curOrder?.orderId || 0)}
+            onRefresh={() => getOrderRefresh(curOrder?.orderId || 0)}
             onBack={() => setVisible(false)}
             countdown={curOrder?.remainingPaySeconds}
           />

@@ -8,6 +8,7 @@ import CouponExchangeSuccess from "@/components/CouponExchangeSuccess";
 import CouponExchangeErr from "@/components/CouponExchangeErr";
 import { useLanguageContext } from "@/store/languageStore";
 import { message } from "antd";
+import { useAuthContext } from "@/store/authStore";
 
 const UserCenter = () => {
   const [successModalVisible, setSuccessModalVisible] = useState(false);
@@ -17,6 +18,7 @@ const UserCenter = () => {
   const [userInfo, setUserInfo] = useState<UserInfoResponseData>();
   const [gender, setGender] = useState("male");
   const { selectUnit } = useLanguageContext();
+  const { setUser } = useAuthContext();
   const exchangeOnClick = async (code: string) => {
     try {
       const { data } = await redeemInOrder({ redeemCode: code });
@@ -39,6 +41,11 @@ const UserCenter = () => {
       const { data } = await getUserInfo();
       setUserInfo(data.data);
       setGender(data.data.gender);
+      setUser({
+        ...data.data,
+        token: localStorage.getItem("token") || "",
+      });
+      localStorage.setItem("user", JSON.stringify(data.data));
     } catch (error) {
       message.error("error");
     }

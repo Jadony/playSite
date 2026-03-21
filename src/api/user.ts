@@ -20,6 +20,8 @@ const api = {
   countryAll: "/front/country/all",
   inviteActivity: "/front/invite/activity",
   purchasedGames: "/front/games/purchased",
+  orderRefresh: "/front/orders/refresh",
+  orderCancel: "/front/orders/cancel",
 };
 
 export const existEmail = (params: ExistEmailRequestParams) => {
@@ -124,9 +126,8 @@ export const getOrderList = (params: OrderListRequestParams) => {
 
 export const getOrderDetail = (orderId: number) => {
   return request<OrderDetailResponseData>({
-    url: api.orderDetail,
+    url: api.orderDetail + "/" + orderId,
     method: "get",
-    params: { orderId },
   });
 };
 
@@ -168,5 +169,19 @@ export const getPurchasedGames = (params: { limit: number } = { limit: 3 }) => {
     url: api.purchasedGames,
     method: "get",
     params,
+  });
+};
+
+export const orderRefresh = (orderId: number) => {
+  return request<OrderDetailResponseData>({
+    url: api.orderRefresh + "/" + orderId,
+    method: "get",
+  });
+};
+
+export const orderCancel = (orderId: number) => {
+  return request<boolean>({
+    url: api.orderCancel + "/" + orderId,
+    method: "get",
   });
 };

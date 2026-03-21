@@ -158,7 +158,11 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
                 >
                   <div className="w-8 h-8 rounded-full bg-white/10">
                     <div className="text-xs">
-                      <img src={item.avatar} alt={item.nickname} />
+                      <img
+                        className="rounded-full border-white border-2"
+                        src={item.avatar}
+                        alt={item.nickname}
+                      />
                     </div>
                   </div>
                 </div>

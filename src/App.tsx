@@ -18,7 +18,7 @@ import GameItemDetail from "@pages/GameItemDetail";
 import About from "@pages/About";
 import UserCenter from "@pages/UserCenter";
 import Payment from "@pages/Payment";
-// import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const { Content } = Layout;
 
@@ -55,9 +55,9 @@ function App() {
                       <Route
                         path="/user-center"
                         element={
-                          // <ProtectedRoute>
-                          <UserCenter />
-                          // </ProtectedRoute>
+                          <ProtectedRoute>
+                            <UserCenter />
+                          </ProtectedRoute>
                         }
                       />
                     </Routes>

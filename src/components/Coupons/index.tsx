@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import Coupon from "../Coupon";
 import { getUserCoupons } from "@/api/user";
 import { useLanguageContext } from "@/store/languageStore";
+import { useNavigate } from "react-router-dom";
 
 const Coupons = ({ data }: { data: UserCouponsResponseData[] }) => {
   const [coupons, setCoupons] = useState<UserCouponsResponseData[]>([]);
   const { selectUnit } = useLanguageContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserCoupons({ currency: selectUnit?.currency }).then((res) => {
@@ -31,7 +33,7 @@ const Coupons = ({ data }: { data: UserCouponsResponseData[] }) => {
               remainingSeconds={coupon.remainingSeconds}
               available={coupon.available}
               couponName={coupon.couponName}
-              onUse={() => console.log("使用优惠券")}
+              onUse={() => navigate("/")}
             />
           </div>
         ))}

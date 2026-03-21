@@ -1,9 +1,7 @@
 import { useTranslation } from "react-i18next";
-import user from "@/assets/avatars/user.jpg";
 import InfoBox from "./InfoBox";
 import CommonModal from "../CommonModal";
 import { useState, useRef, useEffect, useMemo } from "react";
-import { languages } from "@/i18n";
 import {
   useLanguageContext,
   useLanguageDispatchContext,
@@ -53,6 +51,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
 
   const langRef = useRef<HTMLDivElement>(null);
   const currencyRef = useRef<HTMLDivElement>(null);
+  const token = localStorage.getItem("token");
 
   const { selectLanguage, unitAndLanguageList, selectUnit } =
     useLanguageContext();
@@ -103,12 +102,12 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
     if (countDown > 0) {
       return;
     }
-    if (!isValidEmail(email)) {
+    if (!isValidEmail(userInfo?.email || "")) {
       message.error("Please enter your email");
       return;
     }
     try {
-      const { data } = await sendEmailCode({ email });
+      const { data } = await sendEmailCode({ email: userInfo?.email || "" });
       if (data.data) {
         message.success("success");
         setCountDown(60);
@@ -230,6 +229,9 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
       case "setPassword":
         updatePassword();
         break;
+      case "avatar":
+        updateNormalInfo({ avatar: param as string });
+        break;
     }
   };
 
@@ -259,7 +261,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
   const uplodOnChange = (info: UploadChangeParam) => {
     if (info.file.status === "done") {
       message.success("success");
-      getUserAllInfo();
+      updateUserInfoData("avatar", info.file.response.data);
     } else if (info.file.status === "error") {
       message.error("error");
     }
@@ -276,10 +278,19 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
     <div className="py-5 pb-0">
       <div className="mb-5">
         <div className="relative flex justify-center items-center">
-          <img className="rounded-full" width={120} src={user} alt="" />
+          <img
+            className="rounded-full"
+            width={120}
+            src={userData.userInfo?.avatar}
+            alt=""
+          />
           <Upload
+            accept=".png,.jpg,.jpeg,.webp"
             action="/front/oss/upload"
             showUploadList={false}
+            headers={{
+              authorization: token || "",
+            }}
             onChange={uplodOnChange}
           >
             <svg
@@ -400,13 +411,43 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
               label={t("userCenter.password")}
               value={
                 <div className="font-semibold text-white/50">
-                  {t("userCenter.notSet")}
+                  {!userInfo?.fetchPassword
+                    ? t("userCenter.notSet")
+                    : "********"}
                 </div>
               }
               rightEl={
-                <div onClick={setNewPasswordClick}>
-                  |&nbsp;&nbsp;{t("userCenter.settings")}
-                </div>
+                userInfo?.fetchPassword ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    onClick={changePasswordClick}
+                  >
+                    <path
+                      d="M16.1564 6.51808C16.5112 6.16336 16.7105 5.68222 16.7106 5.18051C16.7107 4.6788 16.5114 4.19762 16.1567 3.84281C15.802 3.488 15.3208 3.28864 14.8191 3.28857C14.3174 3.28851 13.8362 3.48775 13.4814 3.84247L4.52515 12.8008C4.36934 12.9561 4.25411 13.1474 4.18961 13.3578L3.30311 16.2783C3.28577 16.3363 3.28446 16.398 3.29932 16.4567C3.31418 16.5154 3.34466 16.569 3.38753 16.6118C3.4304 16.6546 3.48405 16.685 3.54279 16.6998C3.60154 16.7146 3.66319 16.7132 3.7212 16.6957L6.64242 15.8099C6.85258 15.746 7.04384 15.6314 7.19942 15.4764L16.1564 6.51808Z"
+                      stroke="white"
+                      stroke-opacity="0.5"
+                      stroke-width="1.25"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M12.0137 5.30176L14.698 7.98609"
+                      stroke="white"
+                      stroke-opacity="0.5"
+                      stroke-width="1.25"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                ) : (
+                  <div onClick={setNewPasswordClick}>
+                    |&nbsp;&nbsp;{t("userCenter.settings")}
+                  </div>
+                )
               }
             />
           </div>
@@ -468,7 +509,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
             />
             <InfoBox
               label={t("userCenter.currency")}
-              value={selectUnit?.currency}
+              value={selectUnit?.unit + " " + selectUnit?.currency}
               rightEl={
                 <div className="relative" ref={currencyRef}>
                   <div
@@ -519,7 +560,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                               : "text-gray-400"
                           }`}
                         >
-                          {item.currency}
+                          {item.unit + " " + item.currency}
                         </div>
                       ))}
                     </div>

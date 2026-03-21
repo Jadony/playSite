@@ -35,6 +35,7 @@ export interface OrderDetailContentProps {
   onRefresh?: () => void;
   onGoProcess?: () => void;
   className?: string;
+  loading: boolean;
 }
 
 const STEPS = ["下单", "支付", "发货", "完成"] as const;
@@ -51,6 +52,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
   onRefresh,
   onGoProcess,
   className = "",
+  loading,
 }) => {
   const config = usePurchaseHistoryStatusConfig()[status || "PENDING"];
   const showCountdown = status === "PENDING" && countdown;
@@ -65,6 +67,8 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
         setCurTime((prev) => prev - 1);
       }, 1000);
       return () => clearInterval(timer);
+    } else {
+      onRefresh?.();
     }
   }, [showCountdown, curTime]);
 
@@ -177,6 +181,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
                 {config.secondaryBtn && (
                   <button
                     className="order-detail-btn secondary"
+                    disabled={loading}
                     onClick={onCancelOrder || (() => console.log("取消订单"))}
                   >
                     {config.secondaryBtn}
@@ -202,6 +207,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
                 {config.primaryBtn && status === "PROCESSING" && (
                   <button
                     className="order-detail-btn secondary"
+                    disabled={loading}
                     onClick={onRefresh || (() => console.log("刷新"))}
                   >
                     {config.primaryBtn}
@@ -230,7 +236,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
         <div className="order-detail-info-grid">
           <div className="order-detail-info-item">
             <span className="key">{t("userCenter.orderId")}：</span>
-            <span className="value">{orderInfo?.orderNo}</span>
+            <span className="value">{orderInfo?.orderId}</span>
           </div>
           <div className="order-detail-info-item">
             <span className="key">{t("userCenter.paymentMethod")}：</span>

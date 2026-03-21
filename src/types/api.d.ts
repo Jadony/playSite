@@ -125,7 +125,7 @@ type UserAchievementsResponseData = {
 };
 
 type UserInfoResponseData = {
-  userId: number;
+  userId: string;
   nickname: string;
   email: string;
   avatar: string;
@@ -134,6 +134,7 @@ type UserInfoResponseData = {
   inviteCode: string;
   channelName: string;
   thirdPartyType: string;
+  fetchPassword: boolean;
 };
 
 type UpdateUserInfoRequestParams = {

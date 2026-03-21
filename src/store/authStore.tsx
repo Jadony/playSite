@@ -5,8 +5,6 @@ import { message } from "antd";
 import { useTranslation } from "react-i18next";
 import { loginEmail, loginGoogle, registerEmail } from "@/api/user";
 
-const AuthContext = createContext<AuthContextType | null>(null);
-
 type AuthContextType = {
   user: User | null;
   loading: boolean;
@@ -20,8 +18,11 @@ type AuthContextType = {
     callback?: () => void,
   ) => void;
   logout: () => void;
+  setUser: (user: User | null) => void;
   isAuthenticated: boolean;
 };
+
+const AuthContext = createContext<AuthContextType | null>(null);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { t } = useTranslation();
@@ -112,6 +113,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     login,
     loginWithGoogle,
     logout,
+    setUser,
     isAuthenticated: !!user, // 便捷的认证状态
   };
 
