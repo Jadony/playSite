@@ -41,6 +41,7 @@ const SignEmailGroup: React.FC<SignEmailGroupProps> = ({
     try {
       const { data } = await sendEmailCode({
         email,
+        scene: "REGISTER",
       });
       if (data.data) {
         message.success("success");
@@ -69,8 +70,6 @@ const SignEmailGroup: React.FC<SignEmailGroupProps> = ({
           });
         }, 1000); // 每秒更新一次
       }
-    } else {
-      handleSendEmailCode();
     }
     return () => clearTimer();
   }, [isSend, time]);

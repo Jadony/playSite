@@ -10,10 +10,13 @@ const Coupons = ({ data }: { data: UserCouponsResponseData[] }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!selectUnit?.currency) {
+      return;
+    }
     getUserCoupons({ currency: selectUnit?.currency }).then((res) => {
       setCoupons(res.data.data);
     });
-  }, []);
+  }, [selectUnit?.currency]);
 
   useEffect(() => {
     setCoupons(data);

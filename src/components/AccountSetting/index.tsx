@@ -98,7 +98,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
     setChangePasswordModalVisible(true);
   };
 
-  const sendEmailCodeClick = async () => {
+  const sendEmailCodeClick = async (type: string) => {
     if (countDown > 0) {
       return;
     }
@@ -107,7 +107,10 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
       return;
     }
     try {
-      const { data } = await sendEmailCode({ email: userInfo?.email || "" });
+      const { data } = await sendEmailCode({
+        email: userInfo?.email || "",
+        scene: type,
+      });
       if (data.data) {
         message.success("success");
         setCountDown(60);
@@ -191,8 +194,8 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
   const checkCode = async () => {
     try {
       const { data } = await emailCodeCheck({
-        email,
-        code: verificationCode,
+        email: userInfo?.email || "",
+        code: changePasswordCode,
         scene: "RESET_PASSWORD",
       });
       if (data.data) {
@@ -803,7 +806,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                     }}
                   />
                   <button
-                    onClick={() => sendEmailCodeClick()}
+                    onClick={() => sendEmailCodeClick("BIND_EMAIL")}
                     style={{
                       position: "absolute",
                       right: "8px",
@@ -1074,7 +1077,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                     }}
                   />
                   <button
-                    onClick={() => sendEmailCodeClick()}
+                    onClick={() => sendEmailCodeClick("RESET_PASSWORD")}
                     style={{
                       position: "absolute",
                       right: "8px",
