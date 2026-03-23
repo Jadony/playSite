@@ -84,7 +84,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   ) => {
     try {
       const { data } = await loginEmail(params);
-      if (data.data.userId) {
+      if (data.data && data.data.userId) {
         setUser(data.data);
         localStorage.setItem("token", data.data.token);
         localStorage.setItem("user", JSON.stringify(data.data));
