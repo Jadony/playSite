@@ -1,6 +1,4 @@
 import React from "react";
-import user from "@/assets/avatars/user.jpg";
-// import userMenuBg from "@/assets/userPanel/userMenuBg.png";
 import "./style.css";
 import { Link } from "react-scroll";
 
@@ -71,7 +69,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
               className="w-[88px] h-[88px] border-4 border-white rounded-full mx-auto mb-2.5"
               width={88}
               height={88}
-              src={avatars || user}
+              src={avatars}
               alt=""
             />
           </div>
