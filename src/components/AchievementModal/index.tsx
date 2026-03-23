@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import PrimaryButton from "../PrimaryButton";
 import "./style.css";
 
@@ -8,6 +9,22 @@ type AchievementModalProps = {
 const AchievementModal: React.FC<AchievementModalProps> = ({
   closeRegisterModal,
 }) => {
+  const scrollbarWidth =
+    window.innerWidth - document.documentElement.clientWidth;
+
+  const disableScroll = () => {
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+  };
+
+  const enableScroll = () => {
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+  };
+  useEffect(() => {
+    disableScroll();
+    return () => enableScroll();
+  }, []);
   return (
     <div className="modal-overlay">
       <div className="achievement-modal">
