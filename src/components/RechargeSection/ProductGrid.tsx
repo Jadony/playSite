@@ -94,7 +94,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
             </div>
             <div className="w-full">
               <div className="text-base font-simibold mb-2">
-                {item.goodsName}
+                {item.skuNames}
               </div>
               <div className="flex justify-between">
                 <div className="text-base">
