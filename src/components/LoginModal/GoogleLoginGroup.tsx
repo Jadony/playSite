@@ -1,17 +1,14 @@
 import { useTranslation } from "react-i18next";
 import Input from "./Input";
-import PrimaryButton from "../PrimaryButton";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import { message } from "antd";
+import { GoogleLogin } from "@react-oauth/google";
 
 interface GoogleLoginGroupProps {
-  loading: boolean;
   email: string;
-  handleLoginWithGoogle: () => void;
+  handleLoginWithGoogle: (credential: string) => void;
 }
 
 const GoogleLoginGroup: React.FC<GoogleLoginGroupProps> = ({
-  loading,
   email,
   handleLoginWithGoogle,
 }) => {
@@ -48,19 +45,21 @@ const GoogleLoginGroup: React.FC<GoogleLoginGroupProps> = ({
           />
         </div>
       </div>
-      <PrimaryButton
-        disabled={loading}
-        onClick={() => handleLoginWithGoogle()}
-        fontSize="14px"
-      >
-        <Spin
-          indicator={<LoadingOutlined spin />}
-          spinning={loading}
+      <div className="w-full flex justify-center">
+        <GoogleLogin
+          width="326px"
+          theme="filled_black"
           size="large"
-        >
-          {t("loginOrSignUpModal.continueWithGoogleAccount")}
-        </Spin>
-      </PrimaryButton>
+          text="continue_with"
+          shape="rectangular"
+          onSuccess={(res) => {
+            if (res.credential) handleLoginWithGoogle(res.credential);
+          }}
+          onError={() => {
+            message.error("Google Login Failed");
+          }}
+        />
+      </div>
     </div>
   );
 };

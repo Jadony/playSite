@@ -50,7 +50,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
   onCancelOrder,
   onPayNow,
   onRefresh,
-  onGoProcess,
+  // onGoProcess,
   className = "",
   loading,
 }) => {
@@ -68,7 +68,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
       }, 1000);
       return () => clearInterval(timer);
     } else {
-      onRefresh?.();
+      // onRefresh?.();
     }
   }, [showCountdown, curTime]);
 
@@ -213,7 +213,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
                     {config.primaryBtn}
                   </button>
                 )}
-                {config.primaryBtn && (
+                {/* {config.primaryBtn && (
                   // && status === "pending"
                   <button
                     className="order-detail-btn secondary"
@@ -221,7 +221,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
                   >
                     {config.primaryBtn}
                   </button>
-                )}
+                )} */}
               </div>
             )}
           </div>
@@ -236,7 +236,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
         <div className="order-detail-info-grid">
           <div className="order-detail-info-item">
             <span className="key">{t("userCenter.orderId")}：</span>
-            <span className="value">{orderInfo?.orderId}</span>
+            <span className="value">{orderInfo?.orderNo}</span>
           </div>
           <div className="order-detail-info-item">
             <span className="key">{t("userCenter.paymentMethod")}：</span>

@@ -351,7 +351,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
                 ? calculateData?.finalPrice
                 : selectGameItem?.bubblePrice}
             </span>
-            {isAuthenticated && (
+            {isAuthenticated && selectGameItem?.id && (
               <span
                 className="text-sm text-gray-500 cursor-pointer"
                 onClick={() => {
@@ -397,6 +397,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
         visible={successModalVisible}
         onClose={() => setSuccessModalVisible(false)}
         coupon={coupon}
+        isShowRightBtn={false}
       />
       <CouponExchangeErr
         visible={failureModalVisible}

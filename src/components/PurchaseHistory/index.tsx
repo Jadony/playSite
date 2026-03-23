@@ -29,7 +29,7 @@ const PurchaseHistory = () => {
     }
   };
 
-  const getUserOrderDetail = async (orderId: number) => {
+  const getUserOrderDetail = async (orderId: string) => {
     try {
       const { data } = await getOrderDetail(orderId);
       setCurOrder(data.data);
@@ -39,7 +39,7 @@ const PurchaseHistory = () => {
     }
   };
 
-  const getOrderRefresh = async (orderId: number) => {
+  const getOrderRefresh = async (orderId: string) => {
     setLoading(true);
     try {
       const { data } = await orderRefresh(orderId);
@@ -51,7 +51,7 @@ const PurchaseHistory = () => {
     }
   };
 
-  const getOrderCancel = async (orderId: number) => {
+  const getOrderCancel = async (orderId: string) => {
     setLoading(true);
     try {
       const { data } = await orderCancel(orderId);
@@ -95,7 +95,7 @@ const PurchaseHistory = () => {
           return (
             <ProductItem
               onClick={() => {
-                getUserOrderDetail(item.orderId);
+                getUserOrderDetail(item.orderNo);
               }}
               showBorderTop={false}
               product={item}
@@ -148,8 +148,8 @@ const PurchaseHistory = () => {
             status={curOrder?.status}
             product={curOrder}
             orderInfo={curOrder}
-            onCancelOrder={() => getOrderCancel(curOrder?.orderId || 0)}
-            onRefresh={() => getOrderRefresh(curOrder?.orderId || 0)}
+            onCancelOrder={() => getOrderCancel(curOrder?.orderNo || "")}
+            onRefresh={() => getOrderRefresh(curOrder?.orderNo || "")}
             onBack={() => setVisible(false)}
             countdown={curOrder?.remainingPaySeconds}
           />

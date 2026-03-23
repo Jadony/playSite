@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { message, Modal } from "antd";
 import {
   CloseOutlined,
-  GoogleOutlined,
   AppleOutlined,
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 import EmailCheckGroup from "./EmailCheckGroup";
 import SignEmailGroup from "./SignEmailGroup";
 import SetPWDGroup from "./SetPWDGroup";
@@ -15,7 +15,7 @@ import GoogleLoginGroup from "./GoogleLoginGroup";
 import LeaveModal from "./LeaveModal";
 import "./style.css";
 import { useAuthContext } from "@/store/authStore";
-import { emailCodeCheck, existEmail, getGoogleUserInfo } from "@/api/user";
+import { emailCodeCheck, existEmail } from "@/api/user";
 
 interface LoginModalProps {
   visible: boolean;
@@ -173,26 +173,30 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
     }
   };
 
-  const handleLoginWithGoogle = useGoogleLogin({
-    onSuccess: async (credentialResponse) => {
-      const { access_token } = credentialResponse;
-      try {
-        const { data } = await getGoogleUserInfo({ accessToken: access_token });
-        await loginWithGoogle({
-          accessToken: access_token,
-          googleId: data.sub,
-          email: data.email,
-          avatar: data.picture,
-          inviteCode: invitationCode,
-        });
-      } catch (error) {
-        message.error("error");
-      }
-    },
-    onError: () => {
+  const handleLoginWithGoogle = async (jwtToken: string) => {
+    try {
+      setLoading(true);
+      const userInfo = jwtDecode<{
+        email: string;
+        sub: string;
+        picture: string;
+      }>(jwtToken);
+      
+      await loginWithGoogle({
+        accessToken: jwtToken,
+        googleId: userInfo.sub,
+        email: userInfo.email,
+        avatar: userInfo.picture,
+        inviteCode: invitationCode,
+      });
+      initState();
+      onClose?.();
+    } catch (error) {
       message.error("error");
-    },
-  });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const leaveModalOnClose = (isContinue: boolean) => {
     setLeaveModalVisible(false);
@@ -317,7 +321,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
             )}
             {currentType === "googleLogin" && (
               <GoogleLoginGroup
-                loading={loading}
                 email={email}
                 handleLoginWithGoogle={handleLoginWithGoogle}
               />
@@ -336,11 +339,18 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
             {/* Social Login Icons */}
             {currentType !== "googleLogin" && (
               <div className="social-login mt-8">
-                <div
-                  className="social-icon google"
-                  onClick={() => handleLoginWithGoogle()}
-                >
-                  <GoogleOutlined />
+                <div className="social-icon google" style={{ padding: 0, border: "none" }}>
+                  <GoogleLogin
+                    type="icon"
+                    shape="circle"
+                    theme="filled_black"
+                    onSuccess={(res) => {
+                      if (res.credential) handleLoginWithGoogle(res.credential);
+                    }}
+                    onError={() => {
+                      message.error("Google Login Failed");
+                    }}
+                  />
                 </div>
                 <div className="social-icon apple">
                   <AppleOutlined />

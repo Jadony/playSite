@@ -73,7 +73,7 @@ export const loginGoogle = (params: LoginGoogleRequestParams) => {
 };
 
 export const getGoogleUserInfo = (params: { accessToken: string }) => {
-  return axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+  return axios.create().get("https://www.googleapis.com/oauth2/v3/userinfo", {
     headers: { Authorization: `Bearer ${params.accessToken}` },
   });
 };
@@ -124,7 +124,7 @@ export const getOrderList = (params: OrderListRequestParams) => {
   });
 };
 
-export const getOrderDetail = (orderId: number) => {
+export const getOrderDetail = (orderId: string) => {
   return request<OrderDetailResponseData>({
     url: api.orderDetail + "/" + orderId,
     method: "get",
@@ -172,14 +172,14 @@ export const getPurchasedGames = (params: { limit: number } = { limit: 3 }) => {
   });
 };
 
-export const orderRefresh = (orderId: number) => {
+export const orderRefresh = (orderId: string) => {
   return request<OrderDetailResponseData>({
     url: api.orderRefresh + "/" + orderId,
     method: "get",
   });
 };
 
-export const orderCancel = (orderId: number) => {
+export const orderCancel = (orderId: string) => {
   return request<boolean>({
     url: api.orderCancel + "/" + orderId,
     method: "get",

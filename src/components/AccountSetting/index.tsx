@@ -72,6 +72,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
     setPassword("");
     setConfirmPassword("");
     setChangePasswordCode("");
+    setCountDown(0);
   };
 
   const editProfile = () => {
@@ -157,12 +158,12 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
       const { data } = await setNewPassword({
         newPassword: password,
         confirmPassword: confirmPassword,
-        code: changePasswordCode,
       });
       if (data.data) {
         message.success("success");
         getUserAllInfo();
         initState();
+        setNewPasswordModalVisible(false);
         setChangePasswordModalVisible(false);
       } else {
         message.error("error");

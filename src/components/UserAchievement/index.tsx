@@ -88,7 +88,7 @@ const UserAchievement = () => {
           })}
         </div>
         <CommonModal
-          className="p-0 rounded-[14px]"
+          className="p-0 rounded-[25px]"
           visible={visible}
           width={500}
           onClose={() => setVisible(false)}

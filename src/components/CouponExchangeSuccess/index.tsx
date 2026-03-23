@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import CommonModal from "../CommonModal";
 import Coupon from "../Coupon";
 
@@ -5,13 +6,16 @@ type CouponExchangeProps = {
   visible: boolean;
   onClose: () => void;
   coupon: UserCouponsResponseData | null;
+  isShowRightBtn?: boolean;
 };
 
 const CouponExchangeSuccess: React.FC<CouponExchangeProps> = ({
   visible,
   onClose,
   coupon,
+  isShowRightBtn = true,
 }) => {
+  const navigate = useNavigate();
   return (
     <CommonModal
       className="coupons-success-modal"
@@ -24,7 +28,8 @@ const CouponExchangeSuccess: React.FC<CouponExchangeProps> = ({
           discount={coupon?.discountValue}
           minOrder={coupon?.minOrderAmount}
           maxSave={coupon?.maxDiscountAmount}
-          onUse={() => console.log("使用优惠券")}
+          onUse={() => navigate("/")}
+          isShowRightBtn={isShowRightBtn}
         />
       }
       width={480}
