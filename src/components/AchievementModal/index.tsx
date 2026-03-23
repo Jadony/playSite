@@ -2,7 +2,7 @@ import PrimaryButton from "../PrimaryButton";
 import "./style.css";
 
 type AchievementModalProps = {
-  closeRegisterModal: () => void;
+  closeRegisterModal: (isClose: boolean) => void;
 };
 
 const AchievementModal: React.FC<AchievementModalProps> = ({
@@ -11,6 +11,12 @@ const AchievementModal: React.FC<AchievementModalProps> = ({
   return (
     <div className="modal-overlay">
       <div className="achievement-modal">
+        <div
+          onClick={() => closeRegisterModal(true)}
+          className="absolute right-[10%] top-[10%] text-[20px] text-white cursor-pointer"
+        >
+          x
+        </div>
         <img
           className="w-[500px]"
           src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/achievementModalImg.png"
@@ -38,7 +44,7 @@ const AchievementModal: React.FC<AchievementModalProps> = ({
             送给内测及首批用户,后续会解锁特殊玩法与技能
           </p>
           <PrimaryButton
-            onClick={closeRegisterModal}
+            onClick={() => closeRegisterModal(false)}
             className="w-[350px] max-w-[350px]"
           >
             立即注册领取

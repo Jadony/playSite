@@ -27,10 +27,12 @@ const Home: React.FC = () => {
     }
   }, [isAuthenticated]);
 
-  const closeRegisterModal = () => {
+  const closeRegisterModal = (isClose = false) => {
+    if (!isClose) {
+      setIsLoginModalOpen(true);
+    }
     localStorage.setItem("achievementModalCloseTime", Date.now().toString());
     setIsModalOpen(false);
-    setIsLoginModalOpen(true);
   };
 
   return (
