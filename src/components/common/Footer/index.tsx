@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "antd";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 import "./style.css";
 
 const { Footer: AntFooter } = Layout;
@@ -102,7 +102,7 @@ const { Footer: AntFooter } = Layout;
 // };
 
 const Footer: React.FC = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   return (
     <AntFooter className="game-footer">
       <div>

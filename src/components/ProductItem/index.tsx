@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import type { OrderStatus } from "@components/OrderDetailContent";
 import { usePurchaseHistoryStatusConfig } from "@/config/userPurchaseHistoryTypes";
 import "./style.css";
 

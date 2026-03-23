@@ -9,7 +9,6 @@ import { message } from "antd";
 import { useLanguageContext } from "@/store/languageStore";
 
 const Games: React.FC = () => {
-  const [gameList, setGameList] = useState<Game[]>([]);
   const [searchList, setSearchList] = useState<Game[]>([]);
   const [isSearch, setIsSearch] = useState(false);
   const { selectUnit } = useLanguageContext();

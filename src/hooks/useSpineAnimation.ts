@@ -1,39 +1,39 @@
-import { useEffect, useRef } from 'react'
-import * as PIXI from 'pixi.js'
-import { Spine } from 'pixi-spine'
+import { useEffect, useRef } from "react";
+import * as PIXI from "pixi.js";
+import { Spine } from "pixi-spine";
 
 export interface SpineAnimationOptions {
-  width?: number
-  height?: number
-  animation?: string
-  loop?: boolean
-  speed?: number
-  autoPlay?: boolean
-  backgroundColor?: number
-  backgroundAlpha?: number
+  width?: number;
+  height?: number;
+  animation?: string;
+  loop?: boolean;
+  speed?: number;
+  autoPlay?: boolean;
+  backgroundColor?: number;
+  backgroundAlpha?: number;
 }
 
 export const useSpineAnimation = (
   spineDataUrl: string,
-  options: SpineAnimationOptions = {}
+  options: SpineAnimationOptions = {},
 ) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const appRef = useRef<PIXI.Application>()
-  const spineRef = useRef<Spine>()
+  const containerRef = useRef<HTMLDivElement>(null);
+  const appRef = useRef<PIXI.Application>();
+  const spineRef = useRef<Spine>();
 
   useEffect(() => {
-    if (!containerRef.current || !spineDataUrl) return
+    if (!containerRef.current || !spineDataUrl) return;
 
     const {
       width = 400,
       height = 600,
-      animation = 'idle',
-      loop = true,
-      speed = 1,
-      autoPlay = true,
+      // animation = 'idle',
+      // loop = true,
+      // speed = 1,
+      // autoPlay = true,
       backgroundColor = 0x000000,
       backgroundAlpha = 0,
-    } = options
+    } = options;
 
     // 创建 PIXI 应用
     const app = new PIXI.Application({
@@ -44,10 +44,10 @@ export const useSpineAnimation = (
       antialias: true,
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,
-    })
+    });
 
-    containerRef.current.appendChild(app.view as HTMLCanvasElement)
-    appRef.current = app
+    containerRef.current.appendChild(app.view as HTMLCanvasElement);
+    appRef.current = app;
 
     // Load Spine resources with modern PixiJS v7+ Assets API
     // Note: This is commented out as spine loading requires proper setup
@@ -93,35 +93,35 @@ export const useSpineAnimation = (
 
     return () => {
       if (appRef.current) {
-        appRef.current.destroy(true, { children: true, texture: true })
+        appRef.current.destroy(true, { children: true, texture: true });
       }
-    }
-  }, [spineDataUrl, options])
+    };
+  }, [spineDataUrl, options]);
 
   // 控制方法
   const play = (animationName?: string, loop?: boolean) => {
     if (spineRef.current && animationName) {
-      spineRef.current.state.setAnimation(0, animationName, loop ?? true)
+      spineRef.current.state.setAnimation(0, animationName, loop ?? true);
     }
-  }
+  };
 
   const pause = () => {
     if (spineRef.current) {
-      spineRef.current.state.timeScale = 0
+      spineRef.current.state.timeScale = 0;
     }
-  }
+  };
 
   const resume = () => {
     if (spineRef.current) {
-      spineRef.current.state.timeScale = 1
+      spineRef.current.state.timeScale = 1;
     }
-  }
+  };
 
   const setSpeed = (speed: number) => {
     if (spineRef.current) {
-      spineRef.current.state.timeScale = speed
+      spineRef.current.state.timeScale = speed;
     }
-  }
+  };
 
   return {
     containerRef,
@@ -130,5 +130,5 @@ export const useSpineAnimation = (
     resume,
     setSpeed,
     spine: spineRef.current,
-  }
-}
+  };
+};
