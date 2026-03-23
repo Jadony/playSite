@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Carousel } from "antd";
-import sectionImg from "../../assets/background/sectionImg.png";
 import PrimaryButton from "../PrimaryButton";
 import "./style.css";
 import { useTranslation } from "react-i18next";
@@ -20,7 +19,8 @@ const HeroSection: React.FC = () => {
           {t("home.section.startingBenefitsSubSecond")}
         </>
       ),
-      image: sectionImg,
+      image:
+        "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/sectionImg.png",
       cta: t("singUp"),
       link: "/invite",
     },
