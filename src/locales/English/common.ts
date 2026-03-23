@@ -80,6 +80,7 @@ export default {
     invitationCode: "Invitation code",
     login: "Login",
     alreadyHaveAnAccount: "Already have an account, ",
+    pleaseEnterValidEmailAddress: "Please enter a valid email address",
     byRegisteringAnAccountOrLoggingInYouAgreeToThePrivacyPolicyTermsOfServiceCookiePlicy:
       "By registering  an account or logging in,you agree to the Privacy Policy / Terms of Service / cookie Plicy",
     verificationCodeHasBeenSentTo: "Verification code has been sent to :",

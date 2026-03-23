@@ -10,6 +10,7 @@ import {
   orderRefresh,
 } from "@/api/user";
 import { message } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const PurchaseHistory = () => {
   const [curType, setCurType] = useState("ALL");
@@ -19,6 +20,7 @@ const PurchaseHistory = () => {
     null,
   );
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const getUserOrderList = async () => {
     try {
@@ -63,6 +65,12 @@ const PurchaseHistory = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const onPayNow = () => {
+    navigate(`/payment/${curOrder?.orderId}`, {
+      state: { from: "/user-center" },
+    });
   };
 
   useEffect(() => {
@@ -148,6 +156,7 @@ const PurchaseHistory = () => {
             status={curOrder?.status}
             product={curOrder}
             orderInfo={curOrder}
+            onPayNow={onPayNow}
             onCancelOrder={() => getOrderCancel(curOrder?.orderNo || "")}
             onRefresh={() => getOrderRefresh(curOrder?.orderNo || "")}
             onBack={() => setVisible(false)}

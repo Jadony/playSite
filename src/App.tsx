@@ -49,7 +49,14 @@ function App() {
                       <Route path="/" element={<Home />} />
                       <Route path="/games" element={<Games />}></Route>
                       <Route path="/games/:id" element={<GameItemDetail />} />
-                      <Route path="/payment/:skuId" element={<Payment />} />
+                      <Route
+                        path="/payment/:skuId"
+                        element={
+                          <ProtectedRoute>
+                            <Payment />
+                          </ProtectedRoute>
+                        }
+                      />
                       <Route path="/invite" element={<Invite />} />
                       <Route path="/about" element={<About />} />
                       <Route

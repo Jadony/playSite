@@ -175,13 +175,13 @@ export const getPurchasedGames = (params: { limit: number } = { limit: 3 }) => {
 export const orderRefresh = (orderId: string) => {
   return request<OrderDetailResponseData>({
     url: api.orderRefresh + "/" + orderId,
-    method: "get",
+    method: "post",
   });
 };
 
 export const orderCancel = (orderId: string) => {
   return request<boolean>({
     url: api.orderCancel + "/" + orderId,
-    method: "get",
+    method: "post",
   });
 };

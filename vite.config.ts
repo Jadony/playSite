@@ -42,7 +42,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ["react", "react-dom", "react-router-dom"],
-          spine: ["pixi.js", "@pixi/spine", "pixi-spine"],
+          spine: ["pixi.js", "pixi-spine"],
           ui: ["antd", "@ant-design/icons"],
           utils: ["axios", "dayjs", "zustand"],
         },
@@ -51,6 +51,6 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
   },
   optimizeDeps: {
-    include: ["pixi.js", "@pixi/spine", "pixi-spine"],
+    include: ["pixi.js", "pixi-spine"],
   },
 });
