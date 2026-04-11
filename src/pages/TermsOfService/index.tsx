@@ -1,5 +1,3 @@
-import React from "react";
-
 const TermsOfService = () => {
   return (
     <div className="min-h-screen pt-32 pb-24 px-4 sm:px-6 lg:px-8 font-inter bg-[#0E0E11] text-gray-400">
@@ -68,8 +66,8 @@ const TermsOfService = () => {
                 </strong>{" "}
                 By completing the registration for a playdd account, you become
                 a "User." If you are a "Minor" (under 18 or the legal age of
-                majority in your jurisdiction), you must obtain permission from a
-                parent or guardian to use certain restricted features. Parents
+                majority in your jurisdiction), you must obtain permission from
+                a parent or guardian to use certain restricted features. Parents
                 or guardians are responsible for the Minor’s actions within the
                 Services.
               </p>

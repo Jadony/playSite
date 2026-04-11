@@ -1,5 +1,3 @@
-import React from "react";
-
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen pt-32 pb-24 px-4 sm:px-6 lg:px-8 font-inter bg-[#0E0E11] text-gray-400">
@@ -379,22 +377,22 @@ const PrivacyPolicy = () => {
                     <strong className="text-gray-200">
                       Use of Personal Information:
                     </strong>{" "}
-                    We generally act as a data controller of Personal Information
-                    submitted to us by EU data subjects. We rely on that Personal
-                    Information for the legitimate commercial purposes of
-                    providing our Site and Services to you. Where we need to
-                    collect Personal Information by law or under the terms of a
-                    contract we have with you, and you fail to provide that
-                    information when requested, we may not be able to provide you
-                    with our Services. Before processing your Personal
-                    Information, we consider and balance any potential impact on
-                    you and your rights. We will not process your Personal
-                    Information where your rights and interests override our
-                    legitimate commercial interests, unless we have your consent
-                    or are otherwise required or permitted to do so by law. In
-                    certain circumstances, we act as a data processor for
-                    third-party partners, in which case we process your Personal
-                    Information for the purposes set out in this Policy
+                    We generally act as a data controller of Personal
+                    Information submitted to us by EU data subjects. We rely on
+                    that Personal Information for the legitimate commercial
+                    purposes of providing our Site and Services to you. Where we
+                    need to collect Personal Information by law or under the
+                    terms of a contract we have with you, and you fail to
+                    provide that information when requested, we may not be able
+                    to provide you with our Services. Before processing your
+                    Personal Information, we consider and balance any potential
+                    impact on you and your rights. We will not process your
+                    Personal Information where your rights and interests
+                    override our legitimate commercial interests, unless we have
+                    your consent or are otherwise required or permitted to do so
+                    by law. In certain circumstances, we act as a data processor
+                    for third-party partners, in which case we process your
+                    Personal Information for the purposes set out in this Policy
                     consistent with the data processing terms of those partners.
                   </li>
                   <li>
@@ -426,21 +424,21 @@ const PrivacyPolicy = () => {
                     controller, please contact us as detailed in the “Contact
                     Us” section. We will need sufficient information to verify
                     your identity and the nature of your request. We aim to
-                    respond within one (1) calendar month. If we are unable to do
-                    so, we will notify you of the earliest practicable time for a
-                    response (within a maximum of three (3) months). Please note
-                    that certain exemptions and restrictions under European law
-                    may apply, and we will inform you if your information is
-                    retained or withheld accordingly.
+                    respond within one (1) calendar month. If we are unable to
+                    do so, we will notify you of the earliest practicable time
+                    for a response (within a maximum of three (3) months).
+                    Please note that certain exemptions and restrictions under
+                    European law may apply, and we will inform you if your
+                    information is retained or withheld accordingly.
                   </li>
                   <li>
                     <strong className="text-gray-200">
                       International Data Transfers:
                     </strong>{" "}
                     We offer Standard Contractual Clauses (SCC) to meet the
-                    adequacy and security requirements for customers operating in
-                    the EU and the UK, facilitating transfers to countries that
-                    lack an adequacy determination.
+                    adequacy and security requirements for customers operating
+                    in the EU and the UK, facilitating transfers to countries
+                    that lack an adequacy determination.
                   </li>
                 </ul>
               </div>
@@ -455,9 +453,9 @@ const PrivacyPolicy = () => {
                 </p>
                 <ul className="list-disc pl-6 space-y-3 marker:text-gray-600">
                   <li>
-                    <strong className="text-gray-200">Right to Know:</strong> The
-                    right to know what Personal Information we have collected,
-                    used, disclosed, and sold about you.
+                    <strong className="text-gray-200">Right to Know:</strong>{" "}
+                    The right to know what Personal Information we have
+                    collected, used, disclosed, and sold about you.
                   </li>
                   <li>
                     <strong className="text-gray-200">Right to Delete:</strong>{" "}
@@ -477,13 +475,13 @@ const PrivacyPolicy = () => {
                     "sale."
                   </li>
                   <li>
-                    <strong className="text-gray-200">Verification:</strong> When
-                    you submit a request, we will verify your identity via email
-                    or other known information. If we cannot appropriately verify
-                    your identity, the request may be denied. You may also
-                    designate an authorized agent. Exercising these rights will
-                    not adversely affect the price or quality of our goods or
-                    services.
+                    <strong className="text-gray-200">Verification:</strong>{" "}
+                    When you submit a request, we will verify your identity via
+                    email or other known information. If we cannot appropriately
+                    verify your identity, the request may be denied. You may
+                    also designate an authorized agent. Exercising these rights
+                    will not adversely affect the price or quality of our goods
+                    or services.
                   </li>
                   <li>
                     <strong className="text-gray-200">Shine the Light:</strong>{" "}
@@ -577,7 +575,9 @@ const PrivacyPolicy = () => {
                     <tbody className="divide-y divide-gray-800 bg-[#121216]">
                       <tr className="hover:bg-gray-800/50 transition-colors">
                         <td className="px-4 py-3">
-                          <strong className="text-gray-200 block">Google</strong>
+                          <strong className="text-gray-200 block">
+                            Google
+                          </strong>
                           <span className="text-xs text-gray-500">
                             (cloudprivacy@google.com)
                           </span>
@@ -663,9 +663,9 @@ const PrivacyPolicy = () => {
             </h2>
             <div className="space-y-4 leading-relaxed">
               <p>
-                We do not knowingly collect personal information from individuals
-                under the age of 16, unless the personal information is submitted
-                with verifiable parental consent.
+                We do not knowingly collect personal information from
+                individuals under the age of 16, unless the personal information
+                is submitted with verifiable parental consent.
               </p>
             </div>
           </section>

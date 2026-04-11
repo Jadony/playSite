@@ -1,5 +1,3 @@
-import React from "react";
-
 const RefundPolicy = () => {
   return (
     <div className="min-h-screen pt-32 pb-24 px-4 sm:px-6 lg:px-8 font-inter bg-[#0E0E11] text-gray-400">
