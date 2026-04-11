@@ -184,10 +184,10 @@ export default {
     integrations: "Integrations",
     company: "Company",
     aboutUs: "About Us",
-    blog: "Blog",
+    refundPolicy: "Refund Policy",
     contact: "Contact",
     resources: "Resources",
+    playddTermsOfService: "playdd Terms of Service",
     privacyPolicy: "Privacy Policy",
-    termsOfService: "Terms of Service",
   },
 };

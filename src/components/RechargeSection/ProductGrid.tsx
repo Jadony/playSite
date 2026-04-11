@@ -71,7 +71,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
             }}
           >
             {/* Discount Badge */}
-            {item.discount && (
+            {item.discount !== undefined && (
               <div className="absolute top-2 right-2 z-10">
                 <DiscountTag
                   hasSpecialOffer={item.hasSpecialOffer}

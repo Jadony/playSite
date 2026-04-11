@@ -148,9 +148,9 @@ const Header: React.FC = () => {
       path: "/invite",
       icon: <span className="mr-1">🔥</span>,
     },
-    { key: "/suggested", label: t("header.suggestion"), path: "/suggested" },
+    // { key: "/suggested", label: t("header.suggestion"), path: "/suggested" },
     { key: "/help", label: t("header.helpCenter"), path: "/help" },
-    { key: "/about", label: t("header.about"), path: "/about" },
+    // { key: "/about", label: t("header.about"), path: "/about" },
   ];
 
   return (

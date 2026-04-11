@@ -19,6 +19,9 @@ import About from "@pages/About";
 import UserCenter from "@pages/UserCenter";
 import Payment from "@pages/Payment";
 import ProtectedRoute from "./components/ProtectedRoute";
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import RefundPolicy from "./pages/RefundPolicy";
 
 const { Content } = Layout;
 
@@ -67,6 +70,15 @@ function App() {
                           </ProtectedRoute>
                         }
                       />
+                      <Route
+                        path="/terms-of-service"
+                        element={<TermsOfService />}
+                      />
+                      <Route
+                        path="/privacy-policy"
+                        element={<PrivacyPolicy />}
+                      />
+                      <Route path="/refund-policy" element={<RefundPolicy />} />
                     </Routes>
                   </Content>
                   <Footer />
