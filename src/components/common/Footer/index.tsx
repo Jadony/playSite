@@ -3,13 +3,18 @@ import { Layout } from "antd";
 // import { useTranslation } from "react-i18next";
 import "./style.css";
 import { useTranslation } from "react-i18next";
-import { useAllGamesAndSelectContext } from "@/store/gameStore";
+import {
+  useAllGamesAndSelectContext,
+  useAllGamesAndSelectDispatchContext,
+} from "@/store/gameStore";
+import { Link } from "react-scroll";
 
 const { Footer: AntFooter } = Layout;
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
   const { hotGameList } = useAllGamesAndSelectContext();
+  const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
   return (
     <AntFooter className="game-footer">
       <div className="footer-container">
@@ -61,11 +66,20 @@ const Footer: React.FC = () => {
             <h3>{t("footer.product")}</h3>
             <ul>
               {hotGameList?.slice(0, 3)?.map((item) => (
-                <li key={item.gameId}>
-                  <a target="_blank" href={`/games/${item.gameId}`}>
-                    {item.gameName}
-                  </a>
-                </li>
+                <Link
+                  to="gameSelector"
+                  key={item.gameId}
+                  onClick={() => {
+                    allGamesAndSelectDispatch({
+                      type: "setSelectGame",
+                      payload: { selectGame: item },
+                    });
+                  }}
+                >
+                  <li>
+                    <a href="javascript:void(0)">{item.gameName}</a>
+                  </li>
+                </Link>
               ))}
             </ul>
           </div>
