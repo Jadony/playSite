@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PrimaryButton from "@components/PrimaryButton";
 import { usePurchaseHistoryStatusConfig } from "@/config/userPurchaseHistoryTypes";
-import "./style.css";
 
 export interface OrderProduct {
   image?: string;
@@ -58,7 +57,6 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
   const showCountdown = status === "PENDING" && countdown;
   const showActions = status === "PENDING" || status === "PROCESSING";
   const [curTime, setCurTime] = useState(countdown || 0);
-  // || status === "pending";
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -67,8 +65,6 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
         setCurTime((prev) => prev - 1);
       }, 1000);
       return () => clearInterval(timer);
-    } else {
-      // onRefresh?.();
     }
   }, [showCountdown, curTime]);
 
@@ -80,53 +76,85 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
     return [h, m, s].map((v) => v.toString().padStart(2, "0")).join(":");
   };
 
+  // Helper function map for status colors
+  const getStatusColor = (colorConfig: string, isTag: boolean = false) => {
+    switch (colorConfig) {
+      case "grey":
+        return isTag ? "text-[#949494]" : "text-white";
+      case "red":
+        return "text-[#DF393C]";
+      case "orange":
+        return "text-[#009844]";
+      case "green":
+      case "neutral":
+      default:
+        return "text-white";
+    }
+  };
+
   return (
-    <div className={`order-detail-content ${className}`.trim()}>
+    <div
+      className={`w-full max-w-[945px] h-[640px] bg-[#1a1a1f] rounded-2xl border border-white/10 overflow-hidden flex flex-col px-5 pb-5 box-border ${className}`.trim()}
+    >
       {/* Header */}
-      <div className="order-detail-header">
+      <div className="flex items-center justify-between py-5 border-b border-white/10 shrink-0">
         <div
-          className="order-detail-header-left"
+          className="flex items-center gap-3 cursor-pointer"
           onClick={onBack || onClose}
           role="button"
         >
-          <span className="order-detail-back">←</span>
-          <span className="order-detail-title">
+          <span className="text-white text-[16px]">←</span>
+          <span className="text-white text-[16px] font-medium">
             {t("userCenter.orderDetails")}
           </span>
         </div>
       </div>
 
       {/* Status Area */}
-      <div className="order-detail-status-area">
+      <div className="py-5 text-center shrink-0">
         <div
-          className={`order-detail-status-text status-${config.statusColor}`}
+          className={`text-[20px] font-semibold mb-2 leading-6 ${getStatusColor(
+            config.statusColor
+          )}`}
         >
           {config.label}
         </div>
-        <div className="order-detail-status-desc">{config.desc}</div>
+        <div className="text-[#949494] text-[14px] font-normal leading-[18px] mb-5">
+          {config.desc}
+        </div>
 
         {/* Progress Stepper */}
-        <div className="order-detail-stepper">
+        <div className="flex flex-wrap sm:flex-nowrap items-start justify-center gap-2 sm:gap-5 py-5">
           {STEPS.map((step, index) => {
             const completed = index + 1 <= config.completedStep;
             const isLast = index === STEPS.length - 1;
             return (
               <React.Fragment key={step}>
-                <div className="order-detail-step">
+                <div className="flex flex-col items-center shrink-0">
                   <div
-                    className={`order-detail-step-circle ${completed ? "completed" : ""}`}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-[26px] mb-[2px] transition-colors ${
+                      completed
+                        ? "bg-white text-[#0C0B0F]"
+                        : "bg-[#3f3f46] text-transparent"
+                    }`}
                   >
                     {completed ? "✓" : ""}
                   </div>
                   <div
-                    className={`order-detail-step-label ${completed ? "completed" : ""}`}
+                    className={`mt-2 text-[14px] font-normal leading-normal transition-colors ${
+                      completed ? "text-white" : "text-[#949494]"
+                    }`}
                   >
                     {step}
                   </div>
                 </div>
                 {!isLast && (
                   <div
-                    className={`order-detail-step-line ${index + 1 < config.completedStep ? "completed" : ""}`}
+                    className={`hidden sm:block w-[80px] md:w-[120px] lg:w-[160px] h-1 mt-[15px] rounded-[15px] shrink-0 transition-colors ${
+                      index + 1 < config.completedStep
+                        ? "bg-white"
+                        : "bg-[#3f3f46]"
+                    }`}
                   />
                 )}
               </React.Fragment>
@@ -136,51 +164,60 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
       </div>
 
       {/* Product Section */}
-      <div className="order-detail-product">
-        <div className="order-detail-product-main">
-          <div className="order-detail-product-image">
+      <div className="border-t border-white/10 shrink-0">
+        <div className="flex flex-col sm:flex-row items-start py-5 gap-4">
+          <div className="w-full sm:w-[140px] h-[140px] rounded-[10px] overflow-hidden bg-white/5 shrink-0">
             {product?.skuImage ? (
-              <img src={product.skuImage} alt={product.gameName} />
+              <img
+                src={product.skuImage}
+                alt={product.gameName}
+                className="w-full h-full object-cover"
+              />
             ) : (
-              <div className="order-detail-product-placeholder">图</div>
+              <div className="w-full h-full flex items-center justify-center text-[#6b7280] text-[12px]">
+                图
+              </div>
             )}
           </div>
-          <div className="order-detail-product-info">
+          <div className="flex-1 min-w-0 flex flex-col justify-between h-[140px] w-full">
             <div>
-              <div className="order-detail-product-name">
+              <div className="text-white text-[20px] font-semibold mb-1.5 truncate">
                 {product?.skuName}
               </div>
-              <div className="order-detail-product-meta">
+              <div className="text-[#949494] text-[14px] font-normal leading-normal mb-1">
                 {t("userCenter.quantity")}：{product?.quantity}
               </div>
             </div>
-            <div className="order-detail-product-footer">
-              <span className="order-detail-product-uid">
+            <div className="flex items-center gap-6 mt-auto flex-wrap">
+               <span className="text-[#949494] text-[14px] font-normal leading-normal">
                 UID：{product?.gameUid}
               </span>
-              <span className="order-detail-product-server">
+              <span className="text-[#949494] text-[14px] font-normal leading-normal">
                 {t("userCenter.server")}：{product?.gameServer}
               </span>
             </div>
           </div>
-          <div className="order-detail-product-right">
-            <div className="order-detail-product-price-row">
-              <span className="order-detail-product-price">
+          <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:h-[140px] gap-2 shrink-0 w-full sm:w-auto mt-4 sm:mt-0">
+            <div className="flex items-center gap-4">
+              <span className="text-white text-[20px] font-bold">
                 $ {product?.orderAmount}
               </span>
             </div>
             {config.actionTag && (
               <span
-                className={`order-detail-action-tag status-${config.statusColor}`}
+                className={`text-[20px] font-bold ${getStatusColor(
+                  config.statusColor,
+                  true
+                )}`}
               >
                 {config.actionTag}
               </span>
             )}
             {showActions && (
-              <div className="order-detail-product-actions">
+              <div className="flex items-end gap-3 mt-1">
                 {config.secondaryBtn && (
                   <button
-                    className="order-detail-btn secondary"
+                    className="px-4 py-2.5 rounded-lg text-[14px] font-normal cursor-pointer border border-white/30 bg-white text-[#0C0B0F] disabled:opacity-50 hover:bg-gray-200 transition-colors"
                     disabled={loading}
                     onClick={onCancelOrder || (() => console.log("取消订单"))}
                   >
@@ -188,9 +225,9 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
                   </button>
                 )}
                 {config.primaryBtn && status === "PENDING" && (
-                  <div className="order-detail-pay-wrapper">
+                  <div className="flex flex-col items-end gap-2">
                     {showCountdown && (
-                      <span className="order-detail-pay-btn-countdown">
+                      <span className="text-[#DB7DFF] text-[14px] font-normal">
                         {showTime()}
                       </span>
                     )}
@@ -206,22 +243,13 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
                 )}
                 {config.primaryBtn && status === "PROCESSING" && (
                   <button
-                    className="order-detail-btn secondary"
+                    className="px-4 py-2.5 rounded-lg text-[14px] font-normal cursor-pointer border border-white/30 bg-white text-[#0C0B0F] disabled:opacity-50 hover:bg-gray-200 transition-colors"
                     disabled={loading}
                     onClick={onRefresh || (() => console.log("刷新"))}
                   >
                     {config.primaryBtn}
                   </button>
                 )}
-                {/* {config.primaryBtn && (
-                  // && status === "pending"
-                  <button
-                    className="order-detail-btn secondary"
-                    onClick={onGoProcess || (() => console.log("去处理"))}
-                  >
-                    {config.primaryBtn}
-                  </button>
-                )} */}
               </div>
             )}
           </div>
@@ -229,30 +257,50 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
       </div>
 
       {/* Order Info */}
-      <div className="order-detail-info">
-        <div className="order-detail-info-title">
+      <div className="p-5 bg-white/5 rounded-[10px] mt-auto">
+        <div className="text-white text-[14px] font-medium pb-4 border-b border-white/10 mb-5">
           {t("userCenter.orderDetails")}
         </div>
-        <div className="order-detail-info-grid">
-          <div className="order-detail-info-item">
-            <span className="key">{t("userCenter.orderId")}：</span>
-            <span className="value">{orderInfo?.orderNo}</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-0 gap-x-6">
+          <div className="flex items-center gap-2 leading-[27px]">
+            <span className="text-white text-[14px] whitespace-nowrap font-normal">
+              {t("userCenter.orderId")}：
+            </span>
+            <span className="text-white text-[14px] font-normal">
+              {orderInfo?.orderNo}
+            </span>
           </div>
-          <div className="order-detail-info-item">
-            <span className="key">{t("userCenter.paymentMethod")}：</span>
-            <span className="value">{orderInfo?.paymentMethod}</span>
+          <div className="flex items-center gap-2 leading-[27px]">
+            <span className="text-white text-[14px] whitespace-nowrap font-normal">
+              {t("userCenter.paymentMethod")}：
+            </span>
+            <span className="text-white text-[14px] font-normal">
+              {orderInfo?.paymentMethod}
+            </span>
           </div>
-          <div className="order-detail-info-item">
-            <span className="key">{t("userCenter.totalDiscount")}：</span>
-            <span className="value">{orderInfo?.discountAmount}</span>
+          <div className="flex items-center gap-2 leading-[27px]">
+            <span className="text-white text-[14px] whitespace-nowrap font-normal">
+              {t("userCenter.totalDiscount")}：
+            </span>
+            <span className="text-white text-[14px] font-normal">
+              {orderInfo?.discountAmount}
+            </span>
           </div>
-          <div className="order-detail-info-item">
-            <span className="key">{t("userCenter.orderTime")}：</span>
-            <span className="value">{orderInfo?.createTime}</span>
+          <div className="flex items-center gap-2 leading-[27px]">
+            <span className="text-white text-[14px] whitespace-nowrap font-normal">
+              {t("userCenter.orderTime")}：
+            </span>
+            <span className="text-white text-[14px] font-normal">
+              {orderInfo?.createTime}
+            </span>
           </div>
-          <div className="order-detail-info-item">
-            <span className="key">{t("userCenter.officialPrice")}：</span>
-            <span className="value">{orderInfo?.originalPrice}</span>
+          <div className="flex items-center gap-2 leading-[27px]">
+            <span className="text-white text-[14px] whitespace-nowrap font-normal">
+              {t("userCenter.officialPrice")}：
+            </span>
+            <span className="text-white text-[14px] font-normal">
+              {orderInfo?.originalPrice}
+            </span>
           </div>
         </div>
       </div>

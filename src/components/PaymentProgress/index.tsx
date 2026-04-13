@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 import CommonModal from "../CommonModal";
 import PrimaryButton from "../PrimaryButton";
-import "./style.css";
 
 type PaymentProgressProps = {
   visible: boolean;
@@ -53,107 +52,100 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
   }, [status, countdown]);
 
   const title = (
-    <div className="progress-modal-title">
-      <ShieldCheck className="progress-modal-title-icon" strokeWidth={1.5} />
+    <div className="flex items-center gap-2.5 text-[20px] font-bold text-white">
+      <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />
       <span>多重支付保护 充值失败全款返回</span>
     </div>
   );
 
   const renderContent = () => {
     return (
-      <div className="progress-content-inner">
+      <div className="mt-6 flex flex-col gap-6 pb-5">
         {/* Step 1: 支付信息已填写 */}
-        <div className={`progress-step completed`}>
-          <div className="progress-step-header">
-            <CreditCard className="step-icon" strokeWidth={1.5} />
-            <span className="step-title">支付信息已填写</span>
+        <div className="flex items-center gap-4 transition-all duration-300 text-gray-500">
+          <div className="flex items-center gap-4 w-full">
+            <CreditCard className="w-6 h-6" strokeWidth={1.5} />
+            <span className="text-[16px]">支付信息已填写</span>
           </div>
         </div>
 
         {/* Step 2: 支付验证中 -> 支付已验证 */}
         <div
-          className={`progress-step ${status === "verifying" ? "active" : "completed"}`}
+          className={`flex transition-all duration-300 ${
+            status === "verifying"
+              ? "flex-col gap-2 my-2.5 items-start text-white"
+              : "items-center gap-4 text-gray-500"
+          }`}
         >
           {status === "verifying" ? (
             <>
-              <KeyRound className="step-icon" strokeWidth={1.5} />
+              <KeyRound className="w-8 h-8 mb-2" strokeWidth={1.5} />
               <div>
-                <div className="step-title">支付验证中...</div>
-                <div className="step-subtitle">
+                <div className="text-[24px] font-bold">支付验证中...</div>
+                <div className="text-[14px] text-[#9cb3c9] mt-1">
                   正在核对您的银行卡和账户信息
                 </div>
               </div>
-              <div className="step-actions" style={{ width: "100%" }}>
-                <button className="step-btn-ghost">更换支付方式</button>
-                <button className="step-btn-ghost">重新支付</button>
+              <div className="flex gap-4 mt-4 w-full">
+                <button className="flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[16px] cursor-pointer transition-all duration-300 hover:bg-white/10">更换支付方式</button>
+                <button className="flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[16px] cursor-pointer transition-all duration-300 hover:bg-white/10">重新支付</button>
               </div>
             </>
           ) : (
-            <div className="progress-step-header">
-              <KeyRound className="step-icon" strokeWidth={1.5} />
-              <span className="step-title">支付已验证</span>
+            <div className="flex items-center gap-4 w-full">
+              <KeyRound className="w-6 h-6" strokeWidth={1.5} />
+              <span className="text-[16px]">支付已验证</span>
             </div>
           )}
         </div>
 
         {/* Step 3: 发货 -> 正在发货 -> 已发货 */}
         {status === "verifying" && (
-          <div className="progress-step pending">
-            <div className="progress-step-header">
-              <CreditCard className="step-icon" strokeWidth={1.5} />
-              <span className="step-title">发货</span>
+          <div className="flex items-center gap-4 transition-all duration-300 text-gray-500">
+            <div className="flex items-center gap-4 w-full">
+              <CreditCard className="w-6 h-6" strokeWidth={1.5} />
+              <span className="text-[16px]">发货</span>
             </div>
           </div>
         )}
 
         {status === "shipping" && (
-          <div className="progress-step active">
-            <PackageSearch className="step-icon" strokeWidth={1.5} />
-            <div style={{ width: "100%" }}>
-              <div className="step-title">正在发货 ({countdown}s)</div>
-              <div className="progress-bar-container">
+          <div className="flex flex-col gap-2 my-2.5 items-start text-white transition-all duration-300">
+            <PackageSearch className="w-8 h-8 mb-2" strokeWidth={1.5} />
+            <div className="w-full">
+              <div className="text-[24px] font-bold">正在发货 ({countdown}s)</div>
+              <div className="w-full h-1.5 bg-[#383838] rounded overflow-hidden mt-2">
                 <div
-                  className="progress-bar-fill"
+                  className="h-full bg-gradient-to-r from-[#b122e5] to-[#ff63de] rounded transition-[width] duration-1000 ease-linear"
                   style={{ width: `${((5 - countdown) / 5) * 100}%` }}
                 ></div>
               </div>
-              <div className="shipping-box-placeholder"></div>
+              <div className="w-full h-[160px] bg-[#2a2a2a] rounded-xl mt-4"></div>
             </div>
           </div>
         )}
 
         {status === "success" && (
-          <div className="progress-step completed">
-            <div className="progress-step-header">
-              <PackageSearch className="step-icon" strokeWidth={1.5} />
-              <span className="step-title">已发货</span>
+          <div className="flex items-center gap-4 transition-all duration-300 text-gray-500">
+            <div className="flex items-center gap-4 w-full">
+              <PackageSearch className="w-6 h-6" strokeWidth={1.5} />
+              <span className="text-[16px]">已发货</span>
             </div>
           </div>
         )}
 
         {/* Step 4: 订单完成 */}
         {status === "success" && (
-          <div
-            className="progress-step active"
-            style={{
-              marginTop: "16px",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex items-center gap-4 mt-4 text-white transition-all duration-300 w-full">
             <CheckCircle2
-              className="step-icon"
+              className="w-8 h-8 mb-0"
               strokeWidth={1.5}
-              style={{ marginBottom: 0 }}
             />
             <div>
-              <div
-                className="step-title"
-                style={{ margin: 0, marginRight: "12px" }}
-              >
+              <div className="text-[24px] font-bold !m-0 !mr-3 inline-block">
                 订单完成
               </div>
-              <div className="step-subtitle" style={{ margin: 0 }}>
+              <div className="text-[14px] text-[#9cb3c9] mt-1 !m-0 inline-block">
                 您现在可在游戏账号内查看购买商品
               </div>
             </div>
@@ -162,31 +154,17 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
 
         {/* Step 3 (Failed): 发货超时 */}
         {status === "failed" && (
-          <div
-            className="progress-step active"
-            style={{
-              marginTop: "16px",
-              flexDirection: "row",
-              alignItems: "flex-start",
-            }}
-          >
+          <div className="flex items-start gap-4 mt-4 text-white transition-all duration-300 w-full">
             <XCircle
-              className="step-icon"
+              className="w-8 h-8 shrink-0 mt-1"
               strokeWidth={1.5}
               color="#F53F3F"
-              style={{ flexShrink: 0, marginTop: "4px" }}
             />
             <div>
-              <div
-                className="step-title"
-                style={{ margin: 0, color: "#F53F3F", marginBottom: "8px" }}
-              >
+              <div className="text-[24px] font-bold text-[#F53F3F] mb-2 !m-0">
                 发货超时
               </div>
-              <div
-                className="step-subtitle"
-                style={{ margin: 0, lineHeight: "1.5" }}
-              >
+              <div className="text-[14px] text-[#9cb3c9] leading-relaxed !m-0">
                 客服团队会帮助解决发货问题或帮助返回钱款至您的支付账户
               </div>
             </div>
@@ -195,14 +173,14 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
 
         {/* 联系客服按钮 */}
         {status === "failed" && (
-          <div style={{ marginTop: "32px", width: "100%" }}>
+          <div className="w-full mt-8">
             <PrimaryButton
               fullWidth
               variant="gradient"
               glow
               glowColor="rgba(170, 0, 255, 0.5)"
               fontSize="18px"
-              style={{ padding: "16px 0", fontWeight: "bold" }}
+              className="py-4 font-bold"
             >
               联系客服人员
             </PrimaryButton>

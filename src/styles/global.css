@@ -104,3 +104,76 @@ body {
   border: 1px solid rgba(99, 102, 241, 0.2) !important;
   border-radius: 12px !important;
 }
+
+/* Utility class for Glassmorphism with Gradient Border */
+@layer utilities {
+  .glass-gradient-border {
+    background: rgba(24, 24, 28, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 100px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    position: relative;
+    border: none !important;
+  }
+
+  .glass-gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 100px;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.1) 80px,
+      rgba(255, 255, 255, 0.1) calc(100% - 80px),
+      rgba(255, 255, 255, 0.6) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 10;
+  }
+}
+
+/* Custom Radio Button Variant */
+@layer components {
+  .gender-radio {
+    width: 22px !important;
+    height: 22px !important;
+    cursor: pointer;
+    accent-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    background: transparent;
+    position: relative;
+    transition: all 0.2s ease;
+  }
+
+  .gender-radio:checked {
+    border-color: #fff;
+    background: #fff;
+  }
+
+  .gender-radio:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1a1a1a;
+  }
+}

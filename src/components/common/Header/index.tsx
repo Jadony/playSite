@@ -7,7 +7,6 @@ import {
 } from "@/store/languageStore";
 import LoginModal from "@components/LoginModal";
 import GamesDropdown from "./GamesDropdown";
-import "./style.css";
 import { useAuthContext } from "@/store/authStore";
 import { allGames, hotGames } from "@/api/game";
 import { message } from "antd";

@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { Layout } from "antd";
 import i18n from "./i18n";
 import { I18nextProvider } from "react-i18next";
@@ -36,6 +37,25 @@ function App() {
     });
     return showBg;
   };
+
+  useEffect(() => {
+    const handleScreenAuto = () => {
+      const designWidth = 2560; // 此处锁定设计稿宽度
+      const scale = window.innerWidth / designWidth;
+
+      // 使用 CSS zoom 特性！它可以直接缩放真实的 DOM 盒模型占位，不会产生任何底部留白和多余的横向滚动条！
+      document.body.style.zoom = String(scale);
+    };
+
+    handleScreenAuto();
+    window.addEventListener("resize", handleScreenAuto);
+
+    return () => {
+      window.removeEventListener("resize", handleScreenAuto);
+      document.body.style.zoom = ""; // 清理
+    };
+  }, []);
+
   return (
     <AuthProvider>
       <GoogleOAuthProvider clientId="103542172806-v9fh6gl64d995kv8hsilnj5llq8eiidu.apps.googleusercontent.com">

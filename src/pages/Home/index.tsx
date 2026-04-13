@@ -4,7 +4,6 @@ import GameSelector from "@components/GameSelector";
 import GameSearch from "@components/GameSearch";
 import RechargeSection from "@components/RechargeSection";
 import FAQSection from "@components/FAQSection";
-import "./style.css";
 import AchievementModal from "@/components/AchievementModal";
 import { useAuthContext } from "@/store/authStore";
 import LoginModal from "@/components/LoginModal";
