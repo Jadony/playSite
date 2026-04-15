@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Input from "./Input";
 import PrimaryButton from "../PrimaryButton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { isValidEmail } from "@/utils/helpers";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -25,13 +25,15 @@ const EmailCheckGroup: React.FC<EmailCheckGroupProps> = ({
 }) => {
   const { t } = useTranslation();
   const [emailError, setEmailError] = useState("");
-  useEffect(() => {
+
+  const checkIsValidEmail = () => {
     if (isValidEmail(email)) {
       setEmailError("");
+      handleSearchEmail();
     } else {
       setEmailError(t("loginOrSignUpModal.pleaseEnterValidEmailAddress"));
     }
-  }, [email]);
+  };
   return (
     <div className="login-form">
       <div className="mb-7">
@@ -96,9 +98,9 @@ const EmailCheckGroup: React.FC<EmailCheckGroupProps> = ({
         </div>
       </div>
       <PrimaryButton
-        disabled={!!emailError || loading}
-        onClick={handleSearchEmail}
-        fontSize="14px"
+        disabled={loading}
+        onClick={checkIsValidEmail}
+        fontSize="16px"
       >
         <Spin
           indicator={<LoadingOutlined spin />}

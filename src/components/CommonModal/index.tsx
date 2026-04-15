@@ -122,6 +122,7 @@ const CommonModal: React.FC<CommonModalProps> = ({
           disabled={primaryButtonDisabled || primaryButtonLoading}
           className="common-modal-primary-btn"
           fullWidth
+          size="medium"
         >
           {primaryButtonLoading ? "加载中..." : primaryButtonText}
         </PrimaryButton>

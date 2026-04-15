@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
   const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
   return (
     <AntFooter className="game-footer">
-      <div className="footer-container">
+      <div className="footer-container max-w-7xl">
         {/* Left Section: Logo & Socials */}
         <div className="footer-brand">
           <div className="footer-logo">

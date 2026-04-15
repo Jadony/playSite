@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { message, Modal } from "antd";
-import {
-  CloseOutlined,
-  AppleOutlined,
-} from "@ant-design/icons";
+import { CloseOutlined, AppleOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
@@ -181,7 +178,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
         sub: string;
         picture: string;
       }>(jwtToken);
-      
+
       await loginWithGoogle({
         accessToken: jwtToken,
         googleId: userInfo.sub,
@@ -339,7 +336,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
             {/* Social Login Icons */}
             {currentType !== "googleLogin" && (
               <div className="social-login mt-8">
-                <div className="social-icon google" style={{ padding: 0, border: "none" }}>
+                <div
+                  className="social-icon google"
+                  style={{ padding: 0, border: "none" }}
+                >
                   <GoogleLogin
                     type="icon"
                     shape="circle"

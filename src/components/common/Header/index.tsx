@@ -12,6 +12,7 @@ import { allGames, hotGames } from "@/api/game";
 import { message } from "antd";
 import { useAllGamesAndSelectDispatchContext } from "@/store/gameStore";
 import { getCountryAll } from "@/api/user";
+import "./style.css";
 
 const Header: React.FC = () => {
   const location = useLocation();
@@ -155,7 +156,7 @@ const Header: React.FC = () => {
   return (
     <>
       {/* 1. FIXED LEFT: LOGO */}
-      <div className="absolute top-6 left-8 z-50 animate-fade-in">
+      <div className="fixed top-6 left-8 z-[60] animate-fade-in pointer-events-auto">
         <Link to="/" className="flex items-center gap-2 group">
           <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 backdrop-blur-md shadow-[inset_0_0_10px_rgba(255,255,255,0.1)] group-hover:bg-white/10 transition-all">
             <span className="text-xl">⚡</span>
@@ -167,8 +168,8 @@ const Header: React.FC = () => {
       </div>
 
       {/* 2. FIXED CENTER: MENU ONLY */}
-      <div className="absolute top-0 left-0 right-0 z-40 flex justify-center pt-6 px-4 pointer-events-none">
-        <div className="pointer-events-auto h-14 flex items-center justify-center transition-all duration-300 px-2 glass-gradient-border">
+      <div className="fixed top-0 left-0 right-0 z-[55] flex justify-center pt-6 px-4 pointer-events-none">
+        <div className="pointer-events-auto h-12 flex items-center justify-center transition-all duration-300 px-2 bg-gradient-to-b from-[#121215] to-[#1d1e21] rounded-full glass-gradient-border">
           <div className="flex items-center gap-1">
             {menuItems.map((item) => (
               <div key={item.key} className="relative">
@@ -183,7 +184,7 @@ const Header: React.FC = () => {
                     className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 relative group flex items-center gap-1 cursor-pointer select-none ${
                       isActive(item.path)
                         ? "text-black bg-white shadow-lg scale-105"
-                        : "text-white"
+                        : "text-white/80 hover:text-white hover:bg-white/10"
                     }`}
                   >
                     {item.label}
@@ -213,7 +214,7 @@ const Header: React.FC = () => {
                     className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 relative group flex items-center gap-1 ${
                       isActive(item.path)
                         ? "text-black bg-white shadow-lg scale-105"
-                        : "text-white"
+                        : "text-white/80 hover:text-white hover:bg-white/10"
                     }`}
                   >
                     {item.key === "/invite" && (
@@ -229,7 +230,7 @@ const Header: React.FC = () => {
       </div>
 
       {/* 3. FIXED RIGHT: USER ACTIONS */}
-      <div className="absolute top-6 right-8 z-50 flex items-center gap-4 animate-fade-in">
+      <div className="fixed top-6 right-8 z-[60] flex items-center gap-4 animate-fade-in pointer-events-auto">
         <div className="hidden lg:flex items-center gap-6 mr-2">
           <div className="relative" ref={langRef}>
             <div
@@ -285,18 +286,43 @@ const Header: React.FC = () => {
 
             {/* Language Dropdown */}
             {showLang && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-32 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-xl py-2 animate-fade-in z-50 backdrop-blur-md">
-                {unitAndLanguageList?.map((item) => (
-                  <div
-                    key={item.id}
-                    onClick={() => {
-                      changeLanguage(item.displayLanguage);
-                    }}
-                    className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${selectLanguage === item.displayLanguage ? "text-white font-bold" : "text-gray-400"}`}
-                  >
-                    {item.displayLanguage}
-                  </div>
-                ))}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 p-2 w-[140px] bg-[#1e1e1e] border border-white/5 rounded-2xl shadow-2xl animate-fade-in z-50 backdrop-blur-xl">
+                <div className="flex flex-col gap-1">
+                  {unitAndLanguageList?.map((item) => {
+                    const isActive = selectLanguage === item.displayLanguage;
+                    return (
+                      <div
+                        key={item.id}
+                        onClick={() => {
+                          changeLanguage(item.displayLanguage);
+                        }}
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm cursor-pointer transition-all duration-200 ${
+                          isActive
+                            ? "bg-white/10 text-white font-medium"
+                            : "text-gray-400 hover:text-white hover:bg-white/5"
+                        }`}
+                      >
+                        <svg
+                          width="14"
+                          height="10"
+                          viewBox="0 0 14 10"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className={`${isActive ? "opacity-100" : "opacity-0"} shrink-0`}
+                        >
+                          <path
+                            d="M1 5L5 9L13 1"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        <span>{item.displayLanguage}</span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             )}
           </div>
@@ -333,27 +359,54 @@ const Header: React.FC = () => {
 
             {/* Currency Dropdown */}
             {showCurrency && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-24 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-xl py-2 animate-fade-in z-50 backdrop-blur-md">
-                {unitAndLanguageList?.map((curr) => (
-                  <div
-                    key={curr.currency}
-                    onClick={() => {
-                      languageDispatch({
-                        type: "setSelectUnit",
-                        payload: {
-                          selectUnit: {
-                            currency: curr.currency,
-                            unit: curr.unit,
-                          },
-                        },
-                      });
-                      setShowCurrency(false);
-                    }}
-                    className={`px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition-colors ${selectUnit?.currency === curr.currency ? "text-white font-bold" : "text-gray-400"}`}
-                  >
-                    {curr.unit} {curr.currency}
-                  </div>
-                ))}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 p-2 w-[140px] bg-[#1e1e1e] border border-white/5 rounded-2xl shadow-2xl animate-fade-in z-50 backdrop-blur-xl">
+                <div className="flex flex-col gap-1">
+                  {unitAndLanguageList?.map((curr) => {
+                    const isActive = selectUnit?.currency === curr.currency;
+                    return (
+                      <div
+                        key={curr.currency}
+                        onClick={() => {
+                          languageDispatch({
+                            type: "setSelectUnit",
+                            payload: {
+                              selectUnit: {
+                                currency: curr.currency,
+                                unit: curr.unit,
+                              },
+                            },
+                          });
+                          setShowCurrency(false);
+                        }}
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm cursor-pointer transition-all duration-200 ${
+                          isActive
+                            ? "bg-white/10 text-white font-medium"
+                            : "text-gray-400 hover:text-white hover:bg-white/5"
+                        }`}
+                      >
+                        <svg
+                          width="14"
+                          height="10"
+                          viewBox="0 0 14 10"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className={`${isActive ? "opacity-100" : "opacity-0"} shrink-0`}
+                        >
+                          <path
+                            d="M1 5L5 9L13 1"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        <span>
+                          {curr.unit} {curr.currency}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             )}
           </div>
@@ -371,7 +424,7 @@ const Header: React.FC = () => {
         ) : (
           <button
             onClick={() => setLoginModalVisible(true)}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-white/90 hover:text-white font-medium text-sm hover:bg-[#2a2a2a] transition-all glass-gradient-border"
+            className="home-sign-up flex items-center gap-2 px-6 py-2.5 rounded-full text-white/90 hover:text-white font-medium text-sm hover:bg-[#2a2a2a] transition-all glass-gradient-border"
           >
             <svg
               width="16"

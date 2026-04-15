@@ -159,13 +159,13 @@ const GameSelector: React.FC = () => {
         {/* Navigation Buttons */}
         <button
           onClick={handlePrev}
-          className="absolute left-4 md:left-24 z-50 w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:scale-110 transition-all backdrop-blur-sm"
+          className="game-selector-btn game-selector-left absolute left-4 md:left-24 z-50 w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:scale-110 transition-all backdrop-blur-sm glass-gradient-border"
         >
           <LeftOutlined style={{ fontSize: "20px" }} />
         </button>
         <button
           onClick={handleNext}
-          className="absolute right-4 md:right-24 z-50 w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:scale-110 transition-all backdrop-blur-sm"
+          className="game-selector-btn game-selector-right absolute right-4 md:right-24 z-50 w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:scale-110 transition-all glass-gradient-border"
         >
           <RightOutlined style={{ fontSize: "20px" }} />
         </button>

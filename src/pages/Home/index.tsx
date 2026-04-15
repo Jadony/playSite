@@ -51,7 +51,7 @@ const Home: React.FC = () => {
       </div>
 
       {/* 4. FAQ Area */}
-      <section className="container mx-auto px-4 md:px-12 lg:px-24 pt-12">
+      <section className="max-w-7xl container mx-auto pt-12">
         <FAQSection />
       </section>
       {isModalOpen ? (

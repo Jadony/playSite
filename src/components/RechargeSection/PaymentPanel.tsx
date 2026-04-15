@@ -371,6 +371,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
             variant="primary"
             size="large"
             fullWidth
+            disabled={!selectGameItem?.id}
             onClick={handleTradeBtn}
           >
             <span className="text-base">

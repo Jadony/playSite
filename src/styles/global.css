@@ -108,12 +108,13 @@ body {
 /* Utility class for Glassmorphism with Gradient Border */
 @layer utilities {
   .glass-gradient-border {
-    background: rgba(24, 24, 28, 0.5);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-radius: 100px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    position: relative;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.01),
+      rgba(255, 255, 255, 0.05)
+    );
     border: none !important;
   }
 
@@ -123,13 +124,29 @@ body {
     inset: 0;
     border-radius: 100px;
     padding: 1px;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.6) 0%,
-      rgba(255, 255, 255, 0.1) 80px,
-      rgba(255, 255, 255, 0.1) calc(100% - 80px),
-      rgba(255, 255, 255, 0.6) 100%
-    );
+    background: 
+      /* Top-Left Curve: large glow pushing right and slightly down */
+      radial-gradient(
+        ellipse 30px 45px at 0% 0%,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      /* Bottom-Right Curve: medium glow pushing left and slightly up */
+        radial-gradient(
+          ellipse 30px 40px at 100% 100%,
+          rgba(255, 255, 255, 0.8) 0%,
+          rgba(255, 255, 255, 0) 100%
+        ),
+      /* Top & Bottom continuous faint border */
+        linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0) 0px,
+          rgba(255, 255, 255, 0) 0px,
+          rgba(255, 255, 255, 0.1) 90px,
+          rgba(255, 255, 255, 0.1) calc(100% - 90px),
+          rgba(255, 255, 255, 0) calc(100% - 0px),
+          rgba(255, 255, 255, 0) 100%
+        );
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);

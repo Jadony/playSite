@@ -2,7 +2,7 @@ import "./style.css";
 
 const About = () => {
   return (
-    <div className="about-wrap flex flex-col w-full text-white bg-[#000]">
+    <div className="about-wrap flex flex-col max-w-7xl text-white bg-[#000]">
       {/* Hero Section */}
       <div className="w-[1280px] mx-auto">
         <div className="relative w-full h-[1400px] bg-cover bg-center flex flex-col justify-center items-start px-10 md:px-20 lg:px-40">

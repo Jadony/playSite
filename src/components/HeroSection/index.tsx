@@ -21,7 +21,7 @@ const HeroSection: React.FC = () => {
       ),
       image:
         "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/sectionImg.png",
-      cta: t("singUp"),
+      cta: t("home.section.singUp"),
       link: "/invite",
     },
     {
@@ -81,7 +81,7 @@ const HeroSection: React.FC = () => {
                   <div className="pt-4">
                     <PrimaryButton
                       onClick={() => navigate(slide.link)}
-                      className="banner-btn absolute px-10 py-4 rounded-full text-white font-bold text-2xl hover:scale-105 z-20"
+                      className="banner-btn absolute px-10 py-4 rounded-full text-white font-bold text-base hover:scale-105 z-20"
                     >
                       {slide.cta}
                     </PrimaryButton>

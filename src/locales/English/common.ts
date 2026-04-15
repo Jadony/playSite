@@ -14,6 +14,7 @@ export default {
       startingBenefits: "Starting benefits",
       startingBenefitsSubFirst: "The lowest price, hi play, unlimited",
       startingBenefitsSubSecond: "Register now to enjoy the newbie gift",
+      singUp: "Sing Up",
     },
     search: {
       searchForGameNamesOrKeywords: "Search for game names or keywords",

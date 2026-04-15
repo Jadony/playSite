@@ -9,6 +9,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { getPurchasedGames } from "@/api/user";
 import { useAuthContext } from "@/store/authStore";
+import "./style.css";
 
 const GameSearch: React.FC = () => {
   const { t } = useTranslation();
@@ -93,7 +94,7 @@ const GameSearch: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="sticky top-0 z-50 w-full py-4 flex flex-col items-center gap-4 backdrop-blur-md transition-all"
+      className="sticky top-[80px] z-50 w-full py-4 flex flex-col items-center gap-4 backdrop-blur-md transition-all"
     >
       <div className="relative flex items-center gap-4 w-full max-w-3xl px-4">
         {/* Search Input */}
@@ -228,13 +229,13 @@ const GameSearch: React.FC = () => {
                 },
               });
             }}
-            className="flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+            className="game-search-tag flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-all glass-gradient-border"
             style={{
               border: "0.5px solid rgba(255, 255, 255, 0.8)",
               backgroundColor:
                 game.gameId === selectGame?.gameId
                   ? "rgba(255, 255, 255, 0.1)"
-                  : "rgba(255, 255, 255, 0.05)",
+                  : "",
             }}
           >
             {!game.purchased ? <span>🔥</span> : <span>✓</span>}
