@@ -3,7 +3,12 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { message } from "antd";
 import { useTranslation } from "react-i18next";
-import { loginEmail, loginGoogle, registerEmail } from "@/api/user";
+import {
+  getUserInfo,
+  loginEmail,
+  loginGoogle,
+  registerEmail,
+} from "@/api/user";
 
 type AuthContextType = {
   user: User | null;
@@ -30,16 +35,23 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // 初始化：检查 localStorage 是否有登录态
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userInfo = localStorage.getItem("user");
-
-    if (token && userInfo) {
-      // 验证 token 是否有效（可在此处发起验证请求）
-      setUser(JSON.parse(userInfo));
+  const checkLoginAuth = async () => {
+    try {
+      const { data } = await getUserInfo();
+      if (data.code === 200) {
+        const userInfo = localStorage.getItem("user");
+        setUser(JSON.parse(userInfo || "{}"));
+      }
+    } catch (error) {
+      logout();
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
+  };
+
+  // 初始化：检查登录态
+  useEffect(() => {
+    checkLoginAuth();
   }, []);
 
   const registerEmailLogin = async (
