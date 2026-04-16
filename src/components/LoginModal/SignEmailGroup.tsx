@@ -38,13 +38,14 @@ const SignEmailGroup: React.FC<SignEmailGroupProps> = ({
   };
 
   const handleSendEmailCode = async () => {
+    if (isSend) return;
     try {
       const { data } = await sendEmailCode({
         email,
         scene: "REGISTER",
       });
       if (data.data) {
-        message.success("success");
+        // message.success("success");
         setIsSend(true);
         setTime(60);
       } else {
@@ -54,6 +55,10 @@ const SignEmailGroup: React.FC<SignEmailGroupProps> = ({
       message.error("error");
     }
   };
+
+  useEffect(() => {
+    handleSendEmailCode();
+  }, []);
 
   useEffect(() => {
     if (isSend) {
