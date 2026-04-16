@@ -1,0 +1,12 @@
+.recharge-section-container::before {
+  content: "";
+  position: absolute;
+  width: 20%;
+  height: 30%;
+  top: 50%;
+  left: 60%;
+  background-color: #003dcc;
+  opacity: 1;
+  filter: blur(170px);
+  z-index: 0;
+}

@@ -1,3 +1,16 @@
+.game-selector-container::before {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 20%;
+  top: 40%;
+  left: 20%;
+  background-color: #003dcc;
+  opacity: 0.3;
+  filter: blur(170px);
+  z-index: 0;
+}
+
 .card-wrap {
   cursor: pointer;
   clip-path: inset(-200px -200px 2px -200px);

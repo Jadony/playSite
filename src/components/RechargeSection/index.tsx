@@ -5,6 +5,7 @@ import { gameDetail } from "@/api/game";
 import { useAllGamesAndSelectContext } from "@/store/gameStore";
 import { message } from "antd";
 import { useLanguageContext } from "@/store/languageStore";
+import "./style.css";
 
 const RechargeSection: React.FC = () => {
   const [selectGameItem, setSelectGameItem] = useState<GameItem | null>(null);
@@ -32,7 +33,7 @@ const RechargeSection: React.FC = () => {
   }, [selectGame, selectUnit]);
 
   return (
-    <section className="w-full max-w-[1280px] mx-auto">
+    <section className="relative recharge-section-container w-full max-w-[1280px] mx-auto">
       <div className="flex justify-between">
         {/* LEFT SIDEBAR: Payment Panel */}
         <div className="w-[315px]">

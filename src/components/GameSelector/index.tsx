@@ -152,7 +152,7 @@ const GameSelector: React.FC = () => {
 
   return (
     <section
-      className="w-full px-4 relative z-20 overflow-hidden pt-20 pb-60"
+      className="w-full px-4 relative z-20 overflow-hidden pt-20 pb-60 game-selector-container"
       id="gameSelector"
     >
       <div className="max-w-7xl mx-auto h-[500px] relative flex items-center justify-center">

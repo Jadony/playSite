@@ -40,7 +40,7 @@ const FAQSection: React.FC<FAQSectionProps> = () => {
     },
   ];
   return (
-    <div className="faq-section">
+    <div className="faq-section relative">
       <h2 className="faq-title">FAQ</h2>
       {defaultFAQItems.map((item, index) => (
         <div key={index} className="faq-item">
