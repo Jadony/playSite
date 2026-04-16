@@ -29,6 +29,10 @@ const RechargeSection: React.FC = () => {
   };
 
   useEffect(() => {
+    setSelectGameItem(null);
+  }, [selectGame]);
+
+  useEffect(() => {
     getGameItemList();
   }, [selectGame, selectUnit]);
 

@@ -347,7 +347,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
               }}
             >
               {selectUnit?.unit}{" "}
-              {isAuthenticated
+              {isAuthenticated && selectGameItem?.id
                 ? calculateData?.finalPrice
                 : selectGameItem?.bubblePrice}
             </span>
