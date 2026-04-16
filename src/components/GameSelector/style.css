@@ -1,12 +1,12 @@
 .game-selector-container::before {
   content: "";
   position: absolute;
-  width: 60%;
+  width: 30%;
   height: 20%;
   top: 40%;
-  left: 20%;
+  left: 35%;
   background-color: #003dcc;
-  opacity: 0.3;
+  opacity: 0.6;
   filter: blur(170px);
   z-index: 0;
 }
