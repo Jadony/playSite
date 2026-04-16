@@ -26,7 +26,7 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <div className="relative">
+    <div className="relative glass-gradient-border rounded-full">
       <div className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-white">
         {svgEl}
       </div>
@@ -36,7 +36,7 @@ const Input: React.FC<InputProps> = ({
         value={value}
         type={type}
         placeholder={placeholder}
-        className="login-input w-full bg-white/5 border border-white rounded-full py-3.5 pl-12 pr-12 text-base text-white focus:outline-none focus:border-white transition-colors"
+        className="bg-black/5 login-input w-full rounded-full py-3.5 pl-12 pr-12 text-base text-white focus:outline-none focus:border-white"
       />
       {hasSendBtn && (
         <div

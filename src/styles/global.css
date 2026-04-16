@@ -110,11 +110,13 @@ body {
   .glass-gradient-border {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    background: linear-gradient(
-      to right bottom,
-      rgba(255, 255, 255, 0.01),
-      rgba(255, 255, 255, 0.05)
-    );
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow:
+      -20px 68px 20px 0 rgba(0, 0, 0, 0),
+      -13px 43px 18px 0 rgba(0, 0, 0, 0.01),
+      -7px 24px 15px 0 rgba(0, 0, 0, 0.04),
+      -3px 11px 11px 0 rgba(0, 0, 0, 0.07),
+      -1px 3px 6px 0 rgba(0, 0, 0, 0.08);
     border: none !important;
   }
 

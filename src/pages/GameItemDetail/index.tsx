@@ -41,7 +41,7 @@ const GameItemDetail = () => {
     <section className="w-full max-w-[1280px] mx-auto">
       <div style={{ padding: "140px 0 50px 0" }}>
         <div
-          className="flex justify-between game-detail-img"
+          className="relative flex justify-between game-detail-img"
           style={
             {
               "--behindBgImage": `url('${itemsData?.behindBgImage}')`,
@@ -50,7 +50,11 @@ const GameItemDetail = () => {
         >
           <RecentOrders recentOrders={recentOrders} />
           <div>
-            <img className="h-[326px]" src={itemsData?.frontBgImage} alt="" />
+            <img
+              className="max-h-[326px]"
+              src={itemsData?.frontBgImage}
+              alt=""
+            />
           </div>
         </div>
         <div className="flex justify-between">
