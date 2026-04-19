@@ -102,7 +102,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         localStorage.setItem("user", JSON.stringify(data.data));
         callback?.();
       } else {
-        message.error(t("common.incorrectEmailOrPassword"));
+        message.error(t("loginOrSignUpModal.incorrectEmailOrPassword"));
       }
     } catch (error: any) {
       message.error(error.message);

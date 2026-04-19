@@ -1,7 +1,7 @@
 import Input from "./Input";
 import { useTranslation } from "react-i18next";
 import PrimaryButton from "../PrimaryButton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
@@ -25,9 +25,10 @@ const LoginGroup: React.FC<LoginGroupProps> = ({
   const [loginError, setLoginError] = useState("");
   const { t } = useTranslation();
 
-  useEffect(() => {
+  const checkLoginAccountAndPassword = () => {
     if (account && accountPwd) {
       setLoginError("");
+      handleLogin();
       return;
     }
     if (!account) {
@@ -38,7 +39,7 @@ const LoginGroup: React.FC<LoginGroupProps> = ({
       setLoginError(t("loginOrSignUpModal.pleaseEnterPassword"));
       return;
     }
-  }, [account, accountPwd]);
+  };
   return (
     <div className="login-form mt-14">
       <div className="">
@@ -113,8 +114,8 @@ const LoginGroup: React.FC<LoginGroupProps> = ({
         )}
       </div>
       <PrimaryButton
-        disabled={!!loginError || loading}
-        onClick={handleLogin}
+        disabled={loading}
+        onClick={checkLoginAccountAndPassword}
         fontSize="14px"
       >
         <Spin

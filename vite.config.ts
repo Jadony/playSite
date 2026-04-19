@@ -30,7 +30,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/front": {
-        target: "http://124.220.2.226:8088",
+        target: "http://38.76.150.127:8088",
         changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/front/, ""),
       },

@@ -45,7 +45,10 @@ const GoogleLoginGroup: React.FC<GoogleLoginGroupProps> = ({
           />
         </div>
       </div>
-      <div className="w-full flex justify-center">
+      <div 
+        className="w-full flex justify-center" 
+        style={{ colorScheme: "light", borderRadius: "4px", overflow: "hidden" }}
+      >
         <GoogleLogin
           width="326px"
           theme="filled_black"
