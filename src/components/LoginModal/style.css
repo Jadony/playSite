@@ -111,6 +111,13 @@
   transition: all 0.3s ease;
   color: white;
   font-size: 18px;
+  overflow: hidden; /* Force perfectly round cropping */
+}
+
+/* Force Google's 40x40 fallback square to scale up and fill the 48px wrapper perfectly */
+.social-login .social-icon.google > div {
+  transform: scale(1.25);
+  transform-origin: center;
 }
 
 .social-login .social-icon:hover {
