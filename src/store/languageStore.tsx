@@ -79,7 +79,7 @@ const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
       currency: "",
       unit: "",
     },
-    selectLanguage: "",
+    selectLanguage: localStorage.getItem("selectLanguage") || "",
     unitAndLanguageList: [],
   });
   return (

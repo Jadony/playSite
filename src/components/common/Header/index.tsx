@@ -48,7 +48,8 @@ const Header: React.FC = () => {
           currency: currentCurrency,
           unit: currentUnit,
         },
-        selectLanguage: currentLanguage,
+        selectLanguage:
+          localStorage.getItem("selectLanguage") || currentLanguage,
       },
     });
   };
@@ -130,7 +131,7 @@ const Header: React.FC = () => {
     if (!selectUnit?.currency) return;
     getHotGames();
     getAllGames();
-  }, [selectUnit?.currency]);
+  }, [selectUnit?.currency, selectLanguage]);
 
   const isActive = (path: string) => location.pathname === path;
 
