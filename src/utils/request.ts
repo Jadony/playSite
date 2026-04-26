@@ -14,6 +14,7 @@ axios.interceptors.request.use(
     if (token) {
       config.headers.Authorization = token;
     }
+    config.headers.language = localStorage.getItem("selectLanguage") || "en-US";
     return config;
   },
   (error) => {

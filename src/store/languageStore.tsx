@@ -43,6 +43,10 @@ const languageReducer = (
 ) => {
   switch (action.type) {
     case "setSelectLanguage":
+      localStorage.setItem(
+        "selectLanguage",
+        action.payload.selectLanguage || "",
+      );
       return {
         ...state,
         selectLanguage: action.payload.selectLanguage,
