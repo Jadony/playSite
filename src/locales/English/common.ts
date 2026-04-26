@@ -33,7 +33,7 @@ export default {
       gameId: "Game ID",
       quantity: "Quantity",
       price: "Price",
-      savings: "Savings",
+      offAlready: "off already",
       viewingItems: "Viewing items",
       of: "of",
       displayingPage: "Displaying page",

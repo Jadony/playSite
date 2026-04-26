@@ -10,9 +10,15 @@ import { redeemInOrder } from "@/api/user";
 import CouponExchangeSuccess from "../CouponExchangeSuccess";
 import CouponExchangeErr from "../CouponExchangeErr";
 import { message } from "antd";
-import { availableForOrder, calculate, recentOrders } from "@/api/payment";
+import {
+  availableForOrder,
+  calculate,
+  createOrder,
+  recentOrders,
+} from "@/api/payment";
 import { useLanguageContext } from "@/store/languageStore";
 import CommonModal from "../CommonModal";
+import PriceDetailModal from "../PriceDetailModal";
 
 type PaymentPanelProps = {
   selectGameItem: GameItem | null;
@@ -45,20 +51,31 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
   const [calculateData, setCalculateData] =
     useState<CalculateResponseData | null>(null);
   const [showHelpModal, setShowHelpModal] = useState(false);
+  const [priceDetailVisible, setPriceDetailVisible] = useState(false);
   const { isAuthenticated } = useAuthContext();
   const { selectUnit } = useLanguageContext();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleTradeBtn = () => {
+  const handleTradeBtn = async () => {
     if (!isAuthenticated) {
       setLoginModalVisible(true);
       return;
     }
-    navigate(`/payment/${selectGameItem?.id}`, {
-      state: { from: location.pathname },
-    });
+    try {
+      const { data } = await createOrder({
+        skuId: selectGameItem?.id || 0,
+        couponUserId: selectedCoupon?.id,
+        uId: uid || "",
+        serverInfo: selectedServerType?.name || "",
+      });
+      navigate(`/payment/${data.data.orderNo}`, {
+        state: { from: location.pathname },
+      });
+    } catch (error) {
+      message.error("error");
+    }
   };
 
   const exchangeOnClick = async (code: string) => {
@@ -111,7 +128,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
   const getRecentOrders = async () => {
     try {
       const { data } = await recentOrders({
-        skuId: selectGameItem?.id || 0,
+        skuId: selectGameItem?.id || -1,
       });
       setRecentOrdersData(data.data);
       setRecentOrders?.(data.data);
@@ -121,9 +138,10 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
   };
 
   useEffect(() => {
-    if (!selectGameItem) return;
-    getCalculateData();
-    setSelectedServerType(null);
+    if (selectGameItem) {
+      getCalculateData();
+      setSelectedServerType(null);
+    }
     getRecentOrders();
   }, [selectGameItem]);
 
@@ -195,7 +213,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
           </label>
           <div className="transition-colors">
             <span className="text-sm text-white">
-              {selectGameItem?.goodsName}
+              {selectGameItem?.skuNames}
             </span>
           </div>
         </div>
@@ -353,17 +371,19 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
             </span>
             {isAuthenticated && selectGameItem?.id && (
               <span
-                className="text-sm text-gray-500 cursor-pointer"
+                className="text-sm text-white/50 cursor-pointer"
                 onClick={() => {
                   if (!isAuthenticated) {
                     setLoginModalVisible(true);
                     return;
                   }
-                  setCouponModalVisible(true);
+                  setPriceDetailVisible(true);
+                  // setCouponModalVisible(true);
                 }}
               >
-                {selectUnit?.unit} {calculateData?.totalDiscount}
-                {t("home.selectorAndPayment.savings")} &gt;
+                {selectUnit?.unit}
+                {calculateData?.totalDiscount}&nbsp;
+                {t("home.selectorAndPayment.offAlready")} &gt;
               </span>
             )}
           </div>
@@ -383,6 +403,19 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
       <LoginModal
         visible={loginModalVisible}
         onClose={() => setLoginModalVisible(false)}
+      />
+      <PriceDetailModal
+        visible={priceDetailVisible}
+        originalPrice={calculateData?.originalPrice}
+        platformPrice={calculateData?.platformPrice}
+        couponDiscount={calculateData?.couponDiscount}
+        finalPrice={calculateData?.finalPrice}
+        unit={selectUnit?.unit}
+        openCouponModal={() => {
+          setPriceDetailVisible(false);
+          setCouponModalVisible(true);
+        }}
+        onClose={() => setPriceDetailVisible(false)}
       />
       <CouponModal
         selectedCoupon={selectedCoupon}

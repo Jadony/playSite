@@ -106,7 +106,7 @@ const Payment: React.FC = () => {
         }}
         className="flex items-center text-white hover:text-gray-300 transition-colors mb-8 group"
       >
-        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-3 group-hover:bg-white/20 transition-colors border border-white/30">
+        <div className="payment-return-btn glass-gradient-border w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-3 group-hover:bg-white/20 transition-colors border border-white/30">
           <ArrowLeft size={18} />
         </div>
         <span className="text-xl font-medium">Return a list of products</span>

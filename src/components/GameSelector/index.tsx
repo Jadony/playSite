@@ -188,7 +188,9 @@ const GameSelector: React.FC = () => {
                     // We use margins to center the element itself before transforms
                     marginLeft: "-144px", // half of w-72
                     marginTop: "-192px", // half of h-96
-                    "--footerImage": `url('${game.spine?.footerImage}')`,
+                    "--footerImage": isActive
+                      ? `url('${game.spine?.footerImage}')`
+                      : "",
                   } as React.CSSProperties
                 }
                 onClick={() => changeSelectGame(game, index)}
@@ -214,7 +216,7 @@ const GameSelector: React.FC = () => {
                       height={493} // Increase height to fit the character
                       scale={0.7}
                       playing={isActive}
-                      offsetY={180}
+                      offsetY={170}
                     />
                   </div>
 

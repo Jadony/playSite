@@ -350,3 +350,14 @@ type RecentOrdersResponseData = {
   nickname: string;
   finishedTime: string;
 };
+
+type CreateOrderParams = {
+  skuId: number;
+  couponUserId?: number;
+  uId?: string;
+  serverInfo?: string;
+};
+
+type CreateOrderResponseData = {
+  orderNo: string;
+};
