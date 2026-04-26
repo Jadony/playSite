@@ -119,7 +119,9 @@ const CouponModal: React.FC<CouponModalProps> = ({
       footer={
         <div className="flex items-center justify-between pt-9 pb-4 px-3.5 border-t border-white/10">
           <div>
-            <div className="text-xs">共计优惠</div>
+            <div className="text-xs">
+              {t("home.selectorAndPayment.totalSavings")}
+            </div>
             <div
               className="text-2xl mt-2.5 font-black italic"
               style={{
@@ -135,7 +137,7 @@ const CouponModal: React.FC<CouponModalProps> = ({
             </div>
           </div>
           <PrimaryButton className="text-base" onClick={onClose}>
-            Confirm
+            {t("home.userCenter.confirm")}
           </PrimaryButton>
         </div>
       }

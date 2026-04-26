@@ -11,6 +11,7 @@ import {
 } from "@/api/user";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useLanguageContext } from "@/store/languageStore";
 
 const PurchaseHistory = () => {
   const [curType, setCurType] = useState("ALL");
@@ -20,6 +21,7 @@ const PurchaseHistory = () => {
     null,
   );
   const [loading, setLoading] = useState(false);
+  const { selectUnit, selectLanguage } = useLanguageContext();
   const navigate = useNavigate();
 
   const getUserOrderList = async () => {
@@ -75,7 +77,7 @@ const PurchaseHistory = () => {
 
   useEffect(() => {
     getUserOrderList();
-  }, [curType]);
+  }, [curType, selectUnit?.unit, selectLanguage]);
 
   const changePurchaseType = (type: string) => {
     setCurType(type);
@@ -156,6 +158,7 @@ const PurchaseHistory = () => {
             status={curOrder?.status}
             product={curOrder}
             orderInfo={curOrder}
+            unit={selectUnit?.unit || ""}
             onPayNow={onPayNow}
             onCancelOrder={() => getOrderCancel(curOrder?.orderNo || "")}
             onRefresh={() => getOrderRefresh(curOrder?.orderNo || "")}

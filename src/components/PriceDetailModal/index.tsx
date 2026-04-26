@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import CommonModal from "../CommonModal";
 
 interface PriceDetailModalProps {
@@ -22,23 +23,30 @@ const PriceDetailModal: React.FC<PriceDetailModalProps> = ({
   unit,
   openCouponModal,
 }) => {
+  const { t } = useTranslation();
   const content = (
     <div className="flex flex-col pt-2 pb-2">
       <div className="flex flex-col gap-6">
         <div className="flex justify-between items-center text-sm">
-          <span className="text-[#d1d1d1]">官方价格</span>
+          <span className="text-[#d1d1d1]">
+            {t("userCenter.officialPrice")}
+          </span>
           <span className="text-white text-base">
             {unit} {originalPrice}
           </span>
         </div>
         <div className="flex justify-between items-center text-sm">
-          <span className="text-[#d1d1d1]">平台价格</span>
+          <span className="text-[#d1d1d1]">
+            {t("home.selectorAndPayment.platformPrice")}
+          </span>
           <span className="text-[#E700FF] text-base">
             {unit} {platformPrice}
           </span>
         </div>
         <div className="flex justify-between items-center text-sm">
-          <span className="text-[#d1d1d1]">优惠减免</span>
+          <span className="text-[#d1d1d1]">
+            {t("home.selectorAndPayment.discountSavings")}
+          </span>
           <span
             className="text-[#E700FF] text-base flex items-center cursor-pointer"
             onClick={openCouponModal}
@@ -65,7 +73,9 @@ const PriceDetailModal: React.FC<PriceDetailModalProps> = ({
       </div>
 
       <div className="mt-8 bg-[#3c3c3c] rounded-xl flex justify-between items-center px-5 py-4">
-        <span className="text-[#e2e2e2] text-base">实付价格</span>
+        <span className="text-[#e2e2e2] text-base">
+          {t("home.selectorAndPayment.finalPrice")}
+        </span>
         <span
           className="text-xl italic font-black text-[#E700FF] flex items-baseline"
           style={{
@@ -90,7 +100,11 @@ const PriceDetailModal: React.FC<PriceDetailModalProps> = ({
     <CommonModal
       visible={visible}
       onClose={onClose}
-      title={<span className="text-lg">优惠详情</span>}
+      title={
+        <span className="text-lg">
+          {t("home.selectorAndPayment.discountDetails")}
+        </span>
+      }
       content={content}
       footer={null}
       width={400}

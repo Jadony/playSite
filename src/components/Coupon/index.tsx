@@ -163,12 +163,12 @@ const Coupon: React.FC<CouponProps> = ({
             <div
               className={`coupon-discount italic ${!available ? "expiration-opacity" : ""}`}
             >
-              {discount}% OFF
+              {discount}% {t("home.selectorAndPayment.off")}
             </div>
             <div
               className={`coupon-validity ${!available ? "expiration-opacity" : ""}`}
             >
-              Valid for orders over ${minOrder}
+              {t("home.selectorAndPayment.validForOrdersOver")} ${minOrder}
             </div>
             <div
               className={`coupon-save ${!available ? "expiration-opacity" : ""}`}

@@ -33,9 +33,6 @@ const LeaveModal: React.FC<LeaveModalType> = ({ visible, onClose }) => {
           />
           <div className="leave-modal-text">
             <p className="px-4">
-              {t("loginOrSignUpModal.youreOnlyOneStepAway")}
-            </p>
-            <p className="px-4">
               {t(
                 "loginOrSignUpModal.completeRegistrationToReceiveANewUserGiftPack",
               )}

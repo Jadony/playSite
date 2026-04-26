@@ -226,11 +226,11 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
           }}
         >
           <label className="text-sm text-white mb-2 block font-medium">
-            {t("home.selectorAndPayment.rechargeMethod")}
+            {t("home.selectorAndPayment.topUpMethod")}
           </label>
           <div className="transition-colors">
             <span className="text-sm text-white">
-              {t("home.selectorAndPayment.selfServiceRecharge")}
+              {t("home.selectorAndPayment.uidTopUp")}
             </span>
           </div>
         </div>

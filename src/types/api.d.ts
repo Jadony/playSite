@@ -198,6 +198,7 @@ type OrderDetailResponseData = {
   payTime: string;
   completeTime: string;
   remainingPaySeconds: number;
+  skuId: string;
 };
 
 type OrderStatus =

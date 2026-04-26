@@ -7,6 +7,7 @@ import {
   CheckCircle2,
   XCircle,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import CommonModal from "../CommonModal";
 import PrimaryButton from "../PrimaryButton";
 
@@ -23,6 +24,7 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
 }) => {
   const [status, setStatus] = useState<PaymentState>("verifying");
   const [countdown, setCountdown] = useState(5);
+  const { t } = useTranslation();
 
   // 初始化重置状态
   useEffect(() => {
@@ -65,7 +67,9 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
         <div className="flex items-center gap-4 transition-all duration-300 text-gray-500">
           <div className="flex items-center gap-4 w-full">
             <CreditCard className="w-6 h-6" strokeWidth={1.5} />
-            <span className="text-[16px]">支付信息已填写</span>
+            <span className="text-[16px]">
+              {t("payment.paymentInformation")}
+            </span>
           </div>
         </div>
 
@@ -81,14 +85,20 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
             <>
               <KeyRound className="w-8 h-8 mb-2" strokeWidth={1.5} />
               <div>
-                <div className="text-[24px] font-bold">支付验证中...</div>
+                <div className="text-[24px] font-bold">
+                  {t("payment.paymentVerification")}
+                </div>
                 <div className="text-[14px] text-[#9cb3c9] mt-1">
-                  正在核对您的银行卡和账户信息
+                  {t("payment.verifyingPaymentInformation")}
                 </div>
               </div>
               <div className="flex gap-4 mt-4 w-full">
-                <button className="flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[16px] cursor-pointer transition-all duration-300 hover:bg-white/10">更换支付方式</button>
-                <button className="flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[16px] cursor-pointer transition-all duration-300 hover:bg-white/10">重新支付</button>
+                <button className="flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[16px] cursor-pointer transition-all duration-300 hover:bg-white/10">
+                  {t("payment.changePaymentMethod")}
+                </button>
+                <button className="flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[16px] cursor-pointer transition-all duration-300 hover:bg-white/10">
+                  {t("payment.rePay")}
+                </button>
               </div>
             </>
           ) : (
@@ -104,7 +114,7 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
           <div className="flex items-center gap-4 transition-all duration-300 text-gray-500">
             <div className="flex items-center gap-4 w-full">
               <CreditCard className="w-6 h-6" strokeWidth={1.5} />
-              <span className="text-[16px]">发货</span>
+              <span className="text-[16px]">{t("payment.delivery")}</span>
             </div>
           </div>
         )}
@@ -113,7 +123,9 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
           <div className="flex flex-col gap-2 my-2.5 items-start text-white transition-all duration-300">
             <PackageSearch className="w-8 h-8 mb-2" strokeWidth={1.5} />
             <div className="w-full">
-              <div className="text-[24px] font-bold">正在发货 ({countdown}s)</div>
+              <div className="text-[24px] font-bold">
+                {t("payment.delivering")} ({countdown}s)
+              </div>
               <div className="w-full h-1.5 bg-[#383838] rounded overflow-hidden mt-2">
                 <div
                   className="h-full bg-gradient-to-r from-[#b122e5] to-[#ff63de] rounded transition-[width] duration-1000 ease-linear"
@@ -137,16 +149,13 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
         {/* Step 4: 订单完成 */}
         {status === "success" && (
           <div className="flex items-center gap-4 mt-4 text-white transition-all duration-300 w-full">
-            <CheckCircle2
-              className="w-8 h-8 mb-0"
-              strokeWidth={1.5}
-            />
+            <CheckCircle2 className="w-8 h-8 mb-0" strokeWidth={1.5} />
             <div>
               <div className="text-[24px] font-bold !m-0 !mr-3 inline-block">
-                订单完成
+                {t("userCenter.orderCompleted")}
               </div>
               <div className="text-[14px] text-[#9cb3c9] mt-1 !m-0 inline-block">
-                您现在可在游戏账号内查看购买商品
+                {t("payment.youCanNowCheckYourPurchasedItemsInYourGameAccount")}
               </div>
             </div>
           </div>
@@ -162,10 +171,12 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
             />
             <div>
               <div className="text-[24px] font-bold text-[#F53F3F] mb-2 !m-0">
-                发货超时
+                {t("payment.timeout")}
               </div>
               <div className="text-[14px] text-[#9cb3c9] leading-relaxed !m-0">
-                客服团队会帮助解决发货问题或帮助返回钱款至您的支付账户
+                {t(
+                  "payment.ourSupportTeamWillHelpResolveDeliveryIssuesOrAssistWithRefundingTheAmountToYourPaymentAccount",
+                )}
               </div>
             </div>
           </div>
@@ -182,7 +193,7 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
               fontSize="18px"
               className="py-4 font-bold"
             >
-              联系客服人员
+              {t("payment.pleaseContactCustomerService")}
             </PrimaryButton>
           </div>
         )}

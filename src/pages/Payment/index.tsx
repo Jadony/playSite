@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Info } from "lucide-react";
 import "./style.css";
 import PrimaryButton from "@/components/PrimaryButton";
 import CouponModal from "@/components/CouponModal";
-import { redeemInOrder } from "@/api/user";
+import { getOrderDetail, redeemInOrder } from "@/api/user";
 import { useLanguageContext } from "@/store/languageStore";
 import CouponExchangeSuccess from "@/components/CouponExchangeSuccess";
 import CouponExchangeErr from "@/components/CouponExchangeErr";
 import { availableForOrder, calculate } from "@/api/payment";
+import { useTranslation } from "react-i18next";
 import { message } from "antd";
 import PaymentModal from "@/components/PaymentModal";
 
@@ -47,8 +48,11 @@ const Payment: React.FC = () => {
   const [coupon, setCoupon] = useState<UserCouponsResponseData | null>(null);
   const [coupons, setCoupons] = useState<UserCouponsResponseData[]>([]);
   const [paymentModalVisible, setPaymentModalVisible] = useState(false);
-  const params = useParams();
+  const [orderDetail, setOrderDetail] =
+    useState<OrderDetailResponseData | null>(null);
+  const { orderId } = useParams();
   const { selectUnit } = useLanguageContext();
+  const { t } = useTranslation();
 
   const exchangeOnClick = async (code: string) => {
     try {
@@ -83,7 +87,7 @@ const Payment: React.FC = () => {
   ) => {
     try {
       const { data } = await calculate({
-        skuId: Number(params.skuId),
+        skuId: Number(orderDetail?.skuId),
         couponId: selectedCoupon?.id,
         quantity: 1,
         currency: selectUnit?.currency,
@@ -95,6 +99,19 @@ const Payment: React.FC = () => {
       message.error("error");
     }
   };
+
+  const getPaymentOrderDetail = async () => {
+    try {
+      const { data } = await getOrderDetail(orderId || "");
+      setOrderDetail(data.data);
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
+  useEffect(() => {
+    getPaymentOrderDetail();
+  }, []);
 
   return (
     <div className="container payment-container mx-auto px-4 md:px-12 lg:px-24 pt-48 pb-20">
@@ -109,7 +126,9 @@ const Payment: React.FC = () => {
         <div className="payment-return-btn glass-gradient-border w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-3 group-hover:bg-white/20 transition-colors border border-white/30">
           <ArrowLeft size={18} />
         </div>
-        <span className="text-xl font-medium">Return a list of products</span>
+        <span className="text-xl font-medium">
+          {t("payment.backToItemList")}
+        </span>
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -130,7 +149,8 @@ const Payment: React.FC = () => {
                   Zenless Zone Zero
                 </h2>
                 <p className="text-white/50 text-sm mb-6">
-                  Area service : International clothing
+                  {t("home.selectorAndPayment.areaService")} : International
+                  clothing
                 </p>
 
                 <div className="flex items-center justify-between">
@@ -252,7 +272,7 @@ const Payment: React.FC = () => {
 
             <div className="p-6 border-t border-[#282836]">
               <button className="text-sm text-white underline">
-                Don't have the payment method you want? &gt;
+                {t("payment.notThePaymentMethodYouPrefer")} &gt;
               </button>
             </div>
           </div>
@@ -262,16 +282,16 @@ const Payment: React.FC = () => {
         <div className="lg:col-span-1">
           <div className="p-6 rounded-2xl bg-white/5 border border-white/20 rounded-2xl">
             <h3 className="text-xl font-bold text-white mb-6">
-              Payment details
+              {t("payment.paymentDetails")}
             </h3>
 
             <div className="space-y-4 mb-6 text-sm">
               <div className="flex justify-between items-center text-white">
-                <span>官方价格</span>
+                <span>{t("userCenter.officialPrice")}</span>
                 <span>$234</span>
               </div>
               <div className="flex justify-between items-center text-white">
-                <span>平台价格</span>
+                <span>{t("home.selectorAndPayment.platformPrice")}</span>
                 <span
                   style={{
                     background:
@@ -285,7 +305,7 @@ const Payment: React.FC = () => {
                 </span>
               </div>
               <div className="flex justify-between items-center text-white">
-                <span>优惠券</span>
+                <span>{t("home.selectorAndPayment.coupons")}</span>
                 <span
                   className="cursor-pointer"
                   onClick={() => setCouponModalVisible(true)}
@@ -308,32 +328,35 @@ const Payment: React.FC = () => {
                 type="text"
                 value={promoCode}
                 onChange={(e) => setPromoCode(e.target.value)}
-                placeholder="Enter the redemption code"
+                placeholder={t("payment.couponCode")}
                 className="flex-1 bg-white/10 border border-transparent rounded-lg px-4 py-2 text-sm text-white placeholder-gray-500 focus:outline-none"
               />
               <button
                 className="bg-white text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors whitespace-nowrap"
                 onClick={() => exchangeOnClick(promoCode)}
               >
-                Confirm
+                {t("payment.redeem")}
               </button>
             </div>
 
             <div className="space-y-4 mb-6 text-sm border-b border-[#282836] pb-6">
               <div className="flex justify-between items-center text-gray-300">
-                <span>优惠总计</span>
+                <span>{t("payment.totalDiscounts")}</span>
                 <span className="text-[#EE22EB]">-$234</span>
               </div>
               <div className="flex justify-between items-center text-gray-300">
                 <span className="flex items-center gap-1">
-                  手续费 <Info size={14} className="text-gray-500" />
+                  {t("payment.paymentFee")}{" "}
+                  <Info size={14} className="cursor-pointer text-gray-500" />
                 </span>
                 <span>-$234</span>
               </div>
             </div>
 
             <div className="flex justify-between items-center mb-6">
-              <span className="text-white font-medium">合计</span>
+              <span className="text-white font-medium">
+                {t("payment.totalAmount")}
+              </span>
               <span className="text-2xl font-bold" style={{ color: "#EE22EB" }}>
                 $ 260.90
               </span>
@@ -344,7 +367,7 @@ const Payment: React.FC = () => {
               onClick={() => setPaymentModalVisible(true)}
               className="w-full py-4 rounded-[73px] text-white font-bold text-lg relative overflow-hidden"
             >
-              Payment
+              {t("userCenter.payNow")}
             </PrimaryButton>
           </div>
         </div>

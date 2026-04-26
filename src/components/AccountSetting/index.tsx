@@ -458,7 +458,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
         </div>
         <div className="relative py-5">
           <div className="text-base font-medium mb-5">
-            Language and currency setting
+            {t("userCenter.languageAndCurrencySettings")}
           </div>
           <div className="flex justify-between">
             <InfoBox

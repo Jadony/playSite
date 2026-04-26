@@ -32,11 +32,11 @@ const LoginGroup: React.FC<LoginGroupProps> = ({
       return;
     }
     if (!account) {
-      setLoginError(t("loginOrSignUpModal.pleaseEnterAccount"));
+      setLoginError(t("loginOrSignUpModal.pleaseEnterEmailAddressOrNickname"));
       return;
     }
     if (!accountPwd) {
-      setLoginError(t("loginOrSignUpModal.pleaseEnterPassword"));
+      setLoginError(t("loginOrSignUpModal.pleaseEnterAccountPassword"));
       return;
     }
   };

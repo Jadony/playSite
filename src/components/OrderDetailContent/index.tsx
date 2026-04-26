@@ -35,9 +35,8 @@ export interface OrderDetailContentProps {
   onGoProcess?: () => void;
   className?: string;
   loading: boolean;
+  unit: string;
 }
-
-const STEPS = ["下单", "支付", "发货", "完成"] as const;
 
 const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
   onClose,
@@ -52,12 +51,19 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
   // onGoProcess,
   className = "",
   loading,
+  unit,
 }) => {
   const config = usePurchaseHistoryStatusConfig()[status || "PENDING"];
   const showCountdown = status === "PENDING" && countdown;
   const showActions = status === "PENDING" || status === "PROCESSING";
   const [curTime, setCurTime] = useState(countdown || 0);
   const { t } = useTranslation();
+  const STEPS = [
+    t("userCenter.order"),
+    t("userCenter.payment"),
+    t("userCenter.delivery"),
+    t("userCenter.completed"),
+  ] as const;
 
   useEffect(() => {
     if (showCountdown && curTime > 0) {
@@ -114,7 +120,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
       <div className="py-5 text-center shrink-0">
         <div
           className={`text-[20px] font-semibold mb-2 leading-6 ${getStatusColor(
-            config.statusColor
+            config.statusColor,
           )}`}
         >
           {config.label}
@@ -189,7 +195,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
               </div>
             </div>
             <div className="flex items-center gap-6 mt-auto flex-wrap">
-               <span className="text-[#949494] text-[14px] font-normal leading-normal">
+              <span className="text-[#949494] text-[14px] font-normal leading-normal">
                 UID：{product?.gameUid}
               </span>
               <span className="text-[#949494] text-[14px] font-normal leading-normal">
@@ -200,14 +206,14 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
           <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:h-[140px] gap-2 shrink-0 w-full sm:w-auto mt-4 sm:mt-0">
             <div className="flex items-center gap-4">
               <span className="text-white text-[20px] font-bold">
-                $ {product?.orderAmount}
+                {unit} {product?.orderAmount}
               </span>
             </div>
             {config.actionTag && (
               <span
                 className={`text-[20px] font-bold ${getStatusColor(
                   config.statusColor,
-                  true
+                  true,
                 )}`}
               >
                 {config.actionTag}

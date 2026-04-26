@@ -1,4 +1,5 @@
 import CommonModal from "../CommonModal";
+import { useTranslation } from "react-i18next";
 
 type CouponExchangeErrProps = {
   visible: boolean;
@@ -9,11 +10,12 @@ const CouponExchangeErr: React.FC<CouponExchangeErrProps> = ({
   visible,
   onClose,
 }) => {
+  const { t } = useTranslation();
   return (
     <CommonModal
       visible={visible}
       onClose={onClose}
-      title="兑换失败"
+      title={t("home.selectorAndPayment.redemptionFailed")}
       content={
         <div>
           <div className="w-[155px] mx-auto" style={{ marginBottom: "8px" }}>
@@ -24,7 +26,7 @@ const CouponExchangeErr: React.FC<CouponExchangeErrProps> = ({
             />
           </div>
           <div className="text-center text-sm text-white">
-            兑换码无效，请检查后重试
+            {t("home.selectorAndPayment.invalidCode")}
           </div>
         </div>
       }
