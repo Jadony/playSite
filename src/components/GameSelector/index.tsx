@@ -74,7 +74,19 @@ const GameSelector: React.FC = () => {
 
   // Calculate 3D styles
   const getCardStyle = (index: number) => {
-    const diff = index - activeIndex;
+    const len = cardShowGameList.length;
+    let diff = index - activeIndex;
+    
+    // Circular logic for seamless looping
+    if (len > 0) {
+      if (diff > len / 2) {
+        diff -= len;
+      } else if (diff < -Math.floor((len - 1) / 2)) {
+        // Use Math.floor((len - 1) / 2) to perfectly handle even and odd number of elements wrapping
+        diff += len;
+      }
+    }
+    
     const absDiff = Math.abs(diff);
 
     const zIndex = 10 - absDiff;
