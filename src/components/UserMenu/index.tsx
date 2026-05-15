@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import { Link } from "react-scroll";
+import { useAuthContext } from "@/store/authStore";
 
 type UserMenuProps = {
   activeMenu: string;
@@ -24,6 +25,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   userName,
   // integral,
 }) => {
+  const { logout } = useAuthContext();
   return (
     <div
       // 关键：添加 relative 和 overflow-hidden
@@ -109,6 +111,44 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 </div>
               </Link>
             ))}
+            <div
+              className="flex px-5 py-2 items-center cursor-pointer hover:bg-white/10 rounded-lg mb-3.5 h-12"
+              onClick={() => {
+                logout();
+                location.href = "/";
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path
+                  d="M6.66699 14.1668L2.50033 10.0002L6.66699 5.8335"
+                  stroke="#FF1111"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M2.5 10H12.5"
+                  stroke="#FF1111"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M12.5 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V4.16667C17.5 3.72464 17.3244 3.30072 17.0118 2.98816C16.6993 2.67559 16.2754 2.5 15.8333 2.5H12.5"
+                  stroke="#FF1111"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <div className="pl-2.5 text-base text-[#FF1111]">退出登录</div>
+            </div>
           </div>
         </div>
       </div>

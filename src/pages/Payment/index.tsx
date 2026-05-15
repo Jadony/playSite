@@ -208,14 +208,14 @@ const Payment: React.FC = () => {
             <div className="flex gap-6 items-start">
               <div className="w-32 h-32 rounded-xl overflow-hidden bg-[#282836] shrink-0">
                 <img
-                  src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=300&q=80"
+                  src={orderDetail?.skuImage}
                   alt="Zenless Zone Zero Backpack"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="flex-1">
                 <h2 className="text-2xl font-bold text-white mb-2">
-                  Zenless Zone Zero
+                  {orderDetail?.skuName}
                 </h2>
                 <p className="text-white/50 text-sm mb-6">
                   {t("home.selectorAndPayment.areaService")} :{" "}
