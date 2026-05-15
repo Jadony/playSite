@@ -7,6 +7,22 @@ const UserAchievement = () => {
   const [achievements, setAchievements] = useState<
     UserAchievementsResponseData[]
   >([]);
+  const scrollbarWidth =
+    window.innerWidth - document.documentElement.clientWidth;
+
+  const disableScroll = () => {
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+  };
+
+  const enableScroll = () => {
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+  };
+  useEffect(() => {
+    disableScroll();
+    return () => enableScroll();
+  }, []);
 
   useEffect(() => {
     getUserAchievements().then((res) => {
@@ -90,11 +106,11 @@ const UserAchievement = () => {
         <CommonModal
           className="p-0 rounded-[25px]"
           visible={visible}
-          width={500}
+          width={450}
           onClose={() => setVisible(false)}
           content={
             <img
-              width={500}
+              width={450}
               src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-userCenter/achievement.png"
               alt=""
             />

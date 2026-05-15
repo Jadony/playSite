@@ -362,3 +362,29 @@ type CreateOrderParams = {
 type CreateOrderResponseData = {
   orderNo: string;
 };
+
+type createPayPalOrderParams = {
+  orderNo: string;
+  currency: string;
+};
+
+type createPayPalOrderData = {
+  orderNo: string;
+  paypalOrderId: string;
+  status: string;
+  approveUrl: string;
+  amount: number;
+  currency: string;
+};
+
+type capturePayPalOrderParams = {
+  orderNo: string;
+  paypalOrderId: string;
+};
+
+type capturePayPalOrderData = {
+  orderNo: string;
+  paypalOrderId: string;
+  captureId: string;
+  status: string;
+};

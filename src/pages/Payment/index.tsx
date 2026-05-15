@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Info } from "lucide-react";
 import "./style.css";
-import PrimaryButton from "@/components/PrimaryButton";
 import CouponModal from "@/components/CouponModal";
 import { getOrderDetail, redeemInOrder } from "@/api/user";
 import { useLanguageContext } from "@/store/languageStore";
@@ -11,7 +10,11 @@ import CouponExchangeErr from "@/components/CouponExchangeErr";
 import { availableForOrder, calculate } from "@/api/payment";
 import { useTranslation } from "react-i18next";
 import { message } from "antd";
-import PaymentModal from "@/components/PaymentModal";
+import PayPalCustomButton from "@/components/PaypalButton";
+import PaymentProgress from "@/components/PaymentProgress";
+import { Timeout } from "ahooks/lib/useRequest/src/types";
+
+// import PaymentModal from "@/components/PaymentModal";
 
 const staticPaymentMethods = [
   { id: "visa-usd", name: "VISA", currency: "USD", price: "$234", icon: "🌐" },
@@ -32,6 +35,13 @@ const staticPaymentMethods = [
   },
 ];
 
+type PaymentState =
+  | "verifying" // 支付中
+  | "shipping" // 发货中
+  | "success" // 发货成功
+  | "failed" // 发货失败
+  | "canceled"; // 支付取消
+
 const Payment: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -47,12 +57,17 @@ const Payment: React.FC = () => {
     useState<CalculateResponseData | null>(null);
   const [coupon, setCoupon] = useState<UserCouponsResponseData | null>(null);
   const [coupons, setCoupons] = useState<UserCouponsResponseData[]>([]);
-  const [paymentModalVisible, setPaymentModalVisible] = useState(false);
+  const [paymentProgressVisible, setPaymentProgressVisible] = useState(false);
+  const [progressStatus, setProgressStatus] =
+    useState<PaymentState>("verifying");
   const [orderDetail, setOrderDetail] =
     useState<OrderDetailResponseData | null>(null);
   const { orderId } = useParams();
   const { selectUnit } = useLanguageContext();
   const { t } = useTranslation();
+
+  // 使用 ref 存储定时器，确保在组件生命周期内唯一且可清理
+  const pollTimerRef = useRef<Timeout | null>(null);
 
   const exchangeOnClick = async (code: string) => {
     try {
@@ -109,12 +124,66 @@ const Payment: React.FC = () => {
     }
   };
 
+  const handlePaymentSuccess = () => {
+    setProgressStatus("shipping");
+  };
+
+  const cancelPayment = () => {
+    setProgressStatus("canceled");
+  };
+
+  const showPaymentProgress = () => {
+    setPaymentProgressVisible(true);
+  };
+
+  useEffect(() => {
+    // 如果订单详情还没加载出来，不进行轮询判断
+    if (!orderDetail || progressStatus !== "shipping") return;
+
+    const status = orderDetail.status;
+    const isFinished = status === "COMPLETED" || status === "REFUNDING";
+
+    // 如果已经结束，清除可能存在的定时器
+    if (isFinished) {
+      if (pollTimerRef.current) {
+        clearTimeout(pollTimerRef.current);
+        pollTimerRef.current = null;
+      }
+
+      // 可选：在这里处理结束后的逻辑，比如跳转或弹窗
+      if (status === "COMPLETED") {
+        setProgressStatus("success");
+      }
+      if (status === "REFUNDING") {
+        setProgressStatus("failed");
+      }
+      return;
+    }
+
+    // 如果没结束，设置定时器继续请求
+    // 先清除旧的定时器防止重叠
+    if (pollTimerRef.current) {
+      clearTimeout(pollTimerRef.current);
+    }
+
+    pollTimerRef.current = setTimeout(() => {
+      getPaymentOrderDetail();
+    }, 1000); // 每 3 秒轮询一次
+
+    // 清理函数：当组件卸载或依赖变化时清除定时器
+    return () => {
+      if (pollTimerRef.current) {
+        clearTimeout(pollTimerRef.current);
+      }
+    };
+  }, [orderDetail, progressStatus]); // 关键：依赖 orderDetail，每次数据更新都会重新评估是否继续
+
   useEffect(() => {
     getPaymentOrderDetail();
   }, []);
 
   return (
-    <div className="container payment-container mx-auto px-4 md:px-12 lg:px-24 pt-48 pb-20">
+    <div className="w-[1280px] payment-container mx-auto pt-48 pb-20">
       {/* Back Button Area */}
       <button
         onClick={() => {
@@ -131,9 +200,9 @@ const Payment: React.FC = () => {
         </span>
       </button>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="flex flex-row gap-[20px] w-full">
         {/* Left Column (Spans 2 columns) */}
-        <div className="lg:col-span-2 space-y-8 bg-white/5 border border-white/20 rounded-2xl">
+        <div className="shrink-0 space-y-8 bg-white/5 border border-white/20 rounded-2xl w-[905px]">
           {/* Product Info Card */}
           <div className="p-6">
             <div className="flex gap-6 items-start">
@@ -149,8 +218,8 @@ const Payment: React.FC = () => {
                   Zenless Zone Zero
                 </h2>
                 <p className="text-white/50 text-sm mb-6">
-                  {t("home.selectorAndPayment.areaService")} : International
-                  clothing
+                  {t("home.selectorAndPayment.areaService")} :{" "}
+                  {orderDetail?.gameServer}
                 </p>
 
                 <div className="flex items-center justify-between">
@@ -164,7 +233,7 @@ const Payment: React.FC = () => {
                       color: "transparent",
                     }}
                   >
-                    $ 260.90
+                    {selectUnit?.unit} {orderDetail?.orderAmount}
                   </div>
 
                   {/* Quantity Selector */}
@@ -263,7 +332,7 @@ const Payment: React.FC = () => {
                     </div>
 
                     <span className="text-white font-bold text-xl">
-                      {method.price}
+                      {orderDetail?.orderAmount}
                     </span>
                   </label>
                 );
@@ -279,7 +348,7 @@ const Payment: React.FC = () => {
         </div>
 
         {/* Right Column */}
-        <div className="lg:col-span-1">
+        <div className="shrink-0 w-[355px]">
           <div className="p-6 rounded-2xl bg-white/5 border border-white/20 rounded-2xl">
             <h3 className="text-xl font-bold text-white mb-6">
               {t("payment.paymentDetails")}
@@ -301,7 +370,8 @@ const Payment: React.FC = () => {
                     color: "transparent",
                   }}
                 >
-                  -$234
+                  {selectUnit?.unit}
+                  {orderDetail?.platformPrice}
                 </span>
               </div>
               <div className="flex justify-between items-center text-white">
@@ -317,7 +387,8 @@ const Payment: React.FC = () => {
                     color: "transparent",
                   }}
                 >
-                  -$234 &gt;
+                  -{selectUnit?.unit}
+                  {orderDetail?.discountAmount} &gt;
                 </span>
               </div>
             </div>
@@ -358,17 +429,18 @@ const Payment: React.FC = () => {
                 {t("payment.totalAmount")}
               </span>
               <span className="text-2xl font-bold" style={{ color: "#EE22EB" }}>
-                $ 260.90
+                {selectUnit?.unit} {orderDetail?.orderAmount}
               </span>
             </div>
 
             {/* Radiant Payment Button */}
-            <PrimaryButton
-              onClick={() => setPaymentModalVisible(true)}
-              className="w-full py-4 rounded-[73px] text-white font-bold text-lg relative overflow-hidden"
-            >
-              {t("userCenter.payNow")}
-            </PrimaryButton>
+            <PayPalCustomButton
+              cancelPayment={cancelPayment}
+              showPaymentProgress={showPaymentProgress}
+              currency={selectUnit?.currency || "USD"}
+              orderId={orderId}
+              onSuccess={handlePaymentSuccess}
+            />
           </div>
         </div>
       </div>
@@ -389,9 +461,10 @@ const Payment: React.FC = () => {
         visible={failureModalVisible}
         onClose={() => setFailureModalVisible(false)}
       />
-      <PaymentModal
-        visible={paymentModalVisible}
-        onClose={() => setPaymentModalVisible(false)}
+      <PaymentProgress
+        progressStatus={progressStatus}
+        visible={paymentProgressVisible}
+        onClose={() => setPaymentProgressVisible(false)}
       />
     </div>
   );
