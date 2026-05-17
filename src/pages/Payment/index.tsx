@@ -1,52 +1,37 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Info } from "lucide-react";
 import "./style.css";
+import PrimaryButton from "@/components/PrimaryButton";
 import CouponModal from "@/components/CouponModal";
 import { getOrderDetail, redeemInOrder } from "@/api/user";
 import { useLanguageContext } from "@/store/languageStore";
 import CouponExchangeSuccess from "@/components/CouponExchangeSuccess";
 import CouponExchangeErr from "@/components/CouponExchangeErr";
-import { availableForOrder, calculate } from "@/api/payment";
+import {
+  availableForOrder,
+  calculate,
+  capturePayPalOrder,
+  createPayPalOrder,
+} from "@/api/payment";
 import { useTranslation } from "react-i18next";
 import { message } from "antd";
-import PayPalCustomButton from "@/components/PaypalButton";
 import PaymentProgress from "@/components/PaymentProgress";
-import { Timeout } from "ahooks/lib/useRequest/src/types";
-
 // import PaymentModal from "@/components/PaymentModal";
 
 const staticPaymentMethods = [
-  { id: "visa-usd", name: "VISA", currency: "USD", price: "$234", icon: "🌐" },
-  { id: "usdt-trc20", name: "USDT", currency: "", price: "$234", icon: "₮" },
   {
-    id: "alipay-usdt",
-    name: "Alipay",
-    currency: "USDT",
-    price: "$234",
-    icon: "支",
-  },
-  {
-    id: "unionpay-usdt",
-    name: "UnionPay",
-    currency: "USDT",
-    price: "$234",
-    icon: "银",
+    id: "paypal",
+    name: "PayPal",
+    icon: "P",
   },
 ];
-
-type PaymentState =
-  | "verifying" // 支付中
-  | "shipping" // 发货中
-  | "success" // 发货成功
-  | "failed" // 发货失败
-  | "canceled"; // 支付取消
 
 const Payment: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   // const [quantity, setQuantity] = useState(1);
-  const [selectedMethod, setSelectedMethod] = useState("usdt-trc20");
+  const [selectedMethod, setSelectedMethod] = useState("paypal");
   const [promoCode, setPromoCode] = useState("");
   const [couponModalVisible, setCouponModalVisible] = useState(false);
   const [successModalVisible, setSuccessModalVisible] = useState(false);
@@ -57,17 +42,16 @@ const Payment: React.FC = () => {
     useState<CalculateResponseData | null>(null);
   const [coupon, setCoupon] = useState<UserCouponsResponseData | null>(null);
   const [coupons, setCoupons] = useState<UserCouponsResponseData[]>([]);
-  const [paymentProgressVisible, setPaymentProgressVisible] = useState(false);
-  const [progressStatus, setProgressStatus] =
-    useState<PaymentState>("verifying");
+  // const [paymentModalVisible, setPaymentModalVisible] = useState(false);
   const [orderDetail, setOrderDetail] =
     useState<OrderDetailResponseData | null>(null);
+  const [paypalOrderId, setPaypalOrderId] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [progressStatus, setProgressStatus] = useState("verifying");
+  const [paymentModalVisible, setPaymentModalVisible] = useState(false);
   const { orderId } = useParams();
   const { selectUnit } = useLanguageContext();
   const { t } = useTranslation();
-
-  // 使用 ref 存储定时器，确保在组件生命周期内唯一且可清理
-  const pollTimerRef = useRef<Timeout | null>(null);
 
   const exchangeOnClick = async (code: string) => {
     try {
@@ -119,64 +103,74 @@ const Payment: React.FC = () => {
     try {
       const { data } = await getOrderDetail(orderId || "");
       setOrderDetail(data.data);
+      if (data.data.status === "REFUNDING") {
+        setProgressStatus("failed");
+      }
+      if (data.data.status === "COMPLETED") {
+        setProgressStatus("successed");
+      }
     } catch (error) {
       message.error("error");
     }
   };
 
-  const handlePaymentSuccess = () => {
-    setProgressStatus("shipping");
+  const createPaypalOrders = async () => {
+    setLoading(true);
+    try {
+      const { data } = await createPayPalOrder({
+        orderNo: orderId || "",
+        currency: selectUnit?.currency || "USD",
+      });
+      setPaypalOrderId(data.data.paypalOrderId);
+      setProgressStatus("verifying");
+      setPaymentModalVisible(true);
+      window.open(data.data.approveUrl, "_blank");
+    } catch (error) {
+      setLoading(false);
+      message.error("error");
+    }
   };
 
-  const cancelPayment = () => {
-    setProgressStatus("canceled");
-  };
+  const capturePayPalOrders = useCallback(async () => {
+    try {
+      const { data } = await capturePayPalOrder({
+        orderNo: orderId || "",
+        paypalOrderId,
+      });
+      if (data.data.status === "COMPLETED") {
+        setProgressStatus("shipping");
+      }
+      if (data.data.status === "DECLINED") {
+        setProgressStatus("canceled");
+      }
+    } catch (error) {
+      message.error("error");
+    }
+  }, [orderId, paypalOrderId]);
 
-  const showPaymentProgress = () => {
-    setPaymentProgressVisible(true);
+  const switchPayMethod = (method: string) => {
+    switch (method) {
+      case "paypal":
+        createPaypalOrders();
+        break;
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
-    // 如果订单详情还没加载出来，不进行轮询判断
-    if (!orderDetail || progressStatus !== "shipping") return;
-
-    const status = orderDetail.status;
-    const isFinished = status === "COMPLETED" || status === "REFUNDING";
-
-    // 如果已经结束，清除可能存在的定时器
-    if (isFinished) {
-      if (pollTimerRef.current) {
-        clearTimeout(pollTimerRef.current);
-        pollTimerRef.current = null;
-      }
-
-      // 可选：在这里处理结束后的逻辑，比如跳转或弹窗
-      if (status === "COMPLETED") {
-        setProgressStatus("success");
-      }
-      if (status === "REFUNDING") {
-        setProgressStatus("failed");
-      }
-      return;
-    }
-
-    // 如果没结束，设置定时器继续请求
-    // 先清除旧的定时器防止重叠
-    if (pollTimerRef.current) {
-      clearTimeout(pollTimerRef.current);
-    }
-
-    pollTimerRef.current = setTimeout(() => {
-      getPaymentOrderDetail();
-    }, 1000); // 每 3 秒轮询一次
-
-    // 清理函数：当组件卸载或依赖变化时清除定时器
-    return () => {
-      if (pollTimerRef.current) {
-        clearTimeout(pollTimerRef.current);
-      }
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState !== "visible") return;
+      capturePayPalOrders();
     };
-  }, [orderDetail, progressStatus]); // 关键：依赖 orderDetail，每次数据更新都会重新评估是否继续
+
+    // 注册事件
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [capturePayPalOrders]);
 
   useEffect(() => {
     getPaymentOrderDetail();
@@ -322,16 +316,17 @@ const Payment: React.FC = () => {
                       </div>
 
                       {/* Icon placeholder */}
-                      <div className="w-8 h-8 rounded bg-white flex items-center justify-center text-lg">
+                      <div className="w-8 h-8 rounded bg-black flex items-center justify-center text-lg">
                         {method.icon}
                       </div>
 
                       <span className="text-white font-medium text-base">
-                        {method.name} {method.currency}
+                        {method.name}
                       </span>
                     </div>
 
                     <span className="text-white font-bold text-xl">
+                      {selectUnit?.unit}
                       {orderDetail?.orderAmount}
                     </span>
                   </label>
@@ -357,7 +352,10 @@ const Payment: React.FC = () => {
             <div className="space-y-4 mb-6 text-sm">
               <div className="flex justify-between items-center text-white">
                 <span>{t("userCenter.officialPrice")}</span>
-                <span>$234</span>
+                <span>
+                  {selectUnit?.unit}
+                  {orderDetail?.originalPrice}
+                </span>
               </div>
               <div className="flex justify-between items-center text-white">
                 <span>{t("home.selectorAndPayment.platformPrice")}</span>
@@ -388,7 +386,7 @@ const Payment: React.FC = () => {
                   }}
                 >
                   -{selectUnit?.unit}
-                  {orderDetail?.discountAmount} &gt;
+                  {orderDetail?.couponDiscount} &gt;
                 </span>
               </div>
             </div>
@@ -413,14 +411,20 @@ const Payment: React.FC = () => {
             <div className="space-y-4 mb-6 text-sm border-b border-[#282836] pb-6">
               <div className="flex justify-between items-center text-gray-300">
                 <span>{t("payment.totalDiscounts")}</span>
-                <span className="text-[#EE22EB]">-$234</span>
+                <span className="text-[#EE22EB]">
+                  -{selectUnit?.unit}
+                  {orderDetail?.discountAmount}
+                </span>
               </div>
               <div className="flex justify-between items-center text-gray-300">
                 <span className="flex items-center gap-1">
                   {t("payment.paymentFee")}{" "}
                   <Info size={14} className="cursor-pointer text-gray-500" />
                 </span>
-                <span>-$234</span>
+                <span>
+                  -{selectUnit?.unit}
+                  {orderDetail?.paymentFee}
+                </span>
               </div>
             </div>
 
@@ -434,13 +438,13 @@ const Payment: React.FC = () => {
             </div>
 
             {/* Radiant Payment Button */}
-            <PayPalCustomButton
-              cancelPayment={cancelPayment}
-              showPaymentProgress={showPaymentProgress}
-              currency={selectUnit?.currency || "USD"}
-              orderId={orderId}
-              onSuccess={handlePaymentSuccess}
-            />
+            <PrimaryButton
+              disabled={loading}
+              onClick={() => switchPayMethod(selectedMethod)}
+              className="w-full py-4 rounded-[73px] text-white font-bold text-lg relative overflow-hidden"
+            >
+              {t("userCenter.payNow")}
+            </PrimaryButton>
           </div>
         </div>
       </div>
@@ -461,10 +465,20 @@ const Payment: React.FC = () => {
         visible={failureModalVisible}
         onClose={() => setFailureModalVisible(false)}
       />
+      {/* <PaymentModal
+        visible={paymentModalVisible}
+        onClose={() => setPaymentModalVisible(false)}
+      /> */}
       <PaymentProgress
+        createPaypalOrders={createPaypalOrders}
+        visible={paymentModalVisible}
+        onClose={() => {
+          setLoading(false);
+          setPaymentModalVisible(false);
+          getPaymentOrderDetail();
+        }}
+        getPaymentOrderDetail={getPaymentOrderDetail}
         progressStatus={progressStatus}
-        visible={paymentProgressVisible}
-        onClose={() => setPaymentProgressVisible(false)}
       />
     </div>
   );

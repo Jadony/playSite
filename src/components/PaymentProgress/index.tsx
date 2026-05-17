@@ -10,17 +10,22 @@ import {
 import { useTranslation } from "react-i18next";
 import CommonModal from "../CommonModal";
 import PrimaryButton from "../PrimaryButton";
+import "./style.css";
 
 type PaymentProgressProps = {
   progressStatus: string;
   visible: boolean;
   onClose: () => void;
+  getPaymentOrderDetail: () => void;
+  createPaypalOrders: () => void;
 };
 
 const PaymentProgress: React.FC<PaymentProgressProps> = ({
   progressStatus,
   visible,
   onClose,
+  getPaymentOrderDetail,
+  createPaypalOrders,
 }) => {
   const [countdown, setCountdown] = useState(120);
   const { t } = useTranslation();
@@ -30,6 +35,7 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
     if (progressStatus === "shipping" && countdown > 0) {
       const shippingTimer = setTimeout(() => {
         setCountdown((c) => c - 1);
+        getPaymentOrderDetail();
       }, 1000);
       return () => clearTimeout(shippingTimer);
     }
@@ -84,17 +90,52 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
               </div> */}
             </>
           ) : (
-            <div className="flex items-center gap-4 w-full">
-              <KeyRound className="w-6 h-6" strokeWidth={1.5} />
-              <span className="text-[14px]">
-                {t("payment.paymentVerification")}
-              </span>
-            </div>
+            progressStatus !== "canceled" && (
+              <div className="flex items-center gap-4 w-full">
+                <KeyRound className="w-6 h-6" strokeWidth={1.5} />
+                <span className="text-[14px]">
+                  {t("payment.paymentVerification")}
+                </span>
+              </div>
+            )
           )}
         </div>
 
+        {progressStatus === "canceled" && (
+          <div
+            className={`flex transition-all duration-300 flex-col gap-2 mb-2.5 items-start text-white`}
+          >
+            <>
+              <XCircle
+                className="w-8 h-8 shrink-0 mt-1"
+                strokeWidth={1.5}
+                color="#DF393C"
+              />
+              <div>
+                <div className="text-[18px] font-bold">
+                  {t("payment.paymentVerification")}
+                </div>
+                <div className="text-[14px] text-white/50 mt-1">
+                  {t("payment.verifyingPaymentInformation")}
+                </div>
+              </div>
+              <div className="flex gap-4 mt-4 w-full">
+                <button className="payment-progress-btn glass-gradient-border flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[16px] cursor-pointer transition-all duration-300 hover:bg-white/10">
+                  {t("payment.changePaymentMethod")}
+                </button>
+                <button
+                  onClick={createPaypalOrders}
+                  className="payment-progress-btn glass-gradient-border flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[16px] cursor-pointer transition-all duration-300 hover:bg-white/10"
+                >
+                  {t("payment.rePay")}
+                </button>
+              </div>
+            </>
+          </div>
+        )}
+
         {/* Step 3: 发货 -> 正在发货 -> 已发货 */}
-        {progressStatus === "verifying" && (
+        {(progressStatus === "verifying" || progressStatus === "canceled") && (
           <div className="flex items-center gap-4 transition-all duration-300 text-white/50">
             <div className="flex items-center gap-4 w-full">
               <ArchiveRestore className="w-6 h-6" strokeWidth={1.5} />
@@ -121,7 +162,7 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
           </div>
         )}
 
-        {progressStatus === "success" && (
+        {progressStatus === "successed" && (
           <div className="flex items-center gap-4 transition-all duration-300 text-white/50">
             <div className="flex items-center gap-4 w-full">
               <ArchiveRestore className="w-6 h-6" strokeWidth={1.5} />
@@ -131,7 +172,7 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
         )}
 
         {/* Step 4: 订单完成 */}
-        {progressStatus === "success" && (
+        {progressStatus === "successed" && (
           <div className="flex items-center gap-4 mt-4 text-white transition-all duration-300 w-full">
             <CircleCheck className="w-12 h-12 mb-0" strokeWidth={1.5} />
             <div>
