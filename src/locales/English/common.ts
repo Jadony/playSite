@@ -57,8 +57,8 @@ export default {
     },
     faq: {
       faq: "FAQ",
-      whatIsGearpoints: "What is Gearpoints?",
-      whatIsGearpointsText:
+      whatIsPlayDD: "What is playdd?",
+      whatIsPlayDDText:
         "We are a global game top-up platform dedicated to providing affordable, secure, and enjoyable recharge services for gamers worldwide.",
       whyChooseUs: "Why Choose Us?",
       whyChooseUsText: `We offer competitive discounts on a wide range of games and strive for lightning-fast delivery. All transaction data is strictly encrypted to ensure your account privacy and fund security. Our professional support team is available 24/7 to resolve any issues.`,
@@ -197,6 +197,7 @@ export default {
     saved: "Saved",
     eachAccountCanOnlyLinkOnePermanentEmailAddressForImportantNotifications:
       "Each account can only link one permanent email address for important notifications and password verification",
+    logOut: "Log out",
   },
   payment: {
     backToItemList: "Back to Item List",
@@ -207,7 +208,7 @@ export default {
     totalDiscounts: "Total Discounts",
     paymentFee: "Payment Fee",
     totalAmount: "Total Amount",
-    paymentInformation: "Payment information",
+    paymentInformation: "Payment details submitted",
     verifyingPayment: "Verifying payment...",
     paymentVerification: "Payment verified",
     verifyingPaymentInformation: "Verifying your card and account details",
@@ -221,7 +222,7 @@ export default {
     timeout: "Delivery timeout",
     pleaseContactCustomerService: "Contact Support",
     ourSupportTeamWillHelpResolveDeliveryIssuesOrAssistWithRefundingTheAmountToYourPaymentAccount:
-      "Our support team will help resolve delivery issues or assist with refunding the amount to your payment account",
+      "We'll help resolve delivery issues or assist with refunding the amount to your payment account",
     multiLayeredPaymentSecurity: "Multi-layered Payment Security",
     morePaymentMethods: "More Payment Methods",
     cardNumber: "Card Number",
@@ -229,18 +230,19 @@ export default {
     expires: "Expires",
     cvv: "CVV",
     orderCompleted: "Order completed",
+    encryptedDataPaymentNetwork: "Encrypted data & payment network",
   },
   footer: {
-    product: "Product",
+    navigation: "Navigation",
     features: "Features",
     pricing: "Pricing",
     integrations: "Integrations",
-    company: "Company",
+    services: "Services",
     aboutUs: "About Us",
     refundPolicy: "Refund Policy",
     contact: "Contact",
-    resources: "Resources",
-    playddTermsOfService: "playdd Terms of Service",
+    privacyTerms: "Privacy & Terms",
+    termsOfService: "Terms of Service",
     privacyPolicy: "Privacy Policy",
   },
 };

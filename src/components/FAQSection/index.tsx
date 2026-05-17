@@ -1,3 +1,11 @@
+/*
+ * @Author: 安风 2196477263@qq.com
+ * @Date: 2026-01-28 12:30:23
+ * @LastEditors: 安风 2196477263@qq.com
+ * @LastEditTime: 2026-05-17 18:57:43
+ * @FilePath: /playSite/src/components/FAQSection/index.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import React from "react";
 import { useTranslation } from "react-i18next";
 import "./style.css";
@@ -15,8 +23,8 @@ const FAQSection: React.FC<FAQSectionProps> = () => {
   const { t } = useTranslation();
   const defaultFAQItems: FAQItem[] = [
     {
-      question: t("home.faq.whatIsGearpoints"),
-      answer: t("home.faq.whatIsGearpointsText"),
+      question: t("home.faq.whatIsPlayDD"),
+      answer: t("home.faq.whatIsPlayDDText"),
     },
     {
       question: t("home.faq.whyChooseUs"),

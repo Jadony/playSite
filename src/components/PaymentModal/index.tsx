@@ -33,7 +33,9 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, onClose }) => {
 
   const content = (
     <div className="payment-modal-content-inner">
-      <div className="payment-subtitle">支付数据和渠道已加密，请放心填写</div>
+      <div className="payment-subtitle">
+        {t("payment.encryptedDataPaymentNetwork")}
+      </div>
 
       <div className="payment-methods-row">
         <div className="payment-methods-logos">

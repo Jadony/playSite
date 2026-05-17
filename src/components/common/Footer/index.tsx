@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
         {/* Right Section: Link Columns */}
         <div className="footer-links">
           <div className="footer-column">
-            <h3>{t("footer.product")}</h3>
+            <h3>{t("footer.navigation")}</h3>
             <ul>
               {hotGameList?.slice(0, 3)?.map((item) => (
                 <Link
@@ -85,7 +85,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="footer-column">
-            <h3>{t("footer.company")}</h3>
+            <h3>{t("footer.services")}</h3>
             <ul>
               <li>
                 <a href="/about">{t("footer.aboutUs")}</a>
@@ -97,11 +97,11 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="footer-column">
-            <h3>{t("footer.resources")}</h3>
+            <h3>{t("footer.privacyTerms")}</h3>
             <ul>
               <li>
                 <a href="/terms-of-service">
-                  {t("footer.playddTermsOfService")}
+                  {t("footer.termsOfService")}
                 </a>
               </li>
               <li>

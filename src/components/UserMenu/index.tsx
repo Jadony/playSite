@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./style.css";
 import { Link } from "react-scroll";
 import { useAuthContext } from "@/store/authStore";
@@ -26,6 +27,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   // integral,
 }) => {
   const { logout } = useAuthContext();
+  const { t } = useTranslation();
   return (
     <div
       // 关键：添加 relative 和 overflow-hidden
@@ -147,7 +149,9 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   stroke-linejoin="round"
                 />
               </svg>
-              <div className="pl-2.5 text-base text-[#FF1111]">退出登录</div>
+              <div className="pl-2.5 text-base text-[#FF1111]">
+                {t("userCenter.logOut")}
+              </div>
             </div>
           </div>
         </div>
