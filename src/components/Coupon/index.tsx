@@ -173,14 +173,14 @@ const Coupon: React.FC<CouponProps> = ({
             <div
               className={`coupon-save ${!available ? "expiration-opacity" : ""}`}
             >
-              Save up to ${maxSave}
+              {t("userCenter.saved")} ${maxSave}
             </div>
           </div>
           {available ? (
             isShowRightBtn ? (
               isShowToUse ? (
                 <button className="coupon-use-btn" onClick={onUse}>
-                  To Use
+                  {t("userCenter.use")}
                 </button>
               ) : (
                 selectBtn(isSelect)
@@ -215,12 +215,12 @@ const Coupon: React.FC<CouponProps> = ({
           <div
             className={`coupon-expires ${!available ? "expiration-opacity" : ""}`}
           >
-            It expires at {showTime()}
+            {t("userCenter.expiresIn")} {showTime()}
           </div>
           <div
             className={`coupon-disclaimer ${!available ? "expiration-opacity" : ""}`}
           >
-            Click Buy does not stack
+            {t("userCenter.cannotBeCombinedWithOhterOffers")}
           </div>
         </div>
       </div>

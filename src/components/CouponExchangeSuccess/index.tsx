@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import CommonModal from "../CommonModal";
 import Coupon from "../Coupon";
+import { useTranslation } from "react-i18next";
 
 type CouponExchangeProps = {
   visible: boolean;
@@ -16,12 +17,13 @@ const CouponExchangeSuccess: React.FC<CouponExchangeProps> = ({
   isShowRightBtn = true,
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <CommonModal
       className="coupons-success-modal"
       visible={visible}
       onClose={onClose}
-      title="兑换成功"
+      title={t("userCenter.redemptionSuccessful")}
       content={
         <Coupon
           variant="purple"

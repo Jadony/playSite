@@ -3,6 +3,7 @@ import { ShieldCheck, CreditCard } from "lucide-react";
 import CommonModal from "../CommonModal";
 import PayMethodModal from "../PayMethodModal";
 import PaymentProgress from "../PaymentProgress";
+import { useTranslation } from "react-i18next";
 import "./style.css";
 
 type PaymentModalProps = {
@@ -16,6 +17,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, onClose }) => {
   const [cvv, setCvv] = useState("");
   const [payMethodVisible, setPayMethodVisible] = useState(false);
   const [progressVisible, setProgressVisible] = useState(false);
+  const { t } = useTranslation();
 
   const handlePayment = () => {
     // 模拟支付逻辑
@@ -25,7 +27,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, onClose }) => {
   const title = (
     <div className="payment-modal-title">
       <ShieldCheck className="payment-modal-title-icon" strokeWidth={1.5} />
-      <span>多重支付保护 充值失败全款返回</span>
+      <span>{t("payment.multiLayeredPaymentSecurity")}</span>
     </div>
   );
 
@@ -66,19 +68,21 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, onClose }) => {
           className="payment-methods-more"
           onClick={() => setPayMethodVisible(true)}
         >
-          更多支付方式
+          {t("payment.morePaymentMethods")}
         </div>
       </div>
 
       <div className="payment-form">
         <div className="payment-form-group">
-          <label className="payment-form-label">银行卡号</label>
+          <label className="payment-form-label">
+            {t("payment.cardNumber")}
+          </label>
           <div className="payment-input-wrapper">
             <CreditCard className="payment-input-icon" strokeWidth={1.5} />
             <input
               type="text"
               className="payment-input with-prefix"
-              placeholder="请输入银行卡号"
+              placeholder={t("payment.enterCardNumber")}
               value={cardNumber}
               onChange={(e) => setCardNumber(e.target.value)}
             />
@@ -87,7 +91,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, onClose }) => {
 
         <div className="payment-form-row">
           <div className="payment-form-col">
-            <label className="payment-form-label">有效期至</label>
+            <label className="payment-form-label">{t("payment.expires")}</label>
             <div className="payment-input-wrapper">
               <input
                 type="text"
@@ -99,7 +103,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, onClose }) => {
             </div>
           </div>
           <div className="payment-form-col">
-            <label className="payment-form-label">银行卡认证编码</label>
+            <label className="payment-form-label">{t("payment.cvv")}</label>
             <div className="payment-input-wrapper">
               <input
                 type="text"
@@ -122,7 +126,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, onClose }) => {
         onClose={onClose}
         title={title}
         content={content}
-        primaryButtonText="立即支付"
+        primaryButtonText={t("userCenter.payNow")}
         onPrimaryClick={handlePayment}
         width={480}
       />

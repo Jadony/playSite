@@ -45,7 +45,7 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
   const title = (
     <div className="flex items-center gap-2.5 text-[20px] font-bold text-white">
       <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />
-      <span>多重支付保护 充值失败全款返回</span>
+      <span>{t("payment.multiLayeredPaymentSecurity")}</span>
     </div>
   );
 
@@ -75,7 +75,7 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
               <KeyRound className="w-8 h-8 mb-2" strokeWidth={1.5} />
               <div>
                 <div className="text-[18px] font-bold">
-                  {t("payment.paymentVerification")}
+                  {t("payment.verifyingPayment")}
                 </div>
                 <div className="text-[14px] text-white/50 mt-1">
                   {t("payment.verifyingPaymentInformation")}
@@ -168,7 +168,7 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
           <div className="flex items-center gap-4 transition-all duration-300 text-white/50">
             <div className="flex items-center gap-4 w-full">
               <ArchiveRestore className="w-6 h-6" strokeWidth={1.5} />
-              <span className="text-[14px]">已发货</span>
+              <span className="text-[14px]">{t("payment.delivered")}</span>
             </div>
           </div>
         )}
@@ -179,7 +179,7 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
             <CircleCheck className="w-12 h-12 mb-0" strokeWidth={1.5} />
             <div>
               <div className="text-[18px] font-bold !m-0 !mr-3 inline-block">
-                {t("userCenter.orderCompleted")}
+                {t("payment.orderCompleted")}
               </div>
               <div className="text-[14px] text-white/50 mt-1 !m-0 inline-block">
                 {t("payment.youCanNowCheckYourPurchasedItemsInYourGameAccount")}

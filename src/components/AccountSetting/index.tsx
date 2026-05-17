@@ -837,11 +837,13 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                   lineHeight: "20px",
                 }}
               >
-                一个账户只能绑定一个固定电子邮箱，用于接受重要通知，验证密码等
+                {t(
+                  "userCenter.eachAccountCanOnlyLinkOnePermanentEmailAddressForImportantNotifications",
+                )}
               </div>
             </div>
           }
-          primaryButtonText="确认"
+          primaryButtonText={t("userCenter.confirm")}
           onPrimaryClick={() => {
             updateUserInfoData("email");
           }}
