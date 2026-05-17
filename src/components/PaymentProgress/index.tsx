@@ -18,6 +18,7 @@ type PaymentProgressProps = {
   onClose: () => void;
   getPaymentOrderDetail: () => void;
   createPaypalOrders: () => void;
+  loading: boolean;
 };
 
 const PaymentProgress: React.FC<PaymentProgressProps> = ({
@@ -26,10 +27,10 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
   onClose,
   getPaymentOrderDetail,
   createPaypalOrders,
+  loading,
 }) => {
   const [countdown, setCountdown] = useState(120);
   const { t } = useTranslation();
-  console.log(progressStatus);
   // 发货倒计时
   useEffect(() => {
     if (progressStatus === "shipping" && countdown > 0) {
@@ -120,12 +121,13 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
                 </div>
               </div>
               <div className="flex gap-4 mt-4 w-full">
-                <button className="payment-progress-btn glass-gradient-border flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[16px] cursor-pointer transition-all duration-300 hover:bg-white/10">
+                <button className="payment-progress-btn glass-gradient-border flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[14px] cursor-pointer transition-all duration-300 hover:bg-white/10">
                   {t("payment.changePaymentMethod")}
                 </button>
                 <button
+                  disabled={loading}
                   onClick={createPaypalOrders}
-                  className="payment-progress-btn glass-gradient-border flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[16px] cursor-pointer transition-all duration-300 hover:bg-white/10"
+                  className={`payment-progress-btn glass-gradient-border flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[14px] ${loading ? "" : "cursor-pointer"} transition-all duration-300 hover:bg-white/10`}
                 >
                   {t("payment.rePay")}
                 </button>

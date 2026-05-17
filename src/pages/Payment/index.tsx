@@ -132,6 +132,7 @@ const Payment: React.FC = () => {
   };
 
   const capturePayPalOrders = useCallback(async () => {
+    setLoading(true);
     try {
       const { data } = await capturePayPalOrder({
         orderNo: orderId || "",
@@ -142,6 +143,7 @@ const Payment: React.FC = () => {
       }
       if (data.data.status === "DECLINED") {
         setProgressStatus("canceled");
+        setLoading(false);
       }
     } catch (error) {
       message.error("error");
@@ -477,6 +479,7 @@ const Payment: React.FC = () => {
           setPaymentModalVisible(false);
           getPaymentOrderDetail();
         }}
+        loading={loading}
         getPaymentOrderDetail={getPaymentOrderDetail}
         progressStatus={progressStatus}
       />
