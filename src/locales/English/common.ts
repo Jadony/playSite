@@ -37,7 +37,6 @@ export default {
       of: "of",
       displayingPage: "Displaying page",
       topUpNow: "Top up Now",
-      searchForGameNamesOrKeywords: "Search for game names or keywords",
       coupons: "Coupons",
       warning: "Warning",
       uidOrServerWarning:
@@ -72,7 +71,6 @@ export default {
   },
   games: {
     allGames: "All Games",
-    searchForGameNamesOrKeywords: "Search for game names or keywords",
     theHighestProvince: "The highest province",
   },
   inviteFriends: {
@@ -87,7 +85,6 @@ export default {
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
-    logIn: "Log in",
   },
   loginOrSignUpModal: {
     pleaseEnterEmailAddress: "Please enter email address",

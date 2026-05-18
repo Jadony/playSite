@@ -70,7 +70,7 @@ const Games: React.FC = () => {
         <div className="games-header flex justify-between items-center">
           <div className="games-title">{t("games.allGames")}</div>
           <SearchBar
-            placeholder={t("games.searchForGameNamesOrKeywords")}
+            placeholder={t("home.search.searchForGameNamesOrKeywords")}
             onChange={run}
           />
         </div>

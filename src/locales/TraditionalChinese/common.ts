@@ -37,7 +37,6 @@ export default {
       of: "of",
       displayingPage: "Displaying page",
       topUpNow: "現在充值",
-      searchForGameNamesOrKeywords: "請輸入遊戲名稱或關鍵詞",
       coupons: "優惠卷",
       warning: "UID或伺服器錯誤",
       uidOrServerWarning:
@@ -73,7 +72,6 @@ export default {
   },
   games: {
     allGames: "All Games",
-    searchForGameNamesOrKeywords: "Search for game names or keywords",
     theHighestProvince: "The highest province",
   },
   inviteFriends: {
@@ -88,7 +86,6 @@ export default {
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
-    logIn: "登錄",
   },
   loginOrSignUpModal: {
     pleaseEnterEmailAddress: "請輸入郵箱地址",
