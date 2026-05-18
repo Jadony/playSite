@@ -1,3 +1,11 @@
+/*
+ * @Author: 安风 2196477263@qq.com
+ * @Date: 2026-02-10 21:33:30
+ * @LastEditors: 安风 2196477263@qq.com
+ * @LastEditTime: 2026-05-18 15:27:21
+ * @FilePath: /playSite/src/config/userPurchaseHistoryTypes.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import { useTranslation } from "react-i18next";
 
 const usePurchaseHistoryTypes = () => {
@@ -82,7 +90,7 @@ export const usePurchaseHistoryStatusConfig = (): Record<
     },
     COMPLETED: {
       label: t("userCenter.success"),
-      desc: t("userCenter.orderCompleted"),
+      desc: t("payment.orderCompleted"),
       statusColor: "green",
       completedStep: 4,
     },

@@ -31,7 +31,6 @@ export default {
       plaseSelectServer: "請選擇遊戲服務器",
       uid: "UID",
       gameId: "請輸入遊戲UID",
-      quantity: "數量",
       price: "價格",
       offAlready: "已节省",
       viewingItems: "Viewing items",
@@ -147,8 +146,7 @@ export default {
     pleaseEnterNewPassword: "Please enter new password",
     pleaseReEnterNewPassword: "Please re-enter new password",
     pwdConfirmError: "Passwords do not match.",
-    passwordPatternError:
-      "Password must contain both letters and numbers, with a minimum length of 6 characters.",
+    passwordPatternError: "密碼需數字與字母組合，不得少於六位",
     changePassword: "修改密碼",
     linkEmail: "去綁定郵箱",
     perfectInformation: "Perfect information",
@@ -168,7 +166,6 @@ export default {
     payNow: "立即充值",
     orderProcessingText: "我們正在處理您的訂單，請耐心等待",
     refresh: "刷新",
-    orderCompleted: "訂單已完成",
     refundAndAfterSalesText:
       "抱歉，您的訂單處理過程中遇到了一點問題，未能充值成功，我們將全額退回您的款項",
     orderDetails: "訂單詳情",

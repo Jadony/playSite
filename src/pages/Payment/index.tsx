@@ -52,9 +52,6 @@ const Payment: React.FC = () => {
     onPaymentCancel: () => {
       setProgressStatus("canceled");
     },
-    onPaymentError: () => {
-      setProgressStatus("failed");
-    },
   });
 
   // ---------- 订单详情 ----------

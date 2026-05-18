@@ -31,7 +31,6 @@ export default {
       plaseSelectServer: "Please select game server",
       uid: "UID",
       gameId: "Please Enter Your Game UID",
-      quantity: "Quantity",
       price: "Price",
       offAlready: "off already",
       viewingItems: "Viewing items",
@@ -171,7 +170,6 @@ export default {
     orderProcessingText:
       "Your order is being processed. Thank you for your patience.",
     refresh: "Refresh",
-    orderCompleted: "Order Completed",
     refundAndAfterSalesText:
       "Sorry, we encountered an issue while processing your order,A full refund will be issued to your account",
     orderDetails: "Order Details",
