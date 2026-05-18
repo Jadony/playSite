@@ -23,6 +23,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
+import PaymentReturn from "./pages/PaymentReturn";
+import PaymentCancel from "./pages/PaymentCancel";
 
 const { Content } = Layout;
 
@@ -99,6 +101,14 @@ function App() {
                         element={<PrivacyPolicy />}
                       />
                       <Route path="/refund-policy" element={<RefundPolicy />} />
+                      <Route
+                        path="/paypal/return"
+                        element={<PaymentReturn />}
+                      />
+                      <Route
+                        path="/paypal/cancel"
+                        element={<PaymentCancel />}
+                      />
                     </Routes>
                   </Content>
                   <Footer />

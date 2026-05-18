@@ -154,6 +154,12 @@ const Header: React.FC = () => {
     // { key: "/about", label: t("header.about"), path: "/about" },
   ];
 
+  const getCurLanguage = () => {
+    return unitAndLanguageList?.filter(
+      (item) => item.languageName === selectLanguage,
+    );
+  };
+
   return (
     <>
       {/* 1. FIXED LEFT: LOGO */}
@@ -267,7 +273,9 @@ const Header: React.FC = () => {
                   strokeWidth="1.5"
                 />
               </svg>
-              <span className="text-sm font-medium">{selectLanguage}</span>
+              <span className="text-sm font-medium">
+                {getCurLanguage()?.[0]?.displayLanguage}
+              </span>
               <svg
                 width="10"
                 height="6"
@@ -290,12 +298,12 @@ const Header: React.FC = () => {
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 p-2 w-[140px] bg-[#1e1e1e] border border-white/5 rounded-2xl shadow-2xl animate-fade-in z-50 backdrop-blur-xl">
                 <div className="flex flex-col gap-1">
                   {unitAndLanguageList?.map((item) => {
-                    const isActive = selectLanguage === item.displayLanguage;
+                    const isActive = selectLanguage === item.languageName;
                     return (
                       <div
                         key={item.id}
                         onClick={() => {
-                          changeLanguage(item.displayLanguage);
+                          changeLanguage(item.languageName);
                         }}
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm cursor-pointer transition-all duration-200 ${
                           isActive

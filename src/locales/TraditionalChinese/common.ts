@@ -80,7 +80,7 @@ export default {
   inviteFriends: {
     subTitle: `邀请朋友解锁折扣大礼包`,
     copy: "Copy",
-    sendInvitationCodeToFriends: " 發送邀請碼給朋友",
+    sendInvitationCodeToFriends: "發送邀請碼給朋友",
     friendsEnterTheInvitationCodeWhenSigningUpAndCompleteRegistration:
       "朋友注册时填入邀请码，完成注册",
     uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons:

@@ -8,16 +8,11 @@ import { getOrderDetail, redeemInOrder } from "@/api/user";
 import { useLanguageContext } from "@/store/languageStore";
 import CouponExchangeSuccess from "@/components/CouponExchangeSuccess";
 import CouponExchangeErr from "@/components/CouponExchangeErr";
-import {
-  availableForOrder,
-  calculate,
-  capturePayPalOrder,
-  createPayPalOrder,
-} from "@/api/payment";
+import { availableForOrder, calculate } from "@/api/payment";
 import { useTranslation } from "react-i18next";
 import { message } from "antd";
 import PaymentProgress from "@/components/PaymentProgress";
-// import PaymentModal from "@/components/PaymentModal";
+import { usePayPalPayment } from "@/hooks/usePayPalPayment";
 
 const staticPaymentMethods = [
   {
@@ -30,8 +25,60 @@ const staticPaymentMethods = [
 const Payment: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  // const [quantity, setQuantity] = useState(1);
-  const [selectedMethod, setSelectedMethod] = useState("paypal");
+  const { orderId } = useParams<{ orderId: string }>();
+  const { selectUnit } = useLanguageContext();
+  const { t } = useTranslation();
+
+  // ---------- 支付相关状态 ----------
+  const [selectedMethod] = useState("paypal");
+  const [progressVisible, setProgressVisible] = useState(false);
+  const [progressStatus, setProgressStatus] = useState<
+    "verifying" | "shipping" | "successed" | "failed" | "canceled"
+  >("verifying");
+
+  // ---------- 支付 Hook ----------
+  const {
+    loading,
+    startPayment,
+    cleanup: closePayWindow,
+    setLoading,
+  } = usePayPalPayment({
+    orderNo: orderId || "",
+    currency: selectUnit?.currency,
+    onPaymentSuccess: () => {
+      setProgressStatus("shipping");
+      // 后续可通过轮询 orderDetail.status 来自动跳到 successed
+    },
+    onPaymentCancel: () => {
+      setProgressStatus("canceled");
+    },
+    onPaymentError: () => {
+      setProgressStatus("failed");
+    },
+  });
+
+  // ---------- 订单详情 ----------
+  const [orderDetail, setOrderDetail] =
+    useState<OrderDetailResponseData | null>(null);
+
+  const getPaymentOrderDetail = useCallback(async () => {
+    if (!orderId) return;
+    try {
+      const { data } = await getOrderDetail(orderId);
+      setOrderDetail(data.data);
+      // 根据订单状态设置进度
+      if (data.data.status === "REFUNDING") setProgressStatus("failed");
+      if (data.data.status === "COMPLETED") setProgressStatus("successed");
+    } catch (error) {
+      message.error("获取订单信息失败");
+    }
+  }, [orderId]);
+
+  useEffect(() => {
+    getPaymentOrderDetail();
+  }, [getPaymentOrderDetail]);
+
+  // ---------- 优惠券相关状态 ----------
   const [promoCode, setPromoCode] = useState("");
   const [couponModalVisible, setCouponModalVisible] = useState(false);
   const [successModalVisible, setSuccessModalVisible] = useState(false);
@@ -42,16 +89,6 @@ const Payment: React.FC = () => {
     useState<CalculateResponseData | null>(null);
   const [coupon, setCoupon] = useState<UserCouponsResponseData | null>(null);
   const [coupons, setCoupons] = useState<UserCouponsResponseData[]>([]);
-  // const [paymentModalVisible, setPaymentModalVisible] = useState(false);
-  const [orderDetail, setOrderDetail] =
-    useState<OrderDetailResponseData | null>(null);
-  const [paypalOrderId, setPaypalOrderId] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [progressStatus, setProgressStatus] = useState("verifying");
-  const [paymentModalVisible, setPaymentModalVisible] = useState(false);
-  const { orderId } = useParams();
-  const { selectUnit } = useLanguageContext();
-  const { t } = useTranslation();
 
   const exchangeOnClick = async (code: string) => {
     try {
@@ -63,7 +100,7 @@ const Payment: React.FC = () => {
         setSuccessModalVisible(true);
         setCoupon(data.data);
         const { data: couponsData } = await availableForOrder({
-          orderAmount: calculateData?.finalPrice.toString() || "0",
+          orderAmount: calculateData?.finalPrice?.toString() || "0",
           currency: selectUnit?.currency,
         });
         setCoupons(couponsData.data);
@@ -71,7 +108,6 @@ const Payment: React.FC = () => {
         setFailureModalVisible(true);
       }
     } catch (error) {
-      // setSuccessModalVisible(true);
       setFailureModalVisible(true);
     }
   };
@@ -95,95 +131,31 @@ const Payment: React.FC = () => {
       setCalculateData(data.data);
       setCoupons(data.data.availableCoupons);
     } catch (error) {
-      message.error("error");
+      message.error("计算价格失败");
     }
   };
 
-  const getPaymentOrderDetail = async () => {
-    try {
-      const { data } = await getOrderDetail(orderId || "");
-      setOrderDetail(data.data);
-      if (data.data.status === "REFUNDING") {
-        setProgressStatus("failed");
-      }
-      if (data.data.status === "COMPLETED") {
-        setProgressStatus("successed");
-      }
-    } catch (error) {
-      message.error("error");
-    }
+  // ---------- 支付按钮点击 ----------
+  const handlePay = () => {
+    setProgressStatus("verifying");
+    setProgressVisible(true);
+    startPayment();
   };
 
-  const createPaypalOrders = async () => {
-    setLoading(true);
-    try {
-      const { data } = await createPayPalOrder({
-        orderNo: orderId || "",
-        currency: selectUnit?.currency || "USD",
-      });
-      setPaypalOrderId(data.data.paypalOrderId);
-      setProgressStatus("verifying");
-      setPaymentModalVisible(true);
-      window.open(data.data.approveUrl, "_blank");
-    } catch (error) {
-      setLoading(false);
-      message.error("error");
-    }
+  // ---------- 关闭进度弹窗 ----------
+  const handleCloseProgress = () => {
+    closePayWindow(); // 关闭可能还开着的支付窗口
+    setProgressVisible(false);
+    setLoading(false);
+    getPaymentOrderDetail(); // 刷新订单状态
   };
-
-  const capturePayPalOrders = useCallback(async () => {
-    setLoading(true);
-    try {
-      const { data } = await capturePayPalOrder({
-        orderNo: orderId || "",
-        paypalOrderId,
-      });
-      if (data.data.status === "COMPLETED") {
-        setProgressStatus("shipping");
-      }
-      if (data.data.status === "DECLINED") {
-        setProgressStatus("canceled");
-        setLoading(false);
-      }
-    } catch (error) {
-      message.error("error");
-    }
-  }, [orderId, paypalOrderId]);
-
-  const switchPayMethod = (method: string) => {
-    switch (method) {
-      case "paypal":
-        createPaypalOrders();
-        break;
-      default:
-        break;
-    }
-  };
-
-  useEffect(() => {
-    const handleVisibilityChange = async () => {
-      if (document.visibilityState !== "visible") return;
-      capturePayPalOrders();
-    };
-
-    // 注册事件
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, [capturePayPalOrders]);
-
-  useEffect(() => {
-    getPaymentOrderDetail();
-  }, []);
 
   return (
     <div className="w-[1280px] payment-container mx-auto pt-48 pb-20">
-      {/* Back Button Area */}
+      {/* Back Button */}
       <button
         onClick={() => {
-          const from = location.state?.from || "";
+          const from = location.state?.from || "/";
           navigate(from);
         }}
         className="flex items-center text-white hover:text-gray-300 transition-colors mb-8 group"
@@ -197,7 +169,7 @@ const Payment: React.FC = () => {
       </button>
 
       <div className="flex flex-row gap-[20px] w-full">
-        {/* Left Column (Spans 2 columns) */}
+        {/* Left Column */}
         <div className="shrink-0 space-y-8 bg-white/5 border border-white/20 rounded-2xl w-[905px]">
           {/* Product Info Card */}
           <div className="p-6">
@@ -205,7 +177,7 @@ const Payment: React.FC = () => {
               <div className="w-32 h-32 rounded-xl overflow-hidden bg-[#282836] shrink-0">
                 <img
                   src={orderDetail?.skuImage}
-                  alt="Zenless Zone Zero Backpack"
+                  alt="product"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -217,7 +189,6 @@ const Payment: React.FC = () => {
                   {t("home.selectorAndPayment.areaService")} :{" "}
                   {orderDetail?.gameServer}
                 </p>
-
                 <div className="flex items-center justify-between">
                   <div
                     className="text-2xl font-bold"
@@ -231,31 +202,17 @@ const Payment: React.FC = () => {
                   >
                     {selectUnit?.unit} {orderDetail?.orderAmount}
                   </div>
-
-                  {/* Quantity Selector */}
                   <div className="flex items-center bg-[#282836] rounded-lg p-1">
-                    {/* <button
-                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
-                    >
-                      <Minus size={14} />
-                    </button> */}
                     <span className="w-8 text-center text-white font-medium">
                       {1}
                     </span>
-                    {/* <button
-                      onClick={() => setQuantity(quantity + 1)}
-                      className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
-                    >
-                      <Plus size={14} />
-                    </button> */}
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Payment Methods Card */}
+          {/* Payment Methods */}
           <div className="overflow-hidden">
             <div className="flex flex-col">
               {staticPaymentMethods.map((method, index) => {
@@ -273,10 +230,8 @@ const Payment: React.FC = () => {
                         ? "rgba(255, 255, 255, 0.03)"
                         : "transparent",
                     }}
-                    onClick={() => setSelectedMethod(method.id)}
                   >
                     <div className="flex items-center gap-4">
-                      {/* Custom Radio Button */}
                       <div className="w-5 h-5 flex items-center justify-center">
                         {isSelected ? (
                           <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center text-black">
@@ -316,17 +271,13 @@ const Payment: React.FC = () => {
                           <div className="w-5 h-5 rounded-full border border-gray-600"></div>
                         )}
                       </div>
-
-                      {/* Icon placeholder */}
                       <div className="w-8 h-8 rounded bg-black flex items-center justify-center text-lg">
                         {method.icon}
                       </div>
-
                       <span className="text-white font-medium text-base">
                         {method.name}
                       </span>
                     </div>
-
                     <span className="text-white font-bold text-xl">
                       {selectUnit?.unit}
                       {orderDetail?.orderAmount}
@@ -335,7 +286,6 @@ const Payment: React.FC = () => {
                 );
               })}
             </div>
-
             <div className="p-6 border-t border-[#282836]">
               <button className="text-sm text-white underline">
                 {t("payment.notThePaymentMethodYouPrefer")} &gt;
@@ -346,7 +296,7 @@ const Payment: React.FC = () => {
 
         {/* Right Column */}
         <div className="shrink-0 w-[355px]">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/20 rounded-2xl">
+          <div className="p-6 rounded-2xl bg-white/5 border border-white/20">
             <h3 className="text-xl font-bold text-white mb-6">
               {t("payment.paymentDetails")}
             </h3>
@@ -439,10 +389,9 @@ const Payment: React.FC = () => {
               </span>
             </div>
 
-            {/* Radiant Payment Button */}
             <PrimaryButton
               disabled={loading}
-              onClick={() => switchPayMethod(selectedMethod)}
+              onClick={handlePay}
               className="w-full py-4 rounded-[73px] text-white font-bold text-lg relative overflow-hidden"
             >
               {t("userCenter.payNow")}
@@ -450,6 +399,8 @@ const Payment: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Modals */}
       <CouponModal
         selectedCoupon={selectedCoupon}
         visible={couponModalVisible}
@@ -467,18 +418,12 @@ const Payment: React.FC = () => {
         visible={failureModalVisible}
         onClose={() => setFailureModalVisible(false)}
       />
-      {/* <PaymentModal
-        visible={paymentModalVisible}
-        onClose={() => setPaymentModalVisible(false)}
-      /> */}
+
+      {/* Payment Progress Modal */}
       <PaymentProgress
-        createPaypalOrders={createPaypalOrders}
-        visible={paymentModalVisible}
-        onClose={() => {
-          setLoading(false);
-          setPaymentModalVisible(false);
-          getPaymentOrderDetail();
-        }}
+        createPaypalOrders={startPayment}
+        visible={progressVisible}
+        onClose={handleCloseProgress}
         loading={loading}
         getPaymentOrderDetail={getPaymentOrderDetail}
         progressStatus={progressStatus}
