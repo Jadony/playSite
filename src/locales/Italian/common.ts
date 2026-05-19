@@ -112,7 +112,7 @@ export default {
     completeRegistration: "Completa la registrazione",
     pleaseEnterEmailAddressOrNickname:
       "Inserisci il nickname o l'indirizzo email",
-    pleaseEnterAccountPassword: "Inserisci la password",
+    pleaseEnterAccountPassword: "Inserisci la password dell'account",
     emailAlreadyLinked:
       "Questa email è già associata a un account. Conferma per continuare.",
     continueWithGoogleAccount: "Continua con Google",
@@ -141,8 +141,8 @@ export default {
     password: "Password",
     settings: "Impostazioni",
     languageAndCurrencySettings: "Impostazioni lingua e valuta",
-    language: "Sprach",
-    currency: "Währungseinstellungen",
+    language: "Language",
+    currency: "Currency",
     setEmail: "Configura email",
     pleaseEnterEmailAddress: "Inserisci l'indirizzo email",
     pleaseEnterVerificationCode: "Inserisci il codice di verifica",
