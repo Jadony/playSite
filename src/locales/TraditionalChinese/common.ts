@@ -82,6 +82,7 @@ export default {
       "朋友注册时填入邀请码，完成注册",
     uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons:
       "註冊成功後，邀請双方均获得折扣券",
+    // TODO: 代产品修改文案
     friendsInvited: "已邀請朋友",
     invitation: "Invitation",
     coupon: "coupon",
@@ -181,7 +182,7 @@ export default {
     pleaseInputYourBirthday: "Please select your birthday",
     exchange: "Exchange",
     expiration: "Expiration",
-    expiresIn: "優惠券到期",
+    expiresIn: "到期（優惠券）",
     redemptionSuccessful: "兑换成功",
     cannotBeCombinedWithOhterOffers: "單次購買不能疊加",
     use: "使用",

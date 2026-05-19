@@ -82,6 +82,7 @@ export default {
       "Freunde geben den Code bei der Registrierung ein, um den Vorgang abzuschließen.",
     uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons:
       "Nach erfolgreicher Anmeldung erhalten beide Seiten Rabattgutscheine.",
+      // TODO: 代产品修改文案
     friendsInvited: "Freunde eingeladen",
     invitation: "Invitation",
     coupon: "coupon",
@@ -141,11 +142,11 @@ export default {
     language: "Sprach",
     currency: "Währungseinstellungen",
     setEmail: "E-Mail einrichten",
-    pleaseEnterEmailAddress: "Bitte E-Mail-Adresse eingeben",
+    pleaseEnterEmailAddress: "Bitte geben Sie Ihre E-Mail-Adresse ein",
     pleaseEnterVerificationCode: "Bitte Verifizierungscode eingeben",
-    pleaseEnterNewPassword: "Please enter new password",
-    pleaseReEnterNewPassword: "Please re-enter new password",
-    pwdConfirmError: "Passwords do not match.",
+    pleaseEnterNewPassword: "Passwort eingeben",
+    pleaseReEnterNewPassword: "Passwort wiederholen",
+    pwdConfirmError: "Passwörter stimmen nicht überein",
     passwordPatternError: "Mind. 6 Zeichen",
     changePassword: "Passwort ändern",
     linkEmail: "E-Mail-Adresse verknüpfen",

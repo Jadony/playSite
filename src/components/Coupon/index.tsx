@@ -215,7 +215,7 @@ const Coupon: React.FC<CouponProps> = ({
           <div
             className={`coupon-expires ${!available ? "expiration-opacity" : ""}`}
           >
-            {t("userCenter.expiresIn")} {showTime()}
+            {showTime()} {t("userCenter.expiresIn")}
           </div>
           <div
             className={`coupon-disclaimer ${!available ? "expiration-opacity" : ""}`}

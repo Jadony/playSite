@@ -49,6 +49,7 @@ export default {
       finalPrice: "Final Price",
       totalSavings: "Total Savings",
       off: "% OFF",
+      // TODO: 等待产品修改成统一的文案顺序
       validForOrdersOver: "Valid for orders over",
       redemptionFailed: "Redemption Failed",
       invalidCode: "Invalid code. Please check and try again.",
@@ -81,6 +82,7 @@ export default {
       "Friends enter the invitation code when signing up and complete registration.",
     uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons:
       "Upon successful registration, both parties will receive discount coupons.",
+      // TODO: 代产品修改文案
     friendsInvited: "friends invited",
     invitation: "Invitation",
     coupon: "coupon",
@@ -138,7 +140,7 @@ export default {
     languageAndCurrencySettings: "Language and Currency Settings",
     language: "Language",
     currency: "Currency",
-    setEmail: "Set Email",
+    setEmail: "Set Up Email",
     pleaseEnterEmailAddress: "Please enter email address",
     pleaseEnterVerificationCode: "Please enter verification code",
     pleaseEnterNewPassword: "Please enter new password",
@@ -185,7 +187,7 @@ export default {
     pleaseInputYourBirthday: "Please select your birthday",
     exchange: "Exchange",
     expiration: "Expiration",
-    expiresIn: "Expires in",
+    expiresIn: "Expire",
     redemptionSuccessful: "Redemption Successful",
     cannotBeCombinedWithOhterOffers: "Cannot be combined with other offers.",
     use: "Use",
