@@ -122,7 +122,7 @@ export default {
   },
   userCenter: {
     myAchievements: "マイアチーブメント",
-    accountSettings: "アカウント設定t",
+    accountSettings: "アカウント設定",
     purchaseHistory: "購入履歴",
     coupons: "クーポン",
     inviteFriends: "友達を招待",
