@@ -57,18 +57,19 @@ export default {
     },
     faq: {
       faq: "FAQ",
-      whatIsPlayDD: "Qu'est-ce que Playdd ?",
+      whatIsPlayDD: "Cos'è Playdd?",
       whatIsPlayDDText:
-        "Nous sommes une plateforme mondiale de recharge de jeux, dédiée à offrir aux joueurs du monde entier des services de recharge abordables, sécurisés et divertissants.",
-      whyChooseUs: "Pourquoi nous choisir ?",
-      whyChooseUsText: `Nous proposons des tarifs compétitifs sur de nombreux jeux et nous nous efforçons d'assurer une livraison rapide. Toutes les données de transaction sont strictement cryptées pour garantir la confidentialité de votre compte et la sécurité de vos fonds. Une équipe de service client professionnelle est à votre disposition en permanence pour résoudre vos problèmes de recharge ou de réception.`,
-      howToUseCoupons: "Comment utiliser les coupons de réduction ?",
-      howToUseCouponsText: `Lors d'une transaction, le système utilise par défaut le coupon offrant la remise maximale disponible sur votre compte afin de vous garantir le prix le plus bas. Vous pouvez également cliquer sur « Détails de l'offre » pour consulter et utiliser d'autres coupons, ou échanger vos codes promotionnels contre des coupons.`,
-      howLongAfterPurchase: "Quel est le délai de livraison après l'achat ?",
-      howLongAfterPurchaseText: `Les produits rechargés sont généralement crédités sur votre compte dans un délai de 5 minutes.`,
+        "Siamo una piattaforma globale di ricarica per videogiochi, dedicata a offrire ai giocatori di tutto il mondo servizi di ricarica convenienti, sicuri e divertenti.",
+      whyChooseUs: "Perché scegliere noi?",
+      whyChooseUsText: `Offriamo prezzi scontati competitivi su un'ampia gamma di giochi e ci impegniamo per una consegna rapida. Tutti i dati delle transazioni sono rigorosamente crittografati per garantire la privacy del tuo account e la sicurezza dei tuoi fondi. Un team di assistenza clienti professionale è sempre online per risolvere qualsiasi problema relativo alla ricarica o alla ricezione del credito.`,
+      howToUseCoupons: "Come utilizzare i coupon?",
+      howToUseCouponsText: `Al momento della transazione, il sistema utilizzerà automaticamente il coupon con lo sconto maggiore disponibile nel tuo account per garantirti il prezzo più basso. Puoi anche cliccare su "Dettagli offerta" per visualizzare e utilizzare altri coupon, oppure convertire i tuoi codici promozionali in coupon.`,
+      howLongAfterPurchase:
+        "Quanto tempo ci vuole per ricevere l'ordine dopo l'acquisto?",
+      howLongAfterPurchaseText: `I prodotti ricaricati vengono accreditati solitamente entro 5 minuti.`,
       whatIfTheGoodsAreNotSuccessfullyRechargedAfterPayment:
-        "Que faire si la transaction échoue après le paiement ?",
-      whatIfTheGoodsAreNotSuccessfullyRechargedAfterPaymentText: `En cas de non-réception d'une recharge directe sans remboursement de la commande, veuillez contacter notre service client. Veuillez fournir les justificatifs de paiement réussi ainsi que la preuve de la non-réception. Le service client de la plateforme procédera alors à votre remboursement.`,
+        "Cosa fare se la transazione non va a buon fine dopo il pagamento?",
+      whatIfTheGoodsAreNotSuccessfullyRechargedAfterPaymentText: `In caso di mancato accredito di una ricarica diretta e in assenza di rimborso dell'ordine, ti preghiamo di contattare il servizio clienti. Ti verrà richiesto di fornire la conferma di pagamento e le prove del mancato accredito. Il supporto della piattaforma provvederà quindi a elaborare il tuo rimborso.`,
     },
   },
   games: {
@@ -148,7 +149,8 @@ export default {
     pleaseEnterNewPassword: "Inserisci la password",
     pleaseReEnterNewPassword: "Inserisci di nuovo la password",
     pwdConfirmError: "Le password non corrispondono",
-    passwordPatternError: "La password deve essere una combinazione di lettere e numeri e contenere almeno 6 caratteri.",
+    passwordPatternError:
+      "La password deve essere una combinazione di lettere e numeri e contenere almeno 6 caratteri.",
     changePassword: "Cambia password",
     linkEmail: "Collega email",
     perfectInformation: "Perfect information",
