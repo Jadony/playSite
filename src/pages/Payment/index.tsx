@@ -45,6 +45,7 @@ const Payment: React.FC = () => {
   } = usePayPalPayment({
     orderNo: orderId || "",
     currency: selectUnit?.currency,
+    setProgressStatus,
     onPaymentSuccess: () => {
       setProgressStatus("shipping");
       // 后续可通过轮询 orderDetail.status 来自动跳到 successed

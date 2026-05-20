@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { message } from "antd";
 import { createPayPalOrder, capturePayPalOrder } from "@/api/payment";
 import { useLanguageContext } from "@/store/languageStore";
@@ -10,6 +17,11 @@ type UsePayPalPaymentOptions = {
   onPaymentSuccess?: () => void;
   onPaymentCancel?: () => void;
   onPaymentError?: (error: any) => void;
+  setProgressStatus?: Dispatch<
+    SetStateAction<
+      "verifying" | "shipping" | "successed" | "failed" | "canceled"
+    >
+  >;
 };
 
 export function usePayPalPayment({
@@ -18,6 +30,7 @@ export function usePayPalPayment({
   onPaymentSuccess,
   onPaymentCancel,
   onPaymentError,
+  setProgressStatus,
 }: UsePayPalPaymentOptions) {
   const [loading, setLoading] = useState(false);
   const [paypalOrderId, setPaypalOrderId] = useState("");
@@ -61,6 +74,7 @@ export function usePayPalPayment({
   const startPayment = useCallback(async () => {
     setLoading(true);
     try {
+      setProgressStatus?.("verifying");
       const { data } = await createPayPalOrder({
         orderNo,
         currency: selectUnit?.currency || currency,
