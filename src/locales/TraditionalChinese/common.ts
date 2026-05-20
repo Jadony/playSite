@@ -49,8 +49,7 @@ export default {
       finalPrice: "實付價格",
       totalSavings: "共計優惠",
       off: "% OFF",
-      // TODO: 等待产品修改成统一的文案顺序
-      validForOrdersOver: "Valid for orders over",
+      validForOrdersOver: "以上訂單有效",
       redemptionFailed: "兌換失敗",
       invalidCode: "兌換碼無效，請檢查後重試",
     },

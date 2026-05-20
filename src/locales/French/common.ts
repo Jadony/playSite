@@ -50,8 +50,7 @@ export default {
       finalPrice: "Prix final à payer",
       totalSavings: "Total des réductions",
       off: "% OFF",
-      // TODO: 等待产品修改成统一的文案顺序
-      validForOrdersOver: "Valable pour les commandes supérieures à",
+      validForOrdersOver: "d'achat minimum",
       redemptionFailed: "Échec de l'échange",
       invalidCode: "Code invalide. Veuillez vérifier et réessayer.",
     },
@@ -83,7 +82,6 @@ export default {
       "Vos amis saisissent le code lors de leur inscription",
     uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons:
       "Une fois l'inscription réussie, le parrain et le filleul reçoivent un coupon de réduction.",
-      // TODO: 代产品修改文案
     friendsInvited: "amis invités",
     invitation: "Invitation",
     coupon: "coupon",

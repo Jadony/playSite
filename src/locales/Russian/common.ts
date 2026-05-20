@@ -55,18 +55,18 @@ export default {
     },
     faq: {
       faq: "FAQ",
-      whatIsPlayDD: "What is playdd?",
+      whatIsPlayDD: "Что такое Playdd?",
       whatIsPlayDDText:
-        "We are a global game top-up platform dedicated to providing affordable, secure, and enjoyable recharge services for gamers worldwide.",
-      whyChooseUs: "Why Choose Us?",
-      whyChooseUsText: `We offer competitive discounts on a wide range of games and strive for lightning-fast delivery. All transaction data is strictly encrypted to ensure your account privacy and fund security. Our professional support team is available 24/7 to resolve any issues.`,
-      howToUseCoupons: "How to Use Coupons?",
-      howToUseCouponsText: `During checkout, the system will automatically apply the best available coupons from your account to ensure the lowest price. You can also manually select other coupons or redeem codesby clicking on "Discount Details."`,
-      howLongAfterPurchase: "How long does delivery take?",
-      howLongAfterPurchaseText: `Most top-up items are delivered to your account within 5 minutes after a successful payment.`,
+        "Мы — глобальная платформа для пополнения игровых счетов. Наша миссия — предоставлять игрокам по всему миру доступные, безопасные и удобные услуги пополнения в играх.",
+      whyChooseUs: "Почему выбирают нас?",
+      whyChooseUsText: `Мы предлагаем конкурентоспособные скидки на множество популярных игр и стремимся к мгновенному зачислению средств. Все данные транзакций проходят строгое шифрование, что гарантирует конфиденциальность вашего аккаунта и безопасность средств. Наша профессиональная служба поддержки всегда на связи, чтобы помочь с любыми вопросами пополнения.`,
+      howToUseCoupons: "Как использовать купоны?",
+      howToUseCouponsText: `При совершении транзакции система автоматически применит купон с максимальной скидкой из вашего профиля для обеспечения лучшей цены. Вы также можете нажать «Детали акции», чтобы выбрать другой купон или обменять имеющийся промокод на скидочный купон.`,
+      howLongAfterPurchase: "Как скоро придет товар после покупки?",
+      howLongAfterPurchaseText: `Пополнение игровых товаров обычно происходит в течение 5 минут.`,
       whatIfTheGoodsAreNotSuccessfullyRechargedAfterPayment:
-        "What if the transaction fails after payment?",
-      whatIfTheGoodsAreNotSuccessfullyRechargedAfterPaymentText: `Please contact our customer service. Provide your proof of payment and order details, and our team will process a manual refund for you.`,
+        "Что делать, если транзакция не удалась после оплаты?",
+      whatIfTheGoodsAreNotSuccessfullyRechargedAfterPaymentText: `Если средства при прямом пополнении не поступили и возврат по заказу не был произведен, пожалуйста, свяжитесь с нашей службой поддержки. Предоставьте подтверждение успешной оплаты и доказательства отсутствия зачисления. После проверки служба поддержки оформит возврат средств.`,
     },
   },
   games: {

@@ -50,8 +50,7 @@ export default {
       finalPrice: "Prezzo finale",
       totalSavings: "Totale sconti",
       off: "% OFF",
-      // TODO: 等待产品修改成统一的文案顺序
-      validForOrdersOver: "Valable pour les commandes supérieures à",
+      validForOrdersOver: "ordine minimo",
       redemptionFailed: "Riscatto fallito",
       invalidCode: "Codice non valido. Verifica e riprova.",
     },

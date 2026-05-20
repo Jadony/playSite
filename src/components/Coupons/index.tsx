@@ -37,6 +37,7 @@ const Coupons = ({ data }: { data: UserCouponsResponseData[] }) => {
               available={coupon.available}
               couponName={coupon.couponName}
               onUse={() => navigate("/")}
+              unit={selectUnit?.unit || ""}
             />
           </div>
         ))}

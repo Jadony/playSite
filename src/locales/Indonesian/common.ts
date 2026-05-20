@@ -49,24 +49,25 @@ export default {
       finalPrice: "Final Price",
       totalSavings: "Total Savings",
       off: "% OFF",
-      validForOrdersOver: "Orders Only",
+      // TODO: 等待产品修改成统一的文案顺序
+      validForOrdersOver: "Valid for orders over",
       redemptionFailed: "Redemption Failed",
       invalidCode: "Invalid code. Please check and try again.",
     },
     faq: {
       faq: "FAQ",
-      whatIsPlayDD: "What is playdd?",
+      whatIsPlayDD: "Apa itu Playdd?",
       whatIsPlayDDText:
-        "We are a global game top-up platform dedicated to providing affordable, secure, and enjoyable recharge services for gamers worldwide.",
-      whyChooseUs: "Why Choose Us?",
-      whyChooseUsText: `We offer competitive discounts on a wide range of games and strive for lightning-fast delivery. All transaction data is strictly encrypted to ensure your account privacy and fund security. Our professional support team is available 24/7 to resolve any issues.`,
-      howToUseCoupons: "How to Use Coupons?",
-      howToUseCouponsText: `During checkout, the system will automatically apply the best available coupons from your account to ensure the lowest price. You can also manually select other coupons or redeem codesby clicking on "Discount Details."`,
-      howLongAfterPurchase: "How long does delivery take?",
-      howLongAfterPurchaseText: `Most top-up items are delivered to your account within 5 minutes after a successful payment.`,
+        "Kami adalah platform top-up game global yang berkomitmen untuk menyediakan layanan pengisian ulang game yang terjangkau, aman, dan menyenangkan bagi para pemain di seluruh dunia.",
+      whyChooseUs: "Mengapa memilih kami?",
+      whyChooseUsText: `Kami menawarkan harga diskon yang kompetitif untuk berbagai jenis game dan berupaya memberikan pengiriman cepat. Semua data transaksi dienkripsi secara ketat untuk memastikan privasi akun dan keamanan dana Anda. Tim layanan pelanggan profesional kami siap membantu kapan saja untuk menyelesaikan masalah pengisian ulang atau pengiriman produk Anda.`,
+      howToUseCoupons: "Bagaimana cara menggunakan kupon?",
+      howToUseCouponsText: `Saat melakukan transaksi, sistem secara otomatis akan menggunakan kupon diskon terbesar yang tersedia di akun Anda untuk menjamin harga terendah. Anda juga dapat mengeklik "Detail Penawaran" untuk melihat dan menggunakan kupon lain, atau menukarkan kode promo Anda menjadi kupon`,
+      howLongAfterPurchase: "Berapa lama waktu pengiriman setelah pembelian?",
+      howLongAfterPurchaseText: `Produk top-up umumnya akan masuk ke akun Anda dalam waktu kurang dari 5 menit.`,
       whatIfTheGoodsAreNotSuccessfullyRechargedAfterPayment:
-        "What if the transaction fails after payment?",
-      whatIfTheGoodsAreNotSuccessfullyRechargedAfterPaymentText: `Please contact our customer service. Provide your proof of payment and order details, and our team will process a manual refund for you.`,
+        "Apa yang harus dilakukan jika transaksi gagal setelah pembayaran?",
+      whatIfTheGoodsAreNotSuccessfullyRechargedAfterPaymentText: `Jika terjadi kendala di mana top-up langsung belum diterima dan pesanan belum direfund, silakan klik "Hubungi Layanan Pelanggan" untuk bantuan. Mohon lampirkan bukti pembayaran yang berhasil dan bukti bahwa produk belum diterima. Layanan pelanggan kami akan segera memproses pengembalian dana (refund) untuk Anda.`,
     },
   },
   games: {
@@ -81,6 +82,7 @@ export default {
       "Friends enter the invitation code when signing up and complete registration.",
     uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons:
       "Upon successful registration, both parties will receive discount coupons.",
+    // TODO: 代产品修改文案
     friendsInvited: "friends invited",
     invitation: "Invitation",
     coupon: "coupon",

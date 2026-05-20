@@ -58,6 +58,8 @@ export interface CouponProps {
    * 是否显示右侧按钮
    */
   isShowRightBtn?: boolean;
+
+  unit: string;
 }
 
 const Coupon: React.FC<CouponProps> = ({
@@ -72,6 +74,7 @@ const Coupon: React.FC<CouponProps> = ({
   couponName,
   isSelect = false,
   isShowRightBtn = true,
+  unit,
 }) => {
   const [curTime, setCurTime] = useState(remainingSeconds);
   const { t } = useTranslation();
@@ -168,7 +171,8 @@ const Coupon: React.FC<CouponProps> = ({
             <div
               className={`coupon-validity ${!available ? "expiration-opacity" : ""}`}
             >
-              {t("home.selectorAndPayment.validForOrdersOver")} ${minOrder}
+              {unit}
+              {minOrder} {t("home.selectorAndPayment.validForOrdersOver")}
             </div>
             <div
               className={`coupon-save ${!available ? "expiration-opacity" : ""}`}

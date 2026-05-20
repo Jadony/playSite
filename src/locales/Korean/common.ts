@@ -49,8 +49,7 @@ export default {
       finalPrice: "실결제 금액",
       totalSavings: "총 할인",
       off: "% OFF",
-      // TODO: 等待产品修改成统一的文案顺序
-      validForOrdersOver: "Valable pour les commandes supérieures à",
+      validForOrdersOver: "이상 주문 시 적용",
       redemptionFailed: "교환 실패",
       invalidCode: "유효하지 않은 코드입니다. 확인 후 다시 시도해 주세요.",
     },

@@ -42,7 +42,7 @@ function App() {
 
   useEffect(() => {
     const handleScreenAuto = () => {
-      const designWidth = 2560; // 此处锁定设计稿宽度
+      const designWidth = 1920; // 此处锁定设计稿宽度
       const scale = window.innerWidth / designWidth;
 
       // 使用 CSS zoom 特性！它可以直接缩放真实的 DOM 盒模型占位，不会产生任何底部留白和多余的横向滚动条！

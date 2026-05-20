@@ -55,18 +55,19 @@ export default {
     },
     faq: {
       faq: "FAQ",
-      whatIsPlayDD: "What is playdd?",
+      whatIsPlayDD: "Apakah itu Playdd?",
       whatIsPlayDDText:
-        "We are a global game top-up platform dedicated to providing affordable, secure, and enjoyable recharge services for gamers worldwide.",
-      whyChooseUs: "Why Choose Us?",
-      whyChooseUsText: `We offer competitive discounts on a wide range of games and strive for lightning-fast delivery. All transaction data is strictly encrypted to ensure your account privacy and fund security. Our professional support team is available 24/7 to resolve any issues.`,
-      howToUseCoupons: "How to Use Coupons?",
-      howToUseCouponsText: `During checkout, the system will automatically apply the best available coupons from your account to ensure the lowest price. You can also manually select other coupons or redeem codesby clicking on "Discount Details."`,
-      howLongAfterPurchase: "How long does delivery take?",
-      howLongAfterPurchaseText: `Most top-up items are delivered to your account within 5 minutes after a successful payment.`,
+        "Kami adalah platform tambah nilai (top-up) permainan global yang komited untuk menyediakan perkhidmatan pengisian semula permainan yang berpatutan, selamat, dan menyeronokkan bagi pemain di seluruh dunia.",
+      whyChooseUs: "Mengapa memilih kami?",
+      whyChooseUsText: `Kami menawarkan harga diskaun yang kompetitif untuk pelbagai jenis permainan dan berusaha untuk memastikan penghantaran pantas. Semua data transaksi disulitkan (encrypted) dengan ketat bagi menjamin privasi akaun dan keselamatan dana anda. Pasukan khidmat pelanggan profesional kami sentiasa dalam talian untuk menyelesaikan sebarang masalah tambah nilai atau penerimaan kredit anda.`,
+      howToUseCoupons: "Bagaimana cara menggunakan kupon?",
+      howToUseCouponsText: `Semasa transaksi, sistem akan menggunakan kupon diskaun maksimum yang tersedia dalam akaun anda secara lalai untuk menjamin harga terendah. Anda juga boleh klik pada "Butiran Tawaran" untuk melihat dan menggunakan kupon lain, atau menukar kod promo anda kepada kupon.`,
+      howLongAfterPurchase:
+        "Berapa lamakah masa yang diambil untuk menerima pesanan selepas pembelian?",
+      howLongAfterPurchaseText: `Produk tambah nilai biasanya akan dikreditkan ke dalam akaun anda dalam masa 5 minit.`,
       whatIfTheGoodsAreNotSuccessfullyRechargedAfterPayment:
-        "What if the transaction fails after payment?",
-      whatIfTheGoodsAreNotSuccessfullyRechargedAfterPaymentText: `Please contact our customer service. Provide your proof of payment and order details, and our team will process a manual refund for you.`,
+        "Apakah yang perlu dilakukan jika transaksi gagal selepas pembayaran?",
+      whatIfTheGoodsAreNotSuccessfullyRechargedAfterPaymentText: `Jika berlaku keadaan di mana tambah nilai terus tidak diterima dan pesanan belum dikembalikan (refund), sila klik "Hubungi Khidmat Pelanggan" untuk tindakan lanjut. Sila sediakan bukti pembayaran yang berjaya dan bukti bahawa kredit belum diterima. Khidmat pelanggan platform kemudiannya akan memproses bayaran balik untuk anda.`,
     },
   },
   games: {

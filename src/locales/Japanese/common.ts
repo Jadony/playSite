@@ -49,8 +49,7 @@ export default {
       finalPrice: "支払い金額",
       totalSavings: "合計割引額",
       off: "% OFF",
-      // TODO: 等待产品修改成统一的文案顺序
-      validForOrdersOver: "Valable pour les commandes supérieures à",
+      validForOrdersOver: "以上の注文に有効",
       redemptionFailed: "交換に失敗しました",
       invalidCode: "引換コードが無効です。確認してやり直してください。",
     },

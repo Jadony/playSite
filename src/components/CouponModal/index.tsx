@@ -108,6 +108,7 @@ const CouponModal: React.FC<CouponModalProps> = ({
                 available={coupon.available}
                 couponName={coupon.couponName}
                 isShowToUse={false}
+                unit={unit || ""}
                 isSelect={coupon.id === selectedCoupon?.id}
               />
             </div>
