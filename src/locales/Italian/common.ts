@@ -83,7 +83,6 @@ export default {
       "Gli amici inseriscono il codice durante la registrazione.",
     uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons:
       "Dopo la registrazione, entrambi riceverete un coupon sconto",
-    // TODO: 代产品修改文案
     friendsInvited: "amis invités",
     invitation: "Invitation",
     coupon: "coupon",
@@ -231,6 +230,8 @@ export default {
     cvv: "CVV",
     orderCompleted: "Ordine completato",
     encryptedDataPaymentNetwork: "Dati e rete di pagamento crittografati",
+    enanblePop:
+      "Si prega di consentire i pop-up per questo sito, quindi riprovare il pagamento",
   },
   footer: {
     navigation: "Navigazione",

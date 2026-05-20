@@ -49,8 +49,7 @@ export default {
       finalPrice: "Final Price",
       totalSavings: "Total Savings",
       off: "% OFF",
-      // TODO: 等待产品修改成统一的文案顺序
-      validForOrdersOver: "Valid for orders over",
+      validForOrdersOver: "Orders Only",
       redemptionFailed: "Redemption Failed",
       invalidCode: "Invalid code. Please check and try again.",
     },
@@ -82,7 +81,6 @@ export default {
       "Friends enter the invitation code when signing up and complete registration.",
     uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons:
       "Upon successful registration, both parties will receive discount coupons.",
-    // TODO: 代产品修改文案
     friendsInvited: "friends invited",
     invitation: "Invitation",
     coupon: "coupon",
@@ -228,6 +226,7 @@ export default {
     cvv: "CVV",
     orderCompleted: "Order completed",
     encryptedDataPaymentNetwork: "Encrypted data & payment network",
+    enanblePop: "Please enable pop-ups for this website and try paying again",
   },
   footer: {
     navigation: "Navigation",

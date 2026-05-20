@@ -228,6 +228,8 @@ export default {
     orderCompleted: "Bestellung abgeschlossen",
     encryptedDataPaymentNetwork:
       "Daten und Zahlungsnetzwerk sind verschlüsselt",
+    enanblePop:
+      "Veuillez autoriser les pop-ups pour ce site, puis réessayez le paiement",
   },
   footer: {
     navigation: "Navigation",

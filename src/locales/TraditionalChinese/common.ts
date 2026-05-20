@@ -81,8 +81,7 @@ export default {
       "朋友注册时填入邀请码，完成注册",
     uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons:
       "註冊成功後，邀請双方均获得折扣券",
-    // TODO: 代产品修改文案
-    friendsInvited: "已邀請朋友",
+    friendsInvited: "位已邀請",
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
@@ -222,6 +221,7 @@ export default {
     cvv: "安全碼",
     orderCompleted: "訂單完成",
     encryptedDataPaymentNetwork: "資料及支付網絡已加密，請放心輸入",
+    enanblePop: "請允許本站彈窗，然後重新支付",
   },
   footer: {
     navigation: "導航",

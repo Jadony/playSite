@@ -81,8 +81,7 @@ export default {
       "친구가 가입 시 초대 코드를 입력하고 가입 완료",
     uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons:
       "가입 성공 시 초대한 사람과 초대받은 사람 모두에게 할인권 증정",
-    // TODO: 代产品修改文案
-    friendsInvited: "amis invités",
+    friendsInvited: "명 초대 완료",
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
@@ -226,6 +225,7 @@ export default {
     cvv: "CVV",
     orderCompleted: "주문 완료",
     encryptedDataPaymentNetwork: "데이터 및 결제 네트워크 암호화 완료",
+    enanblePop: "팝업 차단을 해제한 후 다시 결제해 주세요",
   },
   footer: {
     navigation: "네비게이션",

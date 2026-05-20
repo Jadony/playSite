@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { message } from "antd";
 import { createPayPalOrder, capturePayPalOrder } from "@/api/payment";
 import { useLanguageContext } from "@/store/languageStore";
+import { useTranslation } from "react-i18next";
 
 type UsePayPalPaymentOptions = {
   orderNo: string;
@@ -23,6 +24,7 @@ export function usePayPalPayment({
   const paypalWindow = useRef<Window | null>(null);
   const timerRef = useRef<number | null>(null);
   const { selectUnit } = useLanguageContext();
+  const { t } = useTranslation();
 
   // 清理资源：关闭弹窗、清除定时器
   const cleanup = useCallback(() => {
@@ -69,7 +71,7 @@ export function usePayPalPayment({
       // 先打开空白窗口，再跳转，避免被浏览器拦截
       const popup = window.open("", "_blank", "width=600,height=600");
       if (!popup) {
-        message.error("请允许本站弹窗，然后重新支付");
+        message.error(t("payment.enanblePop"));
         setLoading(false);
         return;
       }

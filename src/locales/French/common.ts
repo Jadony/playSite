@@ -230,6 +230,8 @@ export default {
     cvv: "CVV",
     orderCompleted: "Commande terminée",
     encryptedDataPaymentNetwork: "Données et réseau de paiement cryptés",
+    enanblePop:
+      "Bitte Pop-ups für diese Website zulassen und Zahlung wiederholen.",
   },
   footer: {
     navigation: "Navigation",

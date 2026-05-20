@@ -81,8 +81,7 @@ export default {
       "友達が登録時に招待コードを入力し、登録を完了する",
     uponSuccessfulRegistrationBothPartiesWillReceiveDiscountCoupons:
       "登録成功後、招待者と友達の両方に割引クーポンを贈呈",
-    // TODO: 代产品修改文案
-    friendsInvited: "amis invités",
+    friendsInvited: "名が招待済み",
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
@@ -227,6 +226,7 @@ export default {
     cvv: "CVV",
     orderCompleted: "注文完了",
     encryptedDataPaymentNetwork: "データ・決済通信の暗号化",
+    enanblePop: "ポップアップブロックを解除し、再度決済を行ってください",
   },
   footer: {
     navigation: "ナビゲーション",

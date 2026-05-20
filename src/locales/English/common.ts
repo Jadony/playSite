@@ -226,6 +226,7 @@ export default {
     cvv: "CVV",
     orderCompleted: "Order completed",
     encryptedDataPaymentNetwork: "Encrypted data & payment network",
+    enanblePop: "Please enable pop-ups for this website and try paying again",
   },
   footer: {
     navigation: "Navigation",
