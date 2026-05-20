@@ -121,9 +121,9 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
                 </div>
               </div>
               <div className="flex gap-4 mt-4 w-full">
-                <button className="payment-progress-btn glass-gradient-border flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[14px] cursor-pointer transition-all duration-300 hover:bg-white/10">
+                {/* <button className="payment-progress-btn glass-gradient-border flex-1 bg-white/5 border border-white/20 text-white rounded-full py-3 text-[14px] cursor-pointer transition-all duration-300 hover:bg-white/10">
                   {t("payment.changePaymentMethod")}
-                </button>
+                </button> */}
                 <button
                   disabled={loading}
                   onClick={createPaypalOrders}

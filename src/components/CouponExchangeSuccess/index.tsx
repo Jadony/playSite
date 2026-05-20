@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import CommonModal from "../CommonModal";
 import Coupon from "../Coupon";
 import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "@/store/languageStore";
 
 type CouponExchangeProps = {
   visible: boolean;
@@ -18,6 +19,7 @@ const CouponExchangeSuccess: React.FC<CouponExchangeProps> = ({
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { selectUnit } = useLanguageContext();
   return (
     <CommonModal
       className="coupons-success-modal"
@@ -32,6 +34,7 @@ const CouponExchangeSuccess: React.FC<CouponExchangeProps> = ({
           maxSave={coupon?.maxDiscountAmount}
           onUse={() => navigate("/")}
           isShowRightBtn={isShowRightBtn}
+          unit={selectUnit?.unit || ""}
         />
       }
       width={480}

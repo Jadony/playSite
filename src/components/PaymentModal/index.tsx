@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ShieldCheck, CreditCard } from "lucide-react";
 import CommonModal from "../CommonModal";
 import PayMethodModal from "../PayMethodModal";
-import PaymentProgress from "../PaymentProgress";
+// import PaymentProgress from "../PaymentProgress";
 import { useTranslation } from "react-i18next";
 import "./style.css";
 
@@ -136,13 +136,13 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ visible, onClose }) => {
         visible={payMethodVisible && !progressVisible}
         onClose={() => setPayMethodVisible(false)}
       />
-      <PaymentProgress
+      {/* <PaymentProgress
         visible={progressVisible}
         onClose={() => {
           setProgressVisible(false);
           onClose(); // Optional: close both when progress modal closes
         }}
-      />
+      /> */}
     </>
   );
 };
