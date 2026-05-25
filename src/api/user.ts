@@ -22,6 +22,8 @@ const api = {
   purchasedGames: "/front/games/purchased",
   orderRefresh: "/front/orders/refresh",
   orderCancel: "/front/orders/cancel",
+  countryAllLanguage: "/front/country/all-language",
+  countryAllCurrency: "/front/country/all-currency",
 };
 
 export const existEmail = (params: ExistEmailRequestParams) => {
@@ -183,5 +185,19 @@ export const orderCancel = (orderId: string) => {
   return request<boolean>({
     url: api.orderCancel + "/" + orderId,
     method: "post",
+  });
+};
+
+export const getCountryAllLanguage = () => {
+  return request<{ languageName: string; displayLanguage: string }[]>({
+    url: api.countryAllLanguage,
+    method: "get",
+  });
+};
+
+export const getCountryAllCurrency = () => {
+  return request<{ currency: string; unit: string }[]>({
+    url: api.countryAllCurrency,
+    method: "get",
   });
 };

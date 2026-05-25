@@ -2,7 +2,7 @@
  * @Author: 安风 2196477263@qq.com
  * @Date: 2026-01-30 15:34:48
  * @LastEditors: 安风 2196477263@qq.com
- * @LastEditTime: 2026-05-17 20:34:46
+ * @LastEditTime: 2026-05-22 14:47:06
  * @FilePath: /playSite/src/store/languageStore.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -16,6 +16,8 @@ type LanguageContextType = {
   selectLanguage?: string;
   unitAndLanguageList?: CountryConfigs[];
   countryConfigs?: CountryConfigs[];
+  languageList?: { languageName: string; displayLanguage: string }[];
+  currencyList?: { currency: string; unit: string }[];
 };
 const languageContext = createContext<LanguageContextType | null>(null);
 const languageDispatchContext = createContext<React.Dispatch<{
@@ -69,6 +71,16 @@ const languageReducer = (
         ...state,
         unitAndLanguageList: action.payload.countryConfigs,
       };
+    case "setLanguageList":
+      return {
+        ...state,
+        languageList: action.payload.languageList,
+      };
+    case "setCurrencyList":
+      return {
+        ...state,
+        currencyList: action.payload.currencyList,
+      };
     case "allData":
       return {
         ...state,
@@ -89,6 +101,8 @@ const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
     },
     selectLanguage: localStorage.getItem("selectLanguage") || "English",
     unitAndLanguageList: [],
+    languageList: [],
+    currencyList: [],
   });
   return (
     <languageContext.Provider value={state}>

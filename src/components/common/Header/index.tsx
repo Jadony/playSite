@@ -11,7 +11,11 @@ import { useAuthContext } from "@/store/authStore";
 import { allGames, hotGames } from "@/api/game";
 import { message } from "antd";
 import { useAllGamesAndSelectDispatchContext } from "@/store/gameStore";
-import { getCountryAll } from "@/api/user";
+import {
+  getCountryAll,
+  getCountryAllCurrency,
+  getCountryAllLanguage,
+} from "@/api/user";
 import "./style.css";
 
 const Header: React.FC = () => {
@@ -29,29 +33,59 @@ const Header: React.FC = () => {
   const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
 
   const languageDispatch = useLanguageDispatchContext();
+  const { languageList, currencyList } = useLanguageContext();
   const { isAuthenticated, user } = useAuthContext();
 
   const { t, i18n } = useTranslation();
 
   const navigate = useNavigate();
 
+  const getAllLanguage = async () => {
+    try {
+      const { data } = await getCountryAllLanguage();
+      const { data: languages } = data;
+      languageDispatch({
+        type: "setLanguageList",
+        payload: { languageList: languages },
+      });
+    } catch (error) {
+      message.error("error");
+    }
+  };
+  const getCurrency = async () => {
+    try {
+      const { data } = await getCountryAllCurrency();
+      const { data: currencys } = data;
+      languageDispatch({
+        type: "setCurrencyList",
+        payload: { currencyList: currencys },
+      });
+    } catch (error) {
+      message.error("error");
+    }
+  };
+
   const getCountryAllData = async () => {
-    const { data } = await getCountryAll();
-    const { data: countryData } = data;
-    const { countryConfigs, currentCurrency, currentLanguage, currentUnit } =
-      countryData;
-    languageDispatch({
-      type: "allData",
-      payload: {
-        countryConfigs,
-        selectUnit: {
-          currency: currentCurrency,
-          unit: currentUnit,
+    try {
+      const { data } = await getCountryAll();
+      const { data: countryData } = data;
+      const { countryConfigs, currentCurrency, currentLanguage, currentUnit } =
+        countryData;
+      languageDispatch({
+        type: "allData",
+        payload: {
+          countryConfigs,
+          selectUnit: {
+            currency: currentCurrency,
+            unit: currentUnit,
+          },
+          selectLanguage:
+            localStorage.getItem("selectLanguage") || currentLanguage,
         },
-        selectLanguage:
-          localStorage.getItem("selectLanguage") || currentLanguage,
-      },
-    });
+      });
+    } catch (error) {
+      message.error("error");
+    }
   };
 
   const changeLanguage = (lang: string) => {
@@ -120,6 +154,8 @@ const Header: React.FC = () => {
   };
 
   useEffect(() => {
+    getCurrency();
+    getAllLanguage();
     getCountryAllData();
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -297,11 +333,11 @@ const Header: React.FC = () => {
             {showLang && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 p-2 w-[140px] bg-[#1e1e1e] border border-white/5 rounded-2xl shadow-2xl animate-fade-in z-50 backdrop-blur-xl">
                 <div className="flex flex-col gap-1">
-                  {unitAndLanguageList?.map((item) => {
+                  {languageList?.map((item) => {
                     const isActive = selectLanguage === item.languageName;
                     return (
                       <div
-                        key={item.id}
+                        key={item.languageName}
                         onClick={() => {
                           changeLanguage(item.languageName);
                         }}
@@ -370,7 +406,7 @@ const Header: React.FC = () => {
             {showCurrency && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 p-2 w-[140px] bg-[#1e1e1e] border border-white/5 rounded-2xl shadow-2xl animate-fade-in z-50 backdrop-blur-xl">
                 <div className="flex flex-col gap-1">
-                  {unitAndLanguageList?.map((curr) => {
+                  {currencyList?.map((curr) => {
                     const isActive = selectUnit?.currency === curr.currency;
                     return (
                       <div
