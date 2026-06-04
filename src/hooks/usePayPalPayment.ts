@@ -52,23 +52,26 @@ export function usePayPalPayment({
   }, []);
 
   // 捕获订单
-  const captureOrder = useCallback(async () => {
-    if (!paypalOrderId) return null;
-    try {
-      const { data } = await capturePayPalOrder({
-        orderNo,
-        paypalOrderId,
-      });
-      return data.data.status as
-        | "COMPLETED"
-        | "DECLINED"
-        | "CANCELLED"
-        | undefined;
-    } catch (err) {
-      console.error("捕获订单失败", err);
-      return null;
-    }
-  }, [orderNo, paypalOrderId]);
+  const captureOrder = useCallback(
+    async (paypalOrderId: string) => {
+      if (!paypalOrderId) return null;
+      try {
+        const { data } = await capturePayPalOrder({
+          orderNo,
+          paypalOrderId,
+        });
+        return data.data.status as
+          | "COMPLETED"
+          | "DECLINED"
+          | "CANCELLED"
+          | undefined;
+      } catch (err) {
+        console.error("捕获订单失败", err);
+        return null;
+      }
+    },
+    [orderNo],
+  );
 
   // 启动支付
   const startPayment = useCallback(async () => {
@@ -100,7 +103,7 @@ export function usePayPalPayment({
           paypalWindow.current = null;
 
           // 弹窗关闭后尝试捕获
-          const status = await captureOrder();
+          const status = await captureOrder(newOrderId);
           setLoading(false);
 
           if (status === "COMPLETED") {
