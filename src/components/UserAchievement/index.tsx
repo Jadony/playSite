@@ -19,10 +19,6 @@ const UserAchievement = () => {
     document.body.style.overflow = "";
     document.body.style.paddingRight = "";
   };
-  useEffect(() => {
-    disableScroll();
-    return () => enableScroll();
-  }, []);
 
   useEffect(() => {
     getUserAchievements().then((res) => {
@@ -81,7 +77,10 @@ const UserAchievement = () => {
             }
             return (
               <div
-                onClick={() => setVisible(true)}
+                onClick={() => {
+                  disableScroll();
+                  setVisible(true);
+                }}
                 key={item.id}
                 className="relative flex-shrink-0 snap-center min-h-[300px]"
               >
@@ -107,7 +106,10 @@ const UserAchievement = () => {
           className="p-0 rounded-[25px]"
           visible={visible}
           width={450}
-          onClose={() => setVisible(false)}
+          onClose={() => {
+            enableScroll();
+            setVisible(false);
+          }}
           content={
             <img
               width={450}
