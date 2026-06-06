@@ -85,6 +85,8 @@ export default {
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
+    invitationCodeCopySuccess:
+      "招待コードをコピーしました。友達にシェアして登録を完了してもらいましょう",
   },
   loginOrSignUpModal: {
     pleaseEnterEmailAddress: "メールアドレスを入力してください",

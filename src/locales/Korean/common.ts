@@ -85,6 +85,8 @@ export default {
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
+    invitationCodeCopySuccess:
+      "초대 코드가 성공적으로 복사되었습니다. 친구에게 공유하여 가입을 완료하세요.",
   },
   loginOrSignUpModal: {
     pleaseEnterEmailAddress: "이메일 주소를 입력해 주세요",

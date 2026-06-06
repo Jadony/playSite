@@ -85,6 +85,7 @@ export default {
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
+    invitationCodeCopySuccess: "Einladungscode erfolgreich kopiert. Teilen Sie ihn mit Freunden, um die Registrierung abzuschließen"
   },
   loginOrSignUpModal: {
     pleaseEnterEmailAddress: "E-Mail-Adresse eingeben",

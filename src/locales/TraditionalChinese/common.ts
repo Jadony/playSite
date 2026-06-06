@@ -85,6 +85,7 @@ export default {
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
+    invitationCodeCopySuccess: "邀請碼複製成功，分享好友完成註冊",
   },
   loginOrSignUpModal: {
     pleaseEnterEmailAddress: "請輸入郵箱地址",

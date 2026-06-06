@@ -26,7 +26,7 @@ const Invite: React.FC = () => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(inviteActivityData?.inviteCode || "");
-    message.success(t("inviteFriends.copySuccess"));
+    message.success(t("inviteFriends.invitationCodeCopySuccess"));
   };
 
   const steps = [
