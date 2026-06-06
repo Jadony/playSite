@@ -19,6 +19,7 @@ import {
 import { useLanguageContext } from "@/store/languageStore";
 import CommonModal from "../CommonModal";
 import PriceDetailModal from "../PriceDetailModal";
+import UIDErrorModal from "../UIDErrorModal";
 
 type PaymentPanelProps = {
   selectGameItem: GameItem | null;
@@ -52,6 +53,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
     useState<CalculateResponseData | null>(null);
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [priceDetailVisible, setPriceDetailVisible] = useState(false);
+  const [showUIDErrorModal, setShowUIDErrorModal] = useState(false);
   const { isAuthenticated } = useAuthContext();
   const { selectUnit } = useLanguageContext();
   const { t } = useTranslation();
@@ -70,6 +72,10 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
         uId: uid || "",
         serverInfo: selectedServerType?.name || "",
       });
+      if (data.code === 1005) {
+        setShowUIDErrorModal(true);
+        return;
+      }
       navigate(`/payment/${data.data.orderNo}`, {
         state: { from: location.pathname },
       });
@@ -442,6 +448,10 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
         title="如何获取游戏UID"
         visible={showHelpModal}
         onClose={() => setShowHelpModal(false)}
+      />
+      <UIDErrorModal
+        visible={showUIDErrorModal}
+        onClose={() => setShowUIDErrorModal(false)}
       />
     </div>
   );
