@@ -1,3 +1,11 @@
+/*
+ * @Author: 安风 2196477263@qq.com
+ * @Date: 2026-02-06 19:54:34
+ * @LastEditors: 安风 2196477263@qq.com
+ * @LastEditTime: 2026-06-06 09:15:24
+ * @FilePath: /playSite/src/pages/GameItemDetail/index.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import { useEffect, useState } from "react";
 import PaymentPanel from "@components/RechargeSection/PaymentPanel";
 import ProductGrid from "@components/RechargeSection/ProductGrid";
@@ -38,7 +46,7 @@ const GameItemDetail = () => {
   }, [id, selectUnit?.currency]);
 
   return (
-    <section className="w-full max-w-[1280px] mx-auto">
+    <section className="w-full max-w-[1280px] mx-auto game-item-detail-wrap">
       <div style={{ padding: "140px 0 50px 0" }}>
         <div
           className="relative flex justify-between game-detail-img"
@@ -57,7 +65,7 @@ const GameItemDetail = () => {
             />
           </div>
         </div>
-        <div className="flex justify-between">
+        <div className="game-item-detail-payment relative flex justify-between">
           {/* LEFT SIDEBAR: Payment Panel */}
           <div className="w-[315px]">
             <PaymentPanel

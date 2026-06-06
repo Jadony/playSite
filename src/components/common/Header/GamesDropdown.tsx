@@ -19,7 +19,7 @@ const GamesDropdown: React.FC<GamesDropdownProps> = ({ onClose }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="absolute top-full left-0 mt-4 w-[800px] h-[550px] bg-[#1a1a1a] rounded-3xl border border-white/10 shadow-2xl overflow-hidden flex animate-fade-in z-50">
+    <div className="w-[800px] h-[550px] rounded-3xl backdrop-blur-xl bg-white/5 shadow-2xl overflow-hidden flex animate-fade-in">
       {/* Left: Popular Games Grid */}
       <div className="flex-1 p-6 overflow-y-auto custom-scrollbar">
         <div className="grid grid-cols-2 gap-4">
@@ -51,7 +51,7 @@ const GamesDropdown: React.FC<GamesDropdownProps> = ({ onClose }) => {
                   alt={game.gameName}
                   className="w-10 h-10 rounded-lg object-cover bg-gray-800"
                 />
-                <span className="text-gray-300 group-hover:text-white transition-colors text-sm font-medium">
+                <span className="text-white text-sm font-medium">
                   {game.gameName}
                 </span>
               </div>
@@ -61,7 +61,7 @@ const GamesDropdown: React.FC<GamesDropdownProps> = ({ onClose }) => {
       </div>
 
       {/* Right: Sidebar List */}
-      <div className="w-64 bg-[#222] p-4 flex flex-col gap-2 border-l border-white/5">
+      <div className="w-64 p-4 flex flex-col gap-2 border-l border-white/5">
         <div
           onClick={() => {
             navigate("/games");
@@ -113,7 +113,7 @@ const GamesDropdown: React.FC<GamesDropdownProps> = ({ onClose }) => {
             >
               <div
                 key={game.gameId}
-                className="px-3 py-2.5 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg cursor-pointer transition-colors text-sm"
+                className="px-3 py-2.5 text-white hover:text-white hover:bg-white/5 rounded-lg cursor-pointer transition-colors text-sm"
                 onClick={() => {
                   allGamesAndSelectDispatch({
                     type: "setSelectGame",
@@ -125,7 +125,7 @@ const GamesDropdown: React.FC<GamesDropdownProps> = ({ onClose }) => {
                     navigate(`/games/${game.gameId}`);
                   }
                   onClose();
-                }} // Or navigate to specific game
+                }}
               >
                 {game.gameName}
               </div>

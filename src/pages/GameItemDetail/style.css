@@ -11,3 +11,42 @@
   left: -5%;
   z-index: -1;
 }
+
+.game-item-detail-wrap::after {
+  content: "";
+  position: absolute;
+  width: 216.239px;
+  height: 157.965px;
+  transform: rotate(-153.595deg);
+  top: 0;
+  right: 5%;
+  background-color: #003dcc;
+  filter: blur(170px);
+  z-index: 0;
+}
+
+.game-item-detail-payment::before {
+  content: "";
+  position: absolute;
+  width: 216.239px;
+  height: 157.965px;
+  transform: rotate(-153.595deg);
+  top: 0;
+  left: 20%;
+  background-color: #003dcc;
+  filter: blur(170px);
+  z-index: 0;
+}
+
+.game-item-detail-payment::after {
+  content: "";
+  position: absolute;
+  width: 315.034px;
+  height: 157.965px;
+  transform: rotate(-138.949deg);
+  top: 0;
+  right: 10%;
+  background-color: #a000cc;
+  filter: blur(170px);
+  z-index: 0;
+}

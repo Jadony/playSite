@@ -217,7 +217,7 @@ const GameSearch: React.FC = () => {
       </div>
 
       {/* Pills below search - Keep them but maybe hide when dropdown is huge? Or keep as is. */}
-      <div className="flex gap-4 mt-2">
+      <div className="flex justify-start gap-4 mt-2 max-w-3xl w-full px-4">
         {resolveGame().map((game) => (
           <button
             key={game.gameId}

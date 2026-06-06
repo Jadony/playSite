@@ -27,7 +27,8 @@ const Header: React.FC = () => {
 
   const langRef = React.useRef<HTMLDivElement>(null);
   const currencyRef = React.useRef<HTMLDivElement>(null);
-  const gamesRef = React.useRef<HTMLDivElement>(null);
+  const gamesButtonRef = React.useRef<HTMLDivElement>(null);
+  const gamesDropdownRef = React.useRef<HTMLDivElement>(null);
   const { selectLanguage, unitAndLanguageList, selectUnit } =
     useLanguageContext();
   const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
@@ -109,7 +110,13 @@ const Header: React.FC = () => {
     ) {
       setShowCurrency(false);
     }
-    if (gamesRef.current && !gamesRef.current.contains(event.target as Node)) {
+    const clickedInsideButton = gamesButtonRef.current?.contains(
+      event.target as Node,
+    );
+    const clickedInsideDropdown = gamesDropdownRef.current?.contains(
+      event.target as Node,
+    );
+    if (!clickedInsideButton && !clickedInsideDropdown) {
       setShowGames(false);
     }
   }
@@ -185,9 +192,7 @@ const Header: React.FC = () => {
       path: "/invite",
       icon: <span className="mr-1">🔥</span>,
     },
-    // { key: "/suggested", label: t("header.suggestion"), path: "/suggested" },
     { key: "/help", label: t("header.helpCenter"), path: "/help" },
-    // { key: "/about", label: t("header.about"), path: "/about" },
   ];
 
   const getCurLanguage = () => {
@@ -218,7 +223,7 @@ const Header: React.FC = () => {
               <div key={item.key} className="relative">
                 {item.key === "/games" ? (
                   <div
-                    ref={gamesRef}
+                    ref={gamesButtonRef}
                     onClick={() => {
                       setShowGames(!showGames);
                       setShowLang(false);
@@ -246,10 +251,6 @@ const Header: React.FC = () => {
                         strokeLinejoin="round"
                       />
                     </svg>
-
-                    {showGames && (
-                      <GamesDropdown onClose={() => setShowGames(false)} />
-                    )}
                   </div>
                 ) : (
                   <Link
@@ -270,6 +271,21 @@ const Header: React.FC = () => {
             ))}
           </div>
         </div>
+
+        {showGames && (
+          <div
+            ref={gamesDropdownRef}
+            className="fixed pointer-events-auto"
+            style={{
+              top: "11%",
+              left: "62%",
+              transform: "translateX(-45%)",
+              zIndex: 60,
+            }}
+          >
+            <GamesDropdown onClose={() => setShowGames(false)} />
+          </div>
+        )}
       </div>
 
       {/* 3. FIXED RIGHT: USER ACTIONS */}
@@ -329,9 +345,8 @@ const Header: React.FC = () => {
               </svg>
             </div>
 
-            {/* Language Dropdown */}
             {showLang && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 p-2 w-[140px] bg-[#1e1e1e] border border-white/5 rounded-2xl shadow-2xl animate-fade-in z-50 backdrop-blur-xl">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 p-2 w-[140px] bg-white/5 backdrop-blur-xl border border-white/5 rounded-2xl shadow-2xl animate-fade-in z-50 backdrop-blur-xl">
                 <div className="flex flex-col gap-1">
                   {languageList?.map((item) => {
                     const isActive = selectLanguage === item.languageName;
@@ -402,9 +417,8 @@ const Header: React.FC = () => {
               </svg>
             </div>
 
-            {/* Currency Dropdown */}
             {showCurrency && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 p-2 w-[140px] bg-[#1e1e1e] border border-white/5 rounded-2xl shadow-2xl animate-fade-in z-50 backdrop-blur-xl">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 p-2 w-[140px] bg-white/5 backdrop-blur-xl border border-white/5 rounded-2xl shadow-2xl animate-fade-in z-50 backdrop-blur-xl">
                 <div className="flex flex-col gap-1">
                   {currencyList?.map((curr) => {
                     const isActive = selectUnit?.currency === curr.currency;
