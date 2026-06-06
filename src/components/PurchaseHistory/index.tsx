@@ -70,7 +70,7 @@ const PurchaseHistory = () => {
   };
 
   const onPayNow = () => {
-    navigate(`/payment/${curOrder?.orderId}`, {
+    navigate(`/payment/${curOrder?.orderNo}`, {
       state: { from: "/user-center" },
     });
   };

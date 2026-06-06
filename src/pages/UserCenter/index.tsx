@@ -22,8 +22,8 @@ const UserCenter = () => {
   const exchangeOnClick = async (code: string) => {
     try {
       const { data } = await redeemInOrder({ redeemCode: code });
-      setSuccessModalVisible(true);
-      if (data) {
+      if (data.data) {
+        setSuccessModalVisible(true);
         setCoupon(data.data);
         getUserCoupons({ currency: selectUnit?.currency }).then((res) => {
           setCoupons(res.data.data);
