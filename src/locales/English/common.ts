@@ -181,7 +181,7 @@ export default {
     quantity: "Quantity",
     orderForm: "Order form",
     server: "Server",
-    enterTheRedemptionCode: "Enter the redemption code",
+    enterTheRedemptionCode: "Enter redemption code",
     pleaseInputYourBirthday: "Please select your birthday",
     exchange: "Exchange",
     expiration: "Expiration",
