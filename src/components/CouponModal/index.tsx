@@ -92,7 +92,7 @@ const CouponModal: React.FC<CouponModalProps> = ({
       className="bg-white-5"
       width={945}
       content={
-        <div className="flex flex-wrap gap-4 my-5">
+        <div className="flex flex-wrap gap-4 my-5 overflow-auto max-h-[400px]">
           {/* 紫色样式（带纸屑） */}
           {coupons.map((coupon) => (
             <div
