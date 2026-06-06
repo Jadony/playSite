@@ -85,7 +85,8 @@ export default {
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
-    invitationCodeCopySuccess: "Einladungscode erfolgreich kopiert. Teilen Sie ihn mit Freunden, um die Registrierung abzuschließen"
+    invitationCodeCopySuccess:
+      "Einladungscode erfolgreich kopiert. Teilen Sie ihn mit Freunden, um die Registrierung abzuschließen",
   },
   loginOrSignUpModal: {
     pleaseEnterEmailAddress: "E-Mail-Adresse eingeben",
@@ -231,6 +232,9 @@ export default {
       "Daten und Zahlungsnetzwerk sind verschlüsselt",
     enanblePop:
       "Veuillez autoriser les pop-ups pour ce site, puis réessayez le paiement",
+    paymentFailed: "Zahlung fehlgeschlagen",
+    pleaseDoubleCheckYourPaymentInformation:
+      "Bitte überprüfen Sie Ihre Zahlungsinformationen noch einmal",
   },
   footer: {
     navigation: "Navigation",

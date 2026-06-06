@@ -233,6 +233,8 @@ export default {
     encryptedDataPaymentNetwork: "Dati e rete di pagamento crittografati",
     enanblePop:
       "Si prega di consentire i pop-up per questo sito, quindi riprovare il pagamento",
+      paymentFailed: "Pagamento fallito",
+    pleaseDoubleCheckYourPaymentInformation: "Si prega di ricontrollare le informazioni di pagamento"
   },
   footer: {
     navigation: "Navigazione",

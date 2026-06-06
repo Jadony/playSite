@@ -334,7 +334,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
           }}
         >
           <label className="text-sm text-white mb-2 block font-medium ml-1">
-            {t("useCenter.quantity")}
+            {t("userCenter.quantity")}
           </label>
           <div className="flex items-center justify-between rounded-lg p-1">
             <span>1</span>

@@ -85,7 +85,8 @@ export default {
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
-    invitationCodeCopySuccess: "Invitation code copied successfully. Share it with friends to complete registration."
+    invitationCodeCopySuccess:
+      "Invitation code copied successfully. Share it with friends to complete registration.",
   },
   loginOrSignUpModal: {
     pleaseEnterEmailAddress: "Please enter email address",
@@ -228,6 +229,8 @@ export default {
     orderCompleted: "Order completed",
     encryptedDataPaymentNetwork: "Encrypted data & payment network",
     enanblePop: "Please enable pop-ups for this website and try paying again",
+    paymentFailed: "Payment failed",
+    pleaseDoubleCheckYourPaymentInformation: "Please double-check your payment information"
   },
   footer: {
     navigation: "Navigation",

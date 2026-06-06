@@ -223,6 +223,8 @@ export default {
     orderCompleted: "訂單完成",
     encryptedDataPaymentNetwork: "資料及支付網絡已加密，請放心輸入",
     enanblePop: "請允許本站彈窗，然後重新支付",
+    paymentFailed: "支付失敗",
+    pleaseDoubleCheckYourPaymentInformation: "請您重新核對支付信息",
   },
   footer: {
     navigation: "導航",

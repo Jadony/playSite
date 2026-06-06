@@ -228,6 +228,8 @@ export default {
     orderCompleted: "주문 완료",
     encryptedDataPaymentNetwork: "데이터 및 결제 네트워크 암호화 완료",
     enanblePop: "팝업 차단을 해제한 후 다시 결제해 주세요",
+    paymentFailed: "결제 실패",
+    pleaseDoubleCheckYourPaymentInformation: "결제 정보를 다시 확인해 주세요"
   },
   footer: {
     navigation: "네비게이션",

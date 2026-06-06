@@ -114,10 +114,10 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
               />
               <div>
                 <div className="text-[18px] font-bold">
-                  {t("payment.paymentVerification")}
+                  {t("payment.paymentFailed")}
                 </div>
                 <div className="text-[14px] text-white/50 mt-1">
-                  {t("payment.verifyingPaymentInformation")}
+                  {t("payment.pleaseDoubleCheckYourPaymentInformation")}
                 </div>
               </div>
               <div className="flex gap-4 mt-4 w-full">
