@@ -163,7 +163,7 @@ const PurchaseHistory = () => {
             onCancelOrder={() => getOrderCancel(curOrder?.orderNo || "")}
             onRefresh={() => getOrderRefresh(curOrder?.orderNo || "")}
             onBack={() => setVisible(false)}
-            countdown={curOrder?.remainingPaySeconds}
+            countdown={curOrder?.createTimeStamp}
           />
         }
         footer={null}

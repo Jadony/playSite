@@ -1,3 +1,11 @@
+/*
+ * @Author: 安风 2196477263@qq.com
+ * @Date: 2026-01-28 19:49:18
+ * @LastEditors: 安风 2196477263@qq.com
+ * @LastEditTime: 2026-06-06 11:41:40
+ * @FilePath: /playSite/src/components/RechargeSection/index.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import React, { useEffect, useState } from "react";
 import PaymentPanel from "./PaymentPanel";
 import ProductGrid from "./ProductGrid";

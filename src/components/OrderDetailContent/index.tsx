@@ -56,7 +56,9 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
   const config = usePurchaseHistoryStatusConfig()[status || "PENDING"];
   const showCountdown = status === "PENDING" && countdown;
   const showActions = status === "PENDING" || status === "PROCESSING";
-  const [curTime, setCurTime] = useState(countdown || 0);
+  const [curTime, setCurTime] = useState(
+    (countdown || 0) + 60 * 20 * 1000 - Date.now(),
+  );
   const { t } = useTranslation();
   const STEPS = [
     t("userCenter.order"),

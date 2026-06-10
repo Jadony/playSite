@@ -2,7 +2,7 @@
  * @Author: 安风 2196477263@qq.com
  * @Date: 2026-02-06 19:54:34
  * @LastEditors: 安风 2196477263@qq.com
- * @LastEditTime: 2026-06-06 09:15:24
+ * @LastEditTime: 2026-06-06 11:44:54
  * @FilePath: /playSite/src/pages/GameItemDetail/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -30,7 +30,7 @@ const GameItemDetail = () => {
   const getGameItemDetail = async () => {
     try {
       const { data } = await gameDetail({
-        gameId: Number(id),
+        gameId: id || "",
         currency: selectUnit?.currency || "",
       });
       setItemsData(data.data);

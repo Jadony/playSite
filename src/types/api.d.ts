@@ -100,7 +100,7 @@ type AllGamesResponseData = {
 };
 
 type GameDetailRequestParams = {
-  gameId: number;
+  gameId: number | string;
   currency: string;
 };
 
@@ -197,10 +197,11 @@ type OrderDetailResponseData = {
   createTime: string;
   payTime: string;
   completeTime: string;
-  remainingPaySeconds: number;
+  createTimeStamp: number;
   skuId: string;
   couponDiscount: number;
   paymentFee: number;
+  gameId: string;
 };
 
 type OrderStatus =

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Info } from "lucide-react";
 import "./style.css";
 import PrimaryButton from "@/components/PrimaryButton";
@@ -24,7 +24,6 @@ const staticPaymentMethods = [
 
 const Payment: React.FC = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { orderId } = useParams<{ orderId: string }>();
   const { selectUnit } = useLanguageContext();
   const { t } = useTranslation();
@@ -153,8 +152,7 @@ const Payment: React.FC = () => {
       {/* Back Button */}
       <button
         onClick={() => {
-          const from = location.state?.from || "/";
-          navigate(from);
+          navigate(`/games/${orderDetail?.gameId}`);
         }}
         className="flex items-center text-white hover:text-gray-300 transition-colors mb-8 group"
       >
