@@ -160,6 +160,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ visible, onClose }) => {
         },
         () => {
           initState();
+          window.location.reload();
           onClose?.();
         },
       );
