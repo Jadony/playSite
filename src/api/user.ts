@@ -24,6 +24,7 @@ const api = {
   orderCancel: "/front/orders/cancel",
   countryAllLanguage: "/front/country/all-language",
   countryAllCurrency: "/front/country/all-currency",
+  feedbackSubmit: "/front/feedback/submit",
 };
 
 export const existEmail = (params: ExistEmailRequestParams) => {
@@ -199,5 +200,13 @@ export const getCountryAllCurrency = () => {
   return request<{ currency: string; unit: string }[]>({
     url: api.countryAllCurrency,
     method: "get",
+  });
+};
+
+export const feedbackSubmit = (params: FeedbackSubmitParams) => {
+  return request<FeedbackSubmitData>({
+    url: api.feedbackSubmit,
+    method: "post",
+    params,
   });
 };

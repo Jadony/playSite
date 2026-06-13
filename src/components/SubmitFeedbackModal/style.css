@@ -1,0 +1,8 @@
+.glass-gradient-border-textarea-wrap::before {
+  border-radius: 1rem !important;
+}
+/* .textarea-wrap .ant-upload-list-item-action {
+  position: absolute;
+  top: -40px;
+  right: 0;
+} */

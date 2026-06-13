@@ -231,6 +231,22 @@ export default {
     paymentFailed: "결제 실패",
     pleaseDoubleCheckYourPaymentInformation: "결제 정보를 다시 확인해 주세요"
   },
+  feedback: {
+    submitFeedback: "피드백 제출",
+    category: "분류",
+    content: "내용",
+    enterFeedbackDetails: "피드백 내용 입력",
+    uploading: "업로드 중...",
+    contactInfo: "연락처",
+    enterYourContactInfo: "연락처 입력",
+    topUpAndFunding: "충전 및 지급",
+    paymentIssues: "결제 오류",
+    signUpAndLogin: "회원가입/로그인",
+    gamesAndProducts: "게임 및 상품",
+    afterSalesService: "사후 서비스",
+    suggestions: "건의사항",
+    others: "기타",
+  },
   footer: {
     navigation: "네비게이션",
     services: "서비스",

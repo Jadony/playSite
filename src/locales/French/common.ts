@@ -238,6 +238,22 @@ export default {
     pleaseDoubleCheckYourPaymentInformation:
       "Veuillez vérifier à nouveau vos informations de paiement",
   },
+  feedback: {
+    submitFeedback: "Envoyer des commentaires",
+    category: "Catégorie",
+    content: "Contenu",
+    enterFeedbackDetails: "Saisir les commentaires",
+    uploading: "Importation...",
+    contactInfo: "Contact",
+    enterYourContactInfo: "Saisir vos coordonnées",
+    topUpAndFunding: "Recharge & Solde",
+    paymentIssues: "Problèmes de paiement",
+    signUpAndLogin: "Inscription & Connexion",
+    gamesAndProducts: "Jeux & Produits",
+    afterSalesService: "Service après-vente",
+    suggestions: "Suggestions",
+    others: "Autres",
+  },
   footer: {
     navigation: "Navigation",
     features: "Features",

@@ -230,7 +230,24 @@ export default {
     encryptedDataPaymentNetwork: "Encrypted data & payment network",
     enanblePop: "Please enable pop-ups for this website and try paying again",
     paymentFailed: "Payment failed",
-    pleaseDoubleCheckYourPaymentInformation: "Please double-check your payment information"
+    pleaseDoubleCheckYourPaymentInformation:
+      "Please double-check your payment information",
+  },
+  feedback: {
+    submitFeedback: "Submit Feedback",
+    category: "Category",
+    content: "Content",
+    enterFeedbackDetails: "Enter feedback details",
+    uploading: "Uploading...",
+    contactInfo: "Contact Info",
+    enterYourContactInfo: "Enter your contact info",
+    topUpAndFunding: "Top-up & Funding",
+    paymentIssues: "Payment Issues",
+    signUpAndLogin: "Sign Up & Login",
+    gamesAndProducts: "Games & Products",
+    afterSalesService: "After-Sales Service",
+    suggestions: "Suggestions",
+    others: "Others",
   },
   footer: {
     navigation: "Navigation",

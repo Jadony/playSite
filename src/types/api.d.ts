@@ -391,3 +391,12 @@ type capturePayPalOrderData = {
   captureId: string;
   status: string;
 };
+
+type FeedbackSubmitParams = {
+  type: string;
+  content: string;
+  contact: string;
+  images: string[];
+};
+
+type FeedbackSubmitData = boolean;

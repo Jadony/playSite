@@ -236,6 +236,22 @@ export default {
     pleaseDoubleCheckYourPaymentInformation:
       "Bitte überprüfen Sie Ihre Zahlungsinformationen noch einmal",
   },
+  feedback: {
+    submitFeedback: "Feedback senden",
+    category: "Kategorie",
+    content: "Inhalt",
+    enterFeedbackDetails: "Feedback eingeben",
+    uploading: "Hochladen...",
+    contactInfo: "Kontaktinfo",
+    enterYourContactInfo: "Kontaktinfo eingeben",
+    topUpAndFunding: "Aufladung & Guthaben",
+    paymentIssues: "Zahlungsprobleme",
+    signUpAndLogin: "Registrierung & Login",
+    gamesAndProducts: "Spiele & Produkte",
+    afterSalesService: "Kundenservice",
+    suggestions: "Vorschläge",
+    others: "Sonstiges",
+  },
   footer: {
     navigation: "Navigation",
     features: "Features",

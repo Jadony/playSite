@@ -13,12 +13,14 @@ import { useTranslation } from "react-i18next";
 import { message } from "antd";
 import PaymentProgress from "@/components/PaymentProgress";
 import { usePayPalPayment } from "@/hooks/usePayPalPayment";
+import SubmitFeedbackModal from "@/components/SubmitFeedbackModal";
+import { FeedbackType } from "@/config";
 
 const staticPaymentMethods = [
   {
     id: "paypal",
     name: "PayPal",
-    icon: "P",
+    icon: "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-payment/paypal%403x.png",
   },
 ];
 
@@ -31,6 +33,7 @@ const Payment: React.FC = () => {
   // ---------- 支付相关状态 ----------
   const [selectedMethod] = useState("paypal");
   const [progressVisible, setProgressVisible] = useState(false);
+  const [submitFeedbackVisible, setSubmitFeedbackVisible] = useState(false);
   const [progressStatus, setProgressStatus] = useState<
     "verifying" | "shipping" | "successed" | "failed" | "canceled"
   >("verifying");
@@ -267,8 +270,8 @@ const Payment: React.FC = () => {
                           <div className="w-5 h-5 rounded-full border border-gray-600"></div>
                         )}
                       </div>
-                      <div className="w-8 h-8 rounded bg-black flex items-center justify-center text-lg">
-                        {method.icon}
+                      <div className="w-11 h-11 rounded flex items-center justify-center text-lg">
+                        <img src={method.icon} alt="" />
                       </div>
                       <span className="text-white font-medium text-base">
                         {method.name}
@@ -283,7 +286,10 @@ const Payment: React.FC = () => {
               })}
             </div>
             <div className="p-6 border-t border-[#282836]">
-              <button className="text-sm text-white underline">
+              <button
+                onClick={() => setSubmitFeedbackVisible(true)}
+                className="text-sm text-white underline"
+              >
                 {t("payment.notThePaymentMethodYouPrefer")} &gt;
               </button>
             </div>
@@ -423,6 +429,11 @@ const Payment: React.FC = () => {
         loading={loading}
         getPaymentOrderDetail={getPaymentOrderDetail}
         progressStatus={progressStatus}
+      />
+      <SubmitFeedbackModal
+        type={FeedbackType(t).paymentIssues}
+        visible={submitFeedbackVisible}
+        onClose={() => setSubmitFeedbackVisible(false)}
       />
     </div>
   );

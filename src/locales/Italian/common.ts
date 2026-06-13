@@ -87,7 +87,8 @@ export default {
     invitation: "Invitation",
     coupon: "coupon",
     copySuccess: "Copy success",
-    invitationCodeCopySuccess: "Codice di invito copiato con successo. Condividilo con gli amici per completare la registrazione."
+    invitationCodeCopySuccess:
+      "Codice di invito copiato con successo. Condividilo con gli amici per completare la registrazione.",
   },
   loginOrSignUpModal: {
     pleaseEnterEmailAddress: "Inserisci l'indirizzo email",
@@ -233,8 +234,25 @@ export default {
     encryptedDataPaymentNetwork: "Dati e rete di pagamento crittografati",
     enanblePop:
       "Si prega di consentire i pop-up per questo sito, quindi riprovare il pagamento",
-      paymentFailed: "Pagamento fallito",
-    pleaseDoubleCheckYourPaymentInformation: "Si prega di ricontrollare le informazioni di pagamento"
+    paymentFailed: "Pagamento fallito",
+    pleaseDoubleCheckYourPaymentInformation:
+      "Si prega di ricontrollare le informazioni di pagamento",
+  },
+  feedback: {
+    submitFeedback: "Invia feedback",
+    category: "Categoria",
+    content: "Contenuto",
+    enterFeedbackDetails: "Inserisci il feedback",
+    uploading: "Caricamento...",
+    contactInfo: "Contatti",
+    enterYourContactInfo: "Inserisci i tuoi contatti",
+    topUpAndFunding: "Ricariche e Saldo",
+    paymentIssues: "Problemi di pagamento",
+    signUpAndLogin: "Registrazione e Login",
+    gamesAndProducts: "Giochi e Prodotti",
+    afterSalesService: "Servizio post-vendita",
+    suggestions: "Suggerimenti",
+    others: "Altro",
   },
   footer: {
     navigation: "Navigazione",

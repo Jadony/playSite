@@ -232,6 +232,22 @@ export default {
     paymentFailed: "決済に失敗しました",
     pleaseDoubleCheckYourPaymentInformation: "お支払い情報をもう一度ご確認ください"
   },
+  feedback: {
+    submitFeedback: "フィードバックを送信",
+    category: "カテゴリ",
+    content: "内容",
+    enterFeedbackDetails: "フィードバック内容を入力",
+    uploading: "アップロード中...",
+    contactInfo: "連絡先",
+    enterYourContactInfo: "連絡先を入力",
+    topUpAndFunding: "チャージ・入金",
+    paymentIssues: "決済エラー",
+    signUpAndLogin: "登録・ログイン",
+    gamesAndProducts: "ゲーム・商品",
+    afterSalesService: "アフターサービス",
+    suggestions: "ご提案・要望",
+    others: "その他",
+  },
   footer: {
     navigation: "ナビゲーション",
     services: "サービス",
