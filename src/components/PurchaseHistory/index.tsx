@@ -94,6 +94,7 @@ const PurchaseHistory = () => {
                 backgroundColor:
                   curType === item.value ? "rgba(255,255,255,0.1)" : "",
               }}
+              key={item.value}
             >
               {item.label}
             </div>
@@ -110,6 +111,7 @@ const PurchaseHistory = () => {
               showBorderTop={false}
               product={item}
               status={item.status}
+              key={item.orderNo}
             />
           );
         })}

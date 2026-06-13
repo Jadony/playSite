@@ -94,23 +94,23 @@ const Games: React.FC = () => {
                   <path
                     d="M7.5 2.5H3.33333C2.8731 2.5 2.5 2.8731 2.5 3.33333V16.6667C2.5 17.1269 2.8731 17.5 3.33333 17.5H7.5C7.96024 17.5 8.33333 17.1269 8.33333 16.6667V3.33333C8.33333 2.8731 7.96024 2.5 7.5 2.5Z"
                     stroke="white"
-                    stroke-width="1.4"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M16.6666 2.5H12.5C12.0397 2.5 11.6666 2.8731 11.6666 3.33333V7.5C11.6666 7.96024 12.0397 8.33333 12.5 8.33333H16.6666C17.1269 8.33333 17.5 7.96024 17.5 7.5V3.33333C17.5 2.8731 17.1269 2.5 16.6666 2.5Z"
                     stroke="white"
-                    stroke-width="1.4"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M16.6666 11.6666H12.5C12.0397 11.6666 11.6666 12.0397 11.6666 12.5V16.6666C11.6666 17.1269 12.0397 17.5 12.5 17.5H16.6666C17.1269 17.5 17.5 17.1269 17.5 16.6666V12.5C17.5 12.0397 17.1269 11.6666 16.6666 11.6666Z"
                     stroke="white"
-                    stroke-width="1.4"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </g>
               </svg>
@@ -132,23 +132,23 @@ const Games: React.FC = () => {
                 <path
                   d="M7.42706 14.5713H13.1423"
                   stroke="gray"
-                  stroke-width="2.26667"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2.26667"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M10.2845 11.7134V17.4286"
                   stroke="gray"
-                  stroke-width="2.26667"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2.26667"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M23.6015 5.99854H8.39904C6.98492 5.99886 5.62113 6.52344 4.57131 7.47087C3.52149 8.41829 2.86019 9.72128 2.71524 11.128C2.70667 11.2023 2.70095 11.2723 2.69095 11.3451C2.57522 12.3081 1.71222 19.5093 1.71222 21.7154C1.71222 22.8522 2.16382 23.9425 2.96768 24.7464C3.77154 25.5502 4.86181 26.0018 5.99864 26.0018C7.42745 26.0018 8.14185 25.2874 8.85626 24.573L10.8766 22.5527C11.4124 22.0168 12.1391 21.7156 12.8969 21.7154H19.1037C19.8615 21.7156 20.5882 22.0168 21.124 22.5527L23.1443 24.573C23.8587 25.2874 24.5731 26.0018 26.0019 26.0018C27.1388 26.0018 28.229 25.5502 29.0329 24.7464C29.8368 23.9425 30.2884 22.8522 30.2884 21.7154C30.2884 19.5079 29.4254 12.3081 29.3096 11.3451C29.2996 11.2737 29.2939 11.2023 29.2853 11.1294C29.1407 9.72245 28.4796 8.41912 27.4297 7.4714C26.3799 6.52368 25.0159 5.9989 23.6015 5.99854Z"
                   stroke="gray"
-                  stroke-width="2.24"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2.24"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <circle cx="22.1074" cy="14.5713" r="2" fill="gray" />
               </svg>

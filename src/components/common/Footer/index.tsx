@@ -77,7 +77,9 @@ const Footer: React.FC = () => {
                   }}
                 >
                   <li>
-                    <a href="javascript:void(0)">{item.gameName}</a>
+                    <span className="text-[#71717a] hover:text-[#fff] transition-colors duration-200">
+                      {item.gameName}
+                    </span>
                   </li>
                 </Link>
               ))}
@@ -100,9 +102,7 @@ const Footer: React.FC = () => {
             <h3>{t("footer.privacyTerms")}</h3>
             <ul>
               <li>
-                <a href="/terms-of-service">
-                  {t("footer.termsOfService")}
-                </a>
+                <a href="/terms-of-service">{t("footer.termsOfService")}</a>
               </li>
               <li>
                 <a href="/privacy-policy">{t("footer.privacyPolicy")}</a>

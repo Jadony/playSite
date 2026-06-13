@@ -328,7 +328,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                   height="40.9091"
                   rx="20.4545"
                   fill="white"
-                  fill-opacity="0.1"
+                  fillOpacity="0.1"
                 />
                 <rect
                   x="2.72727"
@@ -337,21 +337,21 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                   height="40.9091"
                   rx="20.4545"
                   stroke="#18171B"
-                  stroke-width="5.45455"
+                  strokeWidth="5.45455"
                 />
                 <path
                   d="M29.7244 19.4805C30.1015 19.1034 30.3134 18.592 30.3135 18.0588C30.3136 17.5255 30.1018 17.0141 29.7248 16.6369C29.3477 16.2598 28.8364 16.0479 28.3031 16.0479C27.7698 16.0478 27.2584 16.2596 26.8812 16.6366L17.3617 26.1583C17.1961 26.3234 17.0736 26.5267 17.005 26.7503L16.0628 29.8546C16.0443 29.9162 16.043 29.9818 16.0588 30.0442C16.0746 30.1066 16.107 30.1636 16.1525 30.2091C16.1981 30.2546 16.2551 30.2869 16.3175 30.3026C16.38 30.3183 16.4455 30.3168 16.5072 30.2982L19.6121 29.3567C19.8355 29.2887 20.0388 29.167 20.2041 29.0022L29.7244 19.4805Z"
                   stroke="white"
-                  stroke-width="1.63636"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.63636"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M25.3213 18.187L28.1744 21.0402"
                   stroke="white"
-                  stroke-width="1.63636"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.63636"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </g>
               <defs>
@@ -433,18 +433,18 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                     <path
                       d="M16.1564 6.51808C16.5112 6.16336 16.7105 5.68222 16.7106 5.18051C16.7107 4.6788 16.5114 4.19762 16.1567 3.84281C15.802 3.488 15.3208 3.28864 14.8191 3.28857C14.3174 3.28851 13.8362 3.48775 13.4814 3.84247L4.52515 12.8008C4.36934 12.9561 4.25411 13.1474 4.18961 13.3578L3.30311 16.2783C3.28577 16.3363 3.28446 16.398 3.29932 16.4567C3.31418 16.5154 3.34466 16.569 3.38753 16.6118C3.4304 16.6546 3.48405 16.685 3.54279 16.6998C3.60154 16.7146 3.66319 16.7132 3.7212 16.6957L6.64242 15.8099C6.85258 15.746 7.04384 15.6314 7.19942 15.4764L16.1564 6.51808Z"
                       stroke="white"
-                      stroke-opacity="0.5"
-                      stroke-width="1.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeOpacity="0.5"
+                      strokeWidth="1.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M12.0137 5.30176L14.698 7.98609"
                       stroke="white"
-                      stroke-opacity="0.5"
-                      stroke-width="1.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeOpacity="0.5"
+                      strokeWidth="1.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 ) : (
@@ -463,7 +463,11 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
           <div className="flex justify-between">
             <InfoBox
               label={t("userCenter.language")}
-              value={selectLanguage}
+              value={
+                (languageList || []).filter(
+                  (item) => selectLanguage === item.languageName,
+                )[0].displayLanguage
+              }
               rightEl={
                 <div className="relative" ref={langRef}>
                   <div
@@ -582,27 +586,22 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
           onClose={() => setEditProfileModalVisible(false)}
           title={t("userCenter.nickname")}
           content={
-            <input
-              type="text"
-              placeholder={t("userCenter.pleaseInputYourNickname")}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              style={{
-                width: "100%",
-                padding: "12px",
-                background: "#2a2a2a",
-                border: "1px solid #444",
-                borderRadius: "9999px",
-                color: "#fff",
-                fontSize: "14px",
-              }}
-            />
+            <div className="glass-gradient-border bg-white/5 rounded-3xl">
+              <input
+                type="text"
+                placeholder={t("userCenter.pleaseInputYourNickname")}
+                value={name}
+                className="rounded-3xl text-sm bg-transparent outline-none p-4 w-full text-white"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
           }
           primaryButtonText={t("userCenter.confirm")}
           onPrimaryClick={() => {
             updateUserInfoData("nickname", name);
           }}
           primaryButtonDisabled={!name}
+          size="large"
         />
 
         {/* 修改性别 Modal */}
@@ -648,6 +647,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
             </div>
           }
           footer={null}
+          size="large"
         />
 
         {/* 修改生日 Modal */}
@@ -674,6 +674,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
             setEditBirthdayModalVisible(false);
           }}
           primaryButtonDisabled={!birthday}
+          size="large"
         />
 
         {/* 修改邮箱 Modal */}
@@ -685,6 +686,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
             <div>
               {/* 邮箱地址输入框 */}
               <div
+                className="glass-gradient-border bg-white/5 rounded-3xl"
                 style={{
                   position: "relative",
                   marginBottom: "16px",
@@ -710,16 +712,16 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                     <path
                       d="M18.3337 5.8335L10.8412 10.606C10.5869 10.7537 10.2981 10.8315 10.0041 10.8315C9.71004 10.8315 9.42125 10.7537 9.16699 10.606L1.66699 5.8335"
                       stroke="white"
-                      stroke-width="1.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M16.667 3.3335H3.33366C2.41318 3.3335 1.66699 4.07969 1.66699 5.00016V15.0002C1.66699 15.9206 2.41318 16.6668 3.33366 16.6668H16.667C17.5875 16.6668 18.3337 15.9206 18.3337 15.0002V5.00016C18.3337 4.07969 17.5875 3.3335 16.667 3.3335Z"
                       stroke="white"
-                      stroke-width="1.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </span>
@@ -727,16 +729,8 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                   type="email"
                   placeholder={t("userCenter.pleaseEnterEmailAddress")}
                   value={email}
+                  className="text-sm rounded-3xl bg-transparent outline-none py-4 pl-10 pr-4 w-full text-white"
                   onChange={(e) => setEmail(e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "12px 12px 12px 40px",
-                    background: "#2a2a2a",
-                    border: "1px solid #444",
-                    borderRadius: "9999px",
-                    color: "#fff",
-                    fontSize: "14px",
-                  }}
                 />
               </div>
 
@@ -750,7 +744,10 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                   gap: "8px",
                 }}
               >
-                <div style={{ position: "relative", flex: 1 }}>
+                <div
+                  style={{ position: "relative", flex: 1 }}
+                  className="glass-gradient-border bg-white/5 rounded-3xl"
+                >
                   <span
                     style={{
                       position: "absolute",
@@ -771,40 +768,32 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                       <path
                         d="M10.0003 14.1667C10.4606 14.1667 10.8337 13.7936 10.8337 13.3333C10.8337 12.8731 10.4606 12.5 10.0003 12.5C9.54009 12.5 9.16699 12.8731 9.16699 13.3333C9.16699 13.7936 9.54009 14.1667 10.0003 14.1667Z"
                         stroke="white"
-                        stroke-width="1.25"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.25"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M15.8333 8.3335H4.16667C3.24619 8.3335 2.5 9.07969 2.5 10.0002V16.6668C2.5 17.5873 3.24619 18.3335 4.16667 18.3335H15.8333C16.7538 18.3335 17.5 17.5873 17.5 16.6668V10.0002C17.5 9.07969 16.7538 8.3335 15.8333 8.3335Z"
                         stroke="white"
-                        stroke-width="1.25"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.25"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M5.83301 8.33317V5.83317C5.83301 4.7281 6.27199 3.66829 7.0534 2.88689C7.8348 2.10549 8.89461 1.6665 9.99967 1.6665C11.1047 1.6665 12.1646 2.10549 12.946 2.88689C13.7274 3.66829 14.1663 4.7281 14.1663 5.83317V8.33317"
                         stroke="white"
-                        stroke-width="1.25"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.25"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </span>
                   <input
+                    className="text-sm rounded-3xl bg-transparent outline-none py-4 pl-10 pr-4 w-full text-white"
                     type="text"
                     placeholder={t("userCenter.pleaseEnterVerificationCode")}
                     value={verificationCode}
                     onChange={(e) => setVerificationCode(e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "12px 80px 12px 40px",
-                      background: "#2a2a2a",
-                      border: "1px solid #444",
-                      borderRadius: "9999px",
-                      color: "#fff",
-                      fontSize: "14px",
-                    }}
                   />
                   <button
                     onClick={() => sendEmailCodeClick("BIND_EMAIL")}
@@ -848,6 +837,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
             updateUserInfoData("email");
           }}
           primaryButtonDisabled={!email || !verificationCode}
+          size="large"
         />
 
         {/* 设定新密码 Modal */}
@@ -866,6 +856,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
             >
               {/* 新密码输入框 */}
               <div
+                className="glass-gradient-border bg-white/5 rounded-3xl"
                 style={{
                   position: "relative",
                 }}
@@ -890,23 +881,23 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                     <path
                       d="M10.0003 14.1667C10.4606 14.1667 10.8337 13.7936 10.8337 13.3333C10.8337 12.8731 10.4606 12.5 10.0003 12.5C9.54009 12.5 9.16699 12.8731 9.16699 13.3333C9.16699 13.7936 9.54009 14.1667 10.0003 14.1667Z"
                       stroke="white"
-                      stroke-width="1.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M15.8333 8.3335H4.16667C3.24619 8.3335 2.5 9.07969 2.5 10.0002V16.6668C2.5 17.5873 3.24619 18.3335 4.16667 18.3335H15.8333C16.7538 18.3335 17.5 17.5873 17.5 16.6668V10.0002C17.5 9.07969 16.7538 8.3335 15.8333 8.3335Z"
                       stroke="white"
-                      stroke-width="1.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M5.83301 8.33317V5.83317C5.83301 4.7281 6.27199 3.66829 7.0534 2.88689C7.8348 2.10549 8.89461 1.6665 9.99967 1.6665C11.1047 1.6665 12.1646 2.10549 12.946 2.88689C13.7274 3.66829 14.1663 4.7281 14.1663 5.83317V8.33317"
                       stroke="white"
-                      stroke-width="1.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </span>
@@ -915,15 +906,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                   placeholder={t("userCenter.pleaseEnterNewPassword")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "12px 12px 12px 40px",
-                    background: "#2a2a2a",
-                    border: "1px solid #444",
-                    borderRadius: "9999px",
-                    color: "#fff",
-                    fontSize: "14px",
-                  }}
+                  className="text-sm rounded-3xl bg-transparent outline-none py-4 pl-10 pr-4 w-full text-white"
                 />
               </div>
 
@@ -932,6 +915,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                 style={{
                   position: "relative",
                 }}
+                className="glass-gradient-border bg-white/5 rounded-3xl"
               >
                 <span
                   style={{
@@ -953,23 +937,23 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                     <path
                       d="M10.0003 14.1667C10.4606 14.1667 10.8337 13.7936 10.8337 13.3333C10.8337 12.8731 10.4606 12.5 10.0003 12.5C9.54009 12.5 9.16699 12.8731 9.16699 13.3333C9.16699 13.7936 9.54009 14.1667 10.0003 14.1667Z"
                       stroke="white"
-                      stroke-width="1.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M15.8333 8.3335H4.16667C3.24619 8.3335 2.5 9.07969 2.5 10.0002V16.6668C2.5 17.5873 3.24619 18.3335 4.16667 18.3335H15.8333C16.7538 18.3335 17.5 17.5873 17.5 16.6668V10.0002C17.5 9.07969 16.7538 8.3335 15.8333 8.3335Z"
                       stroke="white"
-                      stroke-width="1.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M5.83301 8.33317V5.83317C5.83301 4.7281 6.27199 3.66829 7.0534 2.88689C7.8348 2.10549 8.89461 1.6665 9.99967 1.6665C11.1047 1.6665 12.1646 2.10549 12.946 2.88689C13.7274 3.66829 14.1663 4.7281 14.1663 5.83317V8.33317"
                       stroke="white"
-                      stroke-width="1.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </span>
@@ -978,15 +962,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                   placeholder={t("userCenter.pleaseReEnterNewPassword")}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "12px 12px 12px 40px",
-                    background: "#2a2a2a",
-                    border: "1px solid #444",
-                    borderRadius: "9999px",
-                    color: "#fff",
-                    fontSize: "14px",
-                  }}
+                  className="text-sm rounded-3xl bg-transparent outline-none py-4 pl-10 pr-4 w-full text-white"
                 />
               </div>
             </div>
@@ -1004,6 +980,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
             updateUserInfoData("setPassword");
           }}
           primaryButtonDisabled={!password || !confirmPassword}
+          size="large"
         />
 
         {/* 修改密码 Modal（带两个按钮） */}
@@ -1023,7 +1000,10 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                   gap: "8px",
                 }}
               >
-                <div style={{ position: "relative", flex: 1 }}>
+                <div
+                  style={{ position: "relative", flex: 1 }}
+                  className="glass-gradient-border bg-white/5 rounded-3xl"
+                >
                   <span
                     style={{
                       position: "absolute",
@@ -1044,23 +1024,23 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                       <path
                         d="M10.0003 14.1667C10.4606 14.1667 10.8337 13.7936 10.8337 13.3333C10.8337 12.8731 10.4606 12.5 10.0003 12.5C9.54009 12.5 9.16699 12.8731 9.16699 13.3333C9.16699 13.7936 9.54009 14.1667 10.0003 14.1667Z"
                         stroke="white"
-                        stroke-width="1.25"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.25"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M15.8333 8.3335H4.16667C3.24619 8.3335 2.5 9.07969 2.5 10.0002V16.6668C2.5 17.5873 3.24619 18.3335 4.16667 18.3335H15.8333C16.7538 18.3335 17.5 17.5873 17.5 16.6668V10.0002C17.5 9.07969 16.7538 8.3335 15.8333 8.3335Z"
                         stroke="white"
-                        stroke-width="1.25"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.25"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M5.83301 8.33317V5.83317C5.83301 4.7281 6.27199 3.66829 7.0534 2.88689C7.8348 2.10549 8.89461 1.6665 9.99967 1.6665C11.1047 1.6665 12.1646 2.10549 12.946 2.88689C13.7274 3.66829 14.1663 4.7281 14.1663 5.83317V8.33317"
                         stroke="white"
-                        stroke-width="1.25"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.25"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </span>
@@ -1069,15 +1049,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
                     placeholder={t("userCenter.pleaseEnterVerificationCode")}
                     value={changePasswordCode}
                     onChange={(e) => setChangePasswordCode(e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "12px 80px 12px 40px",
-                      background: "#2a2a2a",
-                      border: "1px solid #444",
-                      borderRadius: "9999px",
-                      color: "#fff",
-                      fontSize: "14px",
-                    }}
+                    className="text-sm rounded-3xl bg-transparent outline-none py-4 pl-10 pr-4 w-full text-white"
                   />
                   <button
                     onClick={() => sendEmailCodeClick("RESET_PASSWORD")}

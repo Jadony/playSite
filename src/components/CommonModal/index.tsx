@@ -69,6 +69,11 @@ export interface CommonModalProps {
    * 自定义 z-index
    */
   zIndex?: string;
+
+  /**
+   * 自定义按钮大小
+   */
+  size?: "small" | "medium" | "large";
 }
 
 const CommonModal: React.FC<CommonModalProps> = ({
@@ -88,6 +93,7 @@ const CommonModal: React.FC<CommonModalProps> = ({
   primaryButtonDisabled = false,
   primaryButtonLoading = false,
   zIndex,
+  size = "medium",
 }) => {
   if (!visible) return null;
 
@@ -122,7 +128,7 @@ const CommonModal: React.FC<CommonModalProps> = ({
           disabled={primaryButtonDisabled || primaryButtonLoading}
           className="common-modal-primary-btn"
           fullWidth
-          size="medium"
+          size={size}
         >
           {primaryButtonLoading ? "加载中..." : primaryButtonText}
         </PrimaryButton>

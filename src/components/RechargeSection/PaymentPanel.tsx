@@ -289,23 +289,23 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
                 <path
                   d="M7 9.3335H7.00583"
                   stroke="white"
-                  stroke-width="0.875"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="0.875"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M7 4.6665V6.99984"
                   stroke="white"
-                  stroke-width="0.875"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="0.875"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M8.93202 1.1665C9.24141 1.16657 9.53811 1.28953 9.75685 1.50834L12.4915 4.243C12.7103 4.46175 12.8333 4.75844 12.8334 5.06784V8.93184C12.8333 9.24123 12.7103 9.53793 12.4915 9.75667L9.75685 12.4913C9.53811 12.7101 9.24141 12.8331 8.93202 12.8332H5.06802C4.75863 12.8331 4.46193 12.7101 4.24319 12.4913L1.50852 9.75667C1.28971 9.53793 1.16675 9.24123 1.16669 8.93184V5.06784C1.16675 4.75844 1.28971 4.46175 1.50852 4.243L4.24319 1.50834C4.46193 1.28953 4.75863 1.16657 5.06802 1.1665H8.93202Z"
                   stroke="white"
-                  stroke-width="0.875"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="0.875"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </g>
               <defs>

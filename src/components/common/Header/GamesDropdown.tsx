@@ -80,23 +80,23 @@ const GamesDropdown: React.FC<GamesDropdownProps> = ({ onClose }) => {
               <path
                 d="M7.5 2.5H3.33333C2.8731 2.5 2.5 2.8731 2.5 3.33333V16.6667C2.5 17.1269 2.8731 17.5 3.33333 17.5H7.5C7.96024 17.5 8.33333 17.1269 8.33333 16.6667V3.33333C8.33333 2.8731 7.96024 2.5 7.5 2.5Z"
                 stroke="white"
-                stroke-width="1.4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M16.6666 2.5H12.5C12.0397 2.5 11.6666 2.8731 11.6666 3.33333V7.5C11.6666 7.96024 12.0397 8.33333 12.5 8.33333H16.6666C17.1269 8.33333 17.5 7.96024 17.5 7.5V3.33333C17.5 2.8731 17.1269 2.5 16.6666 2.5Z"
                 stroke="white"
-                stroke-width="1.4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M16.6666 11.6666H12.5C12.0397 11.6666 11.6666 12.0397 11.6666 12.5V16.6666C11.6666 17.1269 12.0397 17.5 12.5 17.5H16.6666C17.1269 17.5 17.5 17.1269 17.5 16.6666V12.5C17.5 12.0397 17.1269 11.6666 16.6666 11.6666Z"
                 stroke="white"
-                stroke-width="1.4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </g>
           </svg>

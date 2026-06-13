@@ -32,23 +32,23 @@ export default function useMenuData(
           <path
             d="M16.6663 10.8335C16.6663 15.0002 13.7497 17.0835 10.283 18.2919C10.1015 18.3534 9.90429 18.3505 9.72467 18.2835C6.24967 17.0835 3.33301 15.0002 3.33301 10.8335V5.00021C3.33301 4.7792 3.42081 4.56724 3.57709 4.41096C3.73337 4.25468 3.94533 4.16688 4.16634 4.16688C5.83301 4.16688 7.91634 3.16688 9.36634 1.90021C9.54289 1.74938 9.76747 1.6665 9.99967 1.6665C10.2319 1.6665 10.4565 1.74938 10.633 1.90021C12.0913 3.17521 14.1663 4.16688 15.833 4.16688C16.054 4.16688 16.266 4.25468 16.4223 4.41096C16.5785 4.56724 16.6663 4.7792 16.6663 5.00021V10.8335Z"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M5.31348 15.7582C5.66907 14.8017 6.30883 13.9769 7.14683 13.3945C7.98483 12.8122 8.98096 12.5002 10.0014 12.5005C11.0219 12.5008 12.0179 12.8133 12.8556 13.3961C13.6932 13.9788 14.3326 14.804 14.6876 15.7607"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M10.0003 12.5002C11.8413 12.5002 13.3337 11.0078 13.3337 9.16683C13.3337 7.32588 11.8413 5.8335 10.0003 5.8335C8.15938 5.8335 6.66699 7.32588 6.66699 9.16683C6.66699 11.0078 8.15938 12.5002 10.0003 12.5002Z"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       ),
@@ -69,79 +69,79 @@ export default function useMenuData(
           <path
             d="M8.33366 12.5H5.00033C4.11627 12.5 3.26842 12.8512 2.6433 13.4763C2.01818 14.1014 1.66699 14.9493 1.66699 15.8333V17.5"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M11.9209 13.7749L12.6901 13.4565"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M12.6901 11.5433L11.9209 11.2241"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M14.0438 10.1901L13.7246 9.4209"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M14.0438 14.8101L13.7246 15.5801"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M15.957 10.1901L16.2762 9.4209"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M16.2754 15.5801L15.957 14.8101"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M17.3096 11.5433L18.0796 11.2241"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M17.3096 13.4565L18.0796 13.7757"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M15 15C16.3807 15 17.5 13.8807 17.5 12.5C17.5 11.1193 16.3807 10 15 10C13.6193 10 12.5 11.1193 12.5 12.5C12.5 13.8807 13.6193 15 15 15Z"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M7.50033 9.16667C9.34127 9.16667 10.8337 7.67428 10.8337 5.83333C10.8337 3.99238 9.34127 2.5 7.50033 2.5C5.65938 2.5 4.16699 3.99238 4.16699 5.83333C4.16699 7.67428 5.65938 9.16667 7.50033 9.16667Z"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       ),
@@ -164,16 +164,16 @@ export default function useMenuData(
           <path
             d="M10.0003 18.3332C14.6027 18.3332 18.3337 14.6022 18.3337 9.99984C18.3337 5.39746 14.6027 1.6665 10.0003 1.6665C5.39795 1.6665 1.66699 5.39746 1.66699 9.99984C1.66699 14.6022 5.39795 18.3332 10.0003 18.3332Z"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M10 5V10L13.3333 11.6667"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       ),
@@ -194,30 +194,30 @@ export default function useMenuData(
           <path
             d="M1.66699 7.49984C2.33003 7.49984 2.96592 7.76323 3.43476 8.23207C3.9036 8.70091 4.16699 9.3368 4.16699 9.99984C4.16699 10.6629 3.9036 11.2988 3.43476 11.7676C2.96592 12.2364 2.33003 12.4998 1.66699 12.4998V14.1665C1.66699 14.6085 1.84259 15.0325 2.15515 15.345C2.46771 15.6576 2.89163 15.8332 3.33366 15.8332H16.667C17.109 15.8332 17.5329 15.6576 17.8455 15.345C18.1581 15.0325 18.3337 14.6085 18.3337 14.1665V12.4998C17.6706 12.4998 17.0347 12.2364 16.5659 11.7676C16.0971 11.2988 15.8337 10.6629 15.8337 9.99984C15.8337 9.3368 16.0971 8.70091 16.5659 8.23207C17.0347 7.76323 17.6706 7.49984 18.3337 7.49984V5.83317C18.3337 5.39114 18.1581 4.96722 17.8455 4.65466C17.5329 4.3421 17.109 4.1665 16.667 4.1665H3.33366C2.89163 4.1665 2.46771 4.3421 2.15515 4.65466C1.84259 4.96722 1.66699 5.39114 1.66699 5.83317V7.49984Z"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M10.833 4.1665V5.83317"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M10.833 14.1665V15.8332"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M10.833 9.1665V10.8332"
             stroke="white"
-            stroke-width="1.25"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       ),

@@ -197,16 +197,16 @@ const SubmitFeedbackModal: FC<SubmitFeedbackModalProps> = ({
                       <path
                         d="M6.99951 12.9998L12.9995 6.99976"
                         stroke="black"
-                        stroke-width="1.45582"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.45582"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M6.99951 6.99976L12.9995 12.9998"
                         stroke="black"
-                        stroke-width="1.45582"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.45582"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </div>
