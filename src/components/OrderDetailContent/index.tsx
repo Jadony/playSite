@@ -57,7 +57,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
   const showCountdown = status === "PENDING" && countdown;
   const showActions = status === "PENDING" || status === "PROCESSING";
   const [curTime, setCurTime] = useState(
-    (countdown || 0) + 60 * 20 * 1000 - Date.now(),
+    Math.floor(((countdown || 0) + 60 * 20 * 1000 - Date.now()) / 1000),
   );
   const { t } = useTranslation();
   const STEPS = [
@@ -240,6 +240,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
                       </span>
                     )}
                     <PrimaryButton
+                      disabled={loading}
                       size="medium"
                       borderRadius="10px"
                       fontSize="14px"

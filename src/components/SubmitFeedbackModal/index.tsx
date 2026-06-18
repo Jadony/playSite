@@ -40,7 +40,6 @@ const SubmitFeedbackModal: FC<SubmitFeedbackModalProps> = ({
   const selectRef = useRef<HTMLDivElement>(null);
   const token = localStorage.getItem("token");
   const { t } = useTranslation();
-  console.log(type);
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {

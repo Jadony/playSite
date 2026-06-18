@@ -235,7 +235,7 @@ export default function useMenuData(
             onClick={() => leftElOnClick?.(exchangeCode)}
             className="ml-auto cursor-pointer"
           >
-            ｜ {t("payment.exchange")}
+            ｜ {t("userCenter.exchange")}
           </div>
         </div>
       ),

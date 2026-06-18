@@ -81,7 +81,7 @@ const CouponModal: React.FC<CouponModalProps> = ({
           onClick={() => exchangeOnClick(exchangeCode)}
           className="ml-auto cursor-pointer"
         >
-          ｜ {t("payment.exchange")}
+          ｜ {t("userCenter.exchange")}
         </div>
       </div>
     </div>

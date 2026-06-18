@@ -61,6 +61,7 @@ const PurchaseHistory = () => {
       const { data } = await orderCancel(orderId);
       if (data.data) {
         message.success("success");
+        await getUserOrderDetail(orderId);
       }
     } catch (error) {
       message.error("error");
