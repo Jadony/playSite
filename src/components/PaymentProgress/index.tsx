@@ -231,8 +231,7 @@ const PaymentProgress: React.FC<PaymentProgressProps> = ({
   return (
     <CommonModal
       visible={visible}
-      onClose={progressStatus === "shipping" ? () => {} : onClose}
-      showClose={progressStatus === "shipping" ? false : true}
+      onClose={onClose}
       title={title}
       content={renderContent()}
       footer={null} // No primary footer button

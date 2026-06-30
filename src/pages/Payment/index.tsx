@@ -148,6 +148,7 @@ const Payment: React.FC = () => {
     setProgressVisible(false);
     setLoading(false);
     getPaymentOrderDetail(); // 刷新订单状态
+    navigate("/");
   };
 
   return (

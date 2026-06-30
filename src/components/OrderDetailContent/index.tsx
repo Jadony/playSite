@@ -74,6 +74,9 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
       }, 1000);
       return () => clearInterval(timer);
     }
+    if (curTime === 0) {
+      onCancelOrder?.();
+    }
   }, [showCountdown, curTime]);
 
   const showTime = () => {

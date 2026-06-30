@@ -7,7 +7,6 @@ import {
   useAllGamesAndSelectDispatchContext,
 } from "@/store/gameStore";
 import { useTranslation } from "react-i18next";
-import { getPurchasedGames } from "@/api/user";
 import { useAuthContext } from "@/store/authStore";
 import "./style.css";
 
@@ -17,7 +16,7 @@ const GameSearch: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState<Game[]>([]);
-  const [purchasedGames, setPurchasedGames] = useState<Game[]>([]);
+  // const [purchasedGames, setPurchasedGames] = useState<Game[]>([]);
   const { isAuthenticated } = useAuthContext();
   const {
     gameList = [],
@@ -34,20 +33,20 @@ const GameSearch: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const searchPopularGames = (hotGameList: Game[]): Game[] => {
-    return hotGameList.slice(0, 3);
+    return hotGameList.slice(0, 4);
   };
 
   const popularGames = searchPopularGames(hotGameList); // Show 3 games for popular section
 
-  const getGamePurchase = async () => {
-    const { data } = await getPurchasedGames({ limit: 3 });
-    setPurchasedGames(data.data);
-  };
+  // const getGamePurchase = async () => {
+  //   const { data } = await getPurchasedGames({ limit: 4 });
+  //   setPurchasedGames(data.data);
+  // };
 
-  const resolveGame = () => {
-    const gameSet = new Set([...purchasedGames, ...hotGameList]);
-    return Array.from(gameSet).slice(0, 3);
-  };
+  // const resolveGame = () => {
+  //   const gameSet = new Set([...purchasedGames, ...hotGameList]);
+  //   return Array.from(gameSet).slice(0, 4);
+  // };
 
   // Click outside handler
   useEffect(() => {
@@ -59,12 +58,13 @@ const GameSearch: React.FC = () => {
         setShowDropdown(false);
       }
     };
-    if (isAuthenticated) {
-      getGamePurchase();
-    }
+    // console.log(isAuthenticated);
+    // if (isAuthenticated) {
+    //   getGamePurchase();
+    // }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [isAuthenticated]);
 
   // Search Effect
   const fetchGames = async () => {
@@ -218,7 +218,7 @@ const GameSearch: React.FC = () => {
 
       {/* Pills below search - Keep them but maybe hide when dropdown is huge? Or keep as is. */}
       <div className="flex justify-start gap-4 mt-2 max-w-3xl w-full px-4">
-        {resolveGame().map((game) => (
+        {hotGameList.map((game) => (
           <button
             key={game.gameId}
             onClick={() => {
