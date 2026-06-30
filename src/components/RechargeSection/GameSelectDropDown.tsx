@@ -8,6 +8,7 @@ type SelectDropDownProps = {
   options: { type: string; name: string }[];
   keyName: keyof { type: string; name: string };
   placeholder?: string;
+  disable?: boolean;
 };
 
 const GameSelectDropDown: React.FC<SelectDropDownProps> = ({
@@ -17,6 +18,7 @@ const GameSelectDropDown: React.FC<SelectDropDownProps> = ({
   name,
   keyName,
   placeholder,
+  disable = false,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
@@ -55,7 +57,7 @@ const GameSelectDropDown: React.FC<SelectDropDownProps> = ({
             <DownOutlined />
           </span>
         </div>
-        {showDropdown && (
+        {showDropdown && !disable && (
           <div className="absolute top-full left-0 w-full mt-1 bg-[#2e2e36] rounded-lg shadow-xl z-20 overflow-hidden">
             {options.map((option) => (
               <div

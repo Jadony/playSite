@@ -2,7 +2,7 @@
  * @Author: 安风 2196477263@qq.com
  * @Date: 2026-01-28 19:49:18
  * @LastEditors: 安风 2196477263@qq.com
- * @LastEditTime: 2026-06-06 11:41:40
+ * @LastEditTime: 2026-06-25 21:41:52
  * @FilePath: /playSite/src/components/RechargeSection/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -31,6 +31,7 @@ const RechargeSection: React.FC = () => {
         currency: selectUnit?.currency || "",
       });
       setItemList(data.data.skuList);
+      setSelectGameItem(data.data.skuList[0]);
     } catch (error) {
       message.error("error");
     }

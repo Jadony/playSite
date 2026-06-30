@@ -65,6 +65,10 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
       setLoginModalVisible(true);
       return;
     }
+    if (!uid || !selectedServerType) {
+      message.error("请输入区服或UID");
+      return;
+    }
     try {
       const { data } = await createOrder({
         skuId: selectGameItem?.id || 0,
@@ -252,6 +256,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
             onChange={(value) => {
               setSelectedServerType(value);
             }}
+            disable={selectGameItem?.zoneInfos.length === 1}
             placeholder={t("home.selectorAndPayment.plaseSelectServer")}
             label={t("home.selectorAndPayment.areaService")}
             options={
@@ -262,7 +267,11 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
                 };
               }) ?? []
             }
-            name={selectedServerType?.name ?? ""}
+            name={
+              selectGameItem?.zoneInfos.length === 1
+                ? selectGameItem?.zoneInfos[0]
+                : (selectedServerType?.name ?? "")
+            }
             keyName="type"
           />
         </div>
