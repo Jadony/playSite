@@ -165,7 +165,10 @@ const PurchaseHistory = () => {
             onPayNow={onPayNow}
             onCancelOrder={() => getOrderCancel(curOrder?.orderNo || "")}
             onRefresh={() => getOrderRefresh(curOrder?.orderNo || "")}
-            onBack={() => setVisible(false)}
+            onBack={() => {
+              setVisible(false);
+              getUserOrderList();
+            }}
             countdown={curOrder?.createTimeStamp}
           />
         }
