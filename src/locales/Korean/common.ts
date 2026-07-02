@@ -229,7 +229,8 @@ export default {
     encryptedDataPaymentNetwork: "데이터 및 결제 네트워크 암호화 완료",
     enanblePop: "팝업 차단을 해제한 후 다시 결제해 주세요",
     paymentFailed: "결제 실패",
-    pleaseDoubleCheckYourPaymentInformation: "결제 정보를 다시 확인해 주세요"
+    pleaseDoubleCheckYourPaymentInformation: "결제 정보를 다시 확인해 주세요",
+    pleaseEnterYourServerAndUID: "서버와 UID를 입력해 주세요",
   },
   feedback: {
     submitFeedback: "피드백 제출",

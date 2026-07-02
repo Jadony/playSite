@@ -225,6 +225,7 @@ export default {
     enanblePop: "請允許本站彈窗，然後重新支付",
     paymentFailed: "支付失敗",
     pleaseDoubleCheckYourPaymentInformation: "請您重新核對支付信息",
+    pleaseEnterYourServerAndUID: "請輸入區服和UID",
   },
   feedback: {
     submitFeedback: "提交反饋",

@@ -230,7 +230,9 @@ export default {
     encryptedDataPaymentNetwork: "データ・決済通信の暗号化",
     enanblePop: "ポップアップブロックを解除し、再度決済を行ってください",
     paymentFailed: "決済に失敗しました",
-    pleaseDoubleCheckYourPaymentInformation: "お支払い情報をもう一度ご確認ください"
+    pleaseDoubleCheckYourPaymentInformation:
+      "お支払い情報をもう一度ご確認ください",
+    pleaseEnterYourServerAndUID: "サーバーとUIDを入力してください",
   },
   feedback: {
     submitFeedback: "フィードバックを送信",

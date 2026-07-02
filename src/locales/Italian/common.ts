@@ -237,6 +237,7 @@ export default {
     paymentFailed: "Pagamento fallito",
     pleaseDoubleCheckYourPaymentInformation:
       "Si prega di ricontrollare le informazioni di pagamento",
+    pleaseEnterYourServerAndUID: "Inserisci il server e l'UID.",
   },
   feedback: {
     submitFeedback: "Invia feedback",

@@ -66,7 +66,7 @@ const PaymentPanel: React.FC<PaymentPanelProps> = ({
       return;
     }
     if (!uid || !selectedServerType) {
-      message.error("请输入区服或UID");
+      message.error(t("payment.pleaseEnterYourServerAndUID"));
       return;
     }
     try {
