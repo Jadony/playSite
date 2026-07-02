@@ -24,6 +24,7 @@ const Header: React.FC = () => {
   const [showLang, setShowLang] = useState(false);
   const [showCurrency, setShowCurrency] = useState(false);
   const [showGames, setShowGames] = useState(false);
+  const [isSticky, setIsSticky] = useState(true); // 控制吸顶状态
 
   const langRef = React.useRef<HTMLDivElement>(null);
   const currencyRef = React.useRef<HTMLDivElement>(null);
@@ -38,7 +39,6 @@ const Header: React.FC = () => {
   const { isAuthenticated, user } = useAuthContext();
 
   const { t, i18n } = useTranslation();
-
   const navigate = useNavigate();
 
   const getAllLanguage = async () => {
@@ -53,6 +53,7 @@ const Header: React.FC = () => {
       message.error("error");
     }
   };
+
   const getCurrency = async () => {
     try {
       const { data } = await getCountryAllCurrency();
@@ -160,12 +161,21 @@ const Header: React.FC = () => {
     }
   };
 
+  // 滚动监听：更新吸顶状态
+  const hiddenHeader = () => {
+    const scrollY = window.scrollY;
+    const hideHeight = 700;
+    setIsSticky(scrollY <= hideHeight);
+  };
+
   useEffect(() => {
     getCurrency();
     getAllLanguage();
     getCountryAllData();
+    document.addEventListener("scroll", hiddenHeader);
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
+      document.removeEventListener("scroll", hiddenHeader);
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
@@ -175,6 +185,11 @@ const Header: React.FC = () => {
     getHotGames();
     getAllGames();
   }, [selectUnit?.currency, selectLanguage]);
+
+  // 当导航隐藏时，自动关闭下拉菜单
+  useEffect(() => {
+    if (!isSticky) setShowGames(false);
+  }, [isSticky]);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -204,7 +219,13 @@ const Header: React.FC = () => {
   return (
     <>
       {/* 1. FIXED LEFT: LOGO */}
-      <div className="fixed top-6 left-8 z-[60] animate-fade-in pointer-events-auto">
+      <div
+        className="fixed left-8 z-[60] animate-fade-in pointer-events-auto"
+        style={{
+          top: isSticky ? "1.5rem" : "-5rem",
+          transition: "top 0.4s ease",
+        }}
+      >
         <Link to="/" className="flex items-center gap-2 group">
           <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 backdrop-blur-md shadow-[inset_0_0_10px_rgba(255,255,255,0.1)] group-hover:bg-white/10 transition-all">
             <span className="text-xl">⚡</span>
@@ -216,7 +237,13 @@ const Header: React.FC = () => {
       </div>
 
       {/* 2. FIXED CENTER: MENU ONLY */}
-      <div className="fixed top-0 left-0 right-0 z-[55] flex justify-center pt-6 px-4 pointer-events-none">
+      <div
+        className="fixed left-0 right-0 z-[55] flex justify-center pt-6 px-4 pointer-events-none"
+        style={{
+          top: isSticky ? "0" : "-5rem",
+          transition: "top 0.4s ease",
+        }}
+      >
         <div className="pointer-events-auto h-12 flex items-center justify-center transition-all duration-300 px-2 bg-gradient-to-b from-[#121215] to-[#1d1e21] rounded-full glass-gradient-border">
           <div className="flex items-center gap-1">
             {menuItems.map((item) => (
@@ -289,8 +316,15 @@ const Header: React.FC = () => {
       </div>
 
       {/* 3. FIXED RIGHT: USER ACTIONS */}
-      <div className="fixed top-6 right-8 z-[60] flex items-center gap-4 animate-fade-in pointer-events-auto">
+      <div
+        className="fixed right-8 z-[60] flex items-center gap-4 animate-fade-in pointer-events-auto"
+        style={{
+          top: isSticky ? "1.5rem" : "-5rem",
+          transition: "top 0.4s ease",
+        }}
+      >
         <div className="hidden lg:flex items-center gap-6 mr-2">
+          {/* 语言切换 */}
           <div className="relative" ref={langRef}>
             <div
               onClick={() => {
@@ -389,6 +423,7 @@ const Header: React.FC = () => {
 
           <div className="w-px h-4 bg-white/10"></div>
 
+          {/* 货币切换 */}
           <div className="relative" ref={currencyRef}>
             <div
               onClick={() => {

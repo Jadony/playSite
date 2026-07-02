@@ -7,7 +7,7 @@ import {
   useAllGamesAndSelectDispatchContext,
 } from "@/store/gameStore";
 import { useTranslation } from "react-i18next";
-import { useAuthContext } from "@/store/authStore";
+// import { useAuthContext } from "@/store/authStore";
 import "./style.css";
 
 const GameSearch: React.FC = () => {
@@ -16,8 +16,8 @@ const GameSearch: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState<Game[]>([]);
-  // const [purchasedGames, setPurchasedGames] = useState<Game[]>([]);
-  const { isAuthenticated } = useAuthContext();
+  const [isCompact, setIsCompact] = useState(false); // 紧凑模式（Header 隐藏后）
+  // const { isAuthenticated } = useAuthContext();
   const {
     gameList = [],
     hotGameList = [],
@@ -26,29 +26,12 @@ const GameSearch: React.FC = () => {
   const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
 
   const navigate = useNavigate();
-
-  // Debounce search term
   const debouncedSearchTerm = useDebounce(searchTerm, { wait: 500 });
-
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const searchPopularGames = (hotGameList: Game[]): Game[] => {
-    return hotGameList.slice(0, 4);
-  };
+  const popularGames = hotGameList.slice(0, 4);
 
-  const popularGames = searchPopularGames(hotGameList); // Show 3 games for popular section
-
-  // const getGamePurchase = async () => {
-  //   const { data } = await getPurchasedGames({ limit: 4 });
-  //   setPurchasedGames(data.data);
-  // };
-
-  // const resolveGame = () => {
-  //   const gameSet = new Set([...purchasedGames, ...hotGameList]);
-  //   return Array.from(gameSet).slice(0, 4);
-  // };
-
-  // Click outside handler
+  // 点击外部关闭下拉
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -58,22 +41,24 @@ const GameSearch: React.FC = () => {
         setShowDropdown(false);
       }
     };
-    // console.log(isAuthenticated);
-    // if (isAuthenticated) {
-    //   getGamePurchase();
-    // }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isAuthenticated]);
+  }, []);
 
-  // Search Effect
+  // 监听滚动，超过 700px 进入紧凑模式（与 Header 隐藏同步）
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsCompact(window.scrollY > 700);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // 搜索逻辑
   const fetchGames = async () => {
     setIsLoading(true);
     setShowDropdown(true);
-
-    // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 500));
-
     const results = gameList.filter((game) =>
       game.gameName.toLowerCase().includes(debouncedSearchTerm.toLowerCase()),
     );
@@ -87,26 +72,31 @@ const GameSearch: React.FC = () => {
       setIsLoading(false);
       return;
     }
-
     fetchGames();
   }, [debouncedSearchTerm]);
+
+  // 动态样式：紧凑模式下 top 为 0，减少垂直内边距
+  const containerStyle: React.CSSProperties = {
+    top: isCompact ? 0 : "80px",
+    paddingTop: isCompact ? "8px" : "16px",
+    paddingBottom: isCompact ? "8px" : "16px",
+    transition: "top 0.3s ease, padding 0.3s ease",
+  };
 
   return (
     <div
       ref={containerRef}
-      className="sticky top-[80px] z-50 w-full py-4 flex flex-col items-center gap-4 backdrop-blur-md transition-all"
+      className="sticky z-50 w-full flex flex-col items-center gap-4 backdrop-blur-md"
+      style={containerStyle}
     >
       <div className="relative flex items-center gap-4 w-full max-w-3xl px-4">
-        {/* Search Input */}
+        {/* 搜索框 */}
         <div className="flex-1 flex items-center bg-[#121212] border border-white rounded-full px-6 py-4 shadow-lg active:border-white/40 transition-all z-50">
           <SearchOutlined className="text-white mr-4 text-xl" />
           <input
             type="text"
             value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              // if (e.target.value) setShowDropdown(true);
-            }}
+            onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => {
               if (searchTerm) setShowDropdown(true);
             }}
@@ -115,7 +105,7 @@ const GameSearch: React.FC = () => {
           />
         </div>
 
-        {/* All Button */}
+        {/* All 按钮 */}
         <button
           onClick={() => {
             window.scrollTo(0, 0);
@@ -126,7 +116,7 @@ const GameSearch: React.FC = () => {
           <span className="text-base">{t("home.search.allBtn")}</span>
         </button>
 
-        {/* Dropdown Results */}
+        {/* 下拉搜索结果 */}
         {showDropdown && searchTerm && (
           <div className="absolute top-[calc(100%+10px)] left-4 right-[calc(60px+16px+16px)] bg-[#1a1a1a] rounded-3xl p-6 shadow-2xl border border-white/10 z-40 min-h-[300px] flex flex-col">
             {isLoading ? (
@@ -140,9 +130,7 @@ const GameSearch: React.FC = () => {
                     onClick={() => {
                       allGamesAndSelectDispatch({
                         type: "setSelectGame",
-                        payload: {
-                          selectGame: game,
-                        },
+                        payload: { selectGame: game },
                       });
                       setShowDropdown(false);
                     }}
@@ -166,7 +154,6 @@ const GameSearch: React.FC = () => {
                 ))}
               </div>
             ) : (
-              // Empty State
               <div className="flex-1 flex flex-col">
                 <div className="flex-1 flex flex-col items-center justify-center py-12 border-b border-white/5">
                   <InboxOutlined className="text-6xl text-gray-600 mb-4" />
@@ -174,7 +161,6 @@ const GameSearch: React.FC = () => {
                     {t("home.search.noResultsFound")}
                   </h3>
                 </div>
-
                 <div className="mt-6">
                   <div className="flex items-center gap-2 mb-4 text-gray-200">
                     🔥
@@ -186,9 +172,7 @@ const GameSearch: React.FC = () => {
                         onClick={() => {
                           allGamesAndSelectDispatch({
                             type: "setSelectGame",
-                            payload: {
-                              selectGame: game,
-                            },
+                            payload: { selectGame: game },
                           });
                           setShowDropdown(false);
                         }}
@@ -216,33 +200,33 @@ const GameSearch: React.FC = () => {
         )}
       </div>
 
-      {/* Pills below search - Keep them but maybe hide when dropdown is huge? Or keep as is. */}
-      <div className="flex justify-start gap-4 mt-2 max-w-3xl w-full px-4">
-        {hotGameList.map((game) => (
-          <button
-            key={game.gameId}
-            onClick={() => {
-              allGamesAndSelectDispatch({
-                type: "setSelectGame",
-                payload: {
-                  selectGame: game,
-                },
-              });
-            }}
-            className="game-search-tag flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-all glass-gradient-border"
-            style={{
-              border: "0.5px solid rgba(255, 255, 255, 0.8)",
-              backgroundColor:
-                game.gameId === selectGame?.gameId
-                  ? "rgba(255, 255, 255, 0.1)"
-                  : "",
-            }}
-          >
-            {!game.purchased ? <span>🔥</span> : <span>✓</span>}
-            {game.gameName}
-          </button>
-        ))}
-      </div>
+      {/* 热门游戏标签 —— 仅在非紧凑模式下显示 */}
+      {!isCompact && (
+        <div className="flex justify-start gap-4 mt-2 max-w-3xl w-full px-4">
+          {hotGameList.map((game) => (
+            <button
+              key={game.gameId}
+              onClick={() => {
+                allGamesAndSelectDispatch({
+                  type: "setSelectGame",
+                  payload: { selectGame: game },
+                });
+              }}
+              className="game-search-tag flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-all glass-gradient-border"
+              style={{
+                border: "0.5px solid rgba(255, 255, 255, 0.8)",
+                backgroundColor:
+                  game.gameId === selectGame?.gameId
+                    ? "rgba(255, 255, 255, 0.1)"
+                    : "",
+              }}
+            >
+              {!game.purchased ? <span>🔥</span> : <span>✓</span>}
+              {game.gameName}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
