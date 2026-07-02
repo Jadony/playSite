@@ -143,7 +143,7 @@ const CommonModal: React.FC<CommonModalProps> = ({
       onClick={handleMaskClick}
     >
       <div
-        className={`common-modal ${className}`}
+        className={`common-modal ${className} bg-white/5 backdrop-blur-xl`}
         style={{ width: modalWidth }}
         onClick={handleModalClick}
       >
