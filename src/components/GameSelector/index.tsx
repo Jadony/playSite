@@ -76,7 +76,7 @@ const GameSelector: React.FC = () => {
   const getCardStyle = (index: number) => {
     const len = cardShowGameList.length;
     let diff = index - activeIndex;
-    
+
     // Circular logic for seamless looping
     if (len > 0) {
       if (diff > len / 2) {
@@ -86,7 +86,7 @@ const GameSelector: React.FC = () => {
         diff += len;
       }
     }
-    
+
     const absDiff = Math.abs(diff);
 
     const zIndex = 10 - absDiff;

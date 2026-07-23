@@ -138,7 +138,7 @@ const CouponModal: React.FC<CouponModalProps> = ({
             </div>
           </div>
           <PrimaryButton className="text-base" onClick={onClose}>
-            {t("home.userCenter.confirm")}
+            {t("userCenter.confirm")}
           </PrimaryButton>
         </div>
       }
