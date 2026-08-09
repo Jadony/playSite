@@ -30,7 +30,6 @@ const GameSearch: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const popularGames = hotGameList.slice(0, 4);
-  console.log(popularGames);
 
   // 点击外部关闭下拉
   useEffect(() => {
