@@ -30,6 +30,7 @@ const GameSearch: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const popularGames = hotGameList.slice(0, 4);
+  console.log(popularGames);
 
   // 点击外部关闭下拉
   useEffect(() => {
@@ -203,7 +204,7 @@ const GameSearch: React.FC = () => {
       {/* 热门游戏标签 —— 仅在非紧凑模式下显示 */}
       {!isCompact && (
         <div className="flex justify-start gap-4 mt-2 max-w-3xl w-full px-4">
-          {hotGameList.map((game) => (
+          {hotGameList.slice(0, 3).map((game) => (
             <button
               key={game.gameId}
               onClick={() => {

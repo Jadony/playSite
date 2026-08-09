@@ -11,10 +11,11 @@ export default {
   loginSignUp: "login / sign up",
   home: {
     section: {
-      startingBenefits: "Starting benefits",
-      startingBenefitsSubFirst: "The lowest price, hi play, unlimited",
-      startingBenefitsSubSecond: "Register now to enjoy the newbie gift",
-      singUp: "Sing Up",
+      startingBenefits: "序章开启",
+      startingBenefitsSubFirst: "玩转充值新体验",
+      startingBenefitsSubSecond:
+        "封闭一测启动 · 更多玩法构建中 · 全场 9.8 折起",
+      singUp: "注册领取限定卡牌",
     },
     search: {
       searchForGameNamesOrKeywords: "Search for game names or keywords",
@@ -232,7 +233,7 @@ export default {
     paymentFailed: "Payment failed",
     pleaseDoubleCheckYourPaymentInformation:
       "Please double-check your payment information",
-    pleaseEnterYourServerAndUID : "Please enter your server and UID",
+    pleaseEnterYourServerAndUID: "Please enter your server and UID",
   },
   feedback: {
     submitFeedback: "Submit Feedback",
