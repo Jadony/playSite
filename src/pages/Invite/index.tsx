@@ -92,7 +92,7 @@ const Invite: React.FC = () => {
                 fontSize="16px"
                 onClick={() => setLoginModalVisible(true)}
               >
-                {t("loginOrSignUpModal.logIn")}
+                {t("loginOrSignUpModal.login")}
               </PrimaryButton>
             )}
           </div>
