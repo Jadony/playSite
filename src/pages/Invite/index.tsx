@@ -64,7 +64,7 @@ const Invite: React.FC = () => {
           {/* 握手图片 */}
           <div className="fist-image-container">
             <img
-              src="/src/assets/invite/fist.png"
+              src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-invite/invitePNG.png"
               alt="Fist Bump"
               className="fist-image"
             />

@@ -1,8 +1,16 @@
+/*
+ * @Author: 安风 2196477263@qq.com
+ * @Date: 2026-08-09 20:42:09
+ * @LastEditors: 安风 2196477263@qq.com
+ * @LastEditTime: 2026-08-24 16:53:57
+ * @FilePath: /playSite/src/pages/About/index.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import "./style.css";
 
 const About = () => {
   return (
-    <div className="about-wrap flex flex-col max-w-7xl text-white bg-[#000]">
+    <div className="about-wrap flex flex-col text-white bg-[#000]">
       {/* Hero Section */}
       <div className="w-[1280px] mx-auto">
         <div className="relative w-full h-[1400px] bg-cover bg-center flex flex-col justify-center items-start px-10 md:px-20 lg:px-40">

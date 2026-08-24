@@ -6,6 +6,7 @@ import {
   useLanguageDispatchContext,
 } from "@/store/languageStore";
 import LoginModal from "@components/LoginModal";
+import SubmitFeedbackModal from "@/components/SubmitFeedbackModal";
 import GamesDropdown from "./GamesDropdown";
 import { useAuthContext } from "@/store/authStore";
 import { allGames, hotGames } from "@/api/game";
@@ -17,6 +18,7 @@ import {
   getCountryAllLanguage,
 } from "@/api/user";
 import "./style.css";
+import { FeedbackType } from "@/config";
 
 const Header: React.FC = () => {
   const location = useLocation();
@@ -25,6 +27,7 @@ const Header: React.FC = () => {
   const [showCurrency, setShowCurrency] = useState(false);
   const [showGames, setShowGames] = useState(false);
   const [isSticky, setIsSticky] = useState(true); // 控制吸顶状态
+  const [submitFeedbackVisible, setSubmitFeedbackVisible] = useState(false);
 
   const langRef = React.useRef<HTMLDivElement>(null);
   const currencyRef = React.useRef<HTMLDivElement>(null);
@@ -216,6 +219,77 @@ const Header: React.FC = () => {
     );
   };
 
+  const renderMenuItem = (item: {
+    key: string;
+    label: string;
+    path: string;
+    icon?: React.ReactNode;
+  }) => {
+    if (item.key === "/games") {
+      return (
+        <div
+          ref={gamesButtonRef}
+          onClick={() => {
+            setShowGames(!showGames);
+            setShowLang(false);
+            setShowCurrency(false);
+          }}
+          className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 relative group flex items-center gap-1 cursor-pointer select-none ${
+            isActive(item.path)
+              ? "text-black bg-white shadow-lg scale-105"
+              : "text-white/80 hover:text-white hover:bg-white/10"
+          }`}
+        >
+          {item.label}
+          <svg
+            width="10"
+            height="6"
+            viewBox="0 0 10 6"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className={`transition-transform duration-300 ${showGames ? "rotate-180" : ""} ${isActive(item.path) ? "stroke-black" : "stroke-current"}`}
+          >
+            <path
+              d="M1 1L5 5L9 1"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      );
+    } else if (item.key === "/help") {
+      return (
+        <div
+          onClick={() => {
+            setSubmitFeedbackVisible(true);
+          }}
+          className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 relative group flex items-center gap-1 cursor-pointer select-none ${
+            isActive(item.path)
+              ? "text-black bg-white shadow-lg scale-105"
+              : "text-white/80 hover:text-white hover:bg-white/10"
+          }`}
+        >
+          {item.label}
+        </div>
+      );
+    } else {
+      return (
+        <Link
+          to={item.path}
+          className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 relative group flex items-center gap-1 ${
+            isActive(item.path)
+              ? "text-black bg-white shadow-lg scale-105"
+              : "text-white/80 hover:text-white hover:bg-white/10"
+          }`}
+        >
+          {item.key === "/invite" && <span className="text-base">🔥</span>}
+          {item.label}
+        </Link>
+      );
+    }
+  };
+
   return (
     <>
       {/* 1. FIXED LEFT: LOGO */}
@@ -248,52 +322,7 @@ const Header: React.FC = () => {
           <div className="flex items-center gap-1">
             {menuItems.map((item) => (
               <div key={item.key} className="relative">
-                {item.key === "/games" ? (
-                  <div
-                    ref={gamesButtonRef}
-                    onClick={() => {
-                      setShowGames(!showGames);
-                      setShowLang(false);
-                      setShowCurrency(false);
-                    }}
-                    className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 relative group flex items-center gap-1 cursor-pointer select-none ${
-                      isActive(item.path)
-                        ? "text-black bg-white shadow-lg scale-105"
-                        : "text-white/80 hover:text-white hover:bg-white/10"
-                    }`}
-                  >
-                    {item.label}
-                    <svg
-                      width="10"
-                      height="6"
-                      viewBox="0 0 10 6"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className={`transition-transform duration-300 ${showGames ? "rotate-180" : ""} ${isActive(item.path) ? "stroke-black" : "stroke-current"}`}
-                    >
-                      <path
-                        d="M1 1L5 5L9 1"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                ) : (
-                  <Link
-                    to={item.path}
-                    className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 relative group flex items-center gap-1 ${
-                      isActive(item.path)
-                        ? "text-black bg-white shadow-lg scale-105"
-                        : "text-white/80 hover:text-white hover:bg-white/10"
-                    }`}
-                  >
-                    {item.key === "/invite" && (
-                      <span className="text-base">🔥</span>
-                    )}
-                    {item.label}
-                  </Link>
-                )}
+                {renderMenuItem(item)}
               </div>
             ))}
           </div>
@@ -550,6 +579,11 @@ const Header: React.FC = () => {
       <LoginModal
         visible={loginModalVisible}
         onClose={() => setLoginModalVisible(false)}
+      />
+      <SubmitFeedbackModal
+        type={FeedbackType(t).topUpAndFunding}
+        visible={submitFeedbackVisible}
+        onClose={() => setSubmitFeedbackVisible(false)}
       />
     </>
   );
