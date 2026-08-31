@@ -236,6 +236,8 @@ export default {
     pleaseDoubleCheckYourPaymentInformation:
       "Bitte überprüfen Sie Ihre Zahlungsinformationen noch einmal",
     pleaseEnterYourServerAndUID: "Bitte geben Sie den Server und die UID ein.",
+    canceled: "Storniert",
+    orderCancelPleaseReorder: "Bestellung storniert. Bitte neu bestellen",
   },
   feedback: {
     submitFeedback: "Feedback senden",

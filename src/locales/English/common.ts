@@ -234,6 +234,8 @@ export default {
     pleaseDoubleCheckYourPaymentInformation:
       "Please double-check your payment information",
     pleaseEnterYourServerAndUID: "Please enter your server and UID",
+    canceled: "Canceled",
+    orderCancelPleaseReorder: "Order canceled. Please reorder"
   },
   feedback: {
     submitFeedback: "Submit Feedback",

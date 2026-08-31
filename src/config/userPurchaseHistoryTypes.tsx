@@ -2,7 +2,7 @@
  * @Author: 安风 2196477263@qq.com
  * @Date: 2026-02-10 21:33:30
  * @LastEditors: 安风 2196477263@qq.com
- * @LastEditTime: 2026-05-18 15:27:21
+ * @LastEditTime: 2026-08-31 15:26:12
  * @FilePath: /playSite/src/config/userPurchaseHistoryTypes.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -52,11 +52,11 @@ export const usePurchaseHistoryStatusConfig = (): Record<
   const { t } = useTranslation();
   return {
     CANCELLED: {
-      label: "已取消",
-      desc: "订单已取消，请重新下单",
+      label: t("payment.canceled"),
+      desc: t("payment.orderCancelPleaseReorder"),
       statusColor: "grey",
       completedStep: 1,
-      actionTag: "已取消",
+      actionTag: t("payment.canceled"),
       showHeaderStatus: true,
     },
     PROCESSING: {
@@ -71,7 +71,7 @@ export const usePurchaseHistoryStatusConfig = (): Record<
       desc: t("userCenter.refundAndAfterSalesText"),
       statusColor: "red",
       completedStep: 2,
-      actionTag: "售后中",
+      actionTag: t("userCenter.refundAndAfterSalesText"),
     },
     // pending: {
     //   label: "待处理",

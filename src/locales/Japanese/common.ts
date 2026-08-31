@@ -233,6 +233,8 @@ export default {
     pleaseDoubleCheckYourPaymentInformation:
       "お支払い情報をもう一度ご確認ください",
     pleaseEnterYourServerAndUID: "サーバーとUIDを入力してください",
+    canceled: "キャンセル済み",
+    orderCancelPleaseReorder: "注文キャンセル。再注文してください",
   },
   feedback: {
     submitFeedback: "フィードバックを送信",

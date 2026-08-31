@@ -64,7 +64,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
     t("userCenter.order"),
     t("userCenter.payment"),
     t("userCenter.delivery"),
-    t("userCenter.completed"),
+    t("userCenter.success"),
   ] as const;
 
   useEffect(() => {
@@ -105,7 +105,7 @@ const OrderDetailContent: React.FC<OrderDetailContentProps> = ({
 
   return (
     <div
-      className={`w-full max-w-[945px] h-[640px] bg-[#1a1a1f] rounded-2xl border border-white/10 overflow-hidden flex flex-col px-5 pb-5 box-border ${className}`.trim()}
+      className={`w-full max-w-[1045px] h-[640px] bg-[#1a1a1f] rounded-2xl border border-white/10 overflow-hidden flex flex-col px-5 pb-5 box-border ${className}`.trim()}
     >
       {/* Header */}
       <div className="flex items-center justify-between py-5 border-b border-white/10 shrink-0">

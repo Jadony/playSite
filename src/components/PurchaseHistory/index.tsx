@@ -152,7 +152,7 @@ const PurchaseHistory = () => {
       <CommonModal
         className="p-0"
         visible={visible}
-        width={945}
+        width={1045}
         onClose={() => setVisible(false)}
         showClose={false}
         content={

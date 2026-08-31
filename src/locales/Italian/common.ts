@@ -238,6 +238,8 @@ export default {
     pleaseDoubleCheckYourPaymentInformation:
       "Si prega di ricontrollare le informazioni di pagamento",
     pleaseEnterYourServerAndUID: "Inserisci il server e l'UID.",
+    canceled: "Annullato",
+    orderCancelPleaseReorder: "Ordine annullato. Riprova l'ordine",
   },
   feedback: {
     submitFeedback: "Invia feedback",

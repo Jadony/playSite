@@ -231,6 +231,8 @@ export default {
     paymentFailed: "결제 실패",
     pleaseDoubleCheckYourPaymentInformation: "결제 정보를 다시 확인해 주세요",
     pleaseEnterYourServerAndUID: "서버와 UID를 입력해 주세요",
+    canceled: "취소됨",
+    orderCancelPleaseReorder: "주문 취소. 다시 주문해 주세요",
   },
   feedback: {
     submitFeedback: "피드백 제출",

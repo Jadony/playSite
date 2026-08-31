@@ -226,6 +226,8 @@ export default {
     paymentFailed: "支付失敗",
     pleaseDoubleCheckYourPaymentInformation: "請您重新核對支付信息",
     pleaseEnterYourServerAndUID: "請輸入區服和UID",
+    canceled: "已取消",
+    orderCancelPleaseReorder: "訂單已取消，請重新下單",
   },
   feedback: {
     submitFeedback: "提交反饋",
