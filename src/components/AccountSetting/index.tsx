@@ -466,7 +466,7 @@ const AccountSetting = ({ getUserAllInfo, userData }: AccountSettingProps) => {
               value={
                 (languageList || []).filter(
                   (item) => selectLanguage === item.languageName,
-                )[0].displayLanguage
+                )[0]?.displayLanguage || ""
               }
               rightEl={
                 <div className="relative" ref={langRef}>

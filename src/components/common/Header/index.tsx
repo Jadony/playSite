@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
@@ -11,7 +11,10 @@ import GamesDropdown from "./GamesDropdown";
 import { useAuthContext } from "@/store/authStore";
 import { allGames, hotGames } from "@/api/game";
 import { message } from "antd";
-import { useAllGamesAndSelectDispatchContext } from "@/store/gameStore";
+import {
+  useAllGamesAndSelectDispatchContext,
+  useAllGamesAndSelectContext,
+} from "@/store/gameStore";
 import {
   getCountryAll,
   getCountryAllCurrency,
@@ -33,6 +36,7 @@ const Header: React.FC = () => {
   const currencyRef = React.useRef<HTMLDivElement>(null);
   const gamesButtonRef = React.useRef<HTMLDivElement>(null);
   const gamesDropdownRef = React.useRef<HTMLDivElement>(null);
+  const { selectGame } = useAllGamesAndSelectContext();
   const { selectLanguage, unitAndLanguageList, selectUnit } =
     useLanguageContext();
   const allGamesAndSelectDispatch = useAllGamesAndSelectDispatchContext();
@@ -153,12 +157,14 @@ const Header: React.FC = () => {
           gameList: data.data.records,
         },
       });
-      allGamesAndSelectDispatch({
-        type: "setSelectGame",
-        payload: {
-          selectGame: data.data.records[0],
-        },
-      });
+      if (!selectGame) {
+        allGamesAndSelectDispatch({
+          type: "setSelectGame",
+          payload: {
+            selectGame: data.data.records[0],
+          },
+        });
+      }
     } catch (error) {
       message.error("error");
     }

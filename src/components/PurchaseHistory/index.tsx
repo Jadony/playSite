@@ -80,6 +80,13 @@ const PurchaseHistory = () => {
     getUserOrderList();
   }, [curType, selectUnit?.unit, selectLanguage]);
 
+  useEffect(() => {
+    const orderInterval = setInterval(() => {
+      getUserOrderList();
+    }, 15000);
+    return () => clearInterval(orderInterval);
+  }, []);
+
   const changePurchaseType = (type: string) => {
     setCurType(type);
   };
