@@ -11,10 +11,10 @@ export default {
   loginSignUp: "登錄/註冊",
   home: {
     section: {
-      startingBenefits: "Starting benefits",
-      startingBenefitsSubFirst: "The lowest price, hi play, unlimited",
-      startingBenefitsSubSecond: "Register now to enjoy the newbie gift",
-      singUp: "Sing Up",
+      startingBenefits: "好玩的充值站",
+      // startingBenefitsSubFirst: "玩转充值新体验",
+      startingBenefitsSubSecond: "封閉一測開啟 註冊領限量卡牌，全場88折起",
+      singUp: "加入我们的实验",
     },
     search: {
       searchForGameNamesOrKeywords: "請輸入遊戲名稱或關鍵詞",
@@ -258,4 +258,28 @@ export default {
     termsOfService: "服務條款",
     privacyPolicy: "隱私政策",
   },
+  about: {
+    welcomeTo: "欢迎来到 Playdd",
+    weProvide: "这里提供优惠、安全，且足够“好玩”的充值体验",
+    ourStory: "我们的故事",
+    onMost:
+      "在大多数交易平台，充值只是一套冰冷的程序和无聊的流水线。只要扣款成功、点数到账，似乎就算完成了任务。",
+    asCreators:
+      "作为网站的创建者同时也是热爱游戏的玩家，我们忍不住追问：涉及游戏的一切，为什么不能好玩一点？",
+    ifGaming:
+      "既然游戏是关于过程、探索与成长的，充值站也应该是一场属于玩家的互动。",
+    weDecided: "所以，我们决心做一点不一样的探索：",
+    securityComes:
+      "安全是首要：我们的技术团队采用全链路数据加密与智能风控引擎，守护你的账户隐私与资金安全。",
+    valueIsOurPromise:
+      "优惠是诚意：我们会持续争取具有竞争力的折扣，并提升我们的到账时效。降低门槛，让更多人能享受游戏带来的快乐。",
+    funIsTheSoul:
+      "好玩是灵魂：我们尝试把程式化的消费，打造成一段充满探索与惊喜的小小旅程。",
+    currentlyInItsEarly:
+      "Playdd 目前还在它的“1.0 内测阶段”，它还是一款孕育中的实验品。 我们坚信好产品需要与玩家一起打磨。",
+    weAreNotJustAServiceProvider: "我们不仅是服务商，更是与你同行的玩家",
+    gameHasBegun: "这场游戏已经开始了",
+    welcomeAboard: "欢迎你的加入 !",
+  },
+  title: "playdd.gg - 好玩的充值站",
 };

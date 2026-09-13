@@ -1,3 +1,11 @@
+/*
+ * @Author: 安风 2196477263@qq.com
+ * @Date: 2026-03-11 18:09:53
+ * @LastEditors: 安风 2196477263@qq.com
+ * @LastEditTime: 2026-09-10 21:43:37
+ * @FilePath: /playSite/src/components/AchievementModal/index.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import { useEffect } from "react";
 import PrimaryButton from "../PrimaryButton";
 import "./style.css";
@@ -57,12 +65,13 @@ const AchievementModal: React.FC<AchievementModalProps> = ({
           >
             The Trail Blazers
           </p>
-          <p className="text-base text-white text-center mb-4">
-            送给内测及首批用户,后续会解锁特殊玩法与技能
+          <p className="whitespace-nowrap text-base text-white text-center mb-4">
+            Granted to Beta users. Unlocks special gameplay and skills in future
+            updates.
           </p>
           <PrimaryButton
             onClick={() => closeRegisterModal(false)}
-            className="w-[350px] max-w-[350px]"
+            className="ml-[104px] w-[350px] max-w-[350px]"
           >
             立即注册领取
           </PrimaryButton>

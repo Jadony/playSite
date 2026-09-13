@@ -11,10 +11,11 @@ export default {
   loginSignUp: "Login/Register",
   home: {
     section: {
-      startingBenefits: "Starting benefits",
-      startingBenefitsSubFirst: "The lowest price, hi play, unlimited",
-      startingBenefitsSubSecond: "Register now to enjoy the newbie gift",
-      singUp: "Sing Up",
+      startingBenefits: "The Fun and Smart Way to Top Up",
+      // startingBenefitsSubFirst: "玩转充值新体验",
+      startingBenefitsSubSecond:
+        "Sign up for exclusive cards & discounts from 12% off",
+      singUp: "JOIN CLOSED BETA 1",
     },
     search: {
       searchForGameNamesOrKeywords: "Spielname oder Stichwort eingeben",
@@ -268,4 +269,31 @@ export default {
     termsOfService: "Allgemeine Geschäftsbedingungen",
     privacyPolicy: "Datenschutzerklärung",
   },
+  about: {
+    welcomeTo: "Willkommen bei Playdd.",
+    weProvide:
+      "Wir bieten dir ein sicheres, preiswertes und garantiert unterhaltsames Top-Up-Erlebnis",
+    ourStory: "Unsere Geschichte",
+    onMost:
+      "Auf den meisten Plattformen ist das Aufladen nur ein kalter, automatisierter Prozess und ein langweiliges Fließband. Sobald die Zahlung durchgeht und das Guthaben ankommt, gilt die Aufgabe als erledigt.",
+    asCreators:
+      "Als Gründer dieser Website – und selbst leidenschaftliche Gamer – konnten wir nicht anders, als uns zu fragen: Warum sollte nicht alles, was mit Gaming zu tun hat, ein bisschen mehr Spaß machen?",
+    ifGaming:
+      "Wenn es beim Gaming um die Reise, das Erkunden und das Wachsen geht, sollte auch ein Top-Up-Shop eine interaktive Erfahrung für Spieler sein.",
+    weDecided:
+      "Deshalb haben wir uns entschieden, ein etwas anderes Experiment zu wagen:",
+    securityComes:
+      "Sicherheit an erster Stelle: Unser Tech-Team nutzt End-to-End-Datenverschlüsselung und eine smarte Risiko-Engine, um deine Kontoprivatsphäre und dein Geld zu schützen.",
+    valueIsOurPromise:
+      "Mehrwert aus Überzeugung: Wir sichern kontinuierlich wettbewerbsfähige Rabatte und beschleunigen die Lieferzeiten. So senken wir die Hürden, damit noch mehr Menschen die Faszination des Gamings genießen können.",
+    funIsTheSoul:
+      "Spielspaß als Seele: Wir möchten alltägliche Transaktionen in eine kleine Reise voller Entdeckungen und Überraschungen verwandeln.",
+    currentlyInItsEarly:
+      "Playdd befindet sich derzeit in seiner frühen Startup-Phase – ein wachsendes Experiment. Wir sind fest davon überzeugt, dass großartige Produkte gemeinsam mit den Spielern geformt werden.",
+    weAreNotJustAServiceProvider:
+      "Wir sind nicht nur ein Dienstleister, sondern Gamer, die diesen Weg an deiner Seite gehen.",
+    gameHasBegun: "Das Spiel hat begonnen",
+    welcomeAboard: " Willkommen an Bord !",
+  },
+  title: "playdd.gg - The Fun and Smart Way to Top Up",
 };

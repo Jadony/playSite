@@ -11,10 +11,11 @@ export default {
   loginSignUp: "Connexion / Inscription",
   home: {
     section: {
-      startingBenefits: "Starting benefits",
-      startingBenefitsSubFirst: "The lowest price, hi play, unlimited",
-      startingBenefitsSubSecond: "Register now to enjoy the newbie gift",
-      singUp: "Sing Up",
+      startingBenefits: "The Fun and Smart Way to Top Up",
+      // startingBenefitsSubFirst: "玩转充值新体验",
+      startingBenefitsSubSecond:
+        "Sign up for exclusive cards & discounts from 12% off",
+      singUp: "JOIN CLOSED BETA 1",
     },
     search: {
       searchForGameNamesOrKeywords:
@@ -270,4 +271,30 @@ export default {
     termsOfService: "Conditions générales de vente",
     privacyPolicy: "Politique de confidentialité",
   },
+  about: {
+    welcomeTo: "Bienvenue sur Playdd.",
+    weProvide:
+      "Nous vous proposons une expérience de recharge sécurisée, avantageuse et vraiment ludique.",
+    ourStory: "Notre Histoire",
+    onMost:
+      "Sur la plupart des plateformes, recharger son compte n'est qu'une procédure froide et une routine ennuyeuse. Tant que le paiement passe et que les crédits arrivent, la mission semble accomplie.",
+    asCreators:
+      "En tant que créateurs de ce site — et passionnés de jeux vidéo nous-mêmes —, nous n'avons pas pu nous empêcher de nous poser la question : pourquoi tout ce qui touche au jeu ne pourrait-il pas être un peu plus amusant ?",
+    ifGaming:
+      "Si le jeu vidéo est une question de parcours, d'exploration et de progression, une boutique de recharge devrait aussi être une expérience interactive pour les joueurs.",
+    weDecided: "C'est pourquoi nous avons décidé de tenter une expérience différente :",
+    securityComes:
+      "La sécurité avant tout : Notre équipe technique utilise un chiffrement de bout en bout et un moteur de gestion des risques intelligent pour protéger la confidentialité de votre compte et vos fonds.",
+    valueIsOurPromise:
+      "L'avantage comme engagement : Nous négocions continuellement des remises compétitives et optimisons nos délais de livraison, réduisant ainsi les barrières pour que plus de personnes puissent profiter du plaisir de jouer.",
+    funIsTheSoul:
+      "Le jeu comme âme : Nous cherchons à transformer une transaction ordinaire en un petit voyage rempli d'exploration et de surprises.",
+    currentlyInItsEarly:
+      "Playdd n'en est qu'à sa phase de démarrage — un丸 projet en pleine croissance. Nous sommes convaincus que les grands produits se façonnent main dans la main avec les joueurs.",
+    weAreNotJustAServiceProvider:
+      "Nous ne sommes pas seulement un fournisseur de services, nous sommes des joueurs qui avancent à vos côtés.",
+    gameHasBegun: "La partie a commencé",
+    welcomeAboard: "Bienvenue à bord !",
+  },
+  title: "playdd.gg - The Fun and Smart Way to Top Up",
 };

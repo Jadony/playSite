@@ -11,10 +11,11 @@ export default {
   loginSignUp: "로그인 / 회원가입",
   home: {
     section: {
-      startingBenefits: "Starting benefits",
-      startingBenefitsSubFirst: "The lowest price, hi play, unlimited",
-      startingBenefitsSubSecond: "Register now to enjoy the newbie gift",
-      singUp: "Sing Up",
+      startingBenefits: "충전도 게임처럼, 더 스마트하고 즐겁게",
+      // startingBenefitsSubFirst: "玩转充值新体验",
+      startingBenefitsSubSecond:
+        "회원가입 시 한정판 카드 증정 ｜ 전 상품 최대 12% 할인",
+      singUp: "클로즈드 베타 참여하기",
     },
     search: {
       searchForGameNamesOrKeywords: "게임 명칭 또는 키워드를 입력해 주세요",
@@ -259,4 +260,29 @@ export default {
     termsOfService: "이용약관",
     privacyPolicy: "개인정보처리방침",
   },
+  about: {
+    welcomeTo: "Playdd에 오신 것을 환영합니다.",
+    weProvide:
+      "이곳은 안전하고, 합리적이며, 충분히 '즐거운' 충전 경험을 제공합니다.",
+    ourStory: "우리의 이야기",
+    onMost:
+      "대부분의 거래 플랫폼에서 충전은 그저 차가운 절차이자 지루한 공정일 뿐입니다. 결제가 완료되고 포인트가 적립되면, 그것으로 할 일이 끝난 것처럼 보이죠.",
+    asCreators: `이 사이트를 만든 창립자이자 게임을 진심으로 사랑하는 게이머로서, 우리는 스스로에게 묻지 않을 수 없었습니다. "게임과 관련된 모든 것이 조금 더 즐거울 수는 없을까?"`,
+    ifGaming:
+      "게임이 여정과 탐험, 그리고 성장에 대한 것이라면, 충전 플랫폼 역시 게이머를 위한 하나의 인터랙티브한 경험이어야 합니다.",
+    weDecided: "그래서 우리는 조금 다른 실험을 시작하기로 했습니다.",
+    securityComes:
+      "안전은 최우선 (Security): 기술 팀이 엔드투엔드 데이터 암호화와 스마트 리스크 엔진을 적용하여 계정 개인정보와 자금을 철저히 보호합니다.",
+    valueIsOurPromise:
+      "혜택은 진심 (Value): 경쟁력 있는 할인 혜택을 지속적으로 확보하고 전달 속도를 높입니다. 진입 장벽을 낮춰 더 많은 사람들이 게임의 즐거움을 누릴 수 있도록 합니다.",
+    funIsTheSoul:
+      "즐거움은 영혼 (Fun): 형식적인 소비 과정을 탐험과 놀라움으로 가득 찬 '작은 여정'으로 만들어 갑니다.",
+    currentlyInItsEarly:
+      "Playdd는 현재 초기 스타트업 단계에 있는, 성장 중인 실험실입니다. 우리는 위대한 제품이 게이머들과 함께 완성된다고 굳게 믿습니다.",
+    weAreNotJustAServiceProvider:
+      "우리는 단순한 서비스 제공자가 아닌, 여러분과 함께 걷는 동료 게이머입니다.",
+    gameHasBegun: "게임은 이미 시작되었습니다",
+    welcomeAboard: "여러분의 참여를 환영합니다 !",
+  },
+  title: "playdd.gg - The Fun and Smart Way to Top Up",
 };

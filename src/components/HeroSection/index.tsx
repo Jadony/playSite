@@ -2,7 +2,7 @@
  * @Author: 安风 2196477263@qq.com
  * @Date: 2026-01-28 19:43:18
  * @LastEditors: 安风 2196477263@qq.com
- * @LastEditTime: 2026-08-09 20:24:43
+ * @LastEditTime: 2026-09-13 19:10:55
  * @FilePath: /playSite/src/components/HeroSection/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -21,7 +21,7 @@ const HeroSection: React.FC = () => {
     {
       id: 1,
       mainTitle: t("home.section.startingBenefits"),
-      subTitle: t("home.section.startingBenefitsSubFirst"),
+      // subTitle: t("home.section.startingBenefitsSubFirst"),
       content: <>{t("home.section.startingBenefitsSubSecond")}</>,
       image:
         "https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/banner.png",
@@ -37,13 +37,13 @@ const HeroSection: React.FC = () => {
           <div key={slide.id} className="h-full !flex items-center">
             <div className="w-full flex items-center justify-between">
               {/* LEFT: Content */}
-              <div className="text-left whitespace-nowrap">
+              <div className="text-left min-w-96">
                 <h1 className="text-6xl font-black text-white tracking-tight leading-tight">
                   {slide.mainTitle}
                 </h1>
-                <h1 className="text-6xl font-black text-white tracking-tight leading-tight">
+                {/* <h1 className="text-6xl font-black text-white tracking-tight leading-tight">
                   {slide.subTitle}
-                </h1>
+                </h1> */}
                 <p className="text-gray-400 mt-5 text-lg font-light max-w-md leading-relaxed">
                   {slide.content}
                 </p>

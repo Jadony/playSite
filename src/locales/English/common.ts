@@ -11,11 +11,11 @@ export default {
   loginSignUp: "login / sign up",
   home: {
     section: {
-      startingBenefits: "序章开启",
-      startingBenefitsSubFirst: "玩转充值新体验",
+      startingBenefits: "The Fun and Smart Way to Top Up",
+      // startingBenefitsSubFirst: "玩转充值新体验",
       startingBenefitsSubSecond:
-        "封闭一测启动 · 更多玩法构建中 · 全场 9.8 折起",
-      singUp: "注册领取限定卡牌",
+        "Sign up for exclusive cards & discounts from 12% off",
+      singUp: "JOIN CLOSED BETA 1",
     },
     search: {
       searchForGameNamesOrKeywords: "Search for game names or keywords",
@@ -235,7 +235,7 @@ export default {
       "Please double-check your payment information",
     pleaseEnterYourServerAndUID: "Please enter your server and UID",
     canceled: "Canceled",
-    orderCancelPleaseReorder: "Order canceled. Please reorder"
+    orderCancelPleaseReorder: "Order canceled. Please reorder",
   },
   feedback: {
     submitFeedback: "Submit Feedback",
@@ -266,4 +266,30 @@ export default {
     termsOfService: "Terms of Service",
     privacyPolicy: "Privacy Policy",
   },
+  about: {
+    welcomeTo: "Welcome to Playdd.",
+    weProvide:
+      "We provide a safe, high-value, and genuinely fun top-up experience",
+    ourStory: "Our Story",
+    onMost:
+      "On most trading platforms, topping up is just a cold procedure and a boring assembly line. As long as the payment goes through and the credits arrive, the job seems done.",
+    asCreators:
+      "As the creators of this site—and passionate gamers ourselves—we couldn't help but ask: Why shouldn't everything related to gaming be a little more fun?",
+    ifGaming:
+      "If gaming is about the journey, exploration, and growth, a top-up store should also be an interactive experience for players.",
+    weDecided: "So, we decided to embark on a different kind of experiment:",
+    securityComes:
+      "Security Comes First: Our tech team utilizes end-to-end data encryption and a smart risk engine to safeguard your account privacy and funds.",
+    valueIsOurPromise:
+      "Value is Our Promise: We continuously secure competitive discounts and boost delivery speed, lowering the threshold so more people can enjoy the thrill of gaming.",
+    funIsTheSoul:
+      "Fun is the Soul: We aim to transform routine spending into a brief journey filled with exploration and surprises.",
+    currentlyInItsEarly:
+      "Playdd is currently in its early startup stage—a growing experiment. We firmly believe that great products are forged together with players.",
+    weAreNotJustAServiceProvider:
+      "We are not just a service provider; we are gamers walking alongside you.",
+    gameHasBegun: "The game has begun",
+    welcomeAboard: "Welcome aboard !",
+  },
+  title: "playdd.gg - The Fun and Smart Way to Top Up",
 };

@@ -190,6 +190,10 @@ const Header: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    document.title = t("title");
+  }, [selectLanguage]);
+
+  useEffect(() => {
     if (!selectUnit?.currency) return;
     getHotGames();
     getAllGames();

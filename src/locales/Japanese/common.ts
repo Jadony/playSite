@@ -11,10 +11,10 @@ export default {
   loginSignUp: "ログイン",
   home: {
     section: {
-      startingBenefits: "Starting benefits",
-      startingBenefitsSubFirst: "The lowest price, hi play, unlimited",
-      startingBenefitsSubSecond: "Register now to enjoy the newbie gift",
-      singUp: "Sing Up",
+      startingBenefits: "遊ぶなら、課金スタイルも面白く",
+      // startingBenefitsSubFirst: "玩转充值新体验",
+      startingBenefitsSubSecond: "新規登録で限定カード贈呈 ｜ 全品最大12% OFF",
+      singUp: "クローズドβテストに参加",
     },
     search: {
       searchForGameNamesOrKeywords: "ゲーム名またはキーワードを入力",
@@ -261,4 +261,31 @@ export default {
     termsOfService: "利用規約",
     privacyPolicy: "プライバシーポリシー",
   },
+  about: {
+    welcomeTo: "Playddへようこそ。",
+    weProvide:
+      "安全で、お得で、そしてしっかり「面白い」課金体験をお届けします。",
+    ourStory: "私たちのストーリー",
+    onMost:
+      "多くの決済プラットフォームにおいて、課金作業はただの機械的な手続きであり、退屈な作業に過ぎません。決済が完了し、ポイントが反映されれば、それで任務完了とみなされてしまいます。",
+    asCreators:
+      "サイトの制作者であり、一人のゲーム好きとして、私たちは疑問を抱かずにはいられませんでした。「ゲームに関わるすべてのことが、もう少し面白くてもいいんじゃないか？」",
+    ifGaming:
+      "ゲームが過程や探求、そして成長を楽しむものであるなら、課金ショップもまた、プレイヤーのためのインタラクティブな体験であるべきです。",
+    weDecided:
+      "だからこそ、私たちは少し違うアプローチ（実験）に挑戦することにしました。",
+    securityComes:
+      "安全第一（Security）：技術チームがエンドツーエンドのデータ暗号化とスマートなリスク管理エンジンを採用し、アカウントのプライバシーと資金の安全を徹底的に守ります。",
+    valueIsOurPromise:
+      "お得さは誠意（Value）：競争力のある割引を確保し続け、配信スピードを向上させます。参入のハードルを下げ、より多くの人がゲームの楽しさを享受できるようにします。",
+    funIsTheSoul:
+      "面白さは魂（Fun）：単なるルーティン作業の消費を、探求と驚きに満ちた「小旅行」へと変えていきます。",
+    currentlyInItsEarly:
+      "Playddは現在、まだ初期のスタートアップ段階（アーリーステージ）であり、絶えず成長中の実験的プロダクトです。素晴らしいプロダクトは、プレイヤーとともに磨き上げられていくものだと私たちは信じています。",
+    weAreNotJustAServiceProvider:
+      "私たちは単なるサービス提供者ではなく、あなたとともに歩むプレイヤーです。",
+    gameHasBegun: "ゲームはもう始まっています",
+    welcomeAboard: "ようこそ、私たちの世界へ ！",
+  },
+  title: "playdd.gg - The Fun and Smart Way to Top Up",
 };
