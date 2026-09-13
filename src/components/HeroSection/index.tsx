@@ -2,21 +2,25 @@
  * @Author: 安风 2196477263@qq.com
  * @Date: 2026-01-28 19:43:18
  * @LastEditors: 安风 2196477263@qq.com
- * @LastEditTime: 2026-09-13 19:10:55
+ * @LastEditTime: 2026-09-13 20:04:19
  * @FilePath: /playSite/src/components/HeroSection/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import PrimaryButton from "../PrimaryButton";
 import "./style.css";
 import { useTranslation } from "react-i18next";
 import Tilt from "../Tilt";
+import LoginModal from "../LoginModal";
+import { useAuthContext } from "@/store/authStore";
 
 const HeroSection: React.FC = () => {
   const navigate = useNavigate();
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
   const { t } = useTranslation();
+  const { isAuthenticated } = useAuthContext();
   const slides = [
     {
       id: 1,
@@ -50,7 +54,11 @@ const HeroSection: React.FC = () => {
 
                 <div className="pt-4">
                   <PrimaryButton
-                    onClick={() => navigate(slide.link)}
+                    onClick={() =>
+                      isAuthenticated
+                        ? navigate(slide.link)
+                        : setLoginModalVisible(true)
+                    }
                     className="banner-btn absolute px-10 py-4 rounded-full text-white font-bold text-base hover:scale-105 z-20"
                   >
                     {slide.cta}
@@ -69,6 +77,10 @@ const HeroSection: React.FC = () => {
           </div>
         ))}
       </div>
+      <LoginModal
+        visible={loginModalVisible}
+        onClose={() => setLoginModalVisible(false)}
+      />
     </section>
   );
 };
