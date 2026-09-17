@@ -24,6 +24,7 @@ const UserAchievement = () => {
             achievementBody: "",
             invertedImgUrl: "",
             bigImgUrl: "",
+            needImgUrl: "",
             unlockTime: "",
           }),
         );
