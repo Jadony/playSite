@@ -1,25 +1,15 @@
-import CommonModal from "../CommonModal";
+import AchievementDetailModal from "../AchievementDetailModal";
 import { useEffect, useState } from "react";
 import { getUserAchievements } from "@/api/user";
-
+import { useLanguageContext } from "@/store/languageStore";
 const UserAchievement = () => {
   const [visible, setVisible] = useState(false);
   const [achievements, setAchievements] = useState<
     UserAchievementsResponseData[]
   >([]);
-  const scrollbarWidth =
-    window.innerWidth - document.documentElement.clientWidth;
-
-  const disableScroll = () => {
-    document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = `${scrollbarWidth}px`;
-  };
-
-  const enableScroll = () => {
-    document.body.style.overflow = "";
-    document.body.style.paddingRight = "";
-  };
-
+  const { selectLanguage } = useLanguageContext();
+  const [curAchievement, setCurAchievement] =
+    useState<UserAchievementsResponseData>();
   useEffect(() => {
     getUserAchievements().then((res) => {
       if (res.data.data.length < 3) {
@@ -30,6 +20,10 @@ const UserAchievement = () => {
             achievementName: "",
             achievementDesc: "",
             achievementIcon: "",
+            achievementTitle: "",
+            achievementBody: "",
+            invertedImgUrl: "",
+            bigImgUrl: "",
             unlockTime: "",
           }),
         );
@@ -38,7 +32,7 @@ const UserAchievement = () => {
         setAchievements(res.data.data);
       }
     });
-  }, []);
+  }, [selectLanguage]);
 
   return (
     <div>
@@ -78,8 +72,8 @@ const UserAchievement = () => {
             return (
               <div
                 onClick={() => {
-                  disableScroll();
                   setVisible(true);
+                  setCurAchievement(item);
                 }}
                 key={item.id}
                 className="relative flex-shrink-0 snap-center min-h-[300px]"
@@ -102,23 +96,13 @@ const UserAchievement = () => {
             );
           })}
         </div>
-        <CommonModal
-          className="p-0 rounded-[25px]"
-          visible={visible}
-          width={450}
-          onClose={() => {
-            enableScroll();
-            setVisible(false);
-          }}
-          content={
-            <img
-              width={450}
-              src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-userCenter/achievement.png"
-              alt=""
-            />
-          }
-          footer={null}
-        />
+        {curAchievement && (
+          <AchievementDetailModal
+            visible={visible}
+            curAchievement={curAchievement}
+            onClose={() => setVisible(false)}
+          />
+        )}
       </div>
     </div>
   );

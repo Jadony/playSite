@@ -120,7 +120,12 @@ type UserAchievementsResponseData = {
   achievementCode: string;
   achievementName: string;
   achievementDesc: string;
+  achievementTitle: string;
+  achievementBody: string;
   achievementIcon: string;
+  invertedImgUrl: string;
+  bigImgUrl: string;
+  needImgUrl: string;
   unlockTime: string;
 };
 
