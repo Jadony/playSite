@@ -93,7 +93,7 @@ const AchievementDetailModal = ({
               <h3 className="mb-2.5 whitespace-pre-line bg-[linear-gradient(100deg,#919191,#fff_62%)] bg-clip-text text-2xl font-extrabold leading-[29px] tracking-[-0.55px] text-transparent max-[480px]:text-[21px] max-[480px]:leading-[27px]">
                 {formatAchievementTitle(achievementTitle)}
               </h3>
-              <p className="m-0 text-xs font-light leading-5 text-[#b5b3b6]">
+              <p className="m-0 text-sm font-light leading-5 text-[#b5b3b6]">
                 {achievementBody}
               </p>
             </div>

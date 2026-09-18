@@ -311,12 +311,11 @@ const Header: React.FC = () => {
         }}
       >
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 backdrop-blur-md shadow-[inset_0_0_10px_rgba(255,255,255,0.1)] group-hover:bg-white/10 transition-all">
-            <span className="text-xl">⚡</span>
-          </div>
-          <span className="text-white font-bold text-xl tracking-wide hidden sm:block drop-shadow-md group-hover:text-game-primary transition-colors">
-            LOGO
-          </span>
+          <img
+            src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/logo.png"
+            alt="GLEE PLAY"
+            className="h-10 w-10 scale-150 object-contain"
+          />
         </Link>
       </div>
 

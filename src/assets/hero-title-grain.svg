@@ -1,0 +1,811 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <!-- Variable-size round and oval cutouts: mostly fine grains, some medium grains, and a few larger holes. -->
+  <defs>
+    <mask id="grain" maskUnits="userSpaceOnUse" x="0" y="0" width="160" height="160" style="mask-type:luminance">
+      <rect width="160" height="160" fill="white" />
+      <g fill="black">
+      <ellipse cx="101.75" cy="5.90" rx="0.94" ry="0.80" transform="rotate(110 101.75 5.90)" />
+      <circle cx="44.90" cy="36.82" r="0.49" />
+      <circle cx="116.89" cy="107.57" r="0.50" />
+      <circle cx="141.18" cy="15.56" r="0.61" />
+      <circle cx="67.82" cy="6.65" r="0.70" />
+      <circle cx="36.11" cy="80.84" r="0.68" />
+      <circle cx="6.14" cy="33.02" r="0.77" />
+      <ellipse cx="103.38" cy="87.01" rx="0.41" ry="0.20" transform="rotate(40 103.38 87.01)" />
+      <ellipse cx="36.39" cy="93.93" rx="0.32" ry="0.16" transform="rotate(67 36.39 93.93)" />
+      <circle cx="128.27" cy="3.01" r="0.27" />
+      <circle cx="127.71" cy="110.91" r="0.30" />
+      <ellipse cx="55.08" cy="26.25" rx="0.79" ry="0.40" transform="rotate(7 55.08 26.25)" />
+      <ellipse cx="151.33" cy="54.51" rx="0.89" ry="0.41" transform="rotate(28 151.33 54.51)" />
+      <circle cx="16.47" cy="17.09" r="0.91" />
+      <circle cx="134.21" cy="96.18" r="0.38" />
+      <ellipse cx="127.91" cy="115.84" rx="0.34" ry="0.19" transform="rotate(116 127.91 115.84)" />
+      <ellipse cx="85.65" cy="153.81" rx="0.73" ry="0.39" transform="rotate(53 85.65 153.81)" />
+      <ellipse cx="61.05" cy="88.12" rx="1.27" ry="0.93" transform="rotate(93 61.05 88.12)" />
+      <ellipse cx="136.43" cy="92.07" rx="0.44" ry="0.21" transform="rotate(95 136.43 92.07)" />
+      <circle cx="111.91" cy="9.15" r="0.38" />
+      <ellipse cx="37.55" cy="47.14" rx="0.31" ry="0.18" transform="rotate(56 37.55 47.14)" />
+      <ellipse cx="14.45" cy="38.32" rx="0.69" ry="0.35" transform="rotate(116 14.45 38.32)" />
+      <ellipse cx="17.76" cy="45.36" rx="0.71" ry="0.37" transform="rotate(87 17.76 45.36)" />
+      <ellipse cx="101.17" cy="58.91" rx="0.36" ry="0.18" transform="rotate(125 101.17 58.91)" />
+      <circle cx="59.75" cy="34.68" r="1.46" />
+      <ellipse cx="43.65" cy="148.12" rx="0.27" ry="0.17" transform="rotate(103 43.65 148.12)" />
+      <circle cx="103.09" cy="97.02" r="0.56" />
+      <ellipse cx="28.70" cy="115.74" rx="0.41" ry="0.26" transform="rotate(13 28.70 115.74)" />
+      <circle cx="27.49" cy="61.20" r="0.26" />
+      <ellipse cx="156.37" cy="101.84" rx="0.42" ry="0.32" transform="rotate(142 156.37 101.84)" />
+      <circle cx="88.88" cy="108.80" r="0.27" />
+      <ellipse cx="133.48" cy="123.06" rx="0.35" ry="0.22" transform="rotate(148 133.48 123.06)" />
+      <circle cx="37.73" cy="7.01" r="0.43" />
+      <circle cx="51.21" cy="43.77" r="0.41" />
+      <circle cx="34.91" cy="149.09" r="0.28" />
+      <ellipse cx="138.71" cy="51.09" rx="0.67" ry="0.37" transform="rotate(164 138.71 51.09)" />
+      <ellipse cx="104.25" cy="63.72" rx="0.53" ry="0.33" transform="rotate(4 104.25 63.72)" />
+      <circle cx="144.67" cy="73.58" r="0.27" />
+      <ellipse cx="89.57" cy="42.99" rx="0.33" ry="0.25" transform="rotate(171 89.57 42.99)" />
+      <ellipse cx="93.20" cy="142.06" rx="0.53" ry="0.39" transform="rotate(38 93.20 142.06)" />
+      <ellipse cx="64.31" cy="36.21" rx="0.42" ry="0.34" transform="rotate(58 64.31 36.21)" />
+      <circle cx="157.62" cy="81.49" r="0.62" />
+      <circle cx="16.18" cy="9.35" r="0.30" />
+      <ellipse cx="19.11" cy="99.88" rx="1.07" ry="0.78" transform="rotate(118 19.11 99.88)" />
+      <circle cx="125.56" cy="67.86" r="0.63" />
+      <ellipse cx="11.91" cy="61.53" rx="0.84" ry="0.50" transform="rotate(89 11.91 61.53)" />
+      <ellipse cx="153.49" cy="136.28" rx="0.40" ry="0.26" transform="rotate(119 153.49 136.28)" />
+      <circle cx="3.79" cy="114.43" r="0.44" />
+      <circle cx="108.35" cy="85.77" r="0.53" />
+      <ellipse cx="43.62" cy="101.99" rx="0.40" ry="0.32" transform="rotate(145 43.62 101.99)" />
+      <ellipse cx="19.40" cy="69.82" rx="0.61" ry="0.38" transform="rotate(146 19.40 69.82)" />
+      <ellipse cx="72.78" cy="150.80" rx="0.35" ry="0.17" transform="rotate(117 72.78 150.80)" />
+      <circle cx="138.63" cy="43.09" r="1.10" />
+      <ellipse cx="80.09" cy="29.87" rx="1.16" ry="0.53" transform="rotate(153 80.09 29.87)" />
+      <ellipse cx="144.37" cy="137.80" rx="0.40" ry="0.31" transform="rotate(172 144.37 137.80)" />
+      <circle cx="48.56" cy="101.68" r="0.42" />
+      <circle cx="97.00" cy="25.84" r="1.50" />
+      <circle cx="120.95" cy="86.14" r="1.43" />
+      <circle cx="2.09" cy="52.57" r="0.68" />
+      <ellipse cx="5.04" cy="146.94" rx="0.36" ry="0.20" transform="rotate(130 5.04 146.94)" />
+      <ellipse cx="139.08" cy="131.74" rx="0.40" ry="0.18" transform="rotate(141 139.08 131.74)" />
+      <ellipse cx="49.97" cy="11.04" rx="0.43" ry="0.26" transform="rotate(110 49.97 11.04)" />
+      <circle cx="138.97" cy="149.72" r="0.53" />
+      <ellipse cx="15.36" cy="77.81" rx="0.91" ry="0.55" transform="rotate(7 15.36 77.81)" />
+      <circle cx="12.80" cy="120.65" r="0.31" />
+      <ellipse cx="121.47" cy="22.03" rx="0.44" ry="0.33" transform="rotate(111 121.47 22.03)" />
+      <circle cx="76.14" cy="87.77" r="0.38" />
+      <ellipse cx="43.35" cy="138.10" rx="0.47" ry="0.22" transform="rotate(62 43.35 138.10)" />
+      <circle cx="86.13" cy="115.87" r="0.46" />
+      <circle cx="33.38" cy="50.63" r="0.28" />
+      <circle cx="70.34" cy="82.74" r="0.35" />
+      <circle cx="20.88" cy="37.05" r="0.54" />
+      <ellipse cx="54.74" cy="93.78" rx="0.51" ry="0.26" transform="rotate(81 54.74 93.78)" />
+      <ellipse cx="37.90" cy="36.35" rx="0.48" ry="0.31" transform="rotate(76 37.90 36.35)" />
+      <circle cx="13.07" cy="100.45" r="0.60" />
+      <ellipse cx="37.71" cy="143.25" rx="0.55" ry="0.39" transform="rotate(156 37.71 143.25)" />
+      <ellipse cx="136.10" cy="13.05" rx="0.41" ry="0.26" transform="rotate(92 136.10 13.05)" />
+      <ellipse cx="39.13" cy="106.36" rx="0.44" ry="0.32" transform="rotate(111 39.13 106.36)" />
+      <ellipse cx="35.42" cy="22.64" rx="0.84" ry="0.65" transform="rotate(86 35.42 22.64)" />
+      <ellipse cx="147.94" cy="91.08" rx="0.80" ry="0.46" transform="rotate(168 147.94 91.08)" />
+      <ellipse cx="75.74" cy="124.40" rx="0.93" ry="0.65" transform="rotate(113 75.74 124.40)" />
+      <ellipse cx="127.97" cy="31.70" rx="0.64" ry="0.33" transform="rotate(115 127.97 31.70)" />
+      <ellipse cx="68.08" cy="74.86" rx="0.59" ry="0.40" transform="rotate(94 68.08 74.86)" />
+      <circle cx="155.53" cy="17.35" r="0.44" />
+      <ellipse cx="64.81" cy="54.93" rx="0.66" ry="0.40" transform="rotate(75 64.81 54.93)" />
+      <circle cx="31.67" cy="71.98" r="0.62" />
+      <ellipse cx="67.81" cy="45.45" rx="1.46" ry="1.17" transform="rotate(105 67.81 45.45)" />
+      <ellipse cx="71.13" cy="136.37" rx="0.51" ry="0.33" transform="rotate(104 71.13 136.37)" />
+      <ellipse cx="87.85" cy="9.89" rx="0.27" ry="0.19" transform="rotate(113 87.85 9.89)" />
+      <ellipse cx="157.89" cy="132.42" rx="0.72" ry="0.43" transform="rotate(44 157.89 132.42)" />
+      <circle cx="153.16" cy="146.51" r="1.29" />
+      <circle cx="134.40" cy="27.94" r="0.60" />
+      <circle cx="77.76" cy="35.34" r="0.55" />
+      <circle cx="64.56" cy="11.15" r="0.49" />
+      <circle cx="61.12" cy="155.71" r="0.36" />
+      <ellipse cx="43.37" cy="124.32" rx="0.61" ry="0.42" transform="rotate(68 43.37 124.32)" />
+      <circle cx="72.98" cy="67.99" r="0.56" />
+      <circle cx="151.34" cy="157.29" r="0.92" />
+      <ellipse cx="26.15" cy="48.29" rx="0.38" ry="0.26" transform="rotate(52 26.15 48.29)" />
+      <ellipse cx="153.12" cy="92.35" rx="0.93" ry="0.46" transform="rotate(89 153.12 92.35)" />
+      <circle cx="10.92" cy="93.13" r="0.35" />
+      <circle cx="80.44" cy="135.02" r="0.52" />
+      <circle cx="26.56" cy="151.88" r="0.38" />
+      <circle cx="14.50" cy="30.99" r="0.52" />
+      <circle cx="94.83" cy="107.33" r="0.75" />
+      <ellipse cx="94.74" cy="98.62" rx="0.44" ry="0.28" transform="rotate(159 94.74 98.62)" />
+      <circle cx="67.40" cy="93.05" r="0.31" />
+      <ellipse cx="83.55" cy="147.81" rx="1.64" ry="1.11" transform="rotate(116 83.55 147.81)" />
+      <ellipse cx="33.86" cy="113.73" rx="0.49" ry="0.38" transform="rotate(149 33.86 113.73)" />
+      <ellipse cx="39.24" cy="63.74" rx="0.68" ry="0.44" transform="rotate(79 39.24 63.74)" />
+      <ellipse cx="106.78" cy="48.80" rx="0.79" ry="0.43" transform="rotate(80 106.78 48.80)" />
+      <circle cx="51.32" cy="119.29" r="0.87" />
+      <ellipse cx="13.32" cy="73.49" rx="0.33" ry="0.17" transform="rotate(106 13.32 73.49)" />
+      <ellipse cx="157.76" cy="157.39" rx="0.44" ry="0.33" transform="rotate(109 157.76 157.39)" />
+      <ellipse cx="139.41" cy="139.17" rx="0.29" ry="0.20" transform="rotate(98 139.41 139.17)" />
+      <ellipse cx="59.65" cy="26.61" rx="0.46" ry="0.39" transform="rotate(104 59.65 26.61)" />
+      <circle cx="132.06" cy="111.75" r="0.53" />
+      <circle cx="97.42" cy="156.01" r="0.43" />
+      <circle cx="129.47" cy="48.70" r="0.46" />
+      <ellipse cx="105.49" cy="148.47" rx="0.52" ry="0.25" transform="rotate(57 105.49 148.47)" />
+      <circle cx="22.95" cy="20.01" r="0.58" />
+      <circle cx="18.70" cy="88.30" r="0.36" />
+      <ellipse cx="44.49" cy="96.35" rx="0.80" ry="0.64" transform="rotate(172 44.49 96.35)" />
+      <ellipse cx="113.95" cy="33.76" rx="0.95" ry="0.55" transform="rotate(44 113.95 33.76)" />
+      <ellipse cx="100.94" cy="43.18" rx="0.31" ry="0.18" transform="rotate(99 100.94 43.18)" />
+      <ellipse cx="78.21" cy="143.23" rx="0.40" ry="0.29" transform="rotate(138 78.21 143.23)" />
+      <circle cx="2.55" cy="122.29" r="0.29" />
+      <circle cx="13.74" cy="139.76" r="0.25" />
+      <circle cx="143.01" cy="87.11" r="0.99" />
+      <ellipse cx="50.09" cy="142.24" rx="0.80" ry="0.59" transform="rotate(179 50.09 142.24)" />
+      <ellipse cx="126.20" cy="136.27" rx="0.93" ry="0.66" transform="rotate(150 126.20 136.27)" />
+      <circle cx="142.23" cy="34.77" r="0.44" />
+      <circle cx="40.93" cy="18.04" r="0.27" />
+      <circle cx="123.70" cy="139.93" r="0.87" />
+      <circle cx="65.39" cy="98.82" r="1.43" />
+      <circle cx="26.11" cy="147.06" r="0.36" />
+      <ellipse cx="136.88" cy="154.29" rx="0.41" ry="0.29" transform="rotate(126 136.88 154.29)" />
+      <ellipse cx="53.82" cy="147.21" rx="0.51" ry="0.32" transform="rotate(67 53.82 147.21)" />
+      <circle cx="128.48" cy="43.62" r="0.90" />
+      <ellipse cx="124.83" cy="18.86" rx="0.89" ry="0.74" transform="rotate(27 124.83 18.86)" />
+      <circle cx="36.70" cy="129.39" r="0.76" />
+      <ellipse cx="73.81" cy="49.61" rx="0.28" ry="0.23" transform="rotate(2 73.81 49.61)" />
+      <ellipse cx="126.07" cy="37.50" rx="1.41" ry="0.96" transform="rotate(177 126.07 37.50)" />
+      <circle cx="53.21" cy="136.84" r="0.52" />
+      <ellipse cx="152.83" cy="45.54" rx="0.32" ry="0.19" transform="rotate(32 152.83 45.54)" />
+      <ellipse cx="155.06" cy="85.65" rx="0.94" ry="0.62" transform="rotate(176 155.06 85.65)" />
+      <ellipse cx="148.52" cy="19.99" rx="0.72" ry="0.53" transform="rotate(145 148.52 19.99)" />
+      <circle cx="153.38" cy="29.86" r="0.66" />
+      <ellipse cx="115.65" cy="50.93" rx="0.90" ry="0.54" transform="rotate(79 115.65 50.93)" />
+      <circle cx="96.57" cy="81.78" r="0.69" />
+      <ellipse cx="41.74" cy="112.57" rx="0.47" ry="0.30" transform="rotate(113 41.74 112.57)" />
+      <circle cx="58.82" cy="12.92" r="0.48" />
+      <ellipse cx="105.62" cy="53.51" rx="0.53" ry="0.24" transform="rotate(65 105.62 53.51)" />
+      <ellipse cx="50.25" cy="65.71" rx="0.98" ry="0.64" transform="rotate(79 50.25 65.71)" />
+      <ellipse cx="64.77" cy="48.12" rx="0.91" ry="0.66" transform="rotate(151 64.77 48.12)" />
+      <ellipse cx="148.70" cy="107.66" rx="0.89" ry="0.65" transform="rotate(149 148.70 107.66)" />
+      <ellipse cx="142.84" cy="98.02" rx="0.98" ry="0.75" transform="rotate(175 142.84 98.02)" />
+      <ellipse cx="48.95" cy="87.48" rx="0.41" ry="0.34" transform="rotate(152 48.95 87.48)" />
+      <circle cx="2.06" cy="46.76" r="0.58" />
+      <circle cx="104.13" cy="74.54" r="0.69" />
+      <circle cx="70.98" cy="35.34" r="0.63" />
+      <ellipse cx="15.23" cy="82.41" rx="0.55" ry="0.41" transform="rotate(162 15.23 82.41)" />
+      <circle cx="100.74" cy="54.29" r="0.32" />
+      <circle cx="106.96" cy="37.04" r="0.46" />
+      <ellipse cx="33.06" cy="5.81" rx="0.41" ry="0.30" transform="rotate(145 33.06 5.81)" />
+      <circle cx="40.20" cy="76.12" r="0.50" />
+      <ellipse cx="79.12" cy="40.06" rx="0.37" ry="0.23" transform="rotate(1 79.12 40.06)" />
+      <circle cx="119.15" cy="122.13" r="0.48" />
+      <ellipse cx="82.80" cy="9.83" rx="0.36" ry="0.18" transform="rotate(139 82.80 9.83)" />
+      <ellipse cx="40.87" cy="134.34" rx="1.56" ry="0.79" transform="rotate(165 40.87 134.34)" />
+      <circle cx="106.14" cy="156.11" r="0.47" />
+      <ellipse cx="94.89" cy="150.21" rx="0.85" ry="0.51" transform="rotate(126 94.89 150.21)" />
+      <circle cx="114.21" cy="80.75" r="0.41" />
+      <circle cx="131.57" cy="87.47" r="0.53" />
+      <circle cx="141.96" cy="118.01" r="0.90" />
+      <ellipse cx="44.39" cy="51.87" rx="0.52" ry="0.42" transform="rotate(61 44.39 51.87)" />
+      <ellipse cx="86.26" cy="23.59" rx="0.95" ry="0.57" transform="rotate(73 86.26 23.59)" />
+      <circle cx="38.08" cy="110.26" r="1.43" />
+      <circle cx="65.59" cy="86.65" r="0.43" />
+      <circle cx="67.54" cy="143.15" r="0.39" />
+      <circle cx="61.34" cy="2.92" r="0.74" />
+      <circle cx="56.87" cy="119.54" r="0.47" />
+      <ellipse cx="67.37" cy="118.61" rx="0.31" ry="0.21" transform="rotate(126 67.37 118.61)" />
+      <circle cx="87.20" cy="96.11" r="0.51" />
+      <ellipse cx="54.44" cy="107.95" rx="0.98" ry="0.50" transform="rotate(28 54.44 107.95)" />
+      <ellipse cx="65.07" cy="27.75" rx="1.31" ry="0.76" transform="rotate(161 65.07 27.75)" />
+      <circle cx="74.91" cy="21.91" r="0.29" />
+      <ellipse cx="6.23" cy="102.27" rx="0.32" ry="0.19" transform="rotate(75 6.23 102.27)" />
+      <circle cx="23.17" cy="74.02" r="0.26" />
+      <ellipse cx="120.75" cy="61.14" rx="0.46" ry="0.33" transform="rotate(1 120.75 61.14)" />
+      <circle cx="119.31" cy="131.78" r="0.80" />
+      <circle cx="5.02" cy="86.15" r="0.42" />
+      <ellipse cx="157.99" cy="56.59" rx="1.27" ry="0.97" transform="rotate(98 157.99 56.59)" />
+      <ellipse cx="103.42" cy="123.87" rx="0.38" ry="0.32" transform="rotate(87 103.42 123.87)" />
+      <circle cx="103.67" cy="119.66" r="0.57" />
+      <ellipse cx="150.14" cy="33.10" rx="0.39" ry="0.33" transform="rotate(74 150.14 33.10)" />
+      <ellipse cx="5.18" cy="25.77" rx="0.70" ry="0.43" transform="rotate(68 5.18 25.77)" />
+      <ellipse cx="21.69" cy="106.44" rx="0.93" ry="0.65" transform="rotate(99 21.69 106.44)" />
+      <ellipse cx="89.98" cy="36.00" rx="0.40" ry="0.31" transform="rotate(110 89.98 36.00)" />
+      <circle cx="111.12" cy="121.64" r="0.45" />
+      <circle cx="28.18" cy="96.73" r="1.16" />
+      <ellipse cx="129.81" cy="152.50" rx="0.48" ry="0.32" transform="rotate(121 129.81 152.50)" />
+      <circle cx="18.86" cy="6.01" r="0.31" />
+      <ellipse cx="151.47" cy="63.88" rx="0.69" ry="0.50" transform="rotate(146 151.47 63.88)" />
+      <circle cx="113.54" cy="13.86" r="0.48" />
+      <ellipse cx="109.74" cy="99.85" rx="1.31" ry="0.93" transform="rotate(85 109.74 99.85)" />
+      <ellipse cx="17.90" cy="122.51" rx="0.46" ry="0.28" transform="rotate(54 17.90 122.51)" />
+      <ellipse cx="20.88" cy="155.48" rx="0.80" ry="0.43" transform="rotate(84 20.88 155.48)" />
+      <ellipse cx="124.09" cy="56.16" rx="1.36" ry="0.63" transform="rotate(92 124.09 56.16)" />
+      <ellipse cx="68.83" cy="59.81" rx="0.44" ry="0.29" transform="rotate(170 68.83 59.81)" />
+      <circle cx="80.93" cy="55.23" r="0.67" />
+      <circle cx="134.53" cy="130.28" r="0.40" />
+      <ellipse cx="18.46" cy="151.88" rx="0.34" ry="0.20" transform="rotate(30 18.46 151.88)" />
+      <ellipse cx="101.15" cy="131.28" rx="0.55" ry="0.27" transform="rotate(73 101.15 131.28)" />
+      <ellipse cx="112.34" cy="69.94" rx="0.64" ry="0.54" transform="rotate(2 112.34 69.94)" />
+      <circle cx="116.47" cy="152.61" r="0.47" />
+      <circle cx="85.95" cy="77.43" r="0.75" />
+      <ellipse cx="131.59" cy="15.52" rx="0.51" ry="0.27" transform="rotate(136 131.59 15.52)" />
+      <circle cx="74.49" cy="97.21" r="1.50" />
+      <circle cx="111.38" cy="45.10" r="0.49" />
+      <ellipse cx="15.36" cy="114.33" rx="0.97" ry="0.77" transform="rotate(176 15.36 114.33)" />
+      <circle cx="78.22" cy="120.27" r="0.61" />
+      <circle cx="92.72" cy="75.83" r="0.65" />
+      <ellipse cx="84.82" cy="68.38" rx="1.44" ry="0.66" transform="rotate(171 84.82 68.38)" />
+      <ellipse cx="85.59" cy="120.90" rx="0.77" ry="0.64" transform="rotate(136 85.59 120.90)" />
+      <ellipse cx="30.88" cy="35.76" rx="0.46" ry="0.31" transform="rotate(18 30.88 35.76)" />
+      <circle cx="77.53" cy="115.04" r="0.26" />
+      <circle cx="46.15" cy="17.68" r="0.55" />
+      <ellipse cx="85.33" cy="44.79" rx="0.68" ry="0.42" transform="rotate(22 85.33 44.79)" />
+      <ellipse cx="110.80" cy="21.70" rx="1.57" ry="0.77" transform="rotate(2 110.80 21.70)" />
+      <ellipse cx="137.48" cy="78.58" rx="0.53" ry="0.33" transform="rotate(62 137.48 78.58)" />
+      <ellipse cx="30.76" cy="10.01" rx="0.31" ry="0.15" transform="rotate(106 30.76 10.01)" />
+      <ellipse cx="148.81" cy="76.53" rx="1.05" ry="0.53" transform="rotate(72 148.81 76.53)" />
+      <ellipse cx="130.25" cy="64.51" rx="0.88" ry="0.51" transform="rotate(15 130.25 64.51)" />
+      <ellipse cx="10.36" cy="25.27" rx="0.43" ry="0.30" transform="rotate(33 10.36 25.27)" />
+      <ellipse cx="89.80" cy="49.40" rx="1.53" ry="1.24" transform="rotate(152 89.80 49.40)" />
+      <ellipse cx="121.25" cy="96.59" rx="1.50" ry="0.75" transform="rotate(161 121.25 96.59)" />
+      <ellipse cx="83.52" cy="72.28" rx="0.44" ry="0.35" transform="rotate(62 83.52 72.28)" />
+      <ellipse cx="156.44" cy="49.64" rx="0.67" ry="0.53" transform="rotate(29 156.44 49.64)" />
+      <circle cx="98.88" cy="97.10" r="0.70" />
+      <ellipse cx="8.01" cy="110.61" rx="0.56" ry="0.47" transform="rotate(136 8.01 110.61)" />
+      <circle cx="74.16" cy="106.78" r="0.53" />
+      <ellipse cx="149.75" cy="140.30" rx="0.38" ry="0.30" transform="rotate(13 149.75 140.30)" />
+      <ellipse cx="60.63" cy="16.94" rx="0.97" ry="0.73" transform="rotate(32 60.63 16.94)" />
+      <circle cx="91.72" cy="60.80" r="1.00" />
+      <ellipse cx="140.65" cy="83.47" rx="0.26" ry="0.16" transform="rotate(162 140.65 83.47)" />
+      <ellipse cx="104.02" cy="103.36" rx="0.94" ry="0.62" transform="rotate(41 104.02 103.36)" />
+      <ellipse cx="133.79" cy="73.36" rx="0.25" ry="0.17" transform="rotate(48 133.79 73.36)" />
+      <ellipse cx="84.51" cy="111.38" rx="1.08" ry="0.83" transform="rotate(99 84.51 111.38)" />
+      <circle cx="88.11" cy="19.68" r="0.38" />
+      <ellipse cx="123.54" cy="151.02" rx="0.40" ry="0.29" transform="rotate(111 123.54 151.02)" />
+      <circle cx="95.89" cy="15.05" r="0.28" />
+      <ellipse cx="116.05" cy="91.56" rx="0.86" ry="0.50" transform="rotate(110 116.05 91.56)" />
+      <circle cx="131.18" cy="21.66" r="0.43" />
+      <circle cx="42.40" cy="119.66" r="0.73" />
+      <circle cx="113.97" cy="134.20" r="0.27" />
+      <ellipse cx="65.76" cy="126.87" rx="0.48" ry="0.36" transform="rotate(150 65.76 126.87)" />
+      <ellipse cx="29.74" cy="131.07" rx="0.43" ry="0.20" transform="rotate(152 29.74 131.07)" />
+      <ellipse cx="80.22" cy="16.97" rx="0.27" ry="0.21" transform="rotate(52 80.22 16.97)" />
+      <ellipse cx="55.91" cy="36.26" rx="0.40" ry="0.29" transform="rotate(21 55.91 36.26)" />
+      <circle cx="33.36" cy="68.32" r="1.00" />
+      <circle cx="148.01" cy="132.60" r="0.35" />
+      <circle cx="51.92" cy="3.56" r="0.48" />
+      <circle cx="46.63" cy="106.28" r="0.54" />
+      <circle cx="50.05" cy="152.35" r="0.66" />
+      <circle cx="68.73" cy="69.65" r="0.52" />
+      <circle cx="147.19" cy="101.72" r="0.61" />
+      <ellipse cx="101.50" cy="15.76" rx="0.51" ry="0.35" transform="rotate(32 101.50 15.76)" />
+      <ellipse cx="103.80" cy="31.33" rx="0.46" ry="0.32" transform="rotate(27 103.80 31.33)" />
+      <ellipse cx="157.69" cy="67.39" rx="0.71" ry="0.34" transform="rotate(166 157.69 67.39)" />
+      <ellipse cx="43.61" cy="23.74" rx="1.12" ry="0.94" transform="rotate(152 43.61 23.74)" />
+      <ellipse cx="57.87" cy="58.91" rx="0.56" ry="0.35" transform="rotate(134 57.87 58.91)" />
+      <circle cx="52.94" cy="132.44" r="0.52" />
+      <ellipse cx="30.32" cy="140.20" rx="0.40" ry="0.30" transform="rotate(70 30.32 140.20)" />
+      <ellipse cx="35.31" cy="29.86" rx="0.53" ry="0.26" transform="rotate(167 35.31 29.86)" />
+      <ellipse cx="42.71" cy="79.97" rx="0.25" ry="0.16" transform="rotate(31 42.71 79.97)" />
+      <circle cx="80.17" cy="155.82" r="0.39" />
+      <circle cx="91.04" cy="82.80" r="1.22" />
+      <ellipse cx="73.63" cy="75.44" rx="0.36" ry="0.25" transform="rotate(137 73.63 75.44)" />
+      <ellipse cx="15.67" cy="107.30" rx="0.87" ry="0.67" transform="rotate(165 15.67 107.30)" />
+      <ellipse cx="24.99" cy="31.05" rx="0.27" ry="0.21" transform="rotate(163 24.99 31.05)" />
+      <ellipse cx="57.60" cy="52.72" rx="1.02" ry="0.75" transform="rotate(117 57.60 52.72)" />
+      <ellipse cx="97.79" cy="40.16" rx="0.91" ry="0.69" transform="rotate(177 97.79 40.16)" />
+      <ellipse cx="8.14" cy="19.31" rx="0.46" ry="0.25" transform="rotate(104 8.14 19.31)" />
+      <ellipse cx="106.25" cy="128.07" rx="0.89" ry="0.64" transform="rotate(170 106.25 128.07)" />
+      <ellipse cx="78.64" cy="91.44" rx="0.51" ry="0.35" transform="rotate(39 78.64 91.44)" />
+      <ellipse cx="112.10" cy="65.39" rx="0.38" ry="0.18" transform="rotate(145 112.10 65.39)" />
+      <ellipse cx="71.02" cy="101.26" rx="0.34" ry="0.27" transform="rotate(44 71.02 101.26)" />
+      <ellipse cx="129.06" cy="26.11" rx="0.75" ry="0.62" transform="rotate(114 129.06 26.11)" />
+      <ellipse cx="92.26" cy="121.82" rx="0.29" ry="0.20" transform="rotate(174 92.26 121.82)" />
+      <circle cx="63.54" cy="79.42" r="0.67" />
+      <ellipse cx="13.24" cy="19.80" rx="0.78" ry="0.52" transform="rotate(40 13.24 19.80)" />
+      <ellipse cx="146.21" cy="128.40" rx="0.33" ry="0.25" transform="rotate(141 146.21 128.40)" />
+      <ellipse cx="97.56" cy="11.19" rx="1.01" ry="0.62" transform="rotate(151 97.56 11.19)" />
+      <ellipse cx="48.56" cy="57.61" rx="0.34" ry="0.25" transform="rotate(4 48.56 57.61)" />
+      <circle cx="21.32" cy="53.57" r="0.90" />
+      <circle cx="79.34" cy="80.51" r="1.18" />
+      <circle cx="69.54" cy="29.07" r="0.48" />
+      <ellipse cx="114.53" cy="42.32" rx="0.40" ry="0.19" transform="rotate(126 114.53 42.32)" />
+      <circle cx="51.98" cy="18.90" r="0.38" />
+      <circle cx="119.61" cy="142.77" r="0.44" />
+      <circle cx="123.22" cy="105.13" r="0.26" />
+      <circle cx="56.57" cy="99.32" r="1.45" />
+      <ellipse cx="3.19" cy="143.37" rx="0.79" ry="0.40" transform="rotate(39 3.19 143.37)" />
+      <ellipse cx="50.85" cy="97.81" rx="0.28" ry="0.17" transform="rotate(48 50.85 97.81)" />
+      <circle cx="156.53" cy="72.58" r="0.33" />
+      <circle cx="91.44" cy="157.20" r="0.43" />
+      <ellipse cx="48.70" cy="113.71" rx="0.71" ry="0.45" transform="rotate(133 48.70 113.71)" />
+      <circle cx="59.91" cy="71.82" r="0.86" />
+      <ellipse cx="26.03" cy="77.78" rx="0.81" ry="0.54" transform="rotate(142 26.03 77.78)" />
+      <ellipse cx="44.38" cy="63.59" rx="1.46" ry="0.68" transform="rotate(91 44.38 63.59)" />
+      <circle cx="145.06" cy="157.82" r="0.44" />
+      <circle cx="5.03" cy="129.86" r="0.98" />
+      <circle cx="141.82" cy="54.59" r="0.96" />
+      <ellipse cx="111.95" cy="4.04" rx="0.37" ry="0.29" transform="rotate(118 111.95 4.04)" />
+      <ellipse cx="39.72" cy="68.80" rx="0.47" ry="0.26" transform="rotate(95 39.72 68.80)" />
+      <ellipse cx="77.19" cy="53.15" rx="0.46" ry="0.21" transform="rotate(82 77.19 53.15)" />
+      <ellipse cx="93.17" cy="8.03" rx="0.66" ry="0.50" transform="rotate(83 93.17 8.03)" />
+      <ellipse cx="7.02" cy="64.27" rx="0.26" ry="0.20" transform="rotate(10 7.02 64.27)" />
+      <ellipse cx="146.65" cy="116.07" rx="0.91" ry="0.74" transform="rotate(144 146.65 116.07)" />
+      <ellipse cx="23.75" cy="104.16" rx="0.91" ry="0.69" transform="rotate(102 23.75 104.16)" />
+      <ellipse cx="138.57" cy="68.77" rx="0.68" ry="0.56" transform="rotate(150 138.57 68.77)" />
+      <ellipse cx="2.59" cy="107.17" rx="1.02" ry="0.85" transform="rotate(59 2.59 107.17)" />
+      <circle cx="87.87" cy="27.89" r="0.33" />
+      <ellipse cx="15.00" cy="2.65" rx="0.49" ry="0.38" transform="rotate(39 15.00 2.65)" />
+      <ellipse cx="59.02" cy="41.63" rx="0.88" ry="0.63" transform="rotate(108 59.02 41.63)" />
+      <ellipse cx="111.02" cy="17.87" rx="1.33" ry="1.05" transform="rotate(56 111.02 17.87)" />
+      <circle cx="138.11" cy="121.82" r="0.38" />
+      <ellipse cx="115.77" cy="76.19" rx="0.54" ry="0.36" transform="rotate(12 115.77 76.19)" />
+      <circle cx="136.99" cy="30.19" r="0.79" />
+      <ellipse cx="20.64" cy="126.31" rx="0.47" ry="0.32" transform="rotate(93 20.64 126.31)" />
+      <ellipse cx="89.25" cy="64.29" rx="0.34" ry="0.18" transform="rotate(20 89.25 64.29)" />
+      <circle cx="155.31" cy="102.81" r="0.35" />
+      <ellipse cx="32.08" cy="125.84" rx="0.32" ry="0.19" transform="rotate(100 32.08 125.84)" />
+      <ellipse cx="4.50" cy="99.89" rx="0.49" ry="0.41" transform="rotate(80 4.50 99.89)" />
+      <circle cx="109.91" cy="61.09" r="0.27" />
+      <ellipse cx="152.59" cy="126.95" rx="0.72" ry="0.52" transform="rotate(39 152.59 126.95)" />
+      <circle cx="111.48" cy="48.50" r="0.30" />
+      <ellipse cx="38.72" cy="91.53" rx="0.40" ry="0.24" transform="rotate(60 38.72 91.53)" />
+      <circle cx="31.35" cy="7.69" r="0.57" />
+      <ellipse cx="12.90" cy="66.35" rx="0.81" ry="0.43" transform="rotate(83 12.90 66.35)" />
+      <ellipse cx="157.96" cy="76.70" rx="0.47" ry="0.30" transform="rotate(150 157.96 76.70)" />
+      <circle cx="98.50" cy="2.75" r="0.26" />
+      <circle cx="151.99" cy="100.83" r="0.70" />
+      <ellipse cx="14.74" cy="85.78" rx="0.27" ry="0.15" transform="rotate(113 14.74 85.78)" />
+      <circle cx="153.42" cy="16.92" r="0.63" />
+      <ellipse cx="6.39" cy="153.97" rx="0.35" ry="0.23" transform="rotate(132 6.39 153.97)" />
+      <ellipse cx="144.99" cy="103.25" rx="0.51" ry="0.40" transform="rotate(172 144.99 103.25)" />
+      <ellipse cx="37.23" cy="3.09" rx="1.07" ry="0.52" transform="rotate(121 37.23 3.09)" />
+      <circle cx="71.00" cy="6.00" r="0.26" />
+      <circle cx="114.72" cy="94.02" r="1.25" />
+      <ellipse cx="15.16" cy="65.94" rx="0.50" ry="0.39" transform="rotate(127 15.16 65.94)" />
+      <circle cx="131.88" cy="129.07" r="0.30" />
+      <ellipse cx="74.06" cy="25.62" rx="0.83" ry="0.61" transform="rotate(63 74.06 25.62)" />
+      <ellipse cx="24.36" cy="157.21" rx="0.79" ry="0.57" transform="rotate(142 24.36 157.21)" />
+      <circle cx="12.40" cy="138.47" r="0.39" />
+      <ellipse cx="44.26" cy="56.14" rx="0.66" ry="0.51" transform="rotate(142 44.26 56.14)" />
+      <ellipse cx="31.97" cy="20.66" rx="0.97" ry="0.44" transform="rotate(73 31.97 20.66)" />
+      <ellipse cx="65.86" cy="66.71" rx="0.51" ry="0.37" transform="rotate(159 65.86 66.71)" />
+      <circle cx="74.89" cy="34.16" r="0.32" />
+      <ellipse cx="17.65" cy="36.27" rx="0.26" ry="0.12" transform="rotate(126 17.65 36.27)" />
+      <ellipse cx="90.37" cy="37.85" rx="0.55" ry="0.27" transform="rotate(59 90.37 37.85)" />
+      <circle cx="17.28" cy="125.20" r="0.51" />
+      <circle cx="59.49" cy="114.20" r="1.06" />
+      <ellipse cx="113.56" cy="101.92" rx="0.63" ry="0.52" transform="rotate(29 113.56 101.92)" />
+      <ellipse cx="110.40" cy="95.39" rx="0.89" ry="0.57" transform="rotate(116 110.40 95.39)" />
+      <ellipse cx="47.91" cy="31.88" rx="0.34" ry="0.23" transform="rotate(39 47.91 31.88)" />
+      <circle cx="97.14" cy="37.87" r="0.86" />
+      <ellipse cx="118.06" cy="144.71" rx="0.31" ry="0.17" transform="rotate(100 118.06 144.71)" />
+      <circle cx="154.79" cy="39.94" r="0.43" />
+      <circle cx="157.50" cy="5.35" r="0.53" />
+      <ellipse cx="145.47" cy="109.01" rx="0.34" ry="0.28" transform="rotate(32 145.47 109.01)" />
+      <ellipse cx="19.25" cy="83.29" rx="0.25" ry="0.12" transform="rotate(22 19.25 83.29)" />
+      <ellipse cx="32.12" cy="119.42" rx="1.06" ry="0.77" transform="rotate(111 32.12 119.42)" />
+      <ellipse cx="87.34" cy="5.06" rx="0.87" ry="0.72" transform="rotate(81 87.34 5.06)" />
+      <circle cx="52.95" cy="36.01" r="0.88" />
+      <circle cx="50.84" cy="36.49" r="0.46" />
+      <ellipse cx="116.71" cy="31.58" rx="0.38" ry="0.25" transform="rotate(83 116.71 31.58)" />
+      <ellipse cx="59.19" cy="99.09" rx="0.53" ry="0.35" transform="rotate(55 59.19 99.09)" />
+      <ellipse cx="7.40" cy="107.49" rx="0.61" ry="0.50" transform="rotate(118 7.40 107.49)" />
+      <circle cx="152.22" cy="105.59" r="0.85" />
+      <ellipse cx="37.31" cy="127.24" rx="0.46" ry="0.37" transform="rotate(80 37.31 127.24)" />
+      <circle cx="26.15" cy="125.71" r="1.12" />
+      <ellipse cx="154.55" cy="75.35" rx="0.31" ry="0.15" transform="rotate(139 154.55 75.35)" />
+      <circle cx="148.64" cy="47.40" r="0.39" />
+      <ellipse cx="88.99" cy="39.40" rx="0.33" ry="0.20" transform="rotate(83 88.99 39.40)" />
+      <ellipse cx="20.85" cy="128.80" rx="0.50" ry="0.30" transform="rotate(71 20.85 128.80)" />
+      <ellipse cx="52.36" cy="53.82" rx="0.43" ry="0.29" transform="rotate(138 52.36 53.82)" />
+      <circle cx="127.78" cy="123.51" r="0.54" />
+      <circle cx="130.75" cy="113.77" r="0.76" />
+      <ellipse cx="99.03" cy="113.65" rx="1.03" ry="0.64" transform="rotate(13 99.03 113.65)" />
+      <circle cx="39.49" cy="33.01" r="0.74" />
+      <ellipse cx="87.82" cy="156.52" rx="0.25" ry="0.13" transform="rotate(26 87.82 156.52)" />
+      <ellipse cx="134.72" cy="134.38" rx="0.71" ry="0.60" transform="rotate(161 134.72 134.38)" />
+      <circle cx="93.28" cy="103.31" r="0.53" />
+      <ellipse cx="139.26" cy="143.76" rx="1.61" ry="0.80" transform="rotate(109 139.26 143.76)" />
+      <circle cx="29.24" cy="63.45" r="0.40" />
+      <circle cx="103.44" cy="84.86" r="0.36" />
+      <ellipse cx="113.93" cy="17.47" rx="0.65" ry="0.36" transform="rotate(59 113.93 17.47)" />
+      <circle cx="101.47" cy="138.75" r="1.36" />
+      <circle cx="89.20" cy="12.60" r="0.26" />
+      <ellipse cx="128.44" cy="148.35" rx="0.59" ry="0.49" transform="rotate(86 128.44 148.35)" />
+      <ellipse cx="75.83" cy="5.40" rx="0.51" ry="0.27" transform="rotate(108 75.83 5.40)" />
+      <ellipse cx="49.98" cy="48.02" rx="0.68" ry="0.31" transform="rotate(136 49.98 48.02)" />
+      <ellipse cx="22.35" cy="137.71" rx="0.39" ry="0.26" transform="rotate(118 22.35 137.71)" />
+      <ellipse cx="15.88" cy="67.96" rx="0.88" ry="0.52" transform="rotate(41 15.88 67.96)" />
+      <circle cx="81.03" cy="4.68" r="0.37" />
+      <circle cx="71.92" cy="90.25" r="0.98" />
+      <ellipse cx="149.43" cy="38.79" rx="0.59" ry="0.33" transform="rotate(12 149.43 38.79)" />
+      <ellipse cx="155.44" cy="114.15" rx="0.26" ry="0.15" transform="rotate(47 155.44 114.15)" />
+      <ellipse cx="69.32" cy="37.93" rx="1.58" ry="0.87" transform="rotate(169 69.32 37.93)" />
+      <ellipse cx="39.82" cy="83.36" rx="0.32" ry="0.16" transform="rotate(44 39.82 83.36)" />
+      <ellipse cx="54.55" cy="86.66" rx="1.62" ry="1.12" transform="rotate(5 54.55 86.66)" />
+      <ellipse cx="12.86" cy="26.30" rx="0.33" ry="0.18" transform="rotate(145 12.86 26.30)" />
+      <circle cx="12.73" cy="132.81" r="0.49" />
+      <ellipse cx="64.08" cy="103.38" rx="1.64" ry="1.17" transform="rotate(172 64.08 103.38)" />
+      <ellipse cx="22.93" cy="122.58" rx="0.73" ry="0.60" transform="rotate(66 22.93 122.58)" />
+      <ellipse cx="125.82" cy="21.55" rx="0.55" ry="0.39" transform="rotate(57 125.82 21.55)" />
+      <ellipse cx="128.11" cy="85.24" rx="0.40" ry="0.28" transform="rotate(155 128.11 85.24)" />
+      <circle cx="87.08" cy="54.08" r="0.96" />
+      <circle cx="145.16" cy="85.88" r="0.78" />
+      <circle cx="14.73" cy="34.72" r="0.39" />
+      <circle cx="111.78" cy="88.03" r="0.80" />
+      <ellipse cx="78.24" cy="126.19" rx="0.81" ry="0.52" transform="rotate(61 78.24 126.19)" />
+      <circle cx="61.18" cy="83.36" r="0.49" />
+      <circle cx="76.04" cy="44.92" r="0.93" />
+      <ellipse cx="48.97" cy="128.98" rx="0.45" ry="0.33" transform="rotate(68 48.97 128.98)" />
+      <ellipse cx="22.08" cy="5.31" rx="0.83" ry="0.52" transform="rotate(96 22.08 5.31)" />
+      <ellipse cx="24.02" cy="8.05" rx="0.30" ry="0.25" transform="rotate(105 24.02 8.05)" />
+      <ellipse cx="133.52" cy="55.49" rx="0.73" ry="0.61" transform="rotate(163 133.52 55.49)" />
+      <circle cx="2.85" cy="92.24" r="1.12" />
+      <circle cx="55.19" cy="19.05" r="0.30" />
+      <ellipse cx="144.77" cy="140.68" rx="0.42" ry="0.20" transform="rotate(32 144.77 140.68)" />
+      <ellipse cx="26.90" cy="98.78" rx="0.34" ry="0.21" transform="rotate(6 26.90 98.78)" />
+      <ellipse cx="136.25" cy="17.56" rx="0.51" ry="0.26" transform="rotate(37 136.25 17.56)" />
+      <circle cx="30.25" cy="113.59" r="0.86" />
+      <ellipse cx="117.24" cy="110.10" rx="0.30" ry="0.17" transform="rotate(74 117.24 110.10)" />
+      <ellipse cx="42.15" cy="71.51" rx="0.28" ry="0.19" transform="rotate(174 42.15 71.51)" />
+      <circle cx="81.34" cy="47.14" r="0.39" />
+      <ellipse cx="141.56" cy="25.58" rx="0.37" ry="0.19" transform="rotate(69 141.56 25.58)" />
+      <ellipse cx="21.93" cy="142.55" rx="0.87" ry="0.48" transform="rotate(112 21.93 142.55)" />
+      <ellipse cx="47.62" cy="144.42" rx="0.29" ry="0.22" transform="rotate(100 47.62 144.42)" />
+      <ellipse cx="68.98" cy="30.86" rx="0.31" ry="0.20" transform="rotate(56 68.98 30.86)" />
+      <ellipse cx="83.62" cy="79.98" rx="0.45" ry="0.30" transform="rotate(158 83.62 79.98)" />
+      <ellipse cx="71.22" cy="107.50" rx="0.29" ry="0.14" transform="rotate(79 71.22 107.50)" />
+      <circle cx="47.92" cy="108.45" r="0.31" />
+      <ellipse cx="43.91" cy="111.58" rx="0.54" ry="0.26" transform="rotate(2 43.91 111.58)" />
+      <ellipse cx="106.90" cy="91.08" rx="0.38" ry="0.23" transform="rotate(163 106.90 91.08)" />
+      <circle cx="28.38" cy="30.68" r="0.95" />
+      <ellipse cx="9.27" cy="44.94" rx="0.34" ry="0.26" transform="rotate(77 9.27 44.94)" />
+      <ellipse cx="69.30" cy="50.55" rx="0.59" ry="0.39" transform="rotate(21 69.30 50.55)" />
+      <circle cx="149.42" cy="30.00" r="0.92" />
+      <circle cx="77.22" cy="11.67" r="0.32" />
+      <circle cx="14.93" cy="154.39" r="0.87" />
+      <ellipse cx="117.87" cy="15.02" rx="0.35" ry="0.27" transform="rotate(167 117.87 15.02)" />
+      <circle cx="148.53" cy="95.59" r="0.37" />
+      <ellipse cx="10.23" cy="83.99" rx="0.41" ry="0.33" transform="rotate(156 10.23 83.99)" />
+      <ellipse cx="32.26" cy="32.92" rx="0.50" ry="0.34" transform="rotate(84 32.26 32.92)" />
+      <ellipse cx="81.29" cy="141.42" rx="0.47" ry="0.33" transform="rotate(92 81.29 141.42)" />
+      <ellipse cx="8.04" cy="134.87" rx="0.66" ry="0.51" transform="rotate(130 8.04 134.87)" />
+      <ellipse cx="130.00" cy="29.15" rx="0.32" ry="0.18" transform="rotate(92 130.00 29.15)" />
+      <ellipse cx="145.21" cy="26.68" rx="0.93" ry="0.67" transform="rotate(77 145.21 26.68)" />
+      <ellipse cx="10.23" cy="110.41" rx="0.32" ry="0.19" transform="rotate(105 10.23 110.41)" />
+      <ellipse cx="60.97" cy="30.46" rx="0.98" ry="0.52" transform="rotate(138 60.97 30.46)" />
+      <circle cx="154.42" cy="57.85" r="0.42" />
+      <circle cx="78.33" cy="86.44" r="0.53" />
+      <ellipse cx="71.50" cy="17.17" rx="0.30" ry="0.19" transform="rotate(28 71.50 17.17)" />
+      <ellipse cx="152.13" cy="154.24" rx="0.27" ry="0.16" transform="rotate(14 152.13 154.24)" />
+      <circle cx="153.49" cy="13.64" r="0.95" />
+      <ellipse cx="20.83" cy="89.83" rx="0.29" ry="0.24" transform="rotate(56 20.83 89.83)" />
+      <circle cx="53.91" cy="32.78" r="1.20" />
+      <ellipse cx="15.63" cy="121.56" rx="0.31" ry="0.23" transform="rotate(75 15.63 121.56)" />
+      <ellipse cx="119.08" cy="43.16" rx="0.47" ry="0.25" transform="rotate(142 119.08 43.16)" />
+      <circle cx="75.41" cy="122.25" r="0.38" />
+      <circle cx="76.16" cy="143.54" r="0.31" />
+      <circle cx="124.08" cy="65.97" r="0.66" />
+      <ellipse cx="73.01" cy="144.33" rx="0.42" ry="0.19" transform="rotate(5 73.01 144.33)" />
+      <circle cx="91.29" cy="9.08" r="0.34" />
+      <circle cx="143.74" cy="23.26" r="0.45" />
+      <circle cx="153.69" cy="21.32" r="0.98" />
+      <circle cx="63.54" cy="152.38" r="0.44" />
+      <circle cx="39.72" cy="123.27" r="0.97" />
+      <circle cx="53.74" cy="6.41" r="0.71" />
+      <ellipse cx="102.75" cy="89.48" rx="0.41" ry="0.26" transform="rotate(63 102.75 89.48)" />
+      <circle cx="118.37" cy="138.69" r="0.59" />
+      <ellipse cx="58.77" cy="125.89" rx="0.46" ry="0.26" transform="rotate(117 58.77 125.89)" />
+      <ellipse cx="37.41" cy="50.33" rx="0.67" ry="0.35" transform="rotate(115 37.41 50.33)" />
+      <circle cx="46.85" cy="71.74" r="0.32" />
+      <ellipse cx="37.29" cy="135.99" rx="0.34" ry="0.18" transform="rotate(134 37.29 135.99)" />
+      <circle cx="31.12" cy="12.70" r="0.89" />
+      <ellipse cx="75.64" cy="146.20" rx="1.62" ry="0.97" transform="rotate(101 75.64 146.20)" />
+      <circle cx="80.73" cy="33.73" r="0.39" />
+      <circle cx="98.18" cy="109.88" r="0.82" />
+      <ellipse cx="59.49" cy="74.55" rx="0.67" ry="0.49" transform="rotate(91 59.49 74.55)" />
+      <circle cx="62.70" cy="12.48" r="0.49" />
+      <ellipse cx="70.28" cy="14.82" rx="0.33" ry="0.21" transform="rotate(176 70.28 14.82)" />
+      <circle cx="156.86" cy="105.79" r="0.99" />
+      <ellipse cx="44.07" cy="86.38" rx="1.14" ry="0.57" transform="rotate(28 44.07 86.38)" />
+      <ellipse cx="42.64" cy="53.76" rx="0.87" ry="0.65" transform="rotate(50 42.64 53.76)" />
+      <ellipse cx="45.96" cy="114.43" rx="0.48" ry="0.40" transform="rotate(57 45.96 114.43)" />
+      <ellipse cx="54.34" cy="134.41" rx="1.16" ry="0.85" transform="rotate(105 54.34 134.41)" />
+      <ellipse cx="56.26" cy="15.13" rx="0.80" ry="0.65" transform="rotate(127 56.26 15.13)" />
+      <ellipse cx="3.51" cy="116.06" rx="0.26" ry="0.13" transform="rotate(148 3.51 116.06)" />
+      <circle cx="28.28" cy="85.83" r="1.20" />
+      <ellipse cx="75.45" cy="80.79" rx="0.52" ry="0.24" transform="rotate(148 75.45 80.79)" />
+      <ellipse cx="8.95" cy="148.74" rx="0.46" ry="0.22" transform="rotate(153 8.95 148.74)" />
+      <circle cx="119.41" cy="134.22" r="0.43" />
+      <circle cx="109.30" cy="152.71" r="1.52" />
+      <circle cx="104.10" cy="11.96" r="0.44" />
+      <circle cx="86.96" cy="138.59" r="0.86" />
+      <circle cx="105.32" cy="26.14" r="0.30" />
+      <ellipse cx="133.02" cy="18.61" rx="0.37" ry="0.22" transform="rotate(171 133.02 18.61)" />
+      <ellipse cx="126.14" cy="48.03" rx="0.71" ry="0.41" transform="rotate(78 126.14 48.03)" />
+      <ellipse cx="143.24" cy="77.62" rx="0.99" ry="0.45" transform="rotate(44 143.24 77.62)" />
+      <ellipse cx="65.12" cy="60.86" rx="0.41" ry="0.21" transform="rotate(55 65.12 60.86)" />
+      <ellipse cx="33.61" cy="116.95" rx="0.46" ry="0.21" transform="rotate(65 33.61 116.95)" />
+      <circle cx="18.62" cy="120.44" r="0.38" />
+      <circle cx="101.17" cy="62.46" r="0.41" />
+      <ellipse cx="3.29" cy="36.05" rx="0.48" ry="0.28" transform="rotate(57 3.29 36.05)" />
+      <circle cx="133.96" cy="34.89" r="0.66" />
+      <ellipse cx="133.57" cy="9.04" rx="0.44" ry="0.25" transform="rotate(147 133.57 9.04)" />
+      <ellipse cx="103.00" cy="7.83" rx="0.69" ry="0.37" transform="rotate(22 103.00 7.83)" />
+      <ellipse cx="92.97" cy="52.23" rx="0.55" ry="0.27" transform="rotate(71 92.97 52.23)" />
+      <ellipse cx="32.80" cy="146.46" rx="0.29" ry="0.19" transform="rotate(0 32.80 146.46)" />
+      <ellipse cx="78.96" cy="43.19" rx="0.72" ry="0.37" transform="rotate(43 78.96 43.19)" />
+      <circle cx="25.27" cy="137.13" r="0.76" />
+      <ellipse cx="115.34" cy="130.89" rx="1.58" ry="0.92" transform="rotate(143 115.34 130.89)" />
+      <ellipse cx="41.03" cy="92.83" rx="0.46" ry="0.30" transform="rotate(149 41.03 92.83)" />
+      <ellipse cx="127.34" cy="29.06" rx="0.76" ry="0.61" transform="rotate(90 127.34 29.06)" />
+      <ellipse cx="8.89" cy="61.09" rx="0.45" ry="0.32" transform="rotate(6 8.89 61.09)" />
+      <circle cx="10.59" cy="133.37" r="0.94" />
+      <ellipse cx="56.19" cy="106.98" rx="0.31" ry="0.25" transform="rotate(129 56.19 106.98)" />
+      <ellipse cx="54.08" cy="90.88" rx="0.40" ry="0.23" transform="rotate(64 54.08 90.88)" />
+      <circle cx="146.87" cy="141.39" r="0.34" />
+      <ellipse cx="97.87" cy="64.96" rx="0.30" ry="0.15" transform="rotate(85 97.87 64.96)" />
+      <ellipse cx="94.61" cy="116.11" rx="1.33" ry="0.62" transform="rotate(34 94.61 116.11)" />
+      <circle cx="70.70" cy="130.02" r="0.30" />
+      <circle cx="96.54" cy="111.31" r="0.29" />
+      <circle cx="95.45" cy="123.88" r="0.76" />
+      <circle cx="119.87" cy="73.19" r="0.96" />
+      <ellipse cx="20.31" cy="112.17" rx="0.30" ry="0.17" transform="rotate(120 20.31 112.17)" />
+      <circle cx="74.02" cy="125.83" r="0.44" />
+      <ellipse cx="64.38" cy="69.10" rx="0.26" ry="0.21" transform="rotate(125 64.38 69.10)" />
+      <ellipse cx="65.75" cy="134.71" rx="0.32" ry="0.23" transform="rotate(32 65.75 134.71)" />
+      <ellipse cx="89.58" cy="131.03" rx="0.31" ry="0.16" transform="rotate(62 89.58 131.03)" />
+      <ellipse cx="152.91" cy="76.23" rx="0.83" ry="0.47" transform="rotate(80 152.91 76.23)" />
+      <ellipse cx="55.01" cy="110.77" rx="0.66" ry="0.41" transform="rotate(50 55.01 110.77)" />
+      <circle cx="41.47" cy="13.52" r="0.68" />
+      <ellipse cx="116.48" cy="112.13" rx="0.26" ry="0.20" transform="rotate(175 116.48 112.13)" />
+      <ellipse cx="108.36" cy="34.02" rx="0.84" ry="0.50" transform="rotate(147 108.36 34.02)" />
+      <circle cx="97.07" cy="59.70" r="0.27" />
+      <circle cx="81.22" cy="92.19" r="0.80" />
+      <circle cx="94.63" cy="84.83" r="0.62" />
+      <circle cx="60.79" cy="14.32" r="0.59" />
+      <ellipse cx="49.20" cy="83.94" rx="0.96" ry="0.75" transform="rotate(110 49.20 83.94)" />
+      <circle cx="28.81" cy="147.84" r="0.88" />
+      <circle cx="98.90" cy="41.75" r="0.31" />
+      <ellipse cx="84.05" cy="27.69" rx="0.31" ry="0.16" transform="rotate(134 84.05 27.69)" />
+      <circle cx="82.16" cy="145.28" r="0.31" />
+      <ellipse cx="70.63" cy="125.42" rx="0.39" ry="0.26" transform="rotate(168 70.63 125.42)" />
+      <ellipse cx="65.46" cy="132.72" rx="0.58" ry="0.28" transform="rotate(141 65.46 132.72)" />
+      <circle cx="87.61" cy="40.83" r="0.50" />
+      <ellipse cx="59.09" cy="135.72" rx="0.39" ry="0.25" transform="rotate(102 59.09 135.72)" />
+      <circle cx="133.28" cy="107.39" r="0.37" />
+      <ellipse cx="134.76" cy="117.34" rx="1.24" ry="1.01" transform="rotate(170 134.76 117.34)" />
+      <circle cx="111.04" cy="6.14" r="0.78" />
+      <circle cx="157.37" cy="110.71" r="0.84" />
+      <circle cx="6.29" cy="84.35" r="0.29" />
+      <circle cx="139.12" cy="86.13" r="1.10" />
+      <circle cx="106.12" cy="119.14" r="0.39" />
+      <circle cx="138.02" cy="106.75" r="0.42" />
+      <ellipse cx="75.40" cy="135.26" rx="0.86" ry="0.64" transform="rotate(165 75.40 135.26)" />
+      <circle cx="84.98" cy="11.35" r="0.26" />
+      <ellipse cx="54.57" cy="9.18" rx="0.54" ry="0.31" transform="rotate(29 54.57 9.18)" />
+      <ellipse cx="135.37" cy="33.49" rx="0.41" ry="0.31" transform="rotate(30 135.37 33.49)" />
+      <ellipse cx="82.98" cy="63.55" rx="0.37" ry="0.23" transform="rotate(65 82.98 63.55)" />
+      <ellipse cx="140.31" cy="58.05" rx="0.55" ry="0.42" transform="rotate(72 140.31 58.05)" />
+      <circle cx="126.25" cy="122.12" r="0.40" />
+      <ellipse cx="54.57" cy="51.79" rx="0.41" ry="0.32" transform="rotate(110 54.57 51.79)" />
+      <ellipse cx="109.42" cy="56.37" rx="0.32" ry="0.15" transform="rotate(139 109.42 56.37)" />
+      <ellipse cx="96.93" cy="2.67" rx="0.44" ry="0.21" transform="rotate(22 96.93 2.67)" />
+      <ellipse cx="34.92" cy="90.24" rx="0.34" ry="0.27" transform="rotate(146 34.92 90.24)" />
+      <circle cx="26.57" cy="66.37" r="0.75" />
+      <circle cx="56.61" cy="70.93" r="0.78" />
+      <ellipse cx="43.31" cy="98.18" rx="0.29" ry="0.21" transform="rotate(161 43.31 98.18)" />
+      <ellipse cx="28.98" cy="35.04" rx="0.52" ry="0.25" transform="rotate(22 28.98 35.04)" />
+      <circle cx="114.05" cy="48.81" r="0.98" />
+      <ellipse cx="92.80" cy="18.25" rx="0.33" ry="0.24" transform="rotate(59 92.80 18.25)" />
+      <circle cx="19.37" cy="148.47" r="0.46" />
+      <ellipse cx="28.74" cy="57.42" rx="0.30" ry="0.24" transform="rotate(41 28.74 57.42)" />
+      <ellipse cx="49.85" cy="39.39" rx="1.30" ry="0.64" transform="rotate(160 49.85 39.39)" />
+      <ellipse cx="138.90" cy="22.03" rx="0.77" ry="0.65" transform="rotate(67 138.90 22.03)" />
+      <ellipse cx="116.39" cy="147.45" rx="0.39" ry="0.30" transform="rotate(114 116.39 147.45)" />
+      <ellipse cx="107.48" cy="122.36" rx="0.29" ry="0.18" transform="rotate(139 107.48 122.36)" />
+      <circle cx="110.76" cy="73.85" r="0.43" />
+      <ellipse cx="31.51" cy="91.36" rx="0.42" ry="0.26" transform="rotate(24 31.51 91.36)" />
+      <ellipse cx="144.66" cy="149.30" rx="0.29" ry="0.17" transform="rotate(146 144.66 149.30)" />
+      <circle cx="107.03" cy="13.71" r="1.32" />
+      <circle cx="37.72" cy="65.47" r="0.68" />
+      <circle cx="63.30" cy="145.11" r="1.60" />
+      <ellipse cx="14.13" cy="9.09" rx="0.57" ry="0.34" transform="rotate(48 14.13 9.09)" />
+      <circle cx="57.81" cy="46.74" r="0.70" />
+      <ellipse cx="150.51" cy="87.57" rx="1.13" ry="0.60" transform="rotate(108 150.51 87.57)" />
+      <ellipse cx="74.49" cy="113.71" rx="1.00" ry="0.71" transform="rotate(8 74.49 113.71)" />
+      <ellipse cx="10.78" cy="31.34" rx="0.82" ry="0.61" transform="rotate(145 10.78 31.34)" />
+      <circle cx="99.18" cy="28.58" r="0.64" />
+      <ellipse cx="110.06" cy="9.10" rx="0.35" ry="0.18" transform="rotate(10 110.06 9.10)" />
+      <ellipse cx="127.96" cy="100.55" rx="0.47" ry="0.26" transform="rotate(48 127.96 100.55)" />
+      <circle cx="85.78" cy="26.62" r="0.48" />
+      <ellipse cx="156.42" cy="83.49" rx="0.29" ry="0.17" transform="rotate(38 156.42 83.49)" />
+      <ellipse cx="37.00" cy="138.96" rx="0.90" ry="0.75" transform="rotate(169 37.00 138.96)" />
+      <circle cx="56.31" cy="114.30" r="0.84" />
+      <ellipse cx="86.11" cy="100.94" rx="0.50" ry="0.26" transform="rotate(27 86.11 100.94)" />
+      <ellipse cx="77.56" cy="105.91" rx="0.42" ry="0.34" transform="rotate(72 77.56 105.91)" />
+      <ellipse cx="28.53" cy="81.20" rx="1.49" ry="1.26" transform="rotate(122 28.53 81.20)" />
+      <ellipse cx="109.35" cy="122.08" rx="0.60" ry="0.30" transform="rotate(13 109.35 122.08)" />
+      <circle cx="102.65" cy="134.87" r="0.33" />
+      <ellipse cx="72.31" cy="109.11" rx="0.43" ry="0.20" transform="rotate(96 72.31 109.11)" />
+      <ellipse cx="50.45" cy="62.59" rx="0.80" ry="0.52" transform="rotate(101 50.45 62.59)" />
+      <ellipse cx="68.86" cy="148.42" rx="0.70" ry="0.51" transform="rotate(146 68.86 148.42)" />
+      <ellipse cx="141.15" cy="13.21" rx="0.37" ry="0.22" transform="rotate(72 141.15 13.21)" />
+      <ellipse cx="20.78" cy="67.78" rx="0.99" ry="0.63" transform="rotate(57 20.78 67.78)" />
+      <ellipse cx="155.85" cy="12.44" rx="0.60" ry="0.43" transform="rotate(1 155.85 12.44)" />
+      <circle cx="29.49" cy="72.05" r="0.78" />
+      <circle cx="139.45" cy="111.75" r="1.49" />
+      <circle cx="32.79" cy="132.36" r="0.56" />
+      <ellipse cx="12.63" cy="156.94" rx="0.39" ry="0.27" transform="rotate(151 12.63 156.94)" />
+      <circle cx="18.32" cy="85.90" r="0.83" />
+      <circle cx="89.33" cy="106.88" r="0.51" />
+      <ellipse cx="13.04" cy="104.44" rx="0.91" ry="0.46" transform="rotate(62 13.04 104.44)" />
+      <circle cx="142.61" cy="112.49" r="0.74" />
+      <ellipse cx="141.63" cy="75.87" rx="0.66" ry="0.43" transform="rotate(104 141.63 75.87)" />
+      <circle cx="17.31" cy="60.37" r="0.49" />
+      <ellipse cx="18.89" cy="153.22" rx="0.34" ry="0.28" transform="rotate(68 18.89 153.22)" />
+      <circle cx="150.57" cy="93.68" r="0.76" />
+      <circle cx="127.72" cy="8.50" r="0.42" />
+      <circle cx="125.68" cy="149.73" r="0.26" />
+      <ellipse cx="61.01" cy="112.22" rx="0.33" ry="0.26" transform="rotate(148 61.01 112.22)" />
+      <circle cx="73.84" cy="16.74" r="0.36" />
+      <ellipse cx="150.22" cy="129.45" rx="0.26" ry="0.16" transform="rotate(72 150.22 129.45)" />
+      <ellipse cx="25.37" cy="36.58" rx="0.28" ry="0.21" transform="rotate(64 25.37 36.58)" />
+      <circle cx="89.52" cy="18.62" r="0.53" />
+      <ellipse cx="112.45" cy="108.01" rx="0.45" ry="0.27" transform="rotate(72 112.45 108.01)" />
+      <circle cx="148.71" cy="134.58" r="0.29" />
+      <circle cx="27.86" cy="20.66" r="0.53" />
+      <ellipse cx="114.86" cy="146.26" rx="0.34" ry="0.23" transform="rotate(157 114.86 146.26)" />
+      <circle cx="74.25" cy="127.88" r="0.70" />
+      <ellipse cx="62.42" cy="42.81" rx="0.42" ry="0.29" transform="rotate(77 62.42 42.81)" />
+      <ellipse cx="67.85" cy="101.12" rx="0.38" ry="0.27" transform="rotate(63 67.85 101.12)" />
+      <ellipse cx="81.21" cy="14.06" rx="1.07" ry="0.68" transform="rotate(107 81.21 14.06)" />
+      <circle cx="94.35" cy="147.05" r="0.40" />
+      <ellipse cx="20.81" cy="82.55" rx="0.85" ry="0.65" transform="rotate(162 20.81 82.55)" />
+      <ellipse cx="85.67" cy="79.70" rx="0.67" ry="0.43" transform="rotate(119 85.67 79.70)" />
+      <circle cx="50.68" cy="49.95" r="0.76" />
+      <circle cx="16.39" cy="24.05" r="0.32" />
+      <ellipse cx="21.40" cy="130.99" rx="0.34" ry="0.23" transform="rotate(66 21.40 130.99)" />
+      <circle cx="97.58" cy="50.68" r="0.81" />
+      <ellipse cx="129.57" cy="92.52" rx="0.50" ry="0.26" transform="rotate(101 129.57 92.52)" />
+      <ellipse cx="81.44" cy="125.54" rx="1.50" ry="1.02" transform="rotate(175 81.44 125.54)" />
+      <circle cx="156.18" cy="61.97" r="0.41" />
+      <ellipse cx="67.37" cy="76.54" rx="0.37" ry="0.19" transform="rotate(145 67.37 76.54)" />
+      <circle cx="38.32" cy="119.13" r="0.46" />
+      <circle cx="137.86" cy="40.70" r="0.67" />
+      <circle cx="128.15" cy="80.32" r="0.33" />
+      <ellipse cx="145.39" cy="66.44" rx="0.85" ry="0.50" transform="rotate(32 145.39 66.44)" />
+      <circle cx="132.56" cy="22.12" r="0.25" />
+      <ellipse cx="134.26" cy="50.06" rx="0.30" ry="0.21" transform="rotate(35 134.26 50.06)" />
+      <circle cx="16.06" cy="119.72" r="0.63" />
+      <ellipse cx="105.93" cy="68.32" rx="0.74" ry="0.40" transform="rotate(150 105.93 68.32)" />
+      <circle cx="8.79" cy="152.47" r="0.86" />
+      <circle cx="99.53" cy="77.53" r="0.50" />
+      <ellipse cx="43.31" cy="131.82" rx="0.44" ry="0.28" transform="rotate(46 43.31 131.82)" />
+      <ellipse cx="89.57" cy="65.92" rx="0.50" ry="0.31" transform="rotate(42 89.57 65.92)" />
+      <ellipse cx="147.99" cy="70.91" rx="0.28" ry="0.17" transform="rotate(154 147.99 70.91)" />
+      <ellipse cx="63.80" cy="7.84" rx="0.57" ry="0.34" transform="rotate(149 63.80 7.84)" />
+      <ellipse cx="12.24" cy="74.78" rx="0.29" ry="0.18" transform="rotate(140 12.24 74.78)" />
+      <circle cx="10.25" cy="19.90" r="0.41" />
+      <circle cx="128.57" cy="5.68" r="1.39" />
+      <circle cx="82.17" cy="88.24" r="0.52" />
+      <ellipse cx="43.12" cy="146.74" rx="0.35" ry="0.23" transform="rotate(94 43.12 146.74)" />
+      <circle cx="141.55" cy="66.40" r="0.46" />
+      <circle cx="34.62" cy="74.62" r="0.27" />
+      <ellipse cx="99.85" cy="35.80" rx="0.91" ry="0.47" transform="rotate(64 99.85 35.80)" />
+      <ellipse cx="131.35" cy="77.95" rx="0.52" ry="0.29" transform="rotate(37 131.35 77.95)" />
+      <ellipse cx="30.65" cy="142.94" rx="0.99" ry="0.52" transform="rotate(163 30.65 142.94)" />
+      <ellipse cx="56.63" cy="73.57" rx="0.38" ry="0.24" transform="rotate(56 56.63 73.57)" />
+      <circle cx="41.12" cy="49.56" r="0.93" />
+      <circle cx="28.12" cy="68.19" r="0.40" />
+      <circle cx="19.35" cy="57.00" r="0.36" />
+      <ellipse cx="86.70" cy="70.91" rx="0.98" ry="0.60" transform="rotate(36 86.70 70.91)" />
+      <circle cx="5.93" cy="112.25" r="0.67" />
+      <circle cx="89.88" cy="6.95" r="0.33" />
+      <ellipse cx="157.41" cy="120.61" rx="0.32" ry="0.18" transform="rotate(135 157.41 120.61)" />
+      <ellipse cx="81.89" cy="95.39" rx="0.64" ry="0.38" transform="rotate(143 81.89 95.39)" />
+      <circle cx="58.55" cy="25.61" r="0.37" />
+      <ellipse cx="88.58" cy="30.29" rx="0.91" ry="0.43" transform="rotate(149 88.58 30.29)" />
+      <ellipse cx="15.36" cy="136.56" rx="1.61" ry="1.02" transform="rotate(48 15.36 136.56)" />
+      <ellipse cx="66.72" cy="121.48" rx="0.29" ry="0.18" transform="rotate(153 66.72 121.48)" />
+      <ellipse cx="104.43" cy="5.41" rx="0.32" ry="0.25" transform="rotate(150 104.43 5.41)" />
+      <circle cx="31.55" cy="23.28" r="0.37" />
+      <ellipse cx="140.51" cy="128.54" rx="0.44" ry="0.28" transform="rotate(126 140.51 128.54)" />
+      <circle cx="143.10" cy="157.41" r="0.41" />
+      <ellipse cx="49.73" cy="44.72" rx="0.58" ry="0.48" transform="rotate(39 49.73 44.72)" />
+      <circle cx="120.70" cy="17.36" r="0.41" />
+      <ellipse cx="89.36" cy="137.31" rx="0.53" ry="0.31" transform="rotate(103 89.36 137.31)" />
+      <circle cx="115.52" cy="13.02" r="1.06" />
+      <ellipse cx="29.34" cy="155.12" rx="0.34" ry="0.22" transform="rotate(113 29.34 155.12)" />
+      <circle cx="77.51" cy="117.63" r="0.55" />
+      <circle cx="128.71" cy="137.20" r="0.40" />
+      <ellipse cx="115.02" cy="89.04" rx="0.51" ry="0.42" transform="rotate(6 115.02 89.04)" />
+      <circle cx="2.97" cy="49.77" r="0.32" />
+      <circle cx="138.10" cy="24.03" r="0.29" />
+      <ellipse cx="119.69" cy="148.70" rx="1.51" ry="0.71" transform="rotate(95 119.69 148.70)" />
+      <ellipse cx="44.98" cy="92.31" rx="0.39" ry="0.24" transform="rotate(173 44.98 92.31)" />
+      <ellipse cx="116.20" cy="157.64" rx="0.32" ry="0.23" transform="rotate(111 116.20 157.64)" />
+      <ellipse cx="95.22" cy="74.25" rx="0.44" ry="0.26" transform="rotate(102 95.22 74.25)" />
+      <ellipse cx="103.03" cy="110.57" rx="0.62" ry="0.32" transform="rotate(53 103.03 110.57)" />
+      <circle cx="81.51" cy="71.55" r="0.39" />
+      <ellipse cx="121.44" cy="12.64" rx="1.18" ry="0.94" transform="rotate(166 121.44 12.64)" />
+      <ellipse cx="51.32" cy="24.62" rx="1.33" ry="1.09" transform="rotate(62 51.32 24.62)" />
+      <circle cx="98.27" cy="104.22" r="0.48" />
+      <circle cx="89.68" cy="56.95" r="0.55" />
+      <circle cx="31.56" cy="26.62" r="0.47" />
+      <ellipse cx="85.39" cy="51.35" rx="0.37" ry="0.29" transform="rotate(12 85.39 51.35)" />
+      <ellipse cx="110.01" cy="124.19" rx="0.46" ry="0.28" transform="rotate(121 110.01 124.19)" />
+      <ellipse cx="74.23" cy="20.19" rx="0.41" ry="0.19" transform="rotate(9 74.23 20.19)" />
+      <circle cx="6.52" cy="75.79" r="0.95" />
+      <circle cx="91.43" cy="15.75" r="0.32" />
+      <ellipse cx="89.65" cy="123.35" rx="0.40" ry="0.20" transform="rotate(148 89.65 123.35)" />
+      <ellipse cx="117.68" cy="117.03" rx="0.88" ry="0.75" transform="rotate(50 117.68 117.03)" />
+      <ellipse cx="96.34" cy="76.56" rx="0.32" ry="0.22" transform="rotate(55 96.34 76.56)" />
+      <circle cx="128.36" cy="59.65" r="0.28" />
+      <circle cx="152.54" cy="134.09" r="0.29" />
+      <circle cx="77.67" cy="61.69" r="0.53" />
+      <ellipse cx="52.60" cy="52.34" rx="0.31" ry="0.24" transform="rotate(58 52.60 52.34)" />
+      <circle cx="8.85" cy="64.54" r="0.84" />
+      <circle cx="154.11" cy="42.81" r="0.25" />
+      <ellipse cx="114.73" cy="118.33" rx="0.59" ry="0.39" transform="rotate(159 114.73 118.33)" />
+      <ellipse cx="135.49" cy="38.74" rx="0.26" ry="0.15" transform="rotate(174 135.49 38.74)" />
+      <ellipse cx="91.67" cy="146.07" rx="0.95" ry="0.60" transform="rotate(63 91.67 146.07)" />
+      <circle cx="29.12" cy="45.17" r="0.29" />
+      <ellipse cx="94.26" cy="125.39" rx="0.44" ry="0.35" transform="rotate(4 94.26 125.39)" />
+      <ellipse cx="57.10" cy="78.23" rx="0.47" ry="0.39" transform="rotate(147 57.10 78.23)" />
+      <ellipse cx="92.32" cy="119.64" rx="0.32" ry="0.15" transform="rotate(1 92.32 119.64)" />
+      <ellipse cx="63.25" cy="20.63" rx="0.35" ry="0.18" transform="rotate(178 63.25 20.63)" />
+      <ellipse cx="157.20" cy="19.00" rx="1.27" ry="0.74" transform="rotate(113 157.20 19.00)" />
+      <circle cx="108.13" cy="18.00" r="0.44" />
+      <ellipse cx="48.64" cy="146.53" rx="0.51" ry="0.35" transform="rotate(131 48.64 146.53)" />
+      <ellipse cx="64.18" cy="92.88" rx="0.49" ry="0.38" transform="rotate(108 64.18 92.88)" />
+      <ellipse cx="34.16" cy="144.55" rx="0.67" ry="0.38" transform="rotate(97 34.16 144.55)" />
+      <ellipse cx="141.72" cy="29.04" rx="0.36" ry="0.17" transform="rotate(16 141.72 29.04)" />
+      <circle cx="148.85" cy="64.49" r="0.47" />
+      <ellipse cx="96.46" cy="42.98" rx="0.73" ry="0.43" transform="rotate(99 96.46 42.98)" />
+      <circle cx="63.10" cy="59.45" r="0.34" />
+      <ellipse cx="137.59" cy="36.89" rx="0.90" ry="0.46" transform="rotate(0 137.59 36.89)" />
+      <circle cx="13.75" cy="89.15" r="0.26" />
+      <circle cx="130.29" cy="124.21" r="0.84" />
+      <circle cx="111.95" cy="125.72" r="0.29" />
+      <ellipse cx="143.96" cy="114.42" rx="0.53" ry="0.28" transform="rotate(133 143.96 114.42)" />
+      <ellipse cx="137.71" cy="7.61" rx="0.33" ry="0.25" transform="rotate(128 137.71 7.61)" />
+      <ellipse cx="143.87" cy="8.43" rx="0.92" ry="0.76" transform="rotate(95 143.87 8.43)" />
+      <circle cx="16.71" cy="84.71" r="0.30" />
+      <ellipse cx="12.29" cy="111.25" rx="0.56" ry="0.43" transform="rotate(78 12.29 111.25)" />
+      <circle cx="112.17" cy="52.13" r="0.27" />
+      <ellipse cx="61.40" cy="8.06" rx="0.27" ry="0.18" transform="rotate(7 61.40 8.06)" />
+      <ellipse cx="133.90" cy="77.69" rx="0.96" ry="0.64" transform="rotate(22 133.90 77.69)" />
+      <ellipse cx="66.27" cy="51.62" rx="0.36" ry="0.24" transform="rotate(8 66.27 51.62)" />
+      <circle cx="45.67" cy="13.01" r="0.32" />
+      <ellipse cx="60.82" cy="66.56" rx="0.41" ry="0.20" transform="rotate(19 60.82 66.56)" />
+      <circle cx="115.46" cy="27.15" r="0.32" />
+      <ellipse cx="131.50" cy="2.99" rx="1.17" ry="0.88" transform="rotate(5 131.50 2.99)" />
+      <circle cx="63.00" cy="106.02" r="0.26" />
+      <ellipse cx="124.17" cy="121.96" rx="0.41" ry="0.34" transform="rotate(116 124.17 121.96)" />
+      <ellipse cx="33.17" cy="102.90" rx="0.53" ry="0.43" transform="rotate(21 33.17 102.90)" />
+      <ellipse cx="31.72" cy="83.45" rx="0.70" ry="0.37" transform="rotate(17 31.72 83.45)" />
+      <circle cx="83.76" cy="21.90" r="0.94" />
+      <circle cx="123.38" cy="6.43" r="0.62" />
+      <ellipse cx="94.28" cy="93.73" rx="0.91" ry="0.49" transform="rotate(138 94.28 93.73)" />
+      <circle cx="89.94" cy="138.96" r="0.44" />
+      <ellipse cx="44.71" cy="133.63" rx="0.50" ry="0.26" transform="rotate(168 44.71 133.63)" />
+      <ellipse cx="45.18" cy="79.83" rx="0.32" ry="0.22" transform="rotate(5 45.18 79.83)" />
+      <circle cx="46.74" cy="57.04" r="0.76" />
+      <ellipse cx="135.96" cy="6.09" rx="0.38" ry="0.17" transform="rotate(75 135.96 6.09)" />
+      <circle cx="125.17" cy="62.75" r="0.36" />
+      <ellipse cx="151.11" cy="98.75" rx="0.70" ry="0.51" transform="rotate(26 151.11 98.75)" />
+      <circle cx="42.80" cy="68.00" r="0.86" />
+      <ellipse cx="20.46" cy="60.89" rx="0.38" ry="0.24" transform="rotate(73 20.46 60.89)" />
+      <ellipse cx="6.66" cy="12.71" rx="0.52" ry="0.35" transform="rotate(74 6.66 12.71)" />
+      <circle cx="52.49" cy="78.03" r="0.40" />
+      <ellipse cx="7.74" cy="89.65" rx="0.36" ry="0.27" transform="rotate(85 7.74 89.65)" />
+      <ellipse cx="65.54" cy="5.82" rx="0.42" ry="0.22" transform="rotate(45 65.54 5.82)" />
+      <circle cx="82.47" cy="112.20" r="0.46" />
+      <circle cx="43.15" cy="32.15" r="0.72" />
+      <ellipse cx="43.13" cy="109.68" rx="0.78" ry="0.55" transform="rotate(117 43.13 109.68)" />
+      <ellipse cx="35.34" cy="92.11" rx="0.35" ry="0.23" transform="rotate(8 35.34 92.11)" />
+      <circle cx="65.54" cy="79.39" r="0.39" />
+      <ellipse cx="34.22" cy="10.69" rx="0.53" ry="0.42" transform="rotate(0 34.22 10.69)" />
+      <circle cx="126.55" cy="14.84" r="0.99" />
+      <ellipse cx="10.32" cy="128.85" rx="0.42" ry="0.31" transform="rotate(19 10.32 128.85)" />
+      <ellipse cx="88.40" cy="140.08" rx="0.54" ry="0.46" transform="rotate(101 88.40 140.08)" />
+      </g>
+    </mask>
+  </defs>
+  <rect width="160" height="160" fill="white" mask="url(#grain)" />
+</svg>

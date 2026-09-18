@@ -2,7 +2,7 @@
  * @Author: 安风 2196477263@qq.com
  * @Date: 2026-01-28 19:43:18
  * @LastEditors: 安风 2196477263@qq.com
- * @LastEditTime: 2026-09-13 20:04:19
+ * @LastEditTime: 2026-09-18 10:53:51
  * @FilePath: /playSite/src/components/HeroSection/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -41,8 +41,8 @@ const HeroSection: React.FC = () => {
           <div key={slide.id} className="h-full !flex items-center">
             <div className="w-full flex items-center justify-between">
               {/* LEFT: Content */}
-              <div className="text-left min-w-96">
-                <h1 className="text-6xl font-black text-white tracking-tight leading-tight">
+              <div className="text-left min-w-96 max-w-96">
+                <h1 className="hero-main-title inline-block max-w-full text-6xl font-black tracking-tight leading-tight">
                   {slide.mainTitle}
                 </h1>
                 {/* <h1 className="text-6xl font-black text-white tracking-tight leading-tight">

@@ -21,7 +21,11 @@ const Footer: React.FC = () => {
         {/* Left Section: Logo & Socials */}
         <div className="footer-brand">
           <div className="footer-logo">
-            <span className="logo-text">LOGO</span>
+            <img
+              src="https://play-test.oss-cn-hangzhou.aliyuncs.com/front-home/logo.png"
+              alt="GLEE PLAY"
+              className="h-16 w-16 scale-150 object-contain"
+            />
           </div>
 
           <div className="footer-social">
