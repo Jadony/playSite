@@ -1,3 +1,11 @@
+/*
+ * @Author: 安风 2196477263@qq.com
+ * @Date: 2026-01-24 16:13:31
+ * @LastEditors: 安风 2196477263@qq.com
+ * @LastEditTime: 2026-09-20 12:27:36
+ * @FilePath: /playSite/src/components/GameCard/index.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import React from "react";
 import { useTranslation } from "react-i18next";
 import DiscountTag from "../DiscountTag";
@@ -8,7 +16,7 @@ interface GameCardProps {
   unit?: string;
 }
 
-const GameCard: React.FC<GameCardProps> = ({ item, unit }) => {
+const GameCard: React.FC<GameCardProps> = ({ item }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const gameItemClick = (item: Game) => {
@@ -40,7 +48,7 @@ const GameCard: React.FC<GameCardProps> = ({ item, unit }) => {
           {item.gameName}
         </div>
         <div className="text-sm text-[#EE22EB]">
-          {t("games.theHighestProvince")} {unit} {item.maxDiscount}
+          {t("games.maxDiscount")} {item.maxDiscount} %
         </div>
       </div>
     </div>

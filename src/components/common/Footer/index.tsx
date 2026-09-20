@@ -26,6 +26,9 @@ const Footer: React.FC = () => {
               alt="GLEE PLAY"
               className="h-16 w-16 scale-150 object-contain"
             />
+            <span className="text-[32px] font-black italic leading-none text-white [font-family:Inter,system-ui,Avenir,Helvetica,Arial,sans-serif]">
+              PlayDD
+            </span>
           </div>
 
           <div className="footer-social">

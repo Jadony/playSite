@@ -70,8 +70,10 @@ export default {
     },
   },
   games: {
-    allGames: "All Games",
-    theHighestProvince: "The highest province",
+    allGames: "すべてのゲーム",
+    moreGames: "続々タイトル追加中",
+    stayTuned: "ご期待ください",
+    maxDiscount: "最大割引",
   },
   inviteFriends: {
     subTitle: `友達を招待して割引特典をアンロック`,

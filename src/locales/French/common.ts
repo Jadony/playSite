@@ -72,8 +72,10 @@ export default {
     },
   },
   games: {
-    allGames: "All Games",
-    theHighestProvince: "The highest province",
+    allGames: "Tous les jeux",
+    moreGames: "Plus de jeux arrivent bientôt",
+    stayTuned: "Restez à l'affût",
+    maxDiscount: "Réduction jusqu'à",
   },
   inviteFriends: {
     subTitle: `Invitez des amis pour débloquer un pack de réduction.`,
@@ -282,7 +284,8 @@ export default {
       "En tant que créateurs de ce site — et passionnés de jeux vidéo nous-mêmes —, nous n'avons pas pu nous empêcher de nous poser la question : pourquoi tout ce qui touche au jeu ne pourrait-il pas être un peu plus amusant ?",
     ifGaming:
       "Si le jeu vidéo est une question de parcours, d'exploration et de progression, une boutique de recharge devrait aussi être une expérience interactive pour les joueurs.",
-    weDecided: "C'est pourquoi nous avons décidé de tenter une expérience différente :",
+    weDecided:
+      "C'est pourquoi nous avons décidé de tenter une expérience différente :",
     securityComes:
       "La sécurité avant tout : Notre équipe technique utilise un chiffrement de bout en bout et un moteur de gestion des risques intelligent pour protéger la confidentialité de votre compte et vos fonds.",
     valueIsOurPromise:

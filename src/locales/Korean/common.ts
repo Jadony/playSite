@@ -71,8 +71,10 @@ export default {
     },
   },
   games: {
-    allGames: "All Games",
-    theHighestProvince: "The highest province",
+    allGames: "모든 게임",
+    moreGames: "더 많은 게임 출시 예정",
+    stayTuned: "커밍순 (或: 기대해 주세요)",
+    maxDiscount: "최대 할인",
   },
   inviteFriends: {
     subTitle: `친구 초대하고 할인 쿠폰 팩 받기`,

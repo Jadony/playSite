@@ -70,8 +70,10 @@ export default {
     },
   },
   games: {
-    allGames: "All Games",
-    theHighestProvince: "The highest province",
+    allGames: "所有遊戲",
+    moreGames: "更多遊戲接入中",
+    stayTuned: "敬請期待",
+    maxDiscount: "最高折扣",
   },
   inviteFriends: {
     subTitle: `邀请朋友解锁折扣大礼包`,

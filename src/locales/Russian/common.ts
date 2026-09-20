@@ -72,7 +72,9 @@ export default {
   },
   games: {
     allGames: "All Games",
-    theHighestProvince: "The highest province",
+    moreGames: "More games joining soon",
+    stayTuned: "Stay tuned",
+    maxDiscount: "Max discount",
   },
   inviteFriends: {
     subTitle: `Invite friends to unlock a Gift Pack`,

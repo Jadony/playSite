@@ -71,8 +71,10 @@ export default {
     },
   },
   games: {
-    allGames: "All Games",
-    theHighestProvince: "The highest province",
+    allGames: "Alle Spiele",
+    moreGames: "Weitere Spiele in Kürze",
+    stayTuned: "Demnächst verfügbar",
+    maxDiscount: "Rabatt bis zu",
   },
   inviteFriends: {
     subTitle: `Freunde einladen und Rabatt-Paket freischalten`,

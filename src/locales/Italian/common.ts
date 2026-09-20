@@ -73,8 +73,10 @@ export default {
     },
   },
   games: {
-    allGames: "All Games",
-    theHighestProvince: "The highest province",
+    allGames: "Tutti i giochi",
+    moreGames: "Altri giochi in arrivo",
+    stayTuned: "Continua a seguirci",
+    maxDiscount: "Sconto fino al",
   },
   inviteFriends: {
     subTitle: `Invita amici per sbloccare un pacchetto sconto.`,

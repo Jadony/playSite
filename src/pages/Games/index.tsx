@@ -153,9 +153,9 @@ const Games: React.FC = () => {
                 <circle cx="22.1074" cy="14.5713" r="2" fill="gray" />
               </svg>
               <div className="text-center">
-                更多游戏接入中
+                {t("games.moreGames")}
                 <br />
-                敬请期待
+                {t("games.stayTuned")}
               </div>
             </div>
           </div>

@@ -316,6 +316,9 @@ const Header: React.FC = () => {
             alt="GLEE PLAY"
             className="h-10 w-10 scale-150 object-contain"
           />
+          <span className="text-[32px] font-black italic leading-none text-white [font-family:Inter,system-ui,Avenir,Helvetica,Arial,sans-serif]">
+            PlayDD
+          </span>
         </Link>
       </div>
 
